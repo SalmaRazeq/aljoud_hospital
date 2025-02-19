@@ -1,0 +1,42 @@
+import 'package:aljoud_hospital/core/utils/color_manager.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+typedef Validator = String? Function(String?);
+
+class RegisterDesign extends StatelessWidget {
+  RegisterDesign({super.key, required this.hintText,
+    required this.controller, required this.validator, this.isSecure = false});
+  String hintText;
+  TextEditingController controller;
+  Validator validator;
+  bool isSecure;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 50,
+      child: TextFormField(
+        validator: validator,
+        obscureText: isSecure,
+        controller: controller, style: TextStyle(fontSize: 18.sp),
+        decoration: InputDecoration(
+          hintText: hintText,
+          hintStyle: TextStyle(fontSize: 16.sp,color: ColorsManager.hint),
+          filled: true,
+          fillColor: ColorsManager.textField,
+          border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10.r)),
+          enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10.r)),
+          focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10.r)),
+          errorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10.r),
+              borderSide: BorderSide(color: Colors.red, width: 2.w)
+          ),
+        ),
+      ),
+    );
+  }
+}
