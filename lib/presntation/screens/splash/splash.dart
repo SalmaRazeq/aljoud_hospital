@@ -11,14 +11,14 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../core/utils/routes_manager.dart';
 
-class Splash extends StatefulWidget {
-  const Splash({super.key});
+class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
 
   @override
-  State<Splash> createState() => _SplashState();
+  State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashState extends State<Splash> {
+class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void initState() {
@@ -27,7 +27,7 @@ class _SplashState extends State<Splash> {
     Timer(const Duration(seconds: 3), () {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const Start()),
+        MaterialPageRoute(builder: (context) => const StartScreen()),
       );
     });
   }

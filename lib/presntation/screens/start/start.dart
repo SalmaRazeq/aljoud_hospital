@@ -2,13 +2,12 @@ import 'package:aljoud_hospital/core/utils/assets_manager.dart';
 import 'package:aljoud_hospital/core/utils/color_manager.dart';
 import 'package:aljoud_hospital/core/utils/routes_manager.dart';
 import 'package:aljoud_hospital/core/utils/strings_manager.dart';
-import 'package:aljoud_hospital/my_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class Start extends StatelessWidget {
-  const Start({super.key});
+class StartScreen extends StatelessWidget {
+  const StartScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,9 +26,9 @@ class Start extends StatelessWidget {
             // SizedBox(height: 6.h),
             // Text('More than 100 doctors are ready to answer all your questions.',
             //   style: GoogleFonts.sansita(fontSize: 20,color: ColorsManager.lightGreen),),
-            
+
             SizedBox(height: 60.h),
-            
+
             Container(
               margin: REdgeInsets.symmetric(horizontal: 50),
               alignment: Alignment.bottomCenter,
@@ -43,7 +42,8 @@ class Start extends StatelessWidget {
                   elevation: 10,
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(22))
                 ),
-                  child: Text(StringsManager.getStarted, style: GoogleFonts.sourceSerif4(fontSize: 28, fontWeight: FontWeight.w900),),),
+                  child: Text(StringsManager.getStarted,
+                    style: GoogleFonts.sourceSerif4(fontSize: 28, fontWeight: FontWeight.w900, color: Theme.of(context).colorScheme.primary),),),
             )
 
           ],

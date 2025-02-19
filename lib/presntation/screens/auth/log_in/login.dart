@@ -11,100 +11,77 @@ import '../widget/field_design.dart';
 
 
 
-class LogIn extends StatefulWidget {
-  const LogIn({super.key});
+class LoginScreen extends StatelessWidget {
+   LoginScreen({super.key});
+  TextEditingController emailController = TextEditingController();
 
-  @override
-  State<LogIn> createState() => _LogInState();
-}
-
-class _LogInState extends State<LogIn> {
-  late TextEditingController emailController;
-
-  late TextEditingController passwordController;
+  TextEditingController passwordController = TextEditingController();
 
   GlobalKey<FormState> formKey = GlobalKey();
 
-  @override
-  void initState() {
-    emailController = TextEditingController();
-    passwordController = TextEditingController();
-  }
-
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-    emailController.dispose();
-    passwordController.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: REdgeInsets.only(top: 72, left: 18, right: 18),
-            child: Column(
+@override
+Widget build(BuildContext context) {
+  return Scaffold(
+    body: SafeArea(
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: REdgeInsets.only(top: 72, left: 18, right: 18),
+          child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Text(StringsManager.welcomeBack, style: GoogleFonts.sansita(fontSize: 35.sp, fontWeight: FontWeight.w600),),
+                Text(StringsManager.welcomeBack,
+                  style: Theme.of(context).textTheme.titleLarge),
                 SizedBox(height: 16.h,),
-                Text(StringsManager.loginText, style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500, color: ColorsManager.hint),),
+                Text(StringsManager.loginText,
+                  style: Theme.of(context).textTheme.displaySmall),
                 SizedBox(height: 40.h,),
-            
+
                 RegisterDesign(hintText: 'Email Address',
-                   controller: emailController,
-                   validator: (input){
-                     if (input == null || input.trim().isEmpty) {
-                       return 'Please, Enter email address';
-                     }
-                     if (!isEmailValid(input)) {
-                       return 'Email wrong format';
-                     }
-                     return null;
-                   }),
-            
-                SizedBox(height: 40.h,),
+                    controller: emailController,
+                    validator: (input){
+                      if (input == null || input.trim().isEmpty) {
+                        return 'Please, Enter email address';
+                      }
+                      if (!isEmailValid(input)) {
+                        return 'Email wrong format';
+                      }
+                      return null;
+                    }),
+
+                SizedBox(height: 30.h,),
                 RegisterDesign(
                     hintText: 'Password',
                     controller: passwordController,
                     isSecure: true,
                     validator: (input) {
                       if (input == null || input.trim().isEmpty) {
-                        return 'Plz, Enter password';
+                        return 'Please, Enter password';
                       }
                       return null;
                     }),
                 SizedBox(height: 5.h,),
-            
+
                 Padding(
-                  padding: REdgeInsets.only(left: 230),
-                    child: TextButton(onPressed: (){}, child: Text(StringsManager.forgetPassword, style: GoogleFonts.sourceSans3(fontSize: 13,fontWeight: FontWeight.w600, color: ColorsManager.blue2),))),
-            
+                    padding: REdgeInsets.only(left: 230),
+                    child: TextButton(onPressed: (){}, child: Text(StringsManager.forgetPassword,
+                        style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 12.sp,color: Theme.of(context).colorScheme.onPrimary)))),
+
                 SizedBox(height: 8.h,),
                 ElevatedButton(
                   onPressed: () {
-            
+                    Navigator.pushReplacementNamed(context, RoutesManager.home);
                   },
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: ColorsManager.blue2,
-                      elevation: 5,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(25.r))),
+                  style: Theme.of(context).elevatedButtonTheme.style,
                   child: Padding(
-                    padding: const EdgeInsets.all(13),
+                    padding: REdgeInsets.all(13),
                     child: Text(
                       StringsManager.login,
-                      style: GoogleFonts.inter(
-                          fontSize: 20.sp,
-                          fontWeight: FontWeight.w700,
-                          color: ColorsManager.white),
+                      style: Theme.of(context).textTheme.displaySmall?.copyWith(
+                          fontSize: 20.sp, fontWeight: FontWeight.w700, color: Theme.of(context).colorScheme.primary)
                     ),
                   ),
                 ),
-            
+
                 SizedBox(height: 22.h,),
                 Image.asset(AssetsManager.or),
                 SizedBox(height: 10.h),
@@ -114,24 +91,21 @@ class _LogInState extends State<LogIn> {
                     },
                     child: Image.asset(AssetsManager.google)),
                 SizedBox(height: 10.h),
-                InkWell(
 
+                InkWell(
                     onTap: () {
 
-                },
+                    },
                     child: Image.asset(AssetsManager.faceBook)),
-            
-                SizedBox(height: 60.h),
-            
+
+                SizedBox(height: 80.h),
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      StringsManager.haveAccount,
-                      style: TextStyle(
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w600,
-                          color: ColorsManager.hint),
+                      StringsManager.notHaveAccount,
+                      style: Theme.of(context).textTheme.displaySmall
                     ),
                     TextButton(
                       onPressed: () {
@@ -140,21 +114,19 @@ class _LogInState extends State<LogIn> {
                       },
                       child: Text(
                         StringsManager.signUp,
-                        style: TextStyle(
-                            fontSize: 14.sp,
-                            color: ColorsManager.blue2,
-                            decoration: TextDecoration.underline),
+                        style: Theme.of(context).textTheme.displaySmall?.copyWith(
+                            color: Theme.of(context).colorScheme.onPrimary,decoration: TextDecoration.underline
+                        )
                       ),
                     )
                   ],
                 )
-            
+
               ]
-            ),
           ),
         ),
       ),
-    );
-  }
-
+    ),
+  );
+}
 }

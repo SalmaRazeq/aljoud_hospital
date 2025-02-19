@@ -4,10 +4,12 @@ class StringsManager{
   static String getStarted = 'Get Started';
   static String welcomeBack = 'Welcome Back!';
   static String loginText = 'We are happy to see you again.\nPlease, Enter your details.';
-  static String forgetPassword = 'Forget password ?';
+  static String forgetPassword = 'Forget password?';
   static String login = 'Log in';
   static String signUp = 'Sign up';
+  static String createAccount =   'Create an account';
+  static String haveAccount = "Already have account!";
+  static String notHaveAccount = "Don't have an account?";
 
-  static String haveAccount = "Don't have an account ?";
 
 }

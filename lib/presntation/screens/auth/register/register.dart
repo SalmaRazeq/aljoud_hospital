@@ -1,82 +1,53 @@
+import 'package:aljoud_hospital/config/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../../core/utils/assets_manager.dart';
 import '../../../../core/utils/color_manager.dart';
 import '../../../../core/utils/email_validation.dart';
 import '../../../../core/utils/routes_manager.dart';
 import '../../../../core/utils/strings_manager.dart';
 import '../widget/field_design.dart';
 
-class Register extends StatefulWidget {
-  const Register({super.key});
+class RegisterScreen extends StatelessWidget {
+   RegisterScreen({super.key});
 
-  @override
-  State<Register> createState() => _RegisterState();
-}
+  TextEditingController fullNameController = TextEditingController();
 
-class _RegisterState extends State<Register> {
-   late TextEditingController fullNameController;
-   //use ?
+  TextEditingController phoneNumController = TextEditingController();
 
-  late TextEditingController phoneNumController;
+   TextEditingController emailController = TextEditingController();
 
-  late TextEditingController emailController;
+  TextEditingController passwordController = TextEditingController();
 
-  late TextEditingController passwordController;
-
-  late TextEditingController rePasswordController;
+  TextEditingController rePasswordController = TextEditingController();
 
   GlobalKey<FormState> formKey = GlobalKey();
 
   @override
-  void initState() {
-    fullNameController = TextEditingController();
-    phoneNumController = TextEditingController();
-    emailController = TextEditingController();
-    passwordController = TextEditingController();
-    rePasswordController = TextEditingController();
-  }
-
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-    fullNameController.dispose();
-    phoneNumController.dispose();
-    emailController.dispose();
-    passwordController.dispose();
-    rePasswordController.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
-    appBar: AppBar(
-        title: Text('SinUP',style:TextStyle(color: ColorsManager.black,fontWeight:FontWeight.w700,fontSize: 20 ) ,),
-      ),
       body: SafeArea(
         child: SingleChildScrollView(
         child: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 14),
-          padding: const EdgeInsets.symmetric(horizontal: 10),
+          margin: REdgeInsets.symmetric(horizontal: 14,vertical: 18),
+          padding: REdgeInsets.symmetric(horizontal: 10),
           child: Form(
             key: formKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
+                Text(StringsManager.createAccount, style: GoogleFonts.poppins(fontSize: 28, color: Theme.of(context).colorScheme.onPrimary,fontWeight: FontWeight.w600),),
                 SizedBox(
-                  height: 55.h,
+                  height: 20.h,
                 ),
                 Text(
                   'Full name',
-                  style: TextStyle(
-                      fontSize: 20.sp,
-                      fontWeight: FontWeight.w500,
-                      ),
+                  style: Theme.of(context).textTheme.titleMedium
                 ),
                 SizedBox(
-                  height: 10.h,
+                  height: 5.h,
                 ),
                 RegisterDesign(
                   hintText: 'Enter your full name',
@@ -88,21 +59,20 @@ class _RegisterState extends State<Register> {
                     return null;
                   },
                 ),
+
                 SizedBox(
-                  height: 15.h,
+                  height: 16.h,
                 ),
                 Text(
                   'Phone number',
-                  style: TextStyle(
-                      fontSize: 20.sp,
-                      fontWeight: FontWeight.w500,
-                      ),
+                  style: Theme.of(context).textTheme.titleMedium
                 ),
                 SizedBox(
-                  height: 10.h,
+                  height: 5.h,
                 ),
                 RegisterDesign(
                   hintText: 'Enter your phone number',
+                  keyBoardType: const TextInputType.numberWithOptions(),
                   controller: phoneNumController,
                   validator: (input) {
                     if (input == null || input.trim().isEmpty) {
@@ -112,17 +82,14 @@ class _RegisterState extends State<Register> {
                   },
                 ),
                 SizedBox(
-                  height: 15.h,
+                  height: 16.h,
                 ),
                 Text(
                   'E-mail address',
-                  style: TextStyle(
-                      fontSize: 20.sp,
-                      fontWeight: FontWeight.w500,
-                      ),
+                  style: Theme.of(context).textTheme.titleMedium
                 ),
                 SizedBox(
-                  height: 10.h,
+                  height: 5.h,
                 ),
                 RegisterDesign(
                     hintText: 'Enter your email address',
@@ -136,18 +103,16 @@ class _RegisterState extends State<Register> {
                       }
                       return null;
                     }),
+
                 SizedBox(
-                  height: 8.h,
+                  height: 16.h,
                 ),
                 Text(
                   'Password',
-                  style: TextStyle(
-                      fontSize: 20.sp,
-                      fontWeight: FontWeight.w500,
-                      ),
+                  style: Theme.of(context).textTheme.titleMedium
                 ),
                 SizedBox(
-                  height: 10.h,
+                  height: 5.h,
                 ),
                 RegisterDesign(
                   hintText: 'Enter your password',
@@ -161,17 +126,14 @@ class _RegisterState extends State<Register> {
                   },
                 ),
                 SizedBox(
-                  height: 15.h,
+                  height: 16.h,
                 ),
                 Text(
                   'Confirm password',
-                  style: TextStyle(
-                      fontSize: 20.sp,
-                      fontWeight: FontWeight.w500,
-                      ),
+                  style: Theme.of(context).textTheme.titleMedium
                 ),
                 SizedBox(
-                  height: 10.h,
+                  height: 5.h,
                 ),
                 RegisterDesign(
                   hintText: 'Enter your password',
@@ -194,33 +156,40 @@ class _RegisterState extends State<Register> {
                   onPressed: () {
 
                   },
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: ColorsManager.blue2,
-                      elevation: 5,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(25.r))),
+                  style: Theme.of(context).elevatedButtonTheme.style,
                   child: Padding(
-                    padding: const EdgeInsets.all(13),
+                    padding: REdgeInsets.all(13),
                     child: Text(
                       StringsManager.signUp,
-                      style: GoogleFonts.inter(
-                          fontSize: 20.sp,
-                          fontWeight: FontWeight.w700,
-                          color: ColorsManager.white),
+                      style: Theme.of(context).textTheme.displaySmall?.copyWith(
+                          fontSize: 20.sp, fontWeight: FontWeight.w700, color: Theme.of(context).colorScheme.primary)
                     ),
                   ),
                 ),
 
+                SizedBox(height: 22.h,),
+                Image.asset(AssetsManager.or),
+                SizedBox(height: 10.h),
+                InkWell(
+                    onTap: () {
+
+                    },
+                    child: Image.asset(AssetsManager.google)),
+                SizedBox(height: 10.h),
+
+                InkWell(
+                    onTap: () {
+
+                    },
+                    child: Image.asset(AssetsManager.faceBook)),
+                SizedBox(height: 80.h),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "Already have account!",
-                      style: TextStyle(
-                          fontSize: 18.sp,
-                          fontWeight: FontWeight.w600,
-                          ),
+                      StringsManager.haveAccount,
+                      style: Theme.of(context).textTheme.displaySmall
                     ),
                     TextButton(
                       onPressed: () {
@@ -228,11 +197,10 @@ class _RegisterState extends State<Register> {
                             context, RoutesManager.login);
                       },
                       child: Text(
-                        'Sign_in',
-                        style: TextStyle(
-                            fontSize: 18.sp,
-                            color: ColorsManager.blue2,
-                            decoration: TextDecoration.underline),
+                        StringsManager.login,
+                        style: Theme.of(context).textTheme.displaySmall?.copyWith(
+                          color: Theme.of(context).colorScheme.onPrimary, decoration: TextDecoration.underline
+                        )
                       ),
                     )
                   ],
