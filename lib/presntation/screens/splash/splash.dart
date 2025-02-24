@@ -1,15 +1,11 @@
 import 'dart:async';
-
 import 'package:aljoud_hospital/core/utils/assets_manager.dart';
 import 'package:aljoud_hospital/core/utils/color_manager.dart';
-import 'package:aljoud_hospital/core/utils/strings_manager.dart';
-import 'package:aljoud_hospital/presntation/screens/home/home.dart';
 import 'package:aljoud_hospital/presntation/screens/start/start.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../core/utils/routes_manager.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -37,21 +33,23 @@ class _SplashScreenState extends State<SplashScreen> {
 
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-
-          children: [
-            Align(
-                alignment: Alignment.topLeft,
-                child: Image.asset(AssetsManager.topLeft)),
-            SizedBox(height: 70.h,),
-            Center(child: Image.asset(AssetsManager.logo),),
-            Text(StringsManager.splashText, style: TextStyle(fontSize: 18.sp, color: ColorsManager.lightGreen, fontWeight: FontWeight.bold )),
-            SizedBox(height: 130.h,),
-            Align(
-                alignment: Alignment.bottomRight,
-                child: Image.asset(AssetsManager.bottomRight)),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+          
+            children: [
+              Align(
+                  alignment: Alignment.topLeft,
+                  child: Image.asset(AssetsManager.topLeft)),
+              SizedBox(height: 70.h,),
+              Center(child: Image.asset(AssetsManager.logo),),
+              Text(AppLocalizations.of(context)!.splashText, style: TextStyle(fontSize: 18.sp, color: ColorsManager.lightGreen, fontWeight: FontWeight.bold )),
+              SizedBox(height: 130.h,),
+              Align(
+                  alignment: Alignment.bottomRight,
+                  child: Image.asset(AssetsManager.bottomRight)),
+            ],
+          ),
         ),
       ),
     );

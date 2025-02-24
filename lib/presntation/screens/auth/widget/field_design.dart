@@ -18,7 +18,7 @@ class RegisterDesign extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 50,
+      height: 70,
       child: TextFormField(
         autofocus: true,
         validator: validator,
@@ -26,10 +26,15 @@ class RegisterDesign extends StatelessWidget {
         keyboardType: keyBoardType,
         controller: controller, style: TextStyle(fontSize: 16.sp),
         decoration: InputDecoration(
+          isDense: true,
           hintText: hintText,
           hintStyle: GoogleFonts.roboto(fontSize: 16.sp,color: Theme.of(context).colorScheme.shadow),
           filled: true,
           fillColor: ColorsManager.textField,
+          errorStyle: GoogleFonts.roboto(fontSize: 12.sp,),
+          constraints: BoxConstraints(
+            minHeight: 60.h,
+          ),
           border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10.r)),
           enabledBorder: OutlineInputBorder(
@@ -38,7 +43,7 @@ class RegisterDesign extends StatelessWidget {
               borderRadius: BorderRadius.circular(10.r)),
           errorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10.r),
-              borderSide: BorderSide(color: Colors.red, width: 2.w)
+              borderSide: BorderSide(color: Colors.red,)
           ),
         ),
       ),

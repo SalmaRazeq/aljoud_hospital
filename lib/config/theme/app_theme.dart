@@ -10,7 +10,9 @@ class AppTheme {
       seedColor: ColorsManager.white,
       primary: ColorsManager.white,
       onPrimary: ColorsManager.blue2,
-      shadow: ColorsManager.hint
+      shadow: ColorsManager.hint,
+      onSecondary: ColorsManager.black2,
+      secondary: ColorsManager.lightGreen,
 
     ),
       scaffoldBackgroundColor: ColorsManager.white,
@@ -23,7 +25,7 @@ class AppTheme {
       textTheme: TextTheme(
         titleLarge: GoogleFonts.sansita(fontSize: 35,
             fontWeight: FontWeight.w600, color: ColorsManager.black),
-        titleMedium: GoogleFonts.poppins(fontSize: 18,
+        titleMedium: GoogleFonts.poppins(fontSize: 15,
             fontWeight: FontWeight.w500, color: ColorsManager.black2),
         displaySmall: GoogleFonts.inter(fontSize: 14,
             fontWeight: FontWeight.w400, color: ColorsManager.hint),
