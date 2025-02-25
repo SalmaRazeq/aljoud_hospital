@@ -13,7 +13,6 @@ class AppTheme {
       shadow: ColorsManager.hint,
       onSecondary: ColorsManager.black2,
       secondary: ColorsManager.lightGreen,
-
     ),
       scaffoldBackgroundColor: ColorsManager.white,
       elevatedButtonTheme: ElevatedButtonThemeData(
