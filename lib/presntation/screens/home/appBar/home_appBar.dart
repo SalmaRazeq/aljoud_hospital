@@ -11,7 +11,7 @@ class HomeAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: REdgeInsets.symmetric(horizontal: 20, vertical: 20),
+      padding: REdgeInsets.symmetric(horizontal: 15, vertical: 18),
       height: 245.h,
       width: double.infinity,
       decoration: BoxDecoration(
@@ -31,19 +31,17 @@ class HomeAppBar extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 CircleAvatar(
-                  radius: 20.r,
+                  radius: 24.r,
                   backgroundColor: ColorsManager.white,
                   child: const Icon(
                     Icons.person_2_outlined,
                     color: ColorsManager.black2,
+                    size: 28,
                   ),
                 ),
-                SizedBox(width: 12.w,),
+                SizedBox(width: 15.w,),
                 Text('Hello, Ahmed',
-                  style: GoogleFonts.sourceSerif4(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 24.sp,
-                      color: ColorsManager.white),
+                  style: Theme.of(context).textTheme.bodyMedium
                 ),
               ],
             ),
@@ -52,15 +50,11 @@ class HomeAppBar extends StatelessWidget {
               padding: REdgeInsets.only(left: 8.0),
               child: Text(
                 'Find your doctor',
-                style: GoogleFonts.sourceSerif4(
-                    fontSize: 24.sp,
-                    fontWeight: FontWeight.w500,
-                    color: ColorsManager.white),
+                style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w500,)
               ),
             ),
             SizedBox( height: 22.h,),
             SearchWidget(),
-
           ]),
     );
   }

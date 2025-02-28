@@ -28,6 +28,10 @@ class AppTheme {
             fontWeight: FontWeight.w500, color: ColorsManager.black2),
         displaySmall: GoogleFonts.inter(fontSize: 14,
             fontWeight: FontWeight.w400, color: ColorsManager.hint),
+        bodyLarge: GoogleFonts.sourceSerif4(fontSize: 20,
+          fontWeight: FontWeight.w900, color: ColorsManager.black,),
+        bodyMedium: GoogleFonts.sourceSerif4(fontSize: 24.sp,
+            fontWeight: FontWeight.w600, color: ColorsManager.white),
       ),
   );
 }
