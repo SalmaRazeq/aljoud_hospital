@@ -7,7 +7,7 @@ class AssetsManager{
   static const String or = '${base}or.png';
   static const String google = '${base}google.png';
   static const String faceBook = '${base}faceBook.png';
-  static const String heart = '${base}heart.png';
+  static const String cardiology = '${base}heart.png';
   static const String pulmonology = '${base}lungs.png';
   static const String dentistry = '${base}teeth.png';
   static const String dermatology = '${base}Dermatology.png';

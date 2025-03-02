@@ -30,7 +30,7 @@ class AppTheme {
             fontWeight: FontWeight.w400, color: ColorsManager.hint),
         bodyLarge: GoogleFonts.sourceSerif4(fontSize: 20,
           fontWeight: FontWeight.w900, color: ColorsManager.black,),
-        bodyMedium: GoogleFonts.sourceSerif4(fontSize: 24.sp,
+        bodyMedium: GoogleFonts.sourceSerif4(fontSize: 24,
             fontWeight: FontWeight.w600, color: ColorsManager.white),
       ),
   );

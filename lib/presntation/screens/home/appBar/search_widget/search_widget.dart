@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SearchWidget extends StatelessWidget {
   const SearchWidget({super.key});
@@ -25,7 +26,7 @@ class SearchWidget extends StatelessWidget {
         child: TextField(
           textAlign: TextAlign.left,
           decoration: InputDecoration(
-            hintText: 'Search',
+            hintText: AppLocalizations.of(context)!.search,
             hintStyle: GoogleFonts.poppins(fontSize: 16.sp,fontWeight: FontWeight.w600 ,color: Theme.of(context).colorScheme.shadow),
             filled: true,
             isDense: true,
@@ -43,6 +44,7 @@ class SearchWidget extends StatelessWidget {
                 color: Theme.of(context).colorScheme.onPrimary,
               ),
             ),
+
 
           ),
         ),

@@ -4,7 +4,7 @@ import 'package:aljoud_hospital/presntation/screens/home/categories_item/categor
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../core/utils/color_manager.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -25,7 +25,7 @@ class HomeScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Categories',
+                            AppLocalizations.of(context)!.categories,
                             style: Theme.of(context).textTheme.bodyLarge,
                           ),
                           ElevatedButton(
@@ -41,12 +41,12 @@ class HomeScreen extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(20.r),
                                 )),
                             child: Text(
-                              'See all',
+                              AppLocalizations.of(context)!.seeAll,
                               style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                                 fontSize: 14.sp, color: ColorsManager.blue2, fontWeight: FontWeight.w700,
                               ),),
                           ),
-                        ],
+                        ], 
                       ),
                     ),
                     SizedBox(
@@ -57,9 +57,9 @@ class HomeScreen extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          CategoriesItem(imagePath: AssetsManager.heart, title: 'Cardiology'),
-                          CategoriesItem(imagePath: AssetsManager.pulmonology, title: 'Pulmonology'),
-                          CategoriesItem(imagePath: AssetsManager.dentistry, title: 'Dentistry'),
+                          CategoriesItem(imagePath: AssetsManager.cardiology, title: AppLocalizations.of(context)!.cardiology),
+                          CategoriesItem(imagePath: AssetsManager.pulmonology, title: AppLocalizations.of(context)!.pulmonology),
+                          CategoriesItem(imagePath: AssetsManager.dentistry, title: AppLocalizations.of(context)!.dentistry),
                         ],
                       ),
                     ),
@@ -72,24 +72,25 @@ class HomeScreen extends StatelessWidget {
                       children: [
                         _buildBoxWidget(
                           icon: Icons.video_camera_front_outlined,
-                          title: 'Online Consultation',
-                          description: 'Book your online video consultation',
+                          title: AppLocalizations.of(context)!.onlineConsultation,
+                          description: AppLocalizations.of(context)!.bookOnline,
                         ),
                         _buildBoxWidget(
                             icon: Icons.calendar_today,
-                            title: 'Appointments',
-                            description: 'Book your appointment'),
+                            title: AppLocalizations.of(context)!.appointments,
+                            description: AppLocalizations.of(context)!.bookAppointment
+                        ),
                         _buildBoxWidget(
                           icon: Icons.support_agent,
-                          title: 'Support',
+                          title: AppLocalizations.of(context)!.support,
                           description:
-                          'Providing direct support with the customer service team',
+                          AppLocalizations.of(context)!.providingSupport,
                         ),
                         _buildBoxWidget(
                           icon: Icons.assignment,
-                          title: 'Medical Records',
+                          title: AppLocalizations.of(context)!.medicalRecords,
                           description:
-                          'It provides the patient with information about his medical history',
+                          AppLocalizations.of(context)!.patientInformation,
                         ),
                       ],
                     ),

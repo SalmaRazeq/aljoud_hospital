@@ -2,6 +2,7 @@ import 'package:aljoud_hospital/presntation/screens/home/AppBar/search_widget/se
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../core/utils/color_manager.dart';
 
@@ -12,7 +13,7 @@ class HomeAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: REdgeInsets.symmetric(horizontal: 15, vertical: 18),
-      height: 245.h,
+      height: 250.h,
       width: double.infinity,
       decoration: BoxDecoration(
         gradient: LinearGradient(
@@ -40,7 +41,7 @@ class HomeAppBar extends StatelessWidget {
                   ),
                 ),
                 SizedBox(width: 15.w,),
-                Text('Hello, Ahmed',
+                Text('${AppLocalizations.of(context)!.hello}Abdelrahman',
                   style: Theme.of(context).textTheme.bodyMedium
                 ),
               ],
@@ -49,8 +50,8 @@ class HomeAppBar extends StatelessWidget {
             Padding(
               padding: REdgeInsets.only(left: 8.0),
               child: Text(
-                'Find your doctor',
-                style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w500,)
+                  AppLocalizations.of(context)!.findYourDoctor,
+                style: Theme.of(context).textTheme.bodyMedium
               ),
             ),
             SizedBox( height: 22.h,),

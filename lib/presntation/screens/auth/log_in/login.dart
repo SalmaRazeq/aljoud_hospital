@@ -3,8 +3,6 @@ import 'package:aljoud_hospital/core/utils/email_validation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:google_fonts/google_fonts.dart';
-import '../../../../core/utils/color_manager.dart';
 import '../../../../core/utils/routes_manager.dart';
 import '../widget/field_design.dart';
 
