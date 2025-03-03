@@ -1,5 +1,6 @@
 import 'package:aljoud_hospital/presntation/screens/auth/log_in/login.dart';
 import 'package:aljoud_hospital/presntation/screens/auth/register/register.dart';
+import 'package:aljoud_hospital/presntation/screens/see_all/see_all.dart';
 import 'package:aljoud_hospital/presntation/screens/start/start.dart';
 import 'package:flutter/material.dart';
 import '../../presntation/screens/home/home.dart';
@@ -11,7 +12,7 @@ class RoutesManager{
   static const String start = '/start';
   static const String login = '/login';
   static const String register = '/register';
-
+  static const String seeAll = '/seeAll';
 
 
   static Route? router(RouteSettings settings) {
@@ -35,6 +36,10 @@ class RoutesManager{
       case register:
         return MaterialPageRoute(
           builder: (context) => RegisterScreen(),
+        );
+      case seeAll:
+        return MaterialPageRoute(
+          builder: (context) => SeeAllScreen(),
         );
     }
   }

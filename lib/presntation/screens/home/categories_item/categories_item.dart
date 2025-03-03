@@ -15,13 +15,11 @@ class CategoriesItem extends StatelessWidget {
           width: 90.w,
           height: 90.h,
         ),
-        SizedBox(
-          height: 14.h,
-        ),
+
         Text(
           title,
           style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-          fontSize: 14.sp,fontWeight: FontWeight.w700,
+          fontSize: 14.sp,
         ),)
       ],
     );

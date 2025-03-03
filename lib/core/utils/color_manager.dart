@@ -10,5 +10,7 @@ class ColorsManager{
   static const Color textField = Color(0xFFECECEC);
   static const Color blue2 = Color(0xFF145da0);
   static const Color lightGray = Color(0xFFE0E0E0);
+  static const Color blue3 = Color(0xFF6991C9);
+  static const Color blue4 = Color(0xFF003E94);
 
 }

@@ -29,7 +29,7 @@ class AppTheme {
         displaySmall: GoogleFonts.inter(fontSize: 14,
             fontWeight: FontWeight.w400, color: ColorsManager.hint),
         bodyLarge: GoogleFonts.sourceSerif4(fontSize: 20,
-          fontWeight: FontWeight.w900, color: ColorsManager.black,),
+          fontWeight: FontWeight.w700, color: ColorsManager.black,),
         bodyMedium: GoogleFonts.sourceSerif4(fontSize: 24,
             fontWeight: FontWeight.w600, color: ColorsManager.white),
       ),
