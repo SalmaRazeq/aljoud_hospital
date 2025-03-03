@@ -12,8 +12,8 @@ class HomeAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: REdgeInsets.symmetric(horizontal: 15, vertical: 18),
-      height: 250.h,
+      padding: REdgeInsets.symmetric(horizontal: 15, vertical: 10),
+      height: 240.h,
       width: double.infinity,
       decoration: BoxDecoration(
         gradient: LinearGradient(

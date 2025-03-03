@@ -1,4 +1,5 @@
 import 'package:aljoud_hospital/core/utils/assets_manager.dart';
+import 'package:aljoud_hospital/core/utils/routes_manager.dart';
 import 'package:aljoud_hospital/presntation/screens/home/appBar/home_appBar.dart';
 import 'package:aljoud_hospital/presntation/screens/home/categories_item/categories_item.dart';
 import 'package:flutter/material.dart';
@@ -12,92 +13,94 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-        body: SafeArea(
-            child: SingleChildScrollView(
-              child: Column(
-                  children: [
-                  const HomeAppBar(),
-                    SizedBox(height: 6.h,),
-                    Padding(
-                      padding: REdgeInsets.symmetric(horizontal: 16.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            AppLocalizations.of(context)!.categories,
-                            style: Theme.of(context).textTheme.bodyLarge,
-                          ),
-                          ElevatedButton(
-                            onPressed: () {},
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor: ColorsManager.lightGray,
-                                minimumSize: const Size(70, 24),
-                                padding: REdgeInsets.symmetric(
-                                  vertical: 4,
-                                  horizontal: 20,
-                                ),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20.r),
-                                )),
-                            child: Text(
-                              AppLocalizations.of(context)!.seeAll,
-                              style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                                fontSize: 14.sp, color: ColorsManager.blue2, fontWeight: FontWeight.w700,
-                              ),),
-                          ),
-                        ], 
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10.h,
-                    ),
-                    Padding(
-                      padding: REdgeInsets.symmetric(horizontal: 15),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          CategoriesItem(imagePath: AssetsManager.cardiology, title: AppLocalizations.of(context)!.cardiology),
-                          CategoriesItem(imagePath: AssetsManager.pulmonology, title: AppLocalizations.of(context)!.pulmonology),
-                          CategoriesItem(imagePath: AssetsManager.dentistry, title: AppLocalizations.of(context)!.dentistry),
-                        ],
-                      ),
-                    ),
-                    GridView.count(
-                      crossAxisCount: 2,
-                      padding: REdgeInsets.only(right: 15,left: 15 ,top: 45, ),
-                      crossAxisSpacing: 15,
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
+    return  SafeArea(
+      child: Scaffold(
+          body: SingleChildScrollView(
+            child: Column(
+                children: [
+                const HomeAppBar(),
+                  SizedBox(height: 6.h,),
+                  Padding(
+                    padding: REdgeInsets.symmetric(horizontal: 16.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        _buildBoxWidget(
-                          icon: Icons.video_camera_front_outlined,
-                          title: AppLocalizations.of(context)!.onlineConsultation,
-                          description: AppLocalizations.of(context)!.bookOnline,
+                        Text(
+                          AppLocalizations.of(context)!.categories,
+                          style: Theme.of(context).textTheme.bodyLarge,
                         ),
-                        _buildBoxWidget(
-                            icon: Icons.calendar_today,
-                            title: AppLocalizations.of(context)!.appointments,
-                            description: AppLocalizations.of(context)!.bookAppointment
+                        ElevatedButton(
+                          onPressed: () {
+                            Navigator.of(context).pushReplacementNamed(RoutesManager.seeAll,);
+                          },
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: ColorsManager.lightGray,
+                              minimumSize: const Size(70, 24),
+                              padding: REdgeInsets.symmetric(
+                                vertical: 4,
+                                horizontal: 20,
+                              ),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20.r),
+                              )),
+                          child: Text(
+                            AppLocalizations.of(context)!.seeAll,
+                            style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                              fontSize: 14.sp, color: ColorsManager.blue2, fontWeight: FontWeight.w700,
+                            ),),
                         ),
-                        _buildBoxWidget(
-                          icon: Icons.support_agent,
-                          title: AppLocalizations.of(context)!.support,
-                          description:
-                          AppLocalizations.of(context)!.providingSupport,
-                        ),
-                        _buildBoxWidget(
-                          icon: Icons.assignment,
-                          title: AppLocalizations.of(context)!.medicalRecords,
-                          description:
-                          AppLocalizations.of(context)!.patientInformation,
-                        ),
+                      ], 
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10.h,
+                  ),
+                  Padding(
+                    padding: REdgeInsets.symmetric(horizontal: 15),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        CategoriesItem(imagePath: AssetsManager.cardiology, title: AppLocalizations.of(context)!.cardiology),
+                        CategoriesItem(imagePath: AssetsManager.pulmonology, title: AppLocalizations.of(context)!.pulmonology),
+                        CategoriesItem(imagePath: AssetsManager.dentistry, title: AppLocalizations.of(context)!.dentistry),
                       ],
                     ),
-                  ],
-              ),
+                  ),
+                  GridView.count(
+                    crossAxisCount: 2,
+                    padding: REdgeInsets.only(right: 15,left: 15 ,top: 45, ),
+                    crossAxisSpacing: 15,
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    children: [
+                      _buildBoxWidget(
+                        icon: Icons.video_camera_front_outlined,
+                        title: AppLocalizations.of(context)!.onlineConsultation,
+                        description: AppLocalizations.of(context)!.bookOnline,
+                      ),
+                      _buildBoxWidget(
+                          icon: Icons.calendar_today,
+                          title: AppLocalizations.of(context)!.appointments,
+                          description: AppLocalizations.of(context)!.bookAppointment
+                      ),
+                      _buildBoxWidget(
+                        icon: Icons.support_agent,
+                        title: AppLocalizations.of(context)!.support,
+                        description:
+                        AppLocalizations.of(context)!.providingSupport,
+                      ),
+                      _buildBoxWidget(
+                        icon: Icons.assignment,
+                        title: AppLocalizations.of(context)!.medicalRecords,
+                        description:
+                        AppLocalizations.of(context)!.patientInformation,
+                      ),
+                    ],
+                  ),
+                ],
             ),
-        ),
+          ),
+      ),
     );
   }
 

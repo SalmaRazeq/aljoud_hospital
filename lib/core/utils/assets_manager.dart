@@ -14,7 +14,7 @@ class AssetsManager{
   static const String eNT = '${base}ENT.png';
   static const String internalMedicine = '${base}Internal medicine.png';
   static const String neurology = '${base}Neurology.png';
-  static const String oBGYN = '${base}OB-GYN.png.png';
+  static const String obGYN = '${base}OB-GYN.png';
   static const String oncology = '${base}Oncology.png';
   static const String ophthalmology = '${base}ophthalmology.png';
   static const String orthopedics = '${base}Orthopedics.png';
