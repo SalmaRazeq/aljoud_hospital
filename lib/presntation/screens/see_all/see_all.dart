@@ -1,10 +1,10 @@
 import 'package:aljoud_hospital/core/utils/color_manager.dart';
 import 'package:aljoud_hospital/presntation/screens/home/categories_item/categories_item.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../core/utils/assets_manager.dart';
 import '../../../core/utils/routes_manager.dart';
+import '../../../l10n/app_localizations.dart';
 import 'category_details/CategoryDetailsScreen.dart';
 
 class SeeAllScreen extends StatelessWidget {
@@ -32,7 +32,7 @@ class SeeAllScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: ColorsManager.blue2,
+          backgroundColor: Theme.of(context).colorScheme.onPrimary,
           leading: IconButton(onPressed: (){
             Navigator.pushReplacementNamed(context, RoutesManager.home);
             },
@@ -41,25 +41,24 @@ class SeeAllScreen extends StatelessWidget {
         ),
 
         body: Padding(
-          padding: REdgeInsets.symmetric(horizontal: 2, vertical: 20),
+          padding: REdgeInsets.only(top: 14),
           child: GridView.builder(
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 3,
-              crossAxisSpacing: 5,
-              mainAxisSpacing: 10,
+              crossAxisSpacing: 5.w,
+              mainAxisSpacing: 5.h,
               childAspectRatio: 1,
             ),
             itemCount: categories.length,
             itemBuilder: (context, index) {
               return GestureDetector(
                 onTap: () {
-                  Navigator.pushReplacement(
+                  Navigator.push(
                       context,
                       MaterialPageRoute(
                       builder: (context) => CategoryDetailsScreen(category: categories[index]),
-                  ));
-
-                },
+                      ));
+                  },
                 child: categories[index],
               );
             },

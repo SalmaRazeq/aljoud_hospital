@@ -1,6 +1,5 @@
 import 'package:aljoud_hospital/core/utils/color_manager.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
@@ -11,10 +10,14 @@ class AppTheme {
       primary: ColorsManager.white,
       onPrimary: ColorsManager.blue2,
       shadow: ColorsManager.hint,
-      onSecondary: ColorsManager.black2,
+      onSecondary: ColorsManager.darkGray,
       secondary: ColorsManager.lightGreen,
+      onPrimaryFixed: ColorsManager.blue3,
+      onSecondaryFixed: ColorsManager.blue,
+      primaryFixed: ColorsManager.black
     ),
       scaffoldBackgroundColor: ColorsManager.white,
+      dividerColor: ColorsManager.black,
       elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
               backgroundColor: ColorsManager.blue2,
@@ -22,16 +25,29 @@ class AppTheme {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(25)))),
       textTheme: TextTheme(
-        titleLarge: GoogleFonts.sansita(fontSize: 35,
+        titleLarge: GoogleFonts.sansita(fontSize: 34,
             fontWeight: FontWeight.w600, color: ColorsManager.black),
-        titleMedium: GoogleFonts.poppins(fontSize: 15,
-            fontWeight: FontWeight.w500, color: ColorsManager.black2),
-        displaySmall: GoogleFonts.inter(fontSize: 14,
+        titleMedium: GoogleFonts.poppins(fontSize: 14,
+            fontWeight: FontWeight.w500, color: ColorsManager.darkGray),
+        displaySmall: GoogleFonts.lora(fontSize: 12, //text field hint and forgerP
             fontWeight: FontWeight.w400, color: ColorsManager.hint),
-        bodyLarge: GoogleFonts.sourceSerif4(fontSize: 20,
+        bodySmall: GoogleFonts.sourceSerif4(fontSize: 15,
           fontWeight: FontWeight.w700, color: ColorsManager.black,),
-        bodyMedium: GoogleFonts.sourceSerif4(fontSize: 24,
+        bodyMedium: GoogleFonts.sourceSerif4(fontSize: 18,
             fontWeight: FontWeight.w600, color: ColorsManager.white),
+        labelSmall:  GoogleFonts.sourceSerif4(fontSize: 10,
+          fontWeight: FontWeight.w500, color: ColorsManager.darkGray,),
+
       ),
+
+    cardColor: ColorsManager.beige,
+
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+      backgroundColor: Color(0xFFF2F0EF),
+      selectedItemColor: ColorsManager.blue2,
+      unselectedItemColor: Colors.grey,
+      showSelectedLabels: true,
+      showUnselectedLabels: true,
+    ),
   );
 }

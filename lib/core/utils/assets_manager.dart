@@ -22,5 +22,20 @@ class AssetsManager{
   static const String physicalTherapy = '${base}Physical therapy.png';
   static const String surgery = '${base}Surgery.png';
   static const String psychiatry = '${base}psychiatry.png';
+  static const String homeIcon = '${base}home Icon.png';
+  static const String scheduleIcon = '${base}table icon.png';
+  static const String liveChatIcon = '${base}chat icon.png';
+  static const String userIcon = '${base}user icon.png';
+  static const String doctor1 = '${base}man doctor.png';
+  static const String doctor2 = '${base}women doctor1.png';
+  static const String doctor3 = '${base}man doctor2.png';
+  static const String doctor4 = '${base}woman doctor 2.png';
+  static const String cashIcon = '${base}cash_icon.png';
+  static const String monsterCardIcon = '${base}Mastercard_icon.png';
+  static const String visaIcon = '${base}visa_icon.png';
+  static const String circleIcon = '${base}plus-circle_icon.png';
+
+
+
 
 }

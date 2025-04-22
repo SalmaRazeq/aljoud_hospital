@@ -1,8 +1,15 @@
 import 'package:aljoud_hospital/presntation/screens/auth/log_in/login.dart';
 import 'package:aljoud_hospital/presntation/screens/auth/register/register.dart';
+import 'package:aljoud_hospital/presntation/screens/hospital_visit/hospital_visit.dart';
+import 'package:aljoud_hospital/presntation/screens/home/myBooking_tab/myBooking.dart';
+import 'package:aljoud_hospital/presntation/screens/patient_details/patient_details.dart';
+import 'package:aljoud_hospital/presntation/screens/payment/payment.dart';
+import 'package:aljoud_hospital/presntation/screens/see_all/category_details/CategoryDetailsScreen.dart';
 import 'package:aljoud_hospital/presntation/screens/see_all/see_all.dart';
 import 'package:aljoud_hospital/presntation/screens/start/start.dart';
 import 'package:flutter/material.dart';
+import '../../data/models/doctor_model.dart';
+import '../../presntation/screens/home/categories_item/categories_item.dart';
 import '../../presntation/screens/home/home.dart';
 import '../../presntation/screens/splash/splash.dart';
 
@@ -13,9 +20,16 @@ class RoutesManager{
   static const String login = '/login';
   static const String register = '/register';
   static const String seeAll = '/seeAll';
+  static const String hospitalVisit = '/hospitalVisit';
+  static const String categoryDetails = '/categoryDetails';
+  static const String patientDetails = '/patientDetails';
+  static const String myBooking = '/myBooking';
+  static const String payment = '/payment';
+
 
 
   static Route? router(RouteSettings settings) {
+    final CategoriesItem category;
     switch (settings.name) {
       case splash:
         return MaterialPageRoute(
@@ -27,7 +41,7 @@ class RoutesManager{
         );
       case home:
         return MaterialPageRoute(
-          builder: (context) => HomeScreen(),
+          builder: (context) => Home(),
         );
       case login:
         return MaterialPageRoute(
@@ -40,6 +54,44 @@ class RoutesManager{
       case seeAll:
         return MaterialPageRoute(
           builder: (context) => SeeAllScreen(),
+        );
+      case hospitalVisit:
+        final doctor = settings.arguments as Doctor;
+        return MaterialPageRoute(
+          builder: (context) => HospitalVisitScreen(doctor: doctor),
+        );
+      case myBooking:
+        return MaterialPageRoute(
+          builder: (context) => MyBookingScreen(),
+        );
+      case payment:
+        final args = settings.arguments as Map<String, dynamic>;
+        final doctor = args['doctor'] as DoctorModel;
+        return MaterialPageRoute(
+          builder: (context) => PaymentScreen( doctor: doctor,),
+        );
+      case patientDetails:
+        final args = settings.arguments as Map<String, dynamic>;
+        final doctor = args['doctor'] as DoctorModel;
+        final selectedTime = args['selectedTime'] as String;
+        final selectedDay = args['selectedDay'] as String;
+        return MaterialPageRoute(
+          builder: (context) => PatientDetailsScreen(
+            doctor: doctor,
+            selectedTime: selectedTime,
+            selectedDay: selectedDay,
+          ),
+        );
+      case categoryDetails:
+        final category = settings.arguments as CategoriesItem;
+        return MaterialPageRoute(
+          builder: (_) => CategoryDetailsScreen(category: category),
+        );
+      default:
+        return MaterialPageRoute(
+          builder: (_) => const Scaffold(
+            body: Center(child: Text("No route defined")),
+          ),
         );
     }
   }

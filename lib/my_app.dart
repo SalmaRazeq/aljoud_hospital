@@ -2,7 +2,8 @@ import 'package:aljoud_hospital/config/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'core/utils/routes_manager.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'l10n/app_localizations.dart';
+
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: AppTheme.lightTheme,
         onGenerateRoute: RoutesManager.router,
-        initialRoute: RoutesManager.home,
+        initialRoute: RoutesManager.seeAll,
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: const [Locale("ar"), Locale("en")],
         locale: const Locale('en'),
