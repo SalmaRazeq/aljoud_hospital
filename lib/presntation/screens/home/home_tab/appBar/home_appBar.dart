@@ -51,7 +51,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: REdgeInsets.only(right: 15.w, left: 15.w, top: 30.h, bottom: 18.h),
+      padding: REdgeInsets.only(right: 15.w, left: 15.w, top: 25.h, bottom: 18.h),
       height: 230.h,
       width: double.infinity,
       decoration: BoxDecoration(
@@ -80,17 +80,17 @@ class _HomeAppBarState extends State<HomeAppBar> {
               ),
               SizedBox(width: 15.w),
               Text(
-                '${AppLocalizations.of(context)!.hello} $userName',
+                '${AppLocalizations.of(context)!.hello} ${userName ?? '...'}',
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
               const Spacer(),
               IconButton(
                 onPressed: () {},
-                icon: Icon(Icons.menu, color: Theme.of(context).colorScheme.primary, size: 28.sp),
+                icon: Icon(Icons.notifications, color: Theme.of(context).colorScheme.primary, size: 24.sp),
               ),
             ],
           ),
-          SizedBox(height: 18.h),
+          SizedBox(height: 10.h),
           Padding(
             padding: REdgeInsets.only(left: 8.0),
             child: Text(
@@ -98,7 +98,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
               style: Theme.of(context).textTheme.bodyMedium,
             ),
           ),
-          SizedBox(height: 18.h),
+          SizedBox(height: 10.h),
           SearchWidget(),
         ],
       ),

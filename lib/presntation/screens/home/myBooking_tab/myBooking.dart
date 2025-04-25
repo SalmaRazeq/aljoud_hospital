@@ -1,11 +1,11 @@
-import 'package:aljoud_hospital/core/utils/assets_manager.dart';
 import 'package:aljoud_hospital/core/utils/color_manager.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import '../../../../data/models/booking_model.dart';
+import '../../../../l10n/app_localizations.dart';
+
 
 class MyBookingScreen extends StatefulWidget {
   const MyBookingScreen({super.key});
@@ -16,34 +16,20 @@ class MyBookingScreen extends StatefulWidget {
 
 class _MyBookingScreenState extends State<MyBookingScreen> with SingleTickerProviderStateMixin {
   late TabController _tabController;
+  late Future<List<BookingModel>> _bookingsFuture;
 
-  final List<String> tabs = ["Upcoming", "Completed", "Canceled"];
+  late List<String> tabs;
 
-  final List<Map<String, dynamic>> upcomingBookings = [
-    {
-      "doctorName": "Dr. Omar El Naggar",
-      "specialty": "Cardiologist",
-      "city": "Nasr City",
-      "date": "Feb 23 ,2025",
-      "time": "10:00 AM",
-      "price": "100",
-      "icon": Icons.calendar_month_outlined,
-    },
-    {
-      "doctorName": "Dr. Sarah Amgad",
-      "specialty": "Cardiologist",
-      "city": "Abour City",
-      "date": "Feb 24 ,2025",
-      "time": "09:45 AM",
-      "price": "250",
-      "icon": Icons.videocam_outlined,
-    },
-  ];
 
   @override
-  void initState() {
-    super.initState();
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    final loc = AppLocalizations.of(context)!;
+    tabs = [loc.upComing, loc.completed, loc.canceled];
     _tabController = TabController(length: tabs.length, vsync: this);
+    _bookingsFuture = getBookings();
+
   }
 
   @override
@@ -55,22 +41,25 @@ class _MyBookingScreenState extends State<MyBookingScreen> with SingleTickerProv
   Widget buildTab(int index, String label) {
     bool isSelected = _tabController.index == index;
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 4),
+      padding: REdgeInsets.symmetric(horizontal: 4.w),
       child: GestureDetector(
         onTap: () {
           _tabController.animateTo(index);
+          setState(() {});
         },
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 350),
+          curve: Curves.easeInOut,
+          padding: REdgeInsets.symmetric(horizontal: 10.w, vertical: 6.h),
           decoration: BoxDecoration(
-            color: isSelected ? ColorsManager.blue3 : Colors.white,
-            borderRadius: BorderRadius.circular(16),
+            color: isSelected ? ColorsManager.blue3 : ColorsManager.white,
+            borderRadius: BorderRadius.circular(10.r),
           ),
           child: Text(
             label,
             style: GoogleFonts.sourceSerif4(
-              fontSize: 16,
-              color: isSelected ? Colors.white : Colors.black,
+              fontSize: 12.sp,
+              color: isSelected ? ColorsManager.white : ColorsManager.black,
               fontWeight: FontWeight.w700,
             ),
           ),
@@ -80,209 +69,205 @@ class _MyBookingScreenState extends State<MyBookingScreen> with SingleTickerProv
   }
 
   Widget buildCard({
-    required String doctorName,
-    required String specialty,
-    required String city,
-    required String date,
-    required String time,
-    required String price,
-    required IconData icon,
+    required BookingModel booking,
     required String headerTitle,
   }) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Column(
-        children: [
-          Container(
-            decoration: BoxDecoration(
-              color: ColorsManager.blue6,
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
-            ),
-            padding: REdgeInsets.symmetric(horizontal: 16, vertical: 10),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      headerTitle,
-                      style: GoogleFonts.sourceSerif4(
-                        color: ColorsManager.lightGreen,
-                        fontWeight: FontWeight.w400,
-                        fontSize: 18,
-                      ),
-                    ),
-                    SizedBox(height: 2.h),
-                    Text(
-                      "$date   $time",
-                      style: GoogleFonts.sourceSerif4(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w700,
-                        color: ColorsManager.lightGray,
-                      ),
-                    ),
-                    SizedBox(height: 2.h),
-                    Text(
-                      "$price EGP",
-                      style: GoogleFonts.sourceSerif4(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w700,
-                        color: ColorsManager.black3,
-                      ),
-                    ),
-                  ],
-                ),
-                Container(
-                  padding: REdgeInsets.all(6),
-                  decoration: BoxDecoration(
-                    color: ColorsManager.blue8,
-                    borderRadius: BorderRadius.circular(4),
-                  ),
-                  child: Icon(
-                    icon,
-                    color: ColorsManager.blue7,
-                    size: 24,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(16),
-            child: Row(
-              children: [
-                CircleAvatar(
-                  radius: 30,
-                  backgroundImage: AssetImage(AssetsManager.doctor1),
-                ),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: Column(
+        margin: REdgeInsets.symmetric(vertical: 10.h),
+        decoration: BoxDecoration(
+          color: ColorsManager.white,
+          borderRadius: BorderRadius.circular(12.r),
+        ),
+        child: Column(
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                color: ColorsManager.lightBlue, ///change for dark mood
+                borderRadius: BorderRadius.vertical(top: Radius.circular(12.r)),
+              ),
+              padding: REdgeInsets.symmetric(horizontal: 16.w, vertical: 5.h),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        doctorName,
+                        headerTitle,
                         style: GoogleFonts.sourceSerif4(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w700,
-                          color: ColorsManager.black3,
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w500,
+                          color: ColorsManager.lightGreen,
                         ),
                       ),
-                      Text(
-                        "$specialty , $city",
-                        style: GoogleFonts.sourceSerif4(
-                          fontSize: 13,
-                          fontWeight: FontWeight.w400,
-                          color: ColorsManager.black3,
+
+                      SizedBox(height: 2.h),
+
+                      Directionality(
+                        textDirection: TextDirection.ltr,
+                        child: Text(
+                          "${booking.appointmentDate} - ${booking.appointmentTime}",
+                          style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 10.sp,
+                          ),
                         ),
                       ),
-                      const SizedBox(height: 8),
+                      SizedBox(height: 2.h),
                     ],
                   ),
-                )
-              ],
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Icon(
+                        booking.meetingType == 'Online'
+                            ? Icons.videocam_outlined
+                            : Icons.calendar_month_outlined,
+                        color: Theme.of(context).colorScheme.onPrimary,
+                        size: 22.sp,
+                      ),
+                      SizedBox(height: 4.h,),
+                      Directionality(
+                        textDirection: TextDirection.ltr,
+                        child: Text(
+                          "${booking.price}",
+                          style: Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: 10.sp)
+                        ),
+                      ),
+                    ],
+                  ),
+
+                ],
+              ),
             ),
-          )
-        ],
-      ),
+            Padding(
+              padding: REdgeInsets.all(14),
+              child: Row(
+                children: [
+                  CircleAvatar(
+                    radius: 26.r,
+                    backgroundImage: AssetImage('${booking.image}'),
+                  ),
+
+                  SizedBox(width: 12.w),
+
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        '${booking.doctorName}',
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: 14.sp)
+                      ),
+                      Text(
+                        "${booking.doctorSpecialty}",
+                        style: Theme.of(context).textTheme.labelSmall?.copyWith(fontWeight: FontWeight.w600)
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            )
+          ],
+        ),
     );
   }
 
-  List<Widget> buildBookingList(String status) {
-    return upcomingBookings.map((booking) {
+  List<Widget> buildBookingList(List<BookingModel> bookings, String status) {
+    return bookings.map((booking) {
       return buildCard(
-        doctorName: booking["doctorName"],
-        specialty: booking["specialty"],
-        city: booking["city"],
-        date: booking["date"],
-        time: booking["time"],
-        price: booking["price"],
-        icon: booking["icon"],
-        headerTitle: "$status Appointments",
+        booking: booking,
+        headerTitle: Localizations.localeOf(context).languageCode == 'ar'
+            ? "${AppLocalizations.of(context)!.appointments} $status"
+            : "$status ${AppLocalizations.of(context)!.appointments}",
       );
     }).toList();
   }
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
+
     return Scaffold(
-      backgroundColor: const Color(0xfff2f2f2),
+      backgroundColor: ColorsManager.beige,
       body: SafeArea(
-        child: Column(
-          children: [
-            const SizedBox(height: 20),
-            Text(
-              "My Bookings",
-              style: GoogleFonts.sourceSerif4(
-                fontSize: 24.sp,
-                fontWeight: FontWeight.w700,
-                color: ColorsManager.black,
+        child: Padding(
+          padding: REdgeInsets.only(top: 20.h, left: 18.w, right: 18.w),
+          child: Column(
+            children: [
+
+              Text(
+                loc.myBooking,
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: 24.sp)
               ),
-            ),
-            const SizedBox(height: 16),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: List.generate(
-                tabs.length,
-                    (index) => buildTab(index, tabs[index]),
+              SizedBox(height: 20.h),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: List.generate(
+                  tabs.length,
+                      (index) => buildTab(index, tabs[index]),
+                ),
               ),
-            ),
-            const SizedBox(height: 16),
-            Expanded(
-              child: TabBarView(
-                controller: _tabController,
-                children: tabs.map((tab) {
-                  return ListView(
-                    children: buildBookingList(tab),
-                  );
-                }).toList(),
+
+              SizedBox(height: 16.h),
+              Expanded(
+                  child: FutureBuilder<List<BookingModel>>(
+                      future: _bookingsFuture,
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState == ConnectionState.waiting) {
+                          return Center(child: CircularProgressIndicator(color: Theme.of(context).colorScheme.primary));
+                        } else if (snapshot.hasError) {
+                          return Center(child: Text("${loc.error}: ${snapshot.error}"));
+                        } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                          return  Center(child: Text(loc.noBookingsFound));
+                        }
+                        else {
+                          List<BookingModel> bookings = snapshot.data!;
+                          return TabBarView(
+                            controller: _tabController,
+                            children: tabs.map((tab) {
+                              List<BookingModel> filteredBookings = bookings.where((booking) {
+                                if (tab == loc.upComing) {
+                                  return booking.status?.toLowerCase() == 'upcoming';
+                                } else if (tab == loc.completed) {
+                                  return booking.status?.toLowerCase() == 'completed';
+                                } else {
+                                  return booking.status?.toLowerCase() == 'canceled';
+                                }
+                              }).toList();
+
+
+                              return ListView(
+                                children: buildBookingList(filteredBookings, tab),
+                              );
+                            }).toList(),
+                          );
+                        }
+                      }),
               ),
-            ),
-            // Center(
-            //   child: SizedBox(
-            //     width: 200,
-            //     child: ElevatedButton(
-            //       onPressed: () {},
-            //       style: ElevatedButton.styleFrom(
-            //         backgroundColor: ColorsManager.blue,
-            //         padding: REdgeInsets.symmetric(vertical: 15),
-            //         shape: RoundedRectangleBorder(
-            //           borderRadius: BorderRadius.circular(12),
-            //         ),
-            //       ),
-            //       child: Text(
-            //         'Confirm Booking',
-            //         style: GoogleFonts.sourceSerif4(
-            //           fontSize: 16.sp,
-            //           fontWeight: FontWeight.w700,
-            //           color: ColorsManager.white,
-            //         ),
-            //       ),
-            //     ),
-            //   ),
-            // )
-          ],
+            ],
+          ),
         ),
       ),
     );
   }
-}
 
+  Future<List<BookingModel>> getBookings() async {
+    try {
+      // استرجاع بيانات الحجوزات من Firestore
+      QuerySnapshot snapshot = await FirebaseFirestore.instance
+          .collection(BookingModel.collectionName).get();
 
-void addBooking(BookingModel booking) async {
-  CollectionReference bookings = FirebaseFirestore.instance.collection('Bookings');
+      // تحويل البيانات إلى قائمة من BookingModel
+      List<BookingModel> bookings = snapshot.docs.map((doc) {
+        return BookingModel.fromFirestore(doc);
+      }).toList();
 
-  try {
-    await bookings.add(booking.toFirestore());
-    print("Booking added successfully!");
-  } catch (e) {
-    print("Error adding booking: $e");
+      return bookings;
+    } catch (e) {
+      print("Error retrieving bookings: $e");
+      return [];
+    }
   }
+
 }
 

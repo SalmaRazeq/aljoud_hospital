@@ -9,6 +9,8 @@ class DoctorModel {
   String? time;
   String? price;
   String? image;
+  String? meetingType;
+
 
   DoctorModel({
     this.doctorId,
@@ -18,6 +20,8 @@ class DoctorModel {
     this.time,
     this.price,
     this.image,
+    this.meetingType,
+
   });
 
   Map<String, dynamic> toFirestore() {
@@ -29,6 +33,7 @@ class DoctorModel {
       'time': time,
       'price': price,
       'image': image,
+      'meetingType': meetingType,
     };
   }
 
@@ -42,6 +47,7 @@ class DoctorModel {
       time: data['time'],
       price: data['price'],
       image: data['image'],
+      meetingType: data['meetingType'],
     );
   }
 

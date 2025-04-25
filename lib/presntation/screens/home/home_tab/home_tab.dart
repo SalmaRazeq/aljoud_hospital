@@ -99,8 +99,7 @@ class HomeScreen extends StatelessWidget {
                                   imagePath: AssetsManager.dentistry,
                                 );
 
-                                Navigator.pushNamed(
-                                  context,
+                                Navigator.of(context).pushNamed(
                                   RoutesManager.categoryDetails,
                                   arguments: category,
                                 );

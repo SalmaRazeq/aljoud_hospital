@@ -241,4 +241,229 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get ok => 'حسناً';
+
+  @override
+  String get slotsAvailable => 'المواعيد المتاحة';
+
+  @override
+  String get slots => 'فترات';
+
+  @override
+  String get morning => 'الصباح';
+
+  @override
+  String get evening => 'المساء';
+
+  @override
+  String get night => 'الليل';
+
+  @override
+  String get appointmentType => 'نوع الموعد';
+
+  @override
+  String get appointment => 'l,u]';
+
+  @override
+  String get hospitalVisitSchedule => 'جدولة زيارة المستشفى';
+
+  @override
+  String get continueText => 'استمرار';
+
+  @override
+  String get online => 'أونلاين';
+
+  @override
+  String get inPerson => 'حضور شخصي';
+
+  @override
+  String get patientDetails => 'بيانات المريض';
+
+  @override
+  String get patientName => 'اسم المريض';
+
+  @override
+  String get selectYourAgeRange => 'اختر فئتك العمرية';
+
+  @override
+  String get height => 'الطول';
+
+  @override
+  String get weight => 'الوزن';
+
+  @override
+  String get gender => 'الجنس';
+
+  @override
+  String get problem => 'المشكلة';
+
+  @override
+  String get male => 'ذكر';
+
+  @override
+  String get female => 'أنثى';
+
+  @override
+  String get tellTheDrYourProblem => 'أخبر الطبيب عن مشكلتك';
+
+  @override
+  String get confirmBooking => 'تأكيد الحجز';
+
+  @override
+  String get paymentMethods => 'طرق الدفع';
+
+  @override
+  String get totalAmount => 'المبلغ الإجمالي';
+
+  @override
+  String get cash => 'نقدًا';
+
+  @override
+  String get addNewCard => 'إضافة بطاقة جديدة';
+
+  @override
+  String get payWith => 'الدفع باستخدام';
+
+  @override
+  String get confirm => 'تأكيد';
+
+  @override
+  String get paymentAndBookingCompleted => 'تم الدفع والحجز بنجاح';
+
+  @override
+  String get failedToBook => 'فشل في الحجز';
+
+  @override
+  String get upComing => 'القادمة';
+
+  @override
+  String get completed => 'المكتملة';
+
+  @override
+  String get canceled => 'الملغاة';
+
+  @override
+  String get upComingAppointment => 'الموعد القادم';
+
+  @override
+  String get noBookingsFound => 'لا يوجد حجز';
+
+  @override
+  String get doctors => 'أطباء';
+
+  @override
+  String get doctor => 'الطبيب';
+
+  @override
+  String get today => 'اليوم';
+
+  @override
+  String get tomorrow => 'غدًا';
+
+  @override
+  String get sun => 'الأحد';
+
+  @override
+  String get mon => 'الإثنين';
+
+  @override
+  String get tue => 'الثلاثاء';
+
+  @override
+  String get wed => 'الأربعاء';
+
+  @override
+  String get thu => 'الخميس';
+
+  @override
+  String get fri => 'الجمعة';
+
+  @override
+  String get sat => 'السبت';
+
+  @override
+  String get jan => 'يناير';
+
+  @override
+  String get feb => 'فبراير';
+
+  @override
+  String get mar => 'مارس';
+
+  @override
+  String get apr => 'أبريل';
+
+  @override
+  String get may => 'مايو';
+
+  @override
+  String get jun => 'يونيو';
+
+  @override
+  String get jul => 'يوليو';
+
+  @override
+  String get aug => 'أغسطس';
+
+  @override
+  String get sep => 'سبتمبر';
+
+  @override
+  String get oct => 'أكتوبر';
+
+  @override
+  String get nov => 'نوفمبر';
+
+  @override
+  String get dec => 'ديسمبر';
+
+  @override
+  String get enterName => 'أدخل اسمك';
+
+  @override
+  String get plzEnterName => 'من فضلك، أدخل اسمك';
+
+  @override
+  String get enterHeight => 'أدخل طولك';
+
+  @override
+  String get enterWeight => 'أدخل وزنك';
+
+  @override
+  String get doctorProfile => 'الملف الشخصي للطبيب';
+
+  @override
+  String get yearsOf => 'سنة من';
+
+  @override
+  String get experience => 'الخبرة';
+
+  @override
+  String get about => 'حول الطبيب';
+
+  @override
+  String get price => 'سعر الكشف';
+
+  @override
+  String get workingTime => 'أوقات العمل';
+
+  @override
+  String get aboutText1 => 'استشاري في';
+
+  @override
+  String get aboutText2 => 'مستشفى سموحة، أكثر من 30 عامًا من الخبرة';
+
+  @override
+  String get workingTimeText => 'من الثلاثاء إلى الأحد';
+
+  @override
+  String get voiceCall => 'مكالمة صوتية';
+
+  @override
+  String get patients => 'المرضى';
+
+  @override
+  String get patient => 'المريض';
+
+  @override
+  String get rating => 'التقييم';
 }

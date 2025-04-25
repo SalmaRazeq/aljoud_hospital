@@ -19,11 +19,13 @@ import '../../../l10n/app_localizations.dart';
 import '../payment/payment.dart';
 
 class PatientDetailsScreen extends StatefulWidget {
-  PatientDetailsScreen({required this.doctor,required this.selectedTime,
-    required this.selectedDay,super.key});
+  const PatientDetailsScreen({required this.doctor,required this.selectedTime,
+    required this.selectedDay, required this.selectedMeetingType, super.key});
   final DoctorModel doctor;
   final String selectedTime;
   final String selectedDay;
+  final String selectedMeetingType;
+
 
   @override
   State<PatientDetailsScreen> createState() => _PatientDetailsScreenState();
@@ -41,8 +43,11 @@ class _PatientDetailsScreenState extends State<PatientDetailsScreen> {
   String selectedAge = '30+';
   String gender = 'female';
 
+
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
+
     return GestureDetector(
       onTap: () {
         FocusManager.instance.primaryFocus?.unfocus();
@@ -66,42 +71,44 @@ class _PatientDetailsScreenState extends State<PatientDetailsScreen> {
                                   onTap: () {
                                     Navigator.pop(context);
                                   }),
-                              SizedBox(width: 65.w),
-                              Center(
-                                child: Text(
-                                    'Patient Details',
-                                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                        fontSize: 20.sp,
-                                        color: Theme.of(context).colorScheme.primaryFixed)
+                              Expanded(
+                                child: Center(
+                                  child: Text(
+                                      loc.patientDetails,
+                                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                          fontSize: 20.sp,
+                                          color: Theme.of(context).colorScheme.primaryFixed)
+                                  ),
                                 ),
                               ),
+                              SizedBox(width: 30.w),
                             ],
                           ),
 
                           SizedBox(
                             height: 32.h,
                           ),
-                          Text("Patient name", style: Theme.of(context).textTheme.bodySmall),
+                          Text(loc.patientName, style: Theme.of(context).textTheme.bodySmall),
                           SizedBox(
                             height: 10.h,
                           ),
 
                           BuildTextField(
                               icon: Icons.person,
-                              hint: "Enter your name",
+                              hint: loc.enterName,
                               controller: nameController,
                               validator: (input) {
                                 if (input == null || input
                                     .trim()
                                     .isEmpty) {
-                                  return "Please, Enter your name";
+                                  return loc.plzEnterName;
                                 }
                                 return null;
                               },),
                           SizedBox(
                             height: 16.h,
                           ),
-                          Text('Select your age range', style: Theme.of(context).textTheme.bodySmall),
+                          Text(loc.selectYourAgeRange, style: Theme.of(context).textTheme.bodySmall),
                           SizedBox(
                             height: 3.h,
                           ),
@@ -127,7 +134,7 @@ class _PatientDetailsScreenState extends State<PatientDetailsScreen> {
                                   });
                                 },
                                 shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
+                                  borderRadius: BorderRadius.circular(10.r),
                                 ),
                               );
                             }).toList(),
@@ -166,14 +173,14 @@ class _PatientDetailsScreenState extends State<PatientDetailsScreen> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text('Height', style: Theme.of(context).textTheme.bodySmall),
+                                    Text(loc.height, style: Theme.of(context).textTheme.bodySmall),
                                     SizedBox(height: 8.h),
                                     BuildTextField(icon: Icons.height,
                                         hint: 'Cm',
                                         controller: heightController,
                                         validator: (input) {
                                           if (input == null || input.trim().isEmpty) {
-                                            return 'Enter your height';
+                                            return loc.enterHeight;
                                           }
                                           return null;
                                         }),
@@ -185,7 +192,7 @@ class _PatientDetailsScreenState extends State<PatientDetailsScreen> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text('Weight', style: Theme.of(context).textTheme.bodySmall),
+                                    Text(loc.weight, style: Theme.of(context).textTheme.bodySmall),
                                     SizedBox(height: 8.h),
                                     BuildTextField(
                                       icon: Icons.monitor_weight_outlined,
@@ -193,7 +200,7 @@ class _PatientDetailsScreenState extends State<PatientDetailsScreen> {
                                       controller: weightController,
                                       validator: (input) {
                                         if (input == null || input.trim().isEmpty) {
-                                          return 'Enter your weight';
+                                          return loc.enterWeight;
                                         }
                                         return null;
                                       },
@@ -204,12 +211,12 @@ class _PatientDetailsScreenState extends State<PatientDetailsScreen> {
                             ],
                           ),
                           SizedBox(height: 16.h,),
-                          Text('Gender', style: Theme.of(context).textTheme.bodySmall),
+                          Text(loc.gender, style: Theme.of(context).textTheme.bodySmall),
                           SizedBox(
                             height: 8.h,
                           ),
                           Row(
-                            children: ['Male', 'Female'].map((g) {
+                            children: [loc.male, loc.female].map((g) {
                               return Expanded(
                                   child: Padding(
                                     padding: REdgeInsets.symmetric(horizontal: 5),
@@ -236,7 +243,7 @@ class _PatientDetailsScreenState extends State<PatientDetailsScreen> {
                           SizedBox(
                             height: 16.h,
                           ),
-                          Text('Problem', style: Theme.of(context).textTheme.bodySmall),
+                          Text(loc.problem, style: Theme.of(context).textTheme.bodySmall),
                           SizedBox(
                             height: 10.h,
                           ),
@@ -246,7 +253,7 @@ class _PatientDetailsScreenState extends State<PatientDetailsScreen> {
                                 controller: problemController,
                                 maxLines: 3,
                                 decoration: InputDecoration(
-                                  hintText: 'Tell the doctor about your problem',
+                                  hintText: loc.tellTheDrYourProblem,
                                   hintStyle: const TextStyle(color: Colors.grey),
                                   filled: true,
                                   fillColor: Colors.white,
@@ -257,11 +264,11 @@ class _PatientDetailsScreenState extends State<PatientDetailsScreen> {
                                 ),
                               ),
 
-                              SizedBox(height: 20.h,),
+                              SizedBox(height: 28.h,),
 
                               Center(
                                 child: SizedBox(
-                                    width: 220.w,
+                                    width: 240.w,
                                     child: ElevatedButton(
                                       onPressed: () {
                                         //savePatientDetails();
@@ -275,13 +282,13 @@ class _PatientDetailsScreenState extends State<PatientDetailsScreen> {
 
                                       style: ElevatedButton.styleFrom(
                                         backgroundColor: ColorsManager.blue2,
-                                        padding: REdgeInsets.symmetric(vertical: 10.h),
+                                        padding: REdgeInsets.symmetric(vertical: 6.h),
                                         shape: RoundedRectangleBorder(
                                           borderRadius: BorderRadius.circular(10.r),
                                         ),
                                       ),
                                       child: Text(
-                                        'Confirm Booking',
+                                        loc.confirmBooking,
                                         style: Theme.of(context).textTheme.bodyMedium,
                                       ),
                                     )),

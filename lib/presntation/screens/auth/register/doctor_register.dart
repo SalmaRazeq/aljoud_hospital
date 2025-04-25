@@ -18,14 +18,14 @@ import '../../../../l10n/app_localizations.dart';
 import '../widget/field_design.dart';
 
 
-class RegisterScreen extends StatefulWidget {
-   RegisterScreen({super.key});
+class DoctorRegisterScreen extends StatefulWidget {
+  DoctorRegisterScreen({super.key});
 
   @override
-  State<RegisterScreen> createState() => _RegisterScreenState();
+  State<DoctorRegisterScreen> createState() => _DoctorRegisterScreenState();
 }
 
-class _RegisterScreenState extends State<RegisterScreen> {
+class _DoctorRegisterScreenState extends State<DoctorRegisterScreen> {
   TextEditingController fullNameController = TextEditingController();
 
   TextEditingController phoneNumController = TextEditingController();
@@ -37,7 +37,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   TextEditingController rePasswordController = TextEditingController();
 
   GlobalKey<FormState> formKey = GlobalKey();
-  bool isPatient = true;
+  bool isPatient = false;
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +61,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     Center(
                       child: Text(loc.createAccount,
                         style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                          fontSize: 24.sp, color: Theme.of(context).colorScheme.onPrimary,
+                            fontSize: 24.sp, color: Theme.of(context).colorScheme.onPrimary,
                             fontWeight: FontWeight.w600
                         ),),),
                     SizedBox(height: 8.h,),
@@ -204,17 +204,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                     ),
 
-                    SizedBox(height: 22.h,),
-                    Image.asset(AssetsManager.or,),
-                    SizedBox(height: 10.h),
-                    InkWell(
-                        onTap: () {},
-                        child: Image.asset(AssetsManager.google)),
-                    SizedBox(height: 10.h),
 
-                    InkWell(
-                        onTap: () {},
-                        child: Image.asset(AssetsManager.faceBook)),
                     SizedBox(height: 40.h),
 
                     BottomSection(text: loc.haveAccount, body: loc.login, routeName: RoutesManager.login,)

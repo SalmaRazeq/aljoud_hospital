@@ -14,8 +14,9 @@ class AppTheme {
       secondary: ColorsManager.lightGreen,
       onPrimaryFixed: ColorsManager.blue3,
       onSecondaryFixed: ColorsManager.blue,
-      primaryFixed: ColorsManager.black
+      primaryFixed: ColorsManager.black,
     ),
+      canvasColor: ColorsManager.blue4,
       scaffoldBackgroundColor: ColorsManager.white,
       dividerColor: ColorsManager.black,
       elevatedButtonTheme: ElevatedButtonThemeData(
@@ -29,7 +30,7 @@ class AppTheme {
             fontWeight: FontWeight.w600, color: ColorsManager.black),
         titleMedium: GoogleFonts.poppins(fontSize: 14,
             fontWeight: FontWeight.w500, color: ColorsManager.darkGray),
-        displaySmall: GoogleFonts.lora(fontSize: 12, //text field hint and forgerP
+        displaySmall: GoogleFonts.poppins(fontSize: 12, //text field hint and forgerP
             fontWeight: FontWeight.w400, color: ColorsManager.hint),
         bodySmall: GoogleFonts.sourceSerif4(fontSize: 15,
           fontWeight: FontWeight.w700, color: ColorsManager.black,),
@@ -37,6 +38,8 @@ class AppTheme {
             fontWeight: FontWeight.w600, color: ColorsManager.white),
         labelSmall:  GoogleFonts.sourceSerif4(fontSize: 10,
           fontWeight: FontWeight.w500, color: ColorsManager.darkGray,),
+        labelMedium: GoogleFonts.poppins(fontSize: 12,
+          fontWeight: FontWeight.w500, color: ColorsManager.hint,),
 
       ),
 

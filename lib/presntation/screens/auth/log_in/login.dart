@@ -1,11 +1,11 @@
 import 'package:aljoud_hospital/core/utils/assets_manager.dart';
 import 'package:aljoud_hospital/core/utils/email_validation.dart';
+import 'package:aljoud_hospital/presntation/screens/auth/widget/bottom_section.dart';
 import 'package:aljoud_hospital/presntation/screens/auth/widget/password_field_design.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../core/utils/constant_manager.dart';
 import '../../../../core/utils/dialog_utils/dialog_utils.dart';
 import '../../../../core/utils/routes_manager.dart';
@@ -27,6 +27,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
+
     return GestureDetector(
       onTap: () {
         FocusManager.instance.primaryFocus?.unfocus();
@@ -42,32 +44,22 @@ class _LoginScreenState extends State<LoginScreen> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Text(AppLocalizations.of(context)!.welcomeBack,
-                          style: Theme
-                              .of(context)
-                              .textTheme
-                              .titleLarge),
+                      Text(loc.welcomeBack,
+                          style: Theme.of(context).textTheme.titleLarge),
                       SizedBox(height: 16.h,),
-                      Text('${AppLocalizations.of(context)!
-                          .loginText1}\n${AppLocalizations.of(context)!
-                          .loginText2}',
-                          style: Theme
-                              .of(context)
-                              .textTheme
-                              .displaySmall),
+                      Text('${loc.loginText1}\n${AppLocalizations.of(context)!.loginText2}',
+                          style: Theme.of(context).textTheme.displaySmall),
                       SizedBox(height: 40.h,),
 
                       TextFieldDesign(
-                          hintText: AppLocalizations.of(context)!.emailAddress,
+                          hintText: loc.emailAddress,
                           controller: emailController,
                           validator: (input) {
-                            if (input == null || input
-                                .trim()
-                                .isEmpty) {
-                              return AppLocalizations.of(context)!.plzEmail;
+                            if (input == null || input.trim().isEmpty) {
+                              return loc.plzEmail;
                             }
                             if (!isEmailValid(input)) {
-                              return AppLocalizations.of(context)!.wrongFormat;
+                              return loc.wrongFormat;
                             }
                             return null;
                           }),
@@ -75,17 +67,14 @@ class _LoginScreenState extends State<LoginScreen> {
                       SizedBox(height: 15.h,),
 
                       PasswordFieldDesign(
-                          hintText: AppLocalizations.of(context)!.password,
+                          hintText: loc.password,
                           controller: passwordController,
                           validator: (input) {
-                            if (input == null || input
-                                .trim()
-                                .isEmpty) {
-                              return AppLocalizations.of(context)!.plzPassword;
+                            if (input == null || input.trim().isEmpty) {
+                              return loc.plzPassword;
                             }
                             if (input.length < 6) {
-                              return AppLocalizations.of(context)!
-                                  .password6Char;
+                              return loc.password6Char;
                             }
                             return null;
                           }),
@@ -93,8 +82,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       Align(
                         alignment: Alignment.centerRight,
                         child: TextButton(
-                            onPressed: () {}, child: Text(AppLocalizations.of(
-                            context)!.forgetPassword,
+                            onPressed: () {},
+                          child: Text(loc.forgetPassword,
                             style: Theme.of(context).textTheme.displaySmall
                                 ?.copyWith(fontSize: 10.sp, color: Theme
                                 .of(context).colorScheme.onPrimary),
@@ -107,25 +96,13 @@ class _LoginScreenState extends State<LoginScreen> {
                         onPressed: () {
                           signIn();
                         },
-                        style: Theme
-                            .of(context)
-                            .elevatedButtonTheme
-                            .style,
+                        style: Theme.of(context).elevatedButtonTheme.style,
                         child: Padding(
                           padding: REdgeInsets.all(10),
                           child: Text(
                               AppLocalizations.of(context)!.login,
-                              style: Theme
-                                  .of(context)
-                                  .textTheme
-                                  .displaySmall
-                                  ?.copyWith(
-                                  fontSize: 16.sp,
-                                  fontWeight: FontWeight.w700,
-                                  color: Theme
-                                      .of(context)
-                                      .colorScheme
-                                      .primary)
+                              style: Theme.of(context).textTheme.displaySmall?.
+                              copyWith(fontSize: 16.sp, fontWeight: FontWeight.w700, color: Theme.of(context).colorScheme.primary)
                           ),
                         ),
                       ),
@@ -147,39 +124,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: Image.asset(AssetsManager.faceBook)),
 
                       SizedBox(height: 60.h),
-
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                              AppLocalizations.of(context)!.notHaveAccount,
-                              style: Theme
-                                  .of(context)
-                                  .textTheme
-                                  .displaySmall
-                          ),
-                          TextButton(
-                            onPressed: () {
-                              Navigator.pushReplacementNamed(
-                                  context, RoutesManager.register);
-                            },
-                            child: Text(
-                                AppLocalizations.of(context)!.signUp,
-                                style: Theme
-                                    .of(context)
-                                    .textTheme
-                                    .displaySmall
-                                    ?.copyWith(
-                                    color: Theme
-                                        .of(context)
-                                        .colorScheme
-                                        .onPrimary,
-                                    decoration: TextDecoration.underline
-                                )
-                            ),
-                          )
-                        ],
-                      )
+                      BottomSection(text: loc.notHaveAccount, body: loc.signUp, routeName: RoutesManager.register)
 
                     ]
                 ),
