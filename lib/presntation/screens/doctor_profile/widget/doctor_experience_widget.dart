@@ -12,11 +12,11 @@ class DoctorExperienceWidget extends StatelessWidget {
     return Padding(
       padding: REdgeInsets.symmetric(vertical: 5.h),
       child: Container(
-        width: 92.w,
+        width: 90.w,
         height: 100.h,
         padding: REdgeInsets.symmetric(vertical: 6.h),
         decoration: BoxDecoration(
-            color: ColorsManager.fadedBlue3,
+            color: ColorsManager.fadedBlue3.withOpacity(0.2),
             borderRadius: BorderRadius.circular(15.r),
         ),
         child: Center(
