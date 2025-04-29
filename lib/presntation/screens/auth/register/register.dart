@@ -1,3 +1,4 @@
+import 'package:aljoud_hospital/core/utils/color_manager.dart';
 import 'package:aljoud_hospital/core/utils/constant_manager.dart';
 import 'package:aljoud_hospital/core/utils/dialog_utils/dialog_utils.dart';
 import 'package:aljoud_hospital/presntation/screens/auth/widget/bottom_section.dart';
@@ -58,12 +59,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Center(
-                      child: Text(loc.createAccount,
-                        style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                          fontSize: 24.sp, color: Theme.of(context).colorScheme.onPrimary,
-                            fontWeight: FontWeight.w600
-                        ),),),
+                    Row(
+                      children: [
+                        IconButton(onPressed: (){Navigator.pushNamed(context, RoutesManager.login);},
+                            icon: Icon(Icons.arrow_back_rounded,
+                              color: Theme.of(context).colorScheme.onSecondary,
+                              size: 28.sp,)),
+                        Center(
+                          child: Text(loc.createAccount,
+                            style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                              fontSize: 20.sp, color: Theme.of(context).colorScheme.onPrimary,
+                                fontWeight: FontWeight.w600
+                            ),),),
+                      ],
+                    ),
                     SizedBox(height: 8.h,),
 
                     ToggleButtonWidget(
@@ -164,7 +173,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           return null;
                         }),
                     SizedBox(
-                      height: 8.h,
+                      height: 9.h,
                     ),
                     Text(
                         loc.confirmPassword,
@@ -195,7 +204,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       },
                       style: Theme.of(context).elevatedButtonTheme.style,
                       child: Padding(
-                        padding: REdgeInsets.all(10),
+                        padding: REdgeInsets.all(6),
                         child: Text(
                             loc.signUp,
                             style: Theme.of(context).textTheme.titleMedium

@@ -94,7 +94,7 @@ class _MyBookingScreenState extends State<MyBookingScreen> with SingleTickerProv
                     children: [
                       Text(
                         headerTitle,
-                        style: GoogleFonts.sourceSerif4(
+                        style: GoogleFonts.sourceSans3(
                           fontSize: 14.sp,
                           fontWeight: FontWeight.w500,
                           color: ColorsManager.lightGreen,
@@ -131,7 +131,7 @@ class _MyBookingScreenState extends State<MyBookingScreen> with SingleTickerProv
                         textDirection: TextDirection.ltr,
                         child: Text(
                           "${booking.price}",
-                          style: Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: 10.sp)
+                          style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 10.sp)
                         ),
                       ),
                     ],
@@ -141,7 +141,7 @@ class _MyBookingScreenState extends State<MyBookingScreen> with SingleTickerProv
               ),
             ),
             Padding(
-              padding: REdgeInsets.all(14),
+              padding: REdgeInsets.all(12),
               child: Row(
                 children: [
                   CircleAvatar(
@@ -188,10 +188,10 @@ class _MyBookingScreenState extends State<MyBookingScreen> with SingleTickerProv
     final loc = AppLocalizations.of(context)!;
 
     return Scaffold(
-      backgroundColor: ColorsManager.beige,
+      backgroundColor: ColorsManager.lightGray.withOpacity(0.9),
       body: SafeArea(
         child: Padding(
-          padding: REdgeInsets.only(top: 20.h, left: 18.w, right: 18.w),
+          padding: REdgeInsets.only(top: 26.h, left: 18.w, right: 18.w),
           child: Column(
             children: [
 

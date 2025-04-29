@@ -19,13 +19,8 @@ import '../../../l10n/app_localizations.dart';
 import '../payment/payment.dart';
 
 class PatientDetailsScreen extends StatefulWidget {
-  const PatientDetailsScreen({required this.doctor,required this.selectedTime,
-    required this.selectedDay, required this.selectedMeetingType, super.key});
+  const PatientDetailsScreen({required this.doctor, super.key});
   final DoctorModel doctor;
-  final String selectedTime;
-  final String selectedDay;
-  final String selectedMeetingType;
-
 
   @override
   State<PatientDetailsScreen> createState() => _PatientDetailsScreenState();
@@ -95,7 +90,7 @@ class _PatientDetailsScreenState extends State<PatientDetailsScreen> {
 
                           BuildTextField(
                               icon: Icons.person,
-                              hint: loc.enterName,
+                              hintText: loc.enterName,
                               controller: nameController,
                               validator: (input) {
                                 if (input == null || input
@@ -143,22 +138,22 @@ class _PatientDetailsScreenState extends State<PatientDetailsScreen> {
                             height: 20.h,
                           ),
 
-                          Text(AppLocalizations.of(context)!.phone, style: Theme.of(context).textTheme.bodySmall,),
+                          Text(loc.phone, style: Theme.of(context).textTheme.bodySmall,),
                           SizedBox(
                             height: 10.h,
                           ),
 
                           BuildTextField(
                             icon: Icons.phone,
-                            hint: AppLocalizations.of(context)!.enterPhone,
+                            hintText: loc.enterPhone,
                             keyBoardType: const TextInputType.numberWithOptions(),
                             controller: phoneNumController,
                             validator: (input) {
                               if (input == null || input.trim().isEmpty) {
-                                return AppLocalizations.of(context)!.plzPhone;
+                                return loc.plzPhone;
                               }
                               if (input.length != 11) {
-                                return AppLocalizations.of(context)!.password11digits;
+                                return loc.password11digits;
                               }
                               return null;
                             },),
@@ -176,8 +171,9 @@ class _PatientDetailsScreenState extends State<PatientDetailsScreen> {
                                     Text(loc.height, style: Theme.of(context).textTheme.bodySmall),
                                     SizedBox(height: 8.h),
                                     BuildTextField(icon: Icons.height,
-                                        hint: 'Cm',
+                                        hintText: 'Cm',
                                         controller: heightController,
+                                        keyBoardType: const TextInputType.numberWithOptions(),
                                         validator: (input) {
                                           if (input == null || input.trim().isEmpty) {
                                             return loc.enterHeight;
@@ -196,8 +192,9 @@ class _PatientDetailsScreenState extends State<PatientDetailsScreen> {
                                     SizedBox(height: 8.h),
                                     BuildTextField(
                                       icon: Icons.monitor_weight_outlined,
-                                      hint: 'Kg',
+                                      hintText: 'Kg',
                                       controller: weightController,
+                                      keyBoardType: const TextInputType.numberWithOptions(),
                                       validator: (input) {
                                         if (input == null || input.trim().isEmpty) {
                                           return loc.enterWeight;
@@ -271,17 +268,9 @@ class _PatientDetailsScreenState extends State<PatientDetailsScreen> {
                                     width: 240.w,
                                     child: ElevatedButton(
                                       onPressed: () {
-                                        //savePatientDetails();
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => PaymentScreen(doctor: widget.doctor),
-                                          ),
-                                        );
+                                        savePatientDetails();
                                       },
-
                                       style: ElevatedButton.styleFrom(
-                                        backgroundColor: ColorsManager.blue2,
                                         padding: REdgeInsets.symmetric(vertical: 6.h),
                                         shape: RoundedRectangleBorder(
                                           borderRadius: BorderRadius.circular(10.r),
@@ -302,60 +291,53 @@ class _PatientDetailsScreenState extends State<PatientDetailsScreen> {
     );
   }
 
-  // void savePatientDetails() async {
-  //   if (_formKey.currentState!.validate() == false) return;
-  //
-  //   try {
-  //     DialogUtils.showLoading(context, message: AppLocalizations.of(context)!.pleaseWait);
-  //
-  //     final userId = FirebaseAuth.instance.currentUser?.uid;
-  //     if (userId == null) throw Exception("User is not logged in");
-  //
-  //     await savePatientAutoId(userId);
-  //
-  //     if (mounted) {
-  //       DialogUtils.hide(context);
-  //
-  //     }
-  //   } catch (error) {
-  //     DialogUtils.hide(context);
-  //     DialogUtils.showMessage(context, body: error.toString());
-  //     print(error);
-  //   }
-  // }
-  //
-  // Future<void> savePatientAutoId(String uid) async {
-  //   final patientCollection = FirebaseFirestore.instance
-  //       .collection(UserDM.collectionName)
-  //       .doc(uid)
-  //       .collection(PatientModel.collectionName);
-  //
-  //   PatientModel patient = PatientModel(
-  //     patientId: uid,
-  //     patientName: nameController.text,
-  //     patientPhone: phoneNumController.text,
-  //     ageRange: selectedAge,
-  //     gender: gender,
-  //     height: double.tryParse(heightController.text),
-  //     weight: double.tryParse(weightController.text),
-  //     problemDescription: problemController.text,
-  //   );
-  //
-  //   await patientCollection.add(patient.toFireStore());
-  // }
+  void savePatientDetails() async {
+    if (_formKey.currentState!.validate() == false) return;
 
+    try {
+      DialogUtils.showLoading(context, message: AppLocalizations.of(context)!.pleaseWait);
 
+      final userId = FirebaseAuth.instance.currentUser?.uid;
+      if (userId == null) throw Exception("User is not logged in");
 
-// Future<PatientModel> getPatientDetails(String patientId) async {
-  //   DocumentSnapshot doc = await FirebaseFirestore.instance.collection('patients').doc(patientId).get();
-  //
-  //   if (doc.exists) {
-  //     // تحويل بيانات Firestore إلى PatientModel
-  //     return PatientModel.fromFireStore(doc.data() as Map<String, dynamic>);
-  //   } else {
-  //     throw Exception('Patient not found');
-  //   }
-  // }
+      await savePatientAutoId(userId);
+
+      if (mounted) {
+        DialogUtils.hide(context);
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => PaymentScreen(doctor: widget.doctor),
+          ),
+        );
+      }
+    } catch (error) {
+      DialogUtils.hide(context);
+      DialogUtils.showMessage(context, body: error.toString());
+      print(error);
+    }
+  }
+
+  Future<void> savePatientAutoId(String uid) async {
+    final patientCollection = FirebaseFirestore.instance
+        .collection(UserDM.collectionName)
+        .doc(uid)
+        .collection(PatientModel.collectionName);
+
+    PatientModel patient = PatientModel(
+      patientId: uid,
+      patientName: nameController.text,
+      patientPhone: phoneNumController.text,
+      ageRange: selectedAge,
+      gender: gender,
+      height: double.tryParse(heightController.text),
+      weight: double.tryParse(weightController.text),
+      problemDescription: problemController.text,
+    );
+
+    await patientCollection.add(patient.toFireStore());
+ }
+
 
 
 

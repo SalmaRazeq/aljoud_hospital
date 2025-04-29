@@ -125,7 +125,7 @@ class _HospitalVisitScreenState extends State<HospitalVisitScreen> {
                               children: [
                                 Text(widget.doctor.name, style: Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: 14.sp)),
                                 SizedBox(width: 8.w),
-                                Icon(Icons.arrow_forward_ios, size: 15.sp, color: ColorsManager.blue2,)
+                                Icon(Icons.arrow_forward_ios, size: 12.sp, color: ColorsManager.blue2,)
                               ],
                             ),
                             Text(widget.doctor.specialty, style: Theme.of(context).textTheme.labelSmall?.copyWith(fontWeight: FontWeight.w600)),
@@ -249,15 +249,11 @@ class _HospitalVisitScreenState extends State<HospitalVisitScreen> {
                             MaterialPageRoute(
                               builder: (context) => PatientDetailsScreen(
                                 doctor: selectedDoctor,
-                                selectedDay: selectedDay,
-                                selectedTime: '$selectedTime',
-                                selectedMeetingType: '$selectedType',
                               ),
                             ),
                           );
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: ColorsManager.blue2,
                           padding: REdgeInsets.symmetric(vertical: 6.h),
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.r)),
                         ),

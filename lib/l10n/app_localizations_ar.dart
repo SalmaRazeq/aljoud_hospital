@@ -96,7 +96,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get confirmPassword => 'تأكيد كلمة المرور';
 
   @override
-  String get enterPassAgain => 'أدخل كلمة المرور مرة أخرى';
+  String get enterPassAgain => 'من فضلك، أدخل كلمة المرور مرة أخرى';
 
   @override
   String get password11digits => 'يجب أن يتكون رقم الهاتف من 11 رقمًا';

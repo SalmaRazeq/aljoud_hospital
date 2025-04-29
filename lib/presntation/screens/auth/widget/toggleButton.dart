@@ -26,8 +26,8 @@ class _ToggleButtonWidgetState extends State<ToggleButtonWidget> {
 
     return Center(
       child: Container(
-        width: 180.w,
-        height: 30.h,
+        width: 185.w,
+        height: 33.h,
         decoration: BoxDecoration(
           color: ColorsManager.lightGray,
           borderRadius: BorderRadius.circular(30.r),
@@ -48,7 +48,7 @@ class _ToggleButtonWidgetState extends State<ToggleButtonWidget> {
                     loc.patient,
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       color: widget.isPatientSelected ? ColorsManager.white : ColorsManager.black,
-                      fontSize: 16.sp,
+                      fontSize: 15.sp,
                     ),
                   ),
                 ),
@@ -67,7 +67,7 @@ class _ToggleButtonWidgetState extends State<ToggleButtonWidget> {
                     loc.doctor,
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       color: widget.isPatientSelected ? ColorsManager.black : ColorsManager.white,
-                      fontSize: 16.sp,
+                      fontSize: 15.sp,
                     ),
                   ),
                 ),

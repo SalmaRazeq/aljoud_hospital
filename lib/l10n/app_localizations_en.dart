@@ -96,7 +96,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get confirmPassword => 'Confirm password';
 
   @override
-  String get enterPassAgain => 'Enter the password again';
+  String get enterPassAgain => 'Please, Enter the password again';
 
   @override
   String get password11digits => 'Phone number must be 11 digits';

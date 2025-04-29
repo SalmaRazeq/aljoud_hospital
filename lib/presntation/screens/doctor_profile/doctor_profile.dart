@@ -1,3 +1,4 @@
+import 'package:aljoud_hospital/core/utils/color_manager.dart';
 import 'package:aljoud_hospital/presntation/screens/doctor_profile/widget/about_doctor.dart';
 import 'package:aljoud_hospital/presntation/screens/doctor_profile/widget/bottom_bar.dart';
 import 'package:aljoud_hospital/presntation/screens/doctor_profile/widget/doctor_appBar.dart';
@@ -28,7 +29,7 @@ class DoctorProfileScreen extends StatelessWidget {
                   width: double.infinity,
                   height: 210.h,
                   decoration: BoxDecoration(
-                      color: Theme.of(context).canvasColor,
+                      color: ColorsManager.fadedBlue3,
                     borderRadius: BorderRadius.circular(20.r)
                   ),
                   child: Column(

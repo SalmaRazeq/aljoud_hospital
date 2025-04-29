@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../../core/utils/color_manager.dart';
+import '../../../../../data/models/doctor_model.dart';
 import '../../../../../data/models/user_dm.dart';
 import '../../../../../l10n/app_localizations.dart';
 
@@ -31,22 +32,37 @@ class _HomeAppBarState extends State<HomeAppBar> {
   Future<void> loadUserName() async {
     User? user = FirebaseAuth.instance.currentUser;
     if (user != null) {
-      DocumentSnapshot userDoc = await FirebaseFirestore.instance
-          .collection(UserDM.collectionName)
-          .doc(user.uid)
-          .get();
+      final firestore = FirebaseFirestore.instance;
 
-      if (userDoc.exists) {
-        UserDM userDM = UserDM.fromFireStore(userDoc.data() as Map<String, dynamic>);
+      DocumentSnapshot userDoc =
+      await firestore.collection('Users').doc(user.uid).get();
 
+      if (userDoc.exists && userDoc.data() != null) {
+        UserDM userDM =
+        UserDM.fromFireStore(userDoc.data() as Map<String, dynamic>);
         if (userDM.fullName != null && userDM.fullName!.isNotEmpty) {
           List<String> nameParts = userDM.fullName!.split(" ");
           userName = nameParts[0];
         }
-        setState(() {});
+      } else {
+
+        DocumentSnapshot doctorDoc =
+        await firestore.collection('Doctors').doc(user.uid).get();
+
+        if (doctorDoc.exists && doctorDoc.data() != null) {
+          DoctorModel doctor =
+          DoctorModel.fromFirestore(doctorDoc); // تعديل هنا عشان يستخدم الـ factory
+          if (doctor.doctorName != null && doctor.doctorName!.isNotEmpty) {
+            List<String> nameParts = doctor.doctorName!.split(" ");
+            userName = "Dr. ${nameParts[0]}";
+          }
+        }
       }
+
+      setState(() {});
     }
   }
+
 
   @override
   Widget build(BuildContext context) {

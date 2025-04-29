@@ -1,0 +1,2 @@
+D:/Flutter/aljoud_hospital/android/app/.cxx/RelWithDebInfo/h4901d6y/armeabi-v7a/CMakeFiles/edit_cache.dir
+D:/Flutter/aljoud_hospital/android/app/.cxx/RelWithDebInfo/h4901d6y/armeabi-v7a/CMakeFiles/rebuild_cache.dir

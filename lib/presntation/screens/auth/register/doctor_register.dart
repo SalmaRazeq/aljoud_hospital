@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:aljoud_hospital/core/utils/constant_manager.dart';
 import 'package:aljoud_hospital/core/utils/dialog_utils/dialog_utils.dart';
+import 'package:aljoud_hospital/data/models/doctor_model.dart';
 import 'package:aljoud_hospital/presntation/screens/auth/widget/bottom_section.dart';
 import 'package:aljoud_hospital/presntation/screens/auth/widget/password_field_design.dart';
 import 'package:aljoud_hospital/presntation/screens/auth/widget/toggleButton.dart';
@@ -8,13 +11,16 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:image_picker/image_picker.dart';
 import '../../../../core/utils/assets_manager.dart';
+import '../../../../core/utils/color_manager.dart';
 import '../../../../core/utils/email_validation.dart';
 import '../../../../core/utils/routes_manager.dart';
 
 import '../../../../data/models/user_dm.dart';
 import '../../../../l10n/app_localizations.dart';
+import '../widget/doctor_item/doctor_passwordField.dart';
+import '../widget/doctor_item/doctor_textField.dart';
 import '../widget/field_design.dart';
 
 
@@ -27,17 +33,16 @@ class DoctorRegisterScreen extends StatefulWidget {
 
 class _DoctorRegisterScreenState extends State<DoctorRegisterScreen> {
   TextEditingController fullNameController = TextEditingController();
-
   TextEditingController phoneNumController = TextEditingController();
-
   TextEditingController emailController = TextEditingController();
-
   TextEditingController passwordController = TextEditingController();
-
   TextEditingController rePasswordController = TextEditingController();
+  TextEditingController medicalLicenseNumController = TextEditingController();
+  TextEditingController specializationController = TextEditingController();
 
   GlobalKey<FormState> formKey = GlobalKey();
   bool isPatient = false;
+  bool value = false;
 
   @override
   Widget build(BuildContext context) {
@@ -58,14 +63,21 @@ class _DoctorRegisterScreenState extends State<DoctorRegisterScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Center(
-                      child: Text(loc.createAccount,
-                        style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                            fontSize: 24.sp, color: Theme.of(context).colorScheme.onPrimary,
-                            fontWeight: FontWeight.w600
-                        ),),),
+                    Row(
+                      children: [
+                        IconButton(onPressed: (){Navigator.pushNamed(context, RoutesManager.login);},
+                            icon: Icon(Icons.arrow_back_rounded,
+                              color: Theme.of(context).colorScheme.onSecondary,
+                              size: 28.sp,)),
+                        Center(
+                          child: Text(loc.createAccount,
+                            style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                                fontSize: 20.sp, color: Theme.of(context).colorScheme.onPrimary,
+                                fontWeight: FontWeight.w600
+                            ),),),
+                      ],
+                    ),
                     SizedBox(height: 8.h,),
-
                     ToggleButtonWidget(
                       isPatientSelected: isPatient,
                       onToggle: (value) {
@@ -80,18 +92,12 @@ class _DoctorRegisterScreenState extends State<DoctorRegisterScreen> {
                         }
                       },
                     ),
+                    SizedBox(height: 30.h,),
 
-                    SizedBox(height: 20.h,),
-                    Text(
-                        loc.fullName,
-                        style: Theme.of(context).textTheme.titleMedium
-                    ),
-
-                    SizedBox(height: 5.h,),
-
-                    TextFieldDesign(
-                      hintText: loc.enterFullName,
+                    DoctorTextField(
+                      hintText: 'Full Name',
                       controller: fullNameController,
+                      icon: Icons.person_outlined,
                       validator: (input) {
                         if (input == null || input.trim().isEmpty) {
                           return AppLocalizations.of(context)!.plzFullName;
@@ -100,16 +106,13 @@ class _DoctorRegisterScreenState extends State<DoctorRegisterScreen> {
                       },
                     ),
 
-                    SizedBox(height: 8.h,),
-                    Text(
-                        loc.phone,
-                        style: Theme.of(context).textTheme.titleMedium),
-                    SizedBox(height: 5.h,),
+                    SizedBox(height: 14.h,),
 
-                    TextFieldDesign(
-                      hintText: loc.enterPhone,
+                    DoctorTextField(
+                      hintText: 'Phone Number',
                       keyBoardType: const TextInputType.numberWithOptions(),
                       controller: phoneNumController,
+                      icon: Icons.phone_outlined,
                       validator: (input) {
                         if (input == null || input.trim().isEmpty) {
                           return loc.plzPhone;
@@ -120,16 +123,14 @@ class _DoctorRegisterScreenState extends State<DoctorRegisterScreen> {
                         return null;
                       },
                     ),
-                    SizedBox(height: 8.h,),
 
-                    Text(
-                        loc.emailAddress,
-                        style: Theme.of(context).textTheme.titleMedium
-                    ),
-                    SizedBox(height: 5.h,),
-                    TextFieldDesign(
-                        hintText: loc.enterEmail,
+                    SizedBox(height: 14.h,),
+
+
+                    DoctorTextField(
+                        hintText: 'Email Address',
                         controller: emailController,
+                        icon: Icons.email_outlined,
                         validator: (input) {
                           if (input == null || input.trim().isEmpty) {
                             return loc.plzEmail;
@@ -140,20 +141,12 @@ class _DoctorRegisterScreenState extends State<DoctorRegisterScreen> {
                           return null;
                         }),
 
-                    SizedBox(
-                      height: 8.h,
-                    ),
-                    Text(
-                        loc.password,
-                        style: Theme.of(context).textTheme.titleMedium
-                    ),
-                    SizedBox(
-                      height: 5.h,
-                    ),
+                    SizedBox(height: 14.h,),
 
-                    PasswordFieldDesign(
-                        hintText: loc.enterPassword,
+                    DoctorPasswordField(
+                        hintText: 'Password',
                         controller: passwordController,
+                        icon: Icons.lock_outline_rounded,
                         validator: (input) {
                           if (input == null || input.trim().isEmpty) {
                             return loc.plzPassword;
@@ -163,39 +156,78 @@ class _DoctorRegisterScreenState extends State<DoctorRegisterScreen> {
                           }
                           return null;
                         }),
-                    SizedBox(
-                      height: 8.h,
-                    ),
-                    Text(
-                        loc.confirmPassword,
-                        style: Theme.of(context).textTheme.titleMedium
-                    ),
-                    SizedBox(
-                      height: 5.h,
-                    ),
 
-                    PasswordFieldDesign(
-                        hintText: loc.enterPassword,
+                    SizedBox(height: 14.h,),
+
+                    DoctorPasswordField(
+                        hintText: 'Confirm Password',
                         controller: rePasswordController,
+                        icon: Icons.lock_outline_rounded,
                         validator: (input) {
                           if (input == null || input.trim().isEmpty) {
-                            return loc.enterPassAgain;
+                            return loc.plzPassword;
                           }
-                          if (input != passwordController.text) {
-                            return loc.notMatch;
+                          if (input.length < 6) {
+                            return loc.password6Char;
                           }
                           return null;
                         }),
 
-                    SizedBox(height: 35.h,),
+                    SizedBox(height: 14.h,),
+
+                    DoctorTextField(
+                        hintText: 'Medical License Number',
+                        controller: medicalLicenseNumController,
+                        icon: Icons.school_outlined,
+                        keyBoardType: const TextInputType.numberWithOptions(),
+                        validator: (input) {
+                          if (input == null || input.trim().isEmpty) {
+                            return 'Please, Enter your medical license number';
+                          }
+                          return null;
+                        }),
+
+                    SizedBox(height: 14.h,),
+                    DoctorTextField(
+                        hintText: 'Specialization',
+                        controller: specializationController,
+                        icon: Icons.location_on_outlined,
+                        validator: (input) {
+                          if (input == null || input.trim().isEmpty) {
+                            return 'Please, Enter your specialization';
+                          }
+                          return null;
+                        }),
+
+                    SizedBox(height: 14.h,),
+
+                    Row(
+                      children: [
+                        SizedBox(
+                          height: 20.h,
+                          width: 20.w,
+                          child: Checkbox(
+                              value: value,
+                              onChanged: (bool? newValue) {
+                                setState(() {
+                                  value = newValue!;
+                                });
+                          }),
+                        ),
+                       SizedBox(width: 8.w,),
+                       Text('I Agree To The Terms & Conditions', style: GoogleFonts.inter(fontSize: 10, color: ColorsManager.darkGray),),
+                      ],
+                    ),
+
+                    SizedBox(height: 14.h,),
 
                     ElevatedButton(
                       onPressed: () {
-                        signUp();
+                        drSignUp();
                       },
                       style: Theme.of(context).elevatedButtonTheme.style,
                       child: Padding(
-                        padding: REdgeInsets.all(10),
+                        padding: REdgeInsets.all(6),
                         child: Text(
                             loc.signUp,
                             style: Theme.of(context).textTheme.titleMedium
@@ -205,7 +237,7 @@ class _DoctorRegisterScreenState extends State<DoctorRegisterScreen> {
                     ),
 
 
-                    SizedBox(height: 40.h),
+                    SizedBox(height: 30.h),
 
                     BottomSection(text: loc.haveAccount, body: loc.login, routeName: RoutesManager.login,)
                   ],
@@ -217,7 +249,8 @@ class _DoctorRegisterScreenState extends State<DoctorRegisterScreen> {
       ),
     );
   }
-  void signUp() async {
+
+  void drSignUp() async {
     final loc = AppLocalizations.of(context)!;
 
     if (formKey.currentState!.validate() == false) return;
@@ -237,7 +270,7 @@ class _DoctorRegisterScreenState extends State<DoctorRegisterScreen> {
         return;
       }
 
-      await addUserToFireStore(credential.user!.uid);
+      await addDoctorToFireStore(credential.user!.uid);
 
       if (mounted) DialogUtils.hide(context);
 
@@ -266,20 +299,30 @@ class _DoctorRegisterScreenState extends State<DoctorRegisterScreen> {
     }
   }
 
-  Future<void> addUserToFireStore(String uid) async {
-    CollectionReference userCollection =
-    FirebaseFirestore.instance.collection(UserDM.collectionName);
+  Future<void> addDoctorToFireStore(String uid) async {
+    CollectionReference doctorCollection =
+    FirebaseFirestore.instance.collection(DoctorModel.collectionName);
 
-    DocumentReference userDocument = userCollection.doc(uid);
+    DocumentReference doctorDocument = doctorCollection.doc(uid);
 
-    UserDM userDM = UserDM(
-        id: uid,
-        email: emailController.text,
-        fullName: fullNameController.text,
-        phoneNumber: phoneNumController.text
+    DoctorModel doctorDM = DoctorModel(
+        doctorId: uid,
+        doctorEmail: emailController.text,
+        doctorName: fullNameController.text,
+        phoneNumber : phoneNumController.text,
+      specialty: specializationController.text,
+      medicalLicense: medicalLicenseNumController.text
     );
-    await userDocument.set(userDM.toFireStore());
+    await doctorDocument.set(doctorDM.toFirestore());
   }
+
+  Future<DoctorModel> getDoctorFromFirestore(String doctorId) async {
+    DocumentSnapshot doc = await FirebaseFirestore.instance
+        .collection(DoctorModel.collectionName).doc(doctorId).get();
+
+    return DoctorModel.fromFirestore(doc);
+  }
+
 
 
 }

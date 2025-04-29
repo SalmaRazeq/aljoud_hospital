@@ -15,7 +15,7 @@ class AvailableDaysWidget extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: 150.w,
+        width: 140.w,
         decoration: BoxDecoration(
             color: isSelected
                 ? ColorsManager.fadedBlue3

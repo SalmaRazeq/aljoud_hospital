@@ -1,17 +1,15 @@
 import 'package:aljoud_hospital/core/utils/assets_manager.dart';
 import 'package:aljoud_hospital/core/utils/color_manager.dart';
-import 'package:aljoud_hospital/core/utils/routes_manager.dart';
 import 'package:aljoud_hospital/data/models/doctor_model.dart';
-import 'package:aljoud_hospital/presntation/screens/payment/widget/containers.dart';
+import 'package:aljoud_hospital/presntation/screens/payment/confirm_payment/confirm_payment.dart';
+import 'package:aljoud_hospital/presntation/screens/payment/widget/buildContainers.dart';
 import 'package:aljoud_hospital/presntation/screens/widgets/build_circleButton.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
-
+import '../../../core/utils/dialog_utils/dialog_utils.dart';
 import '../../../data/models/booking_model.dart';
 import '../../../l10n/app_localizations.dart';
-import '../see_all/category_details/CategoryDetailsScreen.dart';
 
 class PaymentScreen extends StatefulWidget {
   const PaymentScreen({required this.doctor, super.key});
@@ -96,7 +94,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                     SizedBox(height: 40.h),
 
                     Container(
-                      width: 130.w,
+                      width: 125.w,
                       height: 36.h,
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
@@ -172,7 +170,6 @@ class _PaymentScreenState extends State<PaymentScreen> {
                             },
 
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: ColorsManager.blue2,
                               padding: REdgeInsets.symmetric(vertical: 6.h),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10.r),
@@ -195,6 +192,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
   }
 
   void completePayment(BuildContext context, DoctorModel doctor) async {
+    final loc = AppLocalizations.of(context)!;
+
     final booking = BookingModel(
       doctorName: doctor.doctorName,
       doctorSpecialty: doctor.specialty,
@@ -207,29 +206,29 @@ class _PaymentScreenState extends State<PaymentScreen> {
     );
 
     try {
+      DialogUtils.showLoading(context, message: loc.pleaseWait);
+
       await FirebaseFirestore.instance
-          .collection(BookingModel.collectionName).add(booking.toFirestore());
+          .collection(BookingModel.collectionName)
+          .add(booking.toFirestore());
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("${AppLocalizations.of(context)!.paymentAndBookingCompleted}",
-          style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: 14.sp),),
-          backgroundColor: Theme.of(context).colorScheme.onSecondary,
-          padding: REdgeInsets.all(10),
-        ),
-      );
 
-      Navigator.pushNamedAndRemoveUntil(context, RoutesManager.home, (route) => false,);
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => ConfirmPaymentScreen(doctor: widget.doctor)));
+
 
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-         SnackBar(content: Text("${AppLocalizations.of(context)!.failedToBook}",
-          style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: 14.sp),),
-          backgroundColor: Theme.of(context).colorScheme.onSecondary,
-          padding: REdgeInsets.all(10)
-        ),
-      );
+      if (context.mounted) {
+        DialogUtils.showMessage(context,
+            body: AppLocalizations.of(context)!.failedToBook);
+      }
+      return;
     }
+
   }
+
 
 }
 

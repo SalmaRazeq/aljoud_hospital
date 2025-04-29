@@ -48,12 +48,12 @@ class _MeetingTypeState extends State<MeetingType> {
                   ),
                   label: Text(
                     type,
-                    style: GoogleFonts.sourceSerif4(
+                    style: GoogleFonts.sourceSans3(
                       color: selectedAppointmentType == type
                           ? ColorsManager.blue
                           : ColorsManager.black,
                       fontWeight: FontWeight.w500,
-                      fontSize: 12.sp
+                      fontSize: 13.sp
                     ),
                   ),
                   selected: selectedAppointmentType == type,

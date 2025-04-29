@@ -3,10 +3,10 @@ import '../../../../core/utils/routes_manager.dart';
 import '../../../../l10n/app_localizations.dart';
 
 class BottomSection extends StatelessWidget {
-  BottomSection({super.key, required this.text, required this.body, required this.routeName});
+  BottomSection({super.key, required this.text, required this.body, this.routeName});
   String text;
   String body;
-  String routeName;
+  String? routeName;
 
   @override
   Widget build(BuildContext context) {
@@ -20,8 +20,12 @@ class BottomSection extends StatelessWidget {
         ),
         TextButton(
           onPressed: () {
-            Navigator.pushReplacementNamed(
-                context, routeName);
+            if (routeName != null && routeName!.isNotEmpty) {
+              Navigator.pushNamed(context, routeName!);
+            } else {
+              // ممكن تحط هنا أكشن تاني زي مثلا إعادة إرسال الكود
+              // أو تسيبه فاضي ما يعملش شيء
+            }
           },
           child: Text(
               body,

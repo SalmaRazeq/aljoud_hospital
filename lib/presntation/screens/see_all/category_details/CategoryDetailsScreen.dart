@@ -91,11 +91,11 @@ class CategoryDetailsScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              // Padding(
-              //   padding: REdgeInsets.only(left: 20.w, right: 20.w, top: 5.h),
-              //   child:  Divider(color: Theme.of(context).dividerColor, thickness: 1.w,),
-              // ),
-              SizedBox(height: 14.h,),
+              Padding(
+                padding: REdgeInsets.only(left: 20.w, right: 20.w, top: 5.h),
+                child:  Divider(color: Theme.of(context).dividerColor, thickness: 0.5.w,),
+              ),
+              SizedBox(height: 10.h,),
               Expanded(
                 child: ListView.builder(
                   itemCount: doctors.length,

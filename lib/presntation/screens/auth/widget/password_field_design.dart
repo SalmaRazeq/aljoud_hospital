@@ -34,7 +34,7 @@ class _PasswordFieldDesignState extends State<PasswordFieldDesign> {
         hintStyle: GoogleFonts.roboto(fontSize: 12.sp,color: Theme.of(context).colorScheme.shadow),
         filled: true,
         fillColor: ColorsManager.textField,
-        errorStyle: GoogleFonts.roboto(fontSize: 10.sp, fontWeight: FontWeight.w500),
+        errorStyle: GoogleFonts.roboto(fontSize: 9.sp, fontWeight: FontWeight.w400),
         contentPadding: REdgeInsets.symmetric(vertical: 9, horizontal: 12),
         constraints: BoxConstraints(
           minHeight: 50.h
@@ -50,13 +50,19 @@ class _PasswordFieldDesignState extends State<PasswordFieldDesign> {
           },
         ),
         border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10.r)),
+            borderRadius: BorderRadius.circular(15.r),
+            borderSide: const BorderSide(color: ColorsManager.hint)
+        ),
         enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10.r)),
+            borderRadius: BorderRadius.circular(15.r),
+            borderSide: const BorderSide(color: ColorsManager.hint)
+        ),
         focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10.r)),
+            borderRadius: BorderRadius.circular(15.r),
+            borderSide: const BorderSide(color: ColorsManager.darkGray)
+        ),
         errorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10.r),
+            borderRadius: BorderRadius.circular(15.r),
             borderSide: const BorderSide(color: Colors.red,)
         ),
       ),

@@ -15,16 +15,21 @@ class AppTheme {
       onPrimaryFixed: ColorsManager.blue3,
       onSecondaryFixed: ColorsManager.blue,
       primaryFixed: ColorsManager.black,
+
     ),
-      canvasColor: ColorsManager.blue4,
+
       scaffoldBackgroundColor: ColorsManager.white,
+
       dividerColor: ColorsManager.black,
+
       elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
               backgroundColor: ColorsManager.blue2,
-              elevation: 5,
+              elevation: 2,
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(25)))),
+                  borderRadius: BorderRadius.circular(25)))
+      ),
+
       textTheme: TextTheme(
         titleLarge: GoogleFonts.sansita(fontSize: 34,
             fontWeight: FontWeight.w600, color: ColorsManager.black),
@@ -36,21 +41,27 @@ class AppTheme {
           fontWeight: FontWeight.w700, color: ColorsManager.black,),
         bodyMedium: GoogleFonts.sourceSerif4(fontSize: 18,
             fontWeight: FontWeight.w600, color: ColorsManager.white),
-        labelSmall:  GoogleFonts.sourceSerif4(fontSize: 10,
+        bodyLarge: GoogleFonts.inter(fontSize: 18,
+            fontWeight: FontWeight.w600, color: ColorsManager.black),
+        labelSmall:  GoogleFonts.sourceSans3(fontSize: 10,
           fontWeight: FontWeight.w500, color: ColorsManager.darkGray,),
         labelMedium: GoogleFonts.poppins(fontSize: 12,
           fontWeight: FontWeight.w500, color: ColorsManager.hint,),
-
       ),
 
     cardColor: ColorsManager.beige,
 
-    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-      backgroundColor: Color(0xFFF2F0EF),
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      backgroundColor: const Color(0xFFF2F0EF),
       selectedItemColor: ColorsManager.blue2,
-      unselectedItemColor: Colors.grey,
+      unselectedItemColor: ColorsManager.hint,
       showSelectedLabels: true,
       showUnselectedLabels: true,
+      selectedLabelStyle: GoogleFonts.inter(fontSize: 13,
+          fontWeight: FontWeight.w600, color: ColorsManager.darkGray),
+      unselectedLabelStyle: GoogleFonts.inter(fontSize: 12,
+          fontWeight: FontWeight.w600, color: ColorsManager.darkGray),
+
     ),
   );
 }

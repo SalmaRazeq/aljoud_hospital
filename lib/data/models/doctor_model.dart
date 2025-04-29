@@ -2,9 +2,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class DoctorModel {
-  num? doctorId;
+  static const String collectionName = "Doctors";
+
+  String? doctorId;
   String? doctorName;
+  String? doctorEmail;
+  String? phoneNumber;
   String? specialty;
+  String? medicalLicense;
   String? date;
   String? time;
   String? price;
@@ -15,7 +20,10 @@ class DoctorModel {
   DoctorModel({
     this.doctorId,
     this.doctorName,
+    this.doctorEmail,
+    this.phoneNumber,
     this.specialty,
+    this.medicalLicense,
     this.date,
     this.time,
     this.price,
@@ -28,27 +36,28 @@ class DoctorModel {
     return {
       'doctorId': doctorId,
       'doctorName': doctorName,
+      'doctorEmail': doctorEmail,
+      'phoneNumber': phoneNumber,
       'specialty': specialty,
-      'date': date,
-      'time': time,
-      'price': price,
-      'image': image,
-      'meetingType': meetingType,
+      'medicalLicense': medicalLicense,
     };
   }
 
   factory DoctorModel.fromFirestore(DocumentSnapshot doc) {
-    var data = doc.data() as Map<String, dynamic>;
+    if (!doc.exists || doc.data() == null) {
+      throw Exception("Doctor document does not exist");
+    }
+
+    final data = doc.data() as Map<String, dynamic>;
     return DoctorModel(
       doctorId: data['doctorId'],
       doctorName: data['doctorName'],
+      doctorEmail: data['doctorEmail'],
+      phoneNumber: data['phoneNumber'],
       specialty: data['specialty'],
-      date: data['date'],
-      time: data['time'],
-      price: data['price'],
-      image: data['image'],
-      meetingType: data['meetingType'],
+      medicalLicense: data['medicalLicense'],
     );
   }
+
 
 }

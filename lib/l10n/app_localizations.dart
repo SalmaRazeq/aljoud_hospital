@@ -272,7 +272,7 @@ abstract class AppLocalizations {
   /// No description provided for @enterPassAgain.
   ///
   /// In en, this message translates to:
-  /// **'Enter the password again'**
+  /// **'Please, Enter the password again'**
   String get enterPassAgain;
 
   /// No description provided for @password11digits.

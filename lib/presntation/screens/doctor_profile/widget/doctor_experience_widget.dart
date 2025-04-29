@@ -16,7 +16,7 @@ class DoctorExperienceWidget extends StatelessWidget {
         height: 100.h,
         padding: REdgeInsets.symmetric(vertical: 6.h),
         decoration: BoxDecoration(
-            color: Theme.of(context).canvasColor,
+            color: ColorsManager.fadedBlue3,
             borderRadius: BorderRadius.circular(15.r),
         ),
         child: Center(
