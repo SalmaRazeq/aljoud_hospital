@@ -4,7 +4,7 @@ import 'package:aljoud_hospital/core/utils/color_manager.dart';
 import 'package:aljoud_hospital/presntation/screens/start/start.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../../../l10n/app_localizations.dart';
 
 
 class SplashScreen extends StatefulWidget {
@@ -44,7 +44,7 @@ class _SplashScreenState extends State<SplashScreen> {
               SizedBox(height: 70.h,),
               Center(child: Image.asset(AssetsManager.logo),),
               Text(AppLocalizations.of(context)!.splashText, style: TextStyle(fontSize: 18.sp, color: ColorsManager.lightGreen, fontWeight: FontWeight.bold )),
-              SizedBox(height: 130.h,),
+              SizedBox(height: 136.h,),
               Align(
                   alignment: Alignment.bottomRight,
                   child: Image.asset(AssetsManager.bottomRight)),

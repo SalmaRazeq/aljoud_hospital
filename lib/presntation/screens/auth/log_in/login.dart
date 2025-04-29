@@ -1,145 +1,299 @@
 import 'package:aljoud_hospital/core/utils/assets_manager.dart';
 import 'package:aljoud_hospital/core/utils/email_validation.dart';
+import 'package:aljoud_hospital/presntation/screens/auth/widget/password_field_design.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../../../../core/utils/constant_manager.dart';
+import '../../../../core/utils/dialog_utils/dialog_utils.dart';
 import '../../../../core/utils/routes_manager.dart';
+import '../../../../data/models/user_dm.dart';
+import '../../../../l10n/app_localizations.dart';
 import '../widget/field_design.dart';
 
-
-
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
    LoginScreen({super.key});
 
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
   TextEditingController emailController = TextEditingController();
-
   TextEditingController passwordController = TextEditingController();
-
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-@override
-Widget build(BuildContext context) {
-  return GestureDetector(
-    onTap: (){
-      FocusManager.instance.primaryFocus?.unfocus();
-    },
-    child: Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: REdgeInsets.only(top: 72, left: 18, right: 18),
-            child: Form(
-              key: formKey,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Text(AppLocalizations.of(context)!.welcomeBack,
-                      style: Theme.of(context).textTheme.titleLarge),
-                    SizedBox(height: 16.h,),
-                    Text('${AppLocalizations.of(context)!.loginText1}\n${AppLocalizations.of(context)!.loginText2}',
-                      style: Theme.of(context).textTheme.displaySmall),
-                    SizedBox(height: 40.h,),
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
+      child: Scaffold(
+        body: SafeArea(
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: REdgeInsets.only(top: 72, left: 18, right: 18),
+              child: Form(
+                key: formKey,
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Text(AppLocalizations.of(context)!.welcomeBack,
+                          style: Theme
+                              .of(context)
+                              .textTheme
+                              .titleLarge),
+                      SizedBox(height: 16.h,),
+                      Text('${AppLocalizations.of(context)!
+                          .loginText1}\n${AppLocalizations.of(context)!
+                          .loginText2}',
+                          style: Theme
+                              .of(context)
+                              .textTheme
+                              .displaySmall),
+                      SizedBox(height: 40.h,),
 
-                    RegisterDesign(hintText: AppLocalizations.of(context)!.emailAddress,
-                        controller: emailController,
-                        validator: (input){
-                          if (input == null || input.trim().isEmpty) {
-                            return AppLocalizations.of(context)!.plzEmail;
-                          }
-                          if (!isEmailValid(input)) {
-                            return AppLocalizations.of(context)!.wrongFormat;
-                          }
-                          return null;
-                        }),
+                      TextFieldDesign(
+                          hintText: AppLocalizations.of(context)!.emailAddress,
+                          controller: emailController,
+                          validator: (input) {
+                            if (input == null || input
+                                .trim()
+                                .isEmpty) {
+                              return AppLocalizations.of(context)!.plzEmail;
+                            }
+                            if (!isEmailValid(input)) {
+                              return AppLocalizations.of(context)!.wrongFormat;
+                            }
+                            return null;
+                          }),
 
-                    SizedBox(height: 15.h,),
+                      SizedBox(height: 15.h,),
 
+                      PasswordFieldDesign(
+                          hintText: AppLocalizations.of(context)!.password,
+                          controller: passwordController,
+                          validator: (input) {
+                            if (input == null || input
+                                .trim()
+                                .isEmpty) {
+                              return AppLocalizations.of(context)!.plzPassword;
+                            }
+                            if (input.length < 6) {
+                              return AppLocalizations.of(context)!
+                                  .password6Char;
+                            }
+                            return null;
+                          }),
 
-                    RegisterDesign(
-                        hintText: AppLocalizations.of(context)!.password,
-                        controller: passwordController,
-                        isSecure: true,
-                        validator: (input) {
-                          if (input == null || input.trim().isEmpty) {
-                            return AppLocalizations.of(context)!.plzPassword;
-                          }
-                          if (input.length < 6) {return AppLocalizations.of(context)!.password6Char;}
-                          return null;
-                        }),
-
-                    SizedBox(height: 5.h,),
-
-                    Padding(
-                        padding: REdgeInsets.only(left: 230),
-                        child: TextButton(onPressed: (){}, child: Text(AppLocalizations.of(context)!.forgetPassword,
-                            style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 12.sp,color: Theme.of(context).colorScheme.onPrimary)))),
-
-                    SizedBox(height: 8.h,),
-                    ElevatedButton(
-                      onPressed: () {
-                       if (formKey.currentState?.validate() ?? false) {
-                         formKey.currentState?.save();
-                         Navigator.pushReplacementNamed(context, RoutesManager.home);
-                       }
-                      },
-                      style: Theme.of(context).elevatedButtonTheme.style,
-                      child: Padding(
-                        padding: REdgeInsets.all(13),
-                        child: Text(
-                            AppLocalizations.of(context)!.login,
-                          style: Theme.of(context).textTheme.displaySmall?.copyWith(
-                              fontSize: 18.sp, fontWeight: FontWeight.w700, color: Theme.of(context).colorScheme.primary)
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: TextButton(
+                            onPressed: () {}, child: Text(AppLocalizations.of(
+                            context)!.forgetPassword,
+                            style: Theme.of(context).textTheme.displaySmall
+                                ?.copyWith(fontSize: 10.sp, color: Theme
+                                .of(context).colorScheme.onPrimary),
+                        ),
                         ),
                       ),
-                    ),
 
-                    SizedBox(height: 22.h,),
-                    Image.asset(AssetsManager.or),
-                    SizedBox(height: 10.h),
-                    InkWell(
-                        onTap: () {
-
+                      SizedBox(height: 8.h,),
+                      ElevatedButton(
+                        onPressed: () {
+                          signIn();
                         },
-                        child: Image.asset(AssetsManager.google)),
-                    SizedBox(height: 10.h),
-
-                    InkWell(
-                        onTap: () {
-
-                        },
-                        child: Image.asset(AssetsManager.faceBook)),
-
-                    SizedBox(height: 60.h),
-
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                            AppLocalizations.of(context)!.notHaveAccount,
-                          style: Theme.of(context).textTheme.displaySmall
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            Navigator.pushReplacementNamed(
-                                context, RoutesManager.register);
-                          },
+                        style: Theme
+                            .of(context)
+                            .elevatedButtonTheme
+                            .style,
+                        child: Padding(
+                          padding: REdgeInsets.all(10),
                           child: Text(
-                              AppLocalizations.of(context)!.signUp,
-                            style: Theme.of(context).textTheme.displaySmall?.copyWith(
-                                color: Theme.of(context).colorScheme.onPrimary,decoration: TextDecoration.underline
-                            )
+                              AppLocalizations.of(context)!.login,
+                              style: Theme
+                                  .of(context)
+                                  .textTheme
+                                  .displaySmall
+                                  ?.copyWith(
+                                  fontSize: 16.sp,
+                                  fontWeight: FontWeight.w700,
+                                  color: Theme
+                                      .of(context)
+                                      .colorScheme
+                                      .primary)
                           ),
-                        )
-                      ],
-                    )
+                        ),
+                      ),
 
-                  ]
+                      SizedBox(height: 22.h,),
+                      Image.asset(AssetsManager.or),
+                      SizedBox(height: 10.h),
+                      InkWell(
+                          onTap: () {
+
+                          },
+                          child: Image.asset(AssetsManager.google)),
+                      SizedBox(height: 10.h),
+
+                      InkWell(
+                          onTap: () {
+                            // signInWithFacebook();
+                          },
+                          child: Image.asset(AssetsManager.faceBook)),
+
+                      SizedBox(height: 60.h),
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                              AppLocalizations.of(context)!.notHaveAccount,
+                              style: Theme
+                                  .of(context)
+                                  .textTheme
+                                  .displaySmall
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.pushReplacementNamed(
+                                  context, RoutesManager.register);
+                            },
+                            child: Text(
+                                AppLocalizations.of(context)!.signUp,
+                                style: Theme
+                                    .of(context)
+                                    .textTheme
+                                    .displaySmall
+                                    ?.copyWith(
+                                    color: Theme
+                                        .of(context)
+                                        .colorScheme
+                                        .onPrimary,
+                                    decoration: TextDecoration.underline
+                                )
+                            ),
+                          )
+                        ],
+                      )
+
+                    ]
+                ),
               ),
             ),
           ),
         ),
       ),
-    ),
-  );
-}
+    );
+  }
+  void signIn() async {
+    if (formKey.currentState!.validate() == false) return;
+
+    try {
+      DialogUtils.showLoading(context, message: AppLocalizations.of(context)!.pleaseWait);
+
+      UserCredential credential = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(
+          email: emailController.text.trim(),
+          password: passwordController.text.trim()
+      );
+      UserDM.currentUser = await readUserFromFireStore(credential.user!.uid);
+
+      if (mounted) {
+        DialogUtils.hide(context);
+        Navigator.pushReplacementNamed(context, RoutesManager.home);
+      }
+
+    } on FirebaseAuthException catch (error) {
+      DialogUtils.hide(context);
+      late String message;
+      if (error.code == ConstantManager.invalidCredential) {
+        message = AppLocalizations.of(context)!.wrongEorP;
+      }
+      DialogUtils.showMessage(context, body: message);
+    } catch (error) {
+      DialogUtils.hide(context);
+      DialogUtils.showMessage(context, body: error.toString());
+      print(error);
+    }
+  }
+
+  Future<UserDM> readUserFromFireStore(String uid) async{
+    CollectionReference userCollection =
+    FirebaseFirestore.instance.collection(UserDM.collectionName);
+
+    DocumentReference userDocument = userCollection.doc(uid);
+
+    DocumentSnapshot userDocSnapShot = await userDocument.get();
+    Map<String, dynamic> json =userDocSnapShot.data() as Map<String, dynamic>;
+    UserDM userDM = UserDM.fromFireStore(json);
+    return userDM;
+  }
+
+  // void signInWithFacebook() async {
+  //   try {
+  //     // Show loading dialog
+  //     DialogUtils.showLoading(context, message: 'Signing in with Facebook...');
+  //
+  //     // Trigger the Facebook sign-in flow
+  //     final LoginResult loginResult = await FacebookAuth.instance.login();
+  //
+  //     // Check if login was successful
+  //     if (loginResult.status == LoginStatus.success) {
+  //       final accessToken = loginResult.accessToken;
+  //
+  //       // Create a credential for Firebase
+  //       final OAuthCredential credential = FacebookAuthProvider.credential(accessToken!.tokenString);
+  //
+  //       // Sign in to Firebase
+  //       UserCredential userCredential = await FirebaseAuth.instance.signInWithCredential(credential);
+  //
+  //       // Optional: Save username to SharedPreferences
+  //       final user = userCredential.user;
+  //       final prefs = await SharedPreferences.getInstance();
+  //       await prefs.setString('username', user?.displayName ?? 'Facebook User');
+  //
+  //       if (mounted) {
+  //         DialogUtils.hide(context);
+  //         DialogUtils.showMessage(
+  //           context,
+  //           body: 'Logged in successfully via Facebook',
+  //           posActionTitle: 'Ok',
+  //           posAction: () {
+  //             Navigator.pushReplacementNamed(context, RoutesManager.home); // Or your main screen
+  //           },
+  //         );
+  //       }
+  //     } else {
+  //       if (mounted) DialogUtils.hide(context);
+  //       DialogUtils.showMessage(
+  //         context,
+  //         title: 'Login Cancelled',
+  //         body: 'Facebook login was cancelled.',
+  //       );
+  //     }
+  //   } on FirebaseAuthException catch (authError) {
+  //     if (mounted) DialogUtils.hide(context);
+  //     DialogUtils.showMessage(
+  //       context,
+  //       title: 'Firebase Auth Error',
+  //       body: authError.message ?? 'Unknown error',
+  //     );
+  //   } catch (error) {
+  //     if (mounted) {
+  //       DialogUtils.hide(context);
+  //       DialogUtils.showMessage(
+  //         context,
+  //         title: 'Error',
+  //         body: error.toString(),
+  //       );
+  //     }
+  //     print(error);
+  //   }
+  // }
+
 }
