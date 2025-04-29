@@ -9,7 +9,7 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
-  String get splashText => 'Your Health, Our priority';
+  String get splashText => 'Your Health, Our Priority';
 
   @override
   String get yourDoctor => 'Your Doctor,';
@@ -48,7 +48,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get createAccount => 'Create an account';
 
   @override
-  String get haveAccount => 'Already have account!';
+  String get haveAccount => 'Already have an account!';
 
   @override
   String get notHaveAccount => 'Don\'t have an account?';
@@ -60,7 +60,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get plzEmail => 'Please, Enter email address';
 
   @override
-  String get wrongFormat => 'Email wrong format';
+  String get wrongFormat => 'Invalid email format';
 
   @override
   String get password => 'Password';
@@ -96,7 +96,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get confirmPassword => 'Confirm password';
 
   @override
-  String get enterPassAgain => 'Enter the password again';
+  String get enterPassAgain => 'Please, Enter the password again';
 
   @override
   String get password11digits => 'Phone number must be 11 digits';
@@ -241,4 +241,229 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get ok => 'Ok';
+
+  @override
+  String get slotsAvailable => 'Slots available';
+
+  @override
+  String get slots => 'Slots';
+
+  @override
+  String get morning => 'Morning';
+
+  @override
+  String get evening => 'Evening';
+
+  @override
+  String get night => 'Night';
+
+  @override
+  String get appointmentType => 'Appointment Type';
+
+  @override
+  String get appointment => 'Appointment';
+
+  @override
+  String get hospitalVisitSchedule => 'Hospital Visit Schedule';
+
+  @override
+  String get continueText => 'Continue';
+
+  @override
+  String get online => 'Online';
+
+  @override
+  String get inPerson => 'In-Person';
+
+  @override
+  String get patientDetails => 'Patient Details';
+
+  @override
+  String get patientName => 'Patient name';
+
+  @override
+  String get selectYourAgeRange => 'Select your age range';
+
+  @override
+  String get height => 'Height';
+
+  @override
+  String get weight => 'Weight';
+
+  @override
+  String get gender => 'Gender';
+
+  @override
+  String get problem => 'Problem';
+
+  @override
+  String get male => 'Male';
+
+  @override
+  String get female => 'Female';
+
+  @override
+  String get tellTheDrYourProblem => 'Tell the doctor about your problem';
+
+  @override
+  String get confirmBooking => 'Confirm Booking';
+
+  @override
+  String get paymentMethods => 'Payment Methods';
+
+  @override
+  String get totalAmount => 'Total Amount';
+
+  @override
+  String get cash => 'Cash';
+
+  @override
+  String get addNewCard => 'Add new card';
+
+  @override
+  String get payWith => 'Pay with';
+
+  @override
+  String get confirm => 'Confirm';
+
+  @override
+  String get paymentAndBookingCompleted => 'Payment and Booking completed';
+
+  @override
+  String get failedToBook => 'Failed to book';
+
+  @override
+  String get upComing => 'Upcoming';
+
+  @override
+  String get completed => 'Completed';
+
+  @override
+  String get canceled => 'Canceled';
+
+  @override
+  String get upComingAppointment => 'Upcoming Appointment';
+
+  @override
+  String get noBookingsFound => 'No bookings found';
+
+  @override
+  String get doctors => 'Doctors';
+
+  @override
+  String get doctor => 'Doctor';
+
+  @override
+  String get today => 'Today';
+
+  @override
+  String get tomorrow => 'Tomorrow';
+
+  @override
+  String get sun => 'Sun';
+
+  @override
+  String get mon => 'Mon';
+
+  @override
+  String get tue => 'Tue';
+
+  @override
+  String get wed => 'Wed';
+
+  @override
+  String get thu => 'Thu';
+
+  @override
+  String get fri => 'Fri';
+
+  @override
+  String get sat => 'Sat';
+
+  @override
+  String get jan => 'Jan';
+
+  @override
+  String get feb => 'Feb';
+
+  @override
+  String get mar => 'Mar';
+
+  @override
+  String get apr => 'Apr';
+
+  @override
+  String get may => 'May';
+
+  @override
+  String get jun => 'Jun';
+
+  @override
+  String get jul => 'Jul';
+
+  @override
+  String get aug => 'Aug';
+
+  @override
+  String get sep => 'Sep';
+
+  @override
+  String get oct => 'Oct';
+
+  @override
+  String get nov => 'Nov';
+
+  @override
+  String get dec => 'Dec';
+
+  @override
+  String get enterName => 'Enter your name';
+
+  @override
+  String get plzEnterName => 'Please, Enter your name';
+
+  @override
+  String get enterHeight => 'Enter your height';
+
+  @override
+  String get enterWeight => 'Enter your weight';
+
+  @override
+  String get doctorProfile => 'Doctor Profile';
+
+  @override
+  String get yearsOf => 'Years of';
+
+  @override
+  String get experience => 'experience';
+
+  @override
+  String get about => 'About';
+
+  @override
+  String get price => 'Price';
+
+  @override
+  String get workingTime => 'Working time';
+
+  @override
+  String get aboutText1 => 'Consultant of';
+
+  @override
+  String get aboutText2 => 'at Smouha Hospital, More than 30 years of experience';
+
+  @override
+  String get workingTimeText => 'Tuesday - Sunday';
+
+  @override
+  String get voiceCall => 'VoiceCall';
+
+  @override
+  String get patients => 'Patients';
+
+  @override
+  String get patient => 'Patient';
+
+  @override
+  String get rating => 'Rating';
 }

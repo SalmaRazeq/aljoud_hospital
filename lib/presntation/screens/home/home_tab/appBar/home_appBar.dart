@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../../core/utils/color_manager.dart';
+import '../../../../../data/models/doctor_model.dart';
 import '../../../../../data/models/user_dm.dart';
 import '../../../../../l10n/app_localizations.dart';
 
@@ -31,27 +32,42 @@ class _HomeAppBarState extends State<HomeAppBar> {
   Future<void> loadUserName() async {
     User? user = FirebaseAuth.instance.currentUser;
     if (user != null) {
-      DocumentSnapshot userDoc = await FirebaseFirestore.instance
-          .collection(UserDM.collectionName)
-          .doc(user.uid)
-          .get();
+      final firestore = FirebaseFirestore.instance;
 
-      if (userDoc.exists) {
-        UserDM userDM = UserDM.fromFireStore(userDoc.data() as Map<String, dynamic>);
+      DocumentSnapshot userDoc =
+      await firestore.collection('Users').doc(user.uid).get();
 
+      if (userDoc.exists && userDoc.data() != null) {
+        UserDM userDM =
+        UserDM.fromFireStore(userDoc.data() as Map<String, dynamic>);
         if (userDM.fullName != null && userDM.fullName!.isNotEmpty) {
           List<String> nameParts = userDM.fullName!.split(" ");
           userName = nameParts[0];
         }
-        setState(() {});
+      } else {
+
+        DocumentSnapshot doctorDoc =
+        await firestore.collection('Doctors').doc(user.uid).get();
+
+        if (doctorDoc.exists && doctorDoc.data() != null) {
+          DoctorModel doctor =
+          DoctorModel.fromFirestore(doctorDoc); // تعديل هنا عشان يستخدم الـ factory
+          if (doctor.doctorName != null && doctor.doctorName!.isNotEmpty) {
+            List<String> nameParts = doctor.doctorName!.split(" ");
+            userName = "Dr. ${nameParts[0]}";
+          }
+        }
       }
+
+      setState(() {});
     }
   }
+
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: REdgeInsets.only(right: 15.w, left: 15.w, top: 30.h, bottom: 18.h),
+      padding: REdgeInsets.only(right: 15.w, left: 15.w, top: 25.h, bottom: 18.h),
       height: 230.h,
       width: double.infinity,
       decoration: BoxDecoration(
@@ -80,17 +96,17 @@ class _HomeAppBarState extends State<HomeAppBar> {
               ),
               SizedBox(width: 15.w),
               Text(
-                '${AppLocalizations.of(context)!.hello} $userName',
+                '${AppLocalizations.of(context)!.hello} ${userName ?? '...'}',
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
               const Spacer(),
               IconButton(
                 onPressed: () {},
-                icon: Icon(Icons.menu, color: Theme.of(context).colorScheme.primary, size: 28.sp),
+                icon: Icon(Icons.notifications, color: Theme.of(context).colorScheme.primary, size: 24.sp),
               ),
             ],
           ),
-          SizedBox(height: 18.h),
+          SizedBox(height: 10.h),
           Padding(
             padding: REdgeInsets.only(left: 8.0),
             child: Text(
@@ -98,7 +114,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
               style: Theme.of(context).textTheme.bodyMedium,
             ),
           ),
-          SizedBox(height: 18.h),
+          SizedBox(height: 10.h),
           SearchWidget(),
         ],
       ),

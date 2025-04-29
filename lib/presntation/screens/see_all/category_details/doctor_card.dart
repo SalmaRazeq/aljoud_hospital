@@ -53,7 +53,7 @@ class DoctorCard extends StatelessWidget {
                     fit: BoxFit.cover,
                   ),
                 ),
-                SizedBox(width: 10.w),
+                SizedBox(width: 20.w),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -72,8 +72,10 @@ class DoctorCard extends StatelessWidget {
                         Text("${doctor.rating}", style: Theme.of(context).textTheme.labelSmall,),
                       ],
                     ),
-                    Text(
-                      "${doctor.experience} ${AppLocalizations.of(context)!.yearsOfExperience}",
+                    Text(Localizations.localeOf(context).languageCode == 'ar'
+                        ? "${AppLocalizations.of(context)!.yearsOfExperience} ${doctor.experience}"
+                        : "${doctor.experience} ${AppLocalizations.of(context)!.yearsOfExperience}",
+
                       style: Theme.of(context).textTheme.labelSmall,
                     ),
                     SizedBox(height: 5.h,),

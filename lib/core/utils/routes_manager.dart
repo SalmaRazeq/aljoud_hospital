@@ -1,8 +1,13 @@
+import 'package:aljoud_hospital/presntation/screens/auth/create_new_password/create_new_password.dart';
+import 'package:aljoud_hospital/presntation/screens/auth/forget_password/forget_password.dart';
 import 'package:aljoud_hospital/presntation/screens/auth/log_in/login.dart';
+import 'package:aljoud_hospital/presntation/screens/auth/register/doctor_register.dart';
 import 'package:aljoud_hospital/presntation/screens/auth/register/register.dart';
+import 'package:aljoud_hospital/presntation/screens/doctor_profile/doctor_profile.dart';
 import 'package:aljoud_hospital/presntation/screens/hospital_visit/hospital_visit.dart';
 import 'package:aljoud_hospital/presntation/screens/home/myBooking_tab/myBooking.dart';
 import 'package:aljoud_hospital/presntation/screens/patient_details/patient_details.dart';
+import 'package:aljoud_hospital/presntation/screens/payment/confirm_payment/confirm_payment.dart';
 import 'package:aljoud_hospital/presntation/screens/payment/payment.dart';
 import 'package:aljoud_hospital/presntation/screens/see_all/category_details/CategoryDetailsScreen.dart';
 import 'package:aljoud_hospital/presntation/screens/see_all/see_all.dart';
@@ -18,6 +23,8 @@ class RoutesManager{
   static const String home = '/home';
   static const String start = '/start';
   static const String login = '/login';
+  static const String forgetPassword = '/forgetPassword';
+  static const String createNewPassword = '/createNewPassword';
   static const String register = '/register';
   static const String seeAll = '/seeAll';
   static const String hospitalVisit = '/hospitalVisit';
@@ -25,6 +32,10 @@ class RoutesManager{
   static const String patientDetails = '/patientDetails';
   static const String myBooking = '/myBooking';
   static const String payment = '/payment';
+  static const String confirmPayment = '/confirmPayment';
+  static const String doctorProfile = '/doctorProfile';
+  static const String doctorRegister = '/doctorRegister';
+
 
 
 
@@ -39,13 +50,24 @@ class RoutesManager{
         return MaterialPageRoute(
           builder: (context) => const StartScreen(),
         );
-      case home:
+      case RoutesManager.home:
+        final args = settings.arguments;
         return MaterialPageRoute(
-          builder: (context) => Home(),
+          builder: (context) {
+            return Home(selectedIndex: args as int? ?? 0);
+          },
         );
       case login:
         return MaterialPageRoute(
           builder: (context) => LoginScreen(),
+        );
+      case forgetPassword:
+        return MaterialPageRoute(
+          builder: (context) => ForgetPasswordScreen(),
+        );
+      case createNewPassword:
+        return MaterialPageRoute(
+          builder: (context) => CreateNewPasswordScreen(),
         );
       case register:
         return MaterialPageRoute(
@@ -60,9 +82,18 @@ class RoutesManager{
         return MaterialPageRoute(
           builder: (context) => HospitalVisitScreen(doctor: doctor),
         );
+      case doctorProfile:
+        final doctor = settings.arguments as Doctor;
+        return MaterialPageRoute(
+          builder: (context) => DoctorProfileScreen(doctor: doctor),
+        );
       case myBooking:
         return MaterialPageRoute(
           builder: (context) => MyBookingScreen(),
+        );
+      case doctorRegister:
+        return MaterialPageRoute(
+          builder: (context) => DoctorRegisterScreen(),
         );
       case payment:
         final args = settings.arguments as Map<String, dynamic>;
@@ -70,16 +101,19 @@ class RoutesManager{
         return MaterialPageRoute(
           builder: (context) => PaymentScreen( doctor: doctor,),
         );
+      case confirmPayment:
+        final args = settings.arguments as Map<String, dynamic>;
+        final doctor = args['doctor'] as DoctorModel;
+        return MaterialPageRoute(
+          builder: (context) => ConfirmPaymentScreen(doctor: doctor,),
+        );
+
       case patientDetails:
         final args = settings.arguments as Map<String, dynamic>;
         final doctor = args['doctor'] as DoctorModel;
-        final selectedTime = args['selectedTime'] as String;
-        final selectedDay = args['selectedDay'] as String;
         return MaterialPageRoute(
           builder: (context) => PatientDetailsScreen(
             doctor: doctor,
-            selectedTime: selectedTime,
-            selectedDay: selectedDay,
           ),
         );
       case categoryDetails:

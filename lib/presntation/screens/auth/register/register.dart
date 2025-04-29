@@ -1,6 +1,9 @@
+import 'package:aljoud_hospital/core/utils/color_manager.dart';
 import 'package:aljoud_hospital/core/utils/constant_manager.dart';
 import 'package:aljoud_hospital/core/utils/dialog_utils/dialog_utils.dart';
+import 'package:aljoud_hospital/presntation/screens/auth/widget/bottom_section.dart';
 import 'package:aljoud_hospital/presntation/screens/auth/widget/password_field_design.dart';
+import 'package:aljoud_hospital/presntation/screens/auth/widget/toggleButton.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -35,9 +38,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
   TextEditingController rePasswordController = TextEditingController();
 
   GlobalKey<FormState> formKey = GlobalKey();
+  bool isPatient = true;
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
+
     return GestureDetector(
       onTap: () {
         FocusManager.instance.primaryFocus?.unfocus();
@@ -46,95 +52,99 @@ class _RegisterScreenState extends State<RegisterScreen> {
         body: SafeArea(
           child: SingleChildScrollView(
             child: Container(
-              margin: REdgeInsets.symmetric(horizontal: 14, vertical: 45),
-              padding: REdgeInsets.symmetric(horizontal: 10),
+              margin: REdgeInsets.only(left: 14.w, right: 14.w, top: 35.h, bottom: 14.h),
+              padding: REdgeInsets.symmetric(horizontal: 10.w),
               child: Form(
                 key: formKey,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Text(AppLocalizations.of(context)!.createAccount,
-                      style: GoogleFonts.poppins(fontSize: 22.sp, color: Theme
-                          .of(context)
-                          .colorScheme
-                          .onPrimary, fontWeight: FontWeight.w600),),
-                    SizedBox(
-                      height: 20.h,
+                    Row(
+                      children: [
+                        IconButton(onPressed: (){Navigator.pushNamed(context, RoutesManager.login);},
+                            icon: Icon(Icons.arrow_back_rounded,
+                              color: Theme.of(context).colorScheme.onSecondary,
+                              size: 28.sp,)),
+                        Center(
+                          child: Text(loc.createAccount,
+                            style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                              fontSize: 20.sp, color: Theme.of(context).colorScheme.onPrimary,
+                                fontWeight: FontWeight.w600
+                            ),),),
+                      ],
                     ),
+                    SizedBox(height: 8.h,),
+
+                    ToggleButtonWidget(
+                      isPatientSelected: isPatient,
+                      onToggle: (value) {
+                        setState(() {
+                          isPatient = value;
+                        });
+                        if (isPatient) {
+                          Navigator.pushNamed(context, RoutesManager.register);
+                        }
+                        else {
+                          Navigator.pushNamed(context, RoutesManager.doctorRegister);
+                        }
+                      },
+                    ),
+
+                    SizedBox(height: 20.h,),
                     Text(
-                        AppLocalizations.of(context)!.fullName,
-                        style: Theme
-                            .of(context)
-                            .textTheme
-                            .titleMedium
+                        loc.fullName,
+                        style: Theme.of(context).textTheme.titleMedium
                     ),
-                    SizedBox(
-                      height: 5.h,
-                    ),
+
+                    SizedBox(height: 5.h,),
+
                     TextFieldDesign(
-                      hintText: AppLocalizations.of(context)!.enterFullName,
+                      hintText: loc.enterFullName,
                       controller: fullNameController,
                       validator: (input) {
-                        if (input == null || input
-                            .trim()
-                            .isEmpty) {
+                        if (input == null || input.trim().isEmpty) {
                           return AppLocalizations.of(context)!.plzFullName;
                         }
                         return null;
                       },
                     ),
 
-                    SizedBox(
-                      height: 8.h,
-                    ),
+                    SizedBox(height: 8.h,),
                     Text(
-                        AppLocalizations.of(context)!.phone,
-                        style: Theme
-                            .of(context)
-                            .textTheme
-                            .titleMedium
-                    ),
-                    SizedBox(
-                      height: 5.h,
-                    ),
+                        loc.phone,
+                        style: Theme.of(context).textTheme.titleMedium),
+                    SizedBox(height: 5.h,),
+
                     TextFieldDesign(
-                      hintText: AppLocalizations.of(context)!.enterPhone,
+                      hintText: loc.enterPhone,
                       keyBoardType: const TextInputType.numberWithOptions(),
                       controller: phoneNumController,
                       validator: (input) {
                         if (input == null || input.trim().isEmpty) {
-                          return AppLocalizations.of(context)!.plzPhone;
+                          return loc.plzPhone;
                         }
                         if (input.length != 11) {
-                          return AppLocalizations.of(context)!.password11digits;
+                          return loc.password11digits;
                         }
                         return null;
                       },
                     ),
-                    SizedBox(
-                      height: 8.h,
-                    ),
+                    SizedBox(height: 8.h,),
+
                     Text(
-                        AppLocalizations.of(context)!.emailAddress,
-                        style: Theme
-                            .of(context)
-                            .textTheme
-                            .titleMedium
+                        loc.emailAddress,
+                        style: Theme.of(context).textTheme.titleMedium
                     ),
-                    SizedBox(
-                      height: 5.h,
-                    ),
+                    SizedBox(height: 5.h,),
                     TextFieldDesign(
-                        hintText: AppLocalizations.of(context)!.enterEmail,
+                        hintText: loc.enterEmail,
                         controller: emailController,
                         validator: (input) {
-                          if (input == null || input
-                              .trim()
-                              .isEmpty) {
-                            return AppLocalizations.of(context)!.plzEmail;
+                          if (input == null || input.trim().isEmpty) {
+                            return loc.plzEmail;
                           }
                           if (!isEmailValid(input)) {
-                            return AppLocalizations.of(context)!.wrongFormat;
+                            return loc.wrongFormat;
                           }
                           return null;
                         }),
@@ -143,85 +153,62 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       height: 8.h,
                     ),
                     Text(
-                        AppLocalizations.of(context)!.password,
-                        style: Theme
-                            .of(context)
-                            .textTheme
-                            .titleMedium
+                        loc.password,
+                        style: Theme.of(context).textTheme.titleMedium
                     ),
                     SizedBox(
                       height: 5.h,
                     ),
 
                     PasswordFieldDesign(
-                        hintText: AppLocalizations.of(context)!.enterPassword,
+                        hintText: loc.enterPassword,
                         controller: passwordController,
                         validator: (input) {
-                          if (input == null || input
-                              .trim()
-                              .isEmpty) {
-                            return AppLocalizations.of(context)!.plzPassword;
+                          if (input == null || input.trim().isEmpty) {
+                            return loc.plzPassword;
                           }
                           if (input.length < 6) {
-                            return AppLocalizations.of(context)!.password6Char;
+                            return loc.password6Char;
                           }
                           return null;
                         }),
                     SizedBox(
-                      height: 8.h,
+                      height: 9.h,
                     ),
                     Text(
-                        AppLocalizations.of(context)!.confirmPassword,
-                        style: Theme
-                            .of(context)
-                            .textTheme
-                            .titleMedium
+                        loc.confirmPassword,
+                        style: Theme.of(context).textTheme.titleMedium
                     ),
                     SizedBox(
                       height: 5.h,
                     ),
 
                     PasswordFieldDesign(
-                        hintText: AppLocalizations.of(context)!.enterPassword,
+                        hintText: loc.enterPassword,
                         controller: rePasswordController,
                         validator: (input) {
-                          if (input == null || input
-                              .trim()
-                              .isEmpty) {
-                            return AppLocalizations.of(context)!.enterPassAgain;
+                          if (input == null || input.trim().isEmpty) {
+                            return loc.enterPassAgain;
                           }
                           if (input != passwordController.text) {
-                            return AppLocalizations.of(context)!.notMatch;
+                            return loc.notMatch;
                           }
                           return null;
                         }),
 
-                    SizedBox(
-                      height: 35.h,
-                    ),
+                    SizedBox(height: 35.h,),
+
                     ElevatedButton(
                       onPressed: () {
                         signUp();
                       },
-                      style: Theme
-                          .of(context)
-                          .elevatedButtonTheme
-                          .style,
+                      style: Theme.of(context).elevatedButtonTheme.style,
                       child: Padding(
-                        padding: REdgeInsets.all(10),
+                        padding: REdgeInsets.all(6),
                         child: Text(
-                            AppLocalizations.of(context)!.signUp,
-                            style: Theme
-                                .of(context)
-                                .textTheme
-                                .displaySmall
-                                ?.copyWith(
-                                fontSize: 16.sp,
-                                fontWeight: FontWeight.w700,
-                                color: Theme
-                                    .of(context)
-                                    .colorScheme
-                                    .primary)
+                            loc.signUp,
+                            style: Theme.of(context).textTheme.titleMedium
+                                ?.copyWith(fontSize: 16.sp, fontWeight: FontWeight.w700, color: Theme.of(context).colorScheme.primary)
                         ),
                       ),
                     ),
@@ -230,42 +217,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     Image.asset(AssetsManager.or,),
                     SizedBox(height: 10.h),
                     InkWell(
-                        onTap: () {
-
-                        },
+                        onTap: () {},
                         child: Image.asset(AssetsManager.google)),
                     SizedBox(height: 10.h),
 
                     InkWell(
-                        onTap: () {
-
-                        },
+                        onTap: () {},
                         child: Image.asset(AssetsManager.faceBook)),
-                    SizedBox(height: 60.h),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                            AppLocalizations.of(context)!.haveAccount,
-                            style: Theme
-                                .of(context)
-                                .textTheme
-                                .displaySmall
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            Navigator.pushReplacementNamed(
-                                context, RoutesManager.login);
-                            },
-                          child: Text(
-                              AppLocalizations.of(context)!.login,
-                              style: Theme.of(context).textTheme.displaySmall?.
-                              copyWith(color: Theme.of(context).colorScheme.onPrimary,
-                                  decoration: TextDecoration.underline)),
-                        )
-                      ],
-                    )
+                    SizedBox(height: 40.h),
+
+                    BottomSection(text: loc.haveAccount, body: loc.login, routeName: RoutesManager.login,)
                   ],
                 ),
               ),
@@ -275,66 +236,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
       ),
     );
   }
-
-
-  // void signUp() async {
-  //   if (formKey.currentState?.validate() ?? false) return;
-  //
-  //   try {
-  //     /// todo: show loading
-  //     DialogUtils.showLoading(context, message: 'Please wait...');
-  //     UserCredential credential = await FirebaseAuth.instance
-  //         .createUserWithEmailAndPassword(
-  //       email: emailController.text,
-  //       password: passwordController.text,
-  //     );
-  //
-  //     final prefs = await SharedPreferences.getInstance();
-  //     await prefs.setString('username', fullNameController.text);
-  //
-  //     /// todo: hide loading
-  //     if (mounted) {
-  //       DialogUtils.hide(context);
-  //     } //بتأكد ان ال context موجود علشان اعمله هايد
-  //
-  //     DialogUtils.showMessage(context, body: 'User register successfully',
-  //         posActionTitle: 'Ok',
-  //         posAction: () async{
-  //           Navigator.pushReplacementNamed(context, RoutesManager.login);          }
-  //     );
-  //   }
-  //
-  //   on FirebaseAuthException catch (authError) {
-  //     if (mounted) {
-  //       DialogUtils.hide(context);
-  //     }
-  //     late String message;
-  //     if (authError.code == ConstantManager.weakPassword) {
-  //       message = 'Sorry, Your password is too weak.';
-  //
-  //       /// todo: show error
-  //     }
-  //     else if (authError.code == ConstantManager.emailUsed) {
-  //       message = 'The account already exists for that email.';
-  //
-  //       /// todo: show error
-  //     }
-  //     DialogUtils.showMessage(context, title: 'Error occurred', body: message);
-  //   } catch (error) {
-  //     if (mounted) {
-  //       DialogUtils.hide(context);
-  //       DialogUtils.showMessage(
-  //           context, title: 'Error occurred', body: error.toString());
-  //     }
-  //     print(error);
-  //   }
-  // }
-
   void signUp() async {
+    final loc = AppLocalizations.of(context)!;
+
     if (formKey.currentState!.validate() == false) return;
 
     try {
-      DialogUtils.showLoading(context, message: AppLocalizations.of(context)!.pleaseWait);
+      DialogUtils.showLoading(context, message: loc.pleaseWait);
 
       UserCredential credential = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(
@@ -344,7 +252,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       if (credential.user == null) {
         DialogUtils.hide(context);
         DialogUtils.showMessage(context,
-            title: AppLocalizations.of(context)!.error, body: AppLocalizations.of(context)!.registrationFailed);
+            title: loc.error, body: loc.registrationFailed);
         return;
       }
 
@@ -353,8 +261,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
       if (mounted) DialogUtils.hide(context);
 
       DialogUtils.showMessage(context,
-          title: AppLocalizations.of(context)!.registeredSuccessfully,
-          posActionTitle: AppLocalizations.of(context)!.ok,
+          title: loc.registeredSuccessfully,
+          posActionTitle: loc.ok,
           posAction: () {
             Navigator.pushReplacementNamed(context, RoutesManager.login);
           });
@@ -362,17 +270,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
     } on FirebaseAuthException catch (error) {
       DialogUtils.hide(context);
 
-      String message = AppLocalizations.of(context)!.somethingWentWrong;
+      String message = loc.somethingWentWrong;
       if (error.code == ConstantManager.weakPassword) {
-        message = AppLocalizations.of(context)!.passwordTooWeak;
+        message = loc.passwordTooWeak;
       } else if (error.code == ConstantManager.emailUsed) {
-        message = AppLocalizations.of(context)!.accountAlreadyExists;
+        message = loc.accountAlreadyExists;
       }
 
-      DialogUtils.showMessage(context, title: AppLocalizations.of(context)!.error, body: message);
+      DialogUtils.showMessage(context, title: loc.error, body: message);
     } catch (error) {
       DialogUtils.hide(context);
-      DialogUtils.showMessage(context, title: AppLocalizations.of(context)!.error, body: error.toString());
+      DialogUtils.showMessage(context, title: loc.error, body: error.toString());
       print(error);
     }
   }
@@ -384,12 +292,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
     DocumentReference userDocument = userCollection.doc(uid);
 
     UserDM userDM = UserDM(
-      id: uid,
-      email: emailController.text,
-      fullName: fullNameController.text,
-      phoneNumber: phoneNumController.text
+        id: uid,
+        email: emailController.text,
+        fullName: fullNameController.text,
+        phoneNumber: phoneNumController.text
     );
     await userDocument.set(userDM.toFireStore());
   }
+
 
 }

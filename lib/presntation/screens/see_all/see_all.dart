@@ -33,20 +33,20 @@ class SeeAllScreen extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Theme.of(context).colorScheme.onPrimary,
-          leading: IconButton(onPressed: (){
+          leading: IconButton(onPressed: () {
             Navigator.pushReplacementNamed(context, RoutesManager.home);
-            },
+          },
               icon: Icon(Icons.arrow_back_rounded, size: 26.sp, color: ColorsManager.white,)),
           title: Text(AppLocalizations.of(context)!.categories, style: Theme.of(context).textTheme.bodyMedium),
         ),
 
         body: Padding(
-          padding: REdgeInsets.only(top: 14),
+          padding: REdgeInsets.only(top: 14.h),
           child: GridView.builder(
-            gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 3,
-              crossAxisSpacing: 5.w,
-              mainAxisSpacing: 5.h,
+              crossAxisSpacing: 10.w,
+              mainAxisSpacing: 15.h,
               childAspectRatio: 1,
             ),
             itemCount: categories.length,
@@ -54,11 +54,12 @@ class SeeAllScreen extends StatelessWidget {
               return GestureDetector(
                 onTap: () {
                   Navigator.push(
-                      context,
-                      MaterialPageRoute(
+                    context,
+                    MaterialPageRoute(
                       builder: (context) => CategoryDetailsScreen(category: categories[index]),
-                      ));
-                  },
+                    ),
+                  );
+                },
                 child: categories[index],
               );
             },
@@ -68,4 +69,3 @@ class SeeAllScreen extends StatelessWidget {
     );
   }
 }
-

@@ -99,8 +99,7 @@ class HomeScreen extends StatelessWidget {
                                   imagePath: AssetsManager.dentistry,
                                 );
 
-                                Navigator.pushNamed(
-                                  context,
+                                Navigator.of(context).pushNamed(
                                   RoutesManager.categoryDetails,
                                   arguments: category,
                                 );
@@ -112,7 +111,7 @@ class HomeScreen extends StatelessWidget {
 
                     GridView.count(
                       crossAxisCount: 2,
-                      padding: REdgeInsets.only(right: 15,left: 15 ,top: 40),
+                      padding: REdgeInsets.only(right: 15.w,left: 15.w ,top: 60.h),
                       crossAxisSpacing: 14,
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),

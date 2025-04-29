@@ -15,7 +15,7 @@ class AvailableDaysWidget extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: 150.w,
+        width: 140.w,
         decoration: BoxDecoration(
             color: isSelected
                 ? ColorsManager.fadedBlue3
@@ -26,8 +26,8 @@ class AvailableDaysWidget extends StatelessWidget {
           padding: REdgeInsets.all(4),
           child: Column(
             children: [
-              Text(date, style: Theme.of(context).textTheme.labelSmall?.copyWith(color: ColorsManager.black, fontWeight: FontWeight.w900),),
-              Text(slots ,style: Theme.of(context).textTheme.labelSmall?.copyWith(color: ColorsManager.blue, fontWeight: FontWeight.w900),)
+              Text(date, style: Theme.of(context).textTheme.labelSmall?.copyWith(fontSize: 11.sp,color: ColorsManager.black, fontWeight: FontWeight.w900),),
+              Text(slots ,style: Theme.of(context).textTheme.labelSmall?.copyWith(color: ColorsManager.blue, fontWeight: FontWeight.w700),)
             ],
           ),
         ),

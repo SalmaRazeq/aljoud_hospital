@@ -18,7 +18,8 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: AppTheme.lightTheme,
         onGenerateRoute: RoutesManager.router,
-        initialRoute: RoutesManager.seeAll,
+
+        initialRoute: RoutesManager.home,
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: const [Locale("ar"), Locale("en")],
         locale: const Locale('en'),

@@ -11,13 +11,16 @@ class ColorsManager{
   static const Color blue2 = Color(0xFF145da0);
   static const Color lightGray = Color(0xFFE0E0E0);
   static const Color blue3 = Color(0xFF6991C9);
-  static Color fadedBlue3 = blue3.withOpacity(0.49);
-  static const Color beige = Color(0xFFE0E0E0);
-  static const Color black3 = Color(0xFF000000);
+  static Color fadedBlue3 = blue3.withOpacity(0.4);
+  static const Color beige = Color(0xFFF4F0F0);
   static const Color darkGreen = Color(0xFF2C4B45);
-  static const Color blue6 = Color(0xFFC5CEDA);
-  static const Color blue7 = Color(0xFF014BB2);
-  static const Color blue8 = Color(0xFFC7E6E1);
+  static const Color lightBlue = Color(0xFFC5CEDA);
+  static const Color blue4 = Color(0xFF1976D2);
+  static const Color green = Color(0xFF1DA846);
+  static const Color fadedGreen = Color.fromRGBO(78, 187, 126, 0.35);
+
+
+  static const Color darkBlue = Color(0xFF1E1E2F);
 
 
 }

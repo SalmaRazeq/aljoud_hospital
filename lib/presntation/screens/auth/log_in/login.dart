@@ -1,20 +1,21 @@
 import 'package:aljoud_hospital/core/utils/assets_manager.dart';
 import 'package:aljoud_hospital/core/utils/email_validation.dart';
+import 'package:aljoud_hospital/presntation/screens/auth/widget/bottom_section.dart';
 import 'package:aljoud_hospital/presntation/screens/auth/widget/password_field_design.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../core/utils/constant_manager.dart';
 import '../../../../core/utils/dialog_utils/dialog_utils.dart';
 import '../../../../core/utils/routes_manager.dart';
+import '../../../../data/models/doctor_model.dart';
 import '../../../../data/models/user_dm.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../widget/field_design.dart';
 
 class LoginScreen extends StatefulWidget {
-   LoginScreen({super.key});
+  const LoginScreen({super.key});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -27,6 +28,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
+
     return GestureDetector(
       onTap: () {
         FocusManager.instance.primaryFocus?.unfocus();
@@ -35,57 +38,39 @@ class _LoginScreenState extends State<LoginScreen> {
         body: SafeArea(
           child: SingleChildScrollView(
             child: Padding(
-              padding: REdgeInsets.only(top: 72, left: 18, right: 18),
+              padding: REdgeInsets.only(top: 50, left: 18, right: 18),
               child: Form(
                 key: formKey,
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Text(AppLocalizations.of(context)!.welcomeBack,
-                          style: Theme
-                              .of(context)
-                              .textTheme
-                              .titleLarge),
+                      Text(loc.welcomeBack,
+                          style: Theme.of(context).textTheme.titleLarge),
                       SizedBox(height: 16.h,),
-                      Text('${AppLocalizations.of(context)!
-                          .loginText1}\n${AppLocalizations.of(context)!
-                          .loginText2}',
-                          style: Theme
-                              .of(context)
-                              .textTheme
-                              .displaySmall),
+                      Text('${loc.loginText1}\n${AppLocalizations.of(context)!.loginText2}',
+                          style: Theme.of(context).textTheme.displaySmall),
                       SizedBox(height: 40.h,),
 
                       TextFieldDesign(
-                          hintText: AppLocalizations.of(context)!.emailAddress,
+                          hintText: loc.emailAddress,
                           controller: emailController,
                           validator: (input) {
-                            if (input == null || input
-                                .trim()
-                                .isEmpty) {
-                              return AppLocalizations.of(context)!.plzEmail;
+                            if (input == null || input.trim().isEmpty) {
+                              return loc.plzEmail;
                             }
-                            if (!isEmailValid(input)) {
-                              return AppLocalizations.of(context)!.wrongFormat;
-                            }
+
                             return null;
                           }),
 
                       SizedBox(height: 15.h,),
 
                       PasswordFieldDesign(
-                          hintText: AppLocalizations.of(context)!.password,
+                          hintText: loc.password,
                           controller: passwordController,
                           validator: (input) {
-                            if (input == null || input
-                                .trim()
-                                .isEmpty) {
-                              return AppLocalizations.of(context)!.plzPassword;
-                            }
-                            if (input.length < 6) {
-                              return AppLocalizations.of(context)!
-                                  .password6Char;
+                            if (input == null || input.trim().isEmpty) {
+                              return loc.plzPassword;
                             }
                             return null;
                           }),
@@ -93,39 +78,28 @@ class _LoginScreenState extends State<LoginScreen> {
                       Align(
                         alignment: Alignment.centerRight,
                         child: TextButton(
-                            onPressed: () {}, child: Text(AppLocalizations.of(
-                            context)!.forgetPassword,
+                            onPressed: () {
+                              Navigator.of(context).pushReplacementNamed(RoutesManager.forgetPassword);
+                            },
+                          child: Text(loc.forgetPassword,
                             style: Theme.of(context).textTheme.displaySmall
                                 ?.copyWith(fontSize: 10.sp, color: Theme
                                 .of(context).colorScheme.onPrimary),
                         ),
                         ),
                       ),
-
-                      SizedBox(height: 8.h,),
+                      SizedBox(height: 15.h,),
                       ElevatedButton(
                         onPressed: () {
                           signIn();
                         },
-                        style: Theme
-                            .of(context)
-                            .elevatedButtonTheme
-                            .style,
+                        style: Theme.of(context).elevatedButtonTheme.style,
                         child: Padding(
-                          padding: REdgeInsets.all(10),
+                          padding: REdgeInsets.all(6),
                           child: Text(
                               AppLocalizations.of(context)!.login,
-                              style: Theme
-                                  .of(context)
-                                  .textTheme
-                                  .displaySmall
-                                  ?.copyWith(
-                                  fontSize: 16.sp,
-                                  fontWeight: FontWeight.w700,
-                                  color: Theme
-                                      .of(context)
-                                      .colorScheme
-                                      .primary)
+                              style: Theme.of(context).textTheme.displaySmall?.
+                              copyWith(fontSize: 16.sp, fontWeight: FontWeight.w700, color: Theme.of(context).colorScheme.primary)
                           ),
                         ),
                       ),
@@ -146,40 +120,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           },
                           child: Image.asset(AssetsManager.faceBook)),
 
-                      SizedBox(height: 60.h),
-
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                              AppLocalizations.of(context)!.notHaveAccount,
-                              style: Theme
-                                  .of(context)
-                                  .textTheme
-                                  .displaySmall
-                          ),
-                          TextButton(
-                            onPressed: () {
-                              Navigator.pushReplacementNamed(
-                                  context, RoutesManager.register);
-                            },
-                            child: Text(
-                                AppLocalizations.of(context)!.signUp,
-                                style: Theme
-                                    .of(context)
-                                    .textTheme
-                                    .displaySmall
-                                    ?.copyWith(
-                                    color: Theme
-                                        .of(context)
-                                        .colorScheme
-                                        .onPrimary,
-                                    decoration: TextDecoration.underline
-                                )
-                            ),
-                          )
-                        ],
-                      )
+                      SizedBox(height: 40.h),
+                      BottomSection(text: loc.notHaveAccount, body: loc.signUp, routeName: RoutesManager.register)
 
                     ]
                 ),
@@ -201,7 +143,8 @@ class _LoginScreenState extends State<LoginScreen> {
           email: emailController.text.trim(),
           password: passwordController.text.trim()
       );
-      UserDM.currentUser = await readUserFromFireStore(credential.user!.uid);
+
+      await readAccountFromFirestore(credential.user!.uid);
 
       if (mounted) {
         DialogUtils.hide(context);
@@ -222,78 +165,24 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
-  Future<UserDM> readUserFromFireStore(String uid) async{
-    CollectionReference userCollection =
-    FirebaseFirestore.instance.collection(UserDM.collectionName);
+  Future<dynamic> readAccountFromFirestore(String uid) async {
+    final firestore = FirebaseFirestore.instance;
 
-    DocumentReference userDocument = userCollection.doc(uid);
+    // Check in "Users" collection
+    DocumentSnapshot userDoc = await firestore.collection(UserDM.collectionName).doc(uid).get();
+    if (userDoc.exists && userDoc.data() != null) {
+      return UserDM.fromFireStore(userDoc.data() as Map<String, dynamic>);
+    }
 
-    DocumentSnapshot userDocSnapShot = await userDocument.get();
-    Map<String, dynamic> json =userDocSnapShot.data() as Map<String, dynamic>;
-    UserDM userDM = UserDM.fromFireStore(json);
-    return userDM;
+    // Check in "Doctors" collection
+    DocumentSnapshot doctorDoc = await firestore.collection(DoctorModel.collectionName).doc(uid).get();
+    if (doctorDoc.exists && doctorDoc.data() != null) {
+      return DoctorModel.fromFirestore(doctorDoc);
+    }
+
+    // Not found in any collection
+    throw Exception("No user or doctor found with this UID.");
+
   }
-
-  // void signInWithFacebook() async {
-  //   try {
-  //     // Show loading dialog
-  //     DialogUtils.showLoading(context, message: 'Signing in with Facebook...');
-  //
-  //     // Trigger the Facebook sign-in flow
-  //     final LoginResult loginResult = await FacebookAuth.instance.login();
-  //
-  //     // Check if login was successful
-  //     if (loginResult.status == LoginStatus.success) {
-  //       final accessToken = loginResult.accessToken;
-  //
-  //       // Create a credential for Firebase
-  //       final OAuthCredential credential = FacebookAuthProvider.credential(accessToken!.tokenString);
-  //
-  //       // Sign in to Firebase
-  //       UserCredential userCredential = await FirebaseAuth.instance.signInWithCredential(credential);
-  //
-  //       // Optional: Save username to SharedPreferences
-  //       final user = userCredential.user;
-  //       final prefs = await SharedPreferences.getInstance();
-  //       await prefs.setString('username', user?.displayName ?? 'Facebook User');
-  //
-  //       if (mounted) {
-  //         DialogUtils.hide(context);
-  //         DialogUtils.showMessage(
-  //           context,
-  //           body: 'Logged in successfully via Facebook',
-  //           posActionTitle: 'Ok',
-  //           posAction: () {
-  //             Navigator.pushReplacementNamed(context, RoutesManager.home); // Or your main screen
-  //           },
-  //         );
-  //       }
-  //     } else {
-  //       if (mounted) DialogUtils.hide(context);
-  //       DialogUtils.showMessage(
-  //         context,
-  //         title: 'Login Cancelled',
-  //         body: 'Facebook login was cancelled.',
-  //       );
-  //     }
-  //   } on FirebaseAuthException catch (authError) {
-  //     if (mounted) DialogUtils.hide(context);
-  //     DialogUtils.showMessage(
-  //       context,
-  //       title: 'Firebase Auth Error',
-  //       body: authError.message ?? 'Unknown error',
-  //     );
-  //   } catch (error) {
-  //     if (mounted) {
-  //       DialogUtils.hide(context);
-  //       DialogUtils.showMessage(
-  //         context,
-  //         title: 'Error',
-  //         body: error.toString(),
-  //       );
-  //     }
-  //     print(error);
-  //   }
-  // }
-
+  
 }

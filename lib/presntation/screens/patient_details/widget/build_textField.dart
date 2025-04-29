@@ -6,9 +6,9 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../../core/utils/color_manager.dart';
 
 class BuildTextField extends StatelessWidget {
-  BuildTextField({required this.icon, required this.hint,required this.controller, required this.validator,
+  BuildTextField({required this.icon, required this.hintText,required this.controller, required this.validator,
     this.keyBoardType = TextInputType.text, super.key});
-  String hint;
+  String hintText;
   IconData icon;
   TextEditingController controller;
   Validator validator;
@@ -23,14 +23,14 @@ class BuildTextField extends StatelessWidget {
         controller: controller, style: TextStyle(fontSize: 14.sp, ),
         decoration: InputDecoration(
           isDense: true,
-          hintText: hint,
+          hintText: hintText,
           hintStyle: GoogleFonts.roboto(fontSize: 13.sp,color: ColorsManager.lightGray),
           suffixIcon: Icon(
-            icon, color: ColorsManager.lightGray, size: 16.sp,),
-          errorStyle: GoogleFonts.roboto(fontSize: 12.sp,fontWeight: FontWeight.w500),
+            icon, color: ColorsManager.lightGray, size: 22.sp,),
+          errorStyle: GoogleFonts.roboto(fontSize: 10.sp,fontWeight: FontWeight.w500),
           filled: true,
           fillColor: ColorsManager.white,
-          contentPadding: REdgeInsets.symmetric(vertical: 0.h, horizontal: 10.w),
+          contentPadding: REdgeInsets.symmetric(vertical: 9.h, horizontal: 12.w),
           constraints: BoxConstraints(
               minHeight: 50.h
           ),
@@ -39,7 +39,7 @@ class BuildTextField extends StatelessWidget {
             borderSide: BorderSide.none,
           ),
           errorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10.r),
+              borderRadius: BorderRadius.circular(15.r),
               borderSide: const BorderSide(color: Colors.red,)
           ),
         ),

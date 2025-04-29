@@ -10,21 +10,28 @@ import 'myBooking_tab/myBooking.dart';
 
 
 class Home extends StatefulWidget {
-  const Home({super.key});
+  const Home({super.key, required this.selectedIndex});
+  final int selectedIndex;
 
   @override
   State<Home> createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
+  late int selectedIndex;
+
+  @override
+  void initState() {
+    super.initState();
+    selectedIndex = widget.selectedIndex;  // استخدام القيمة من الـ constructor
+  }
+
   List<Widget> tabs = [
     HomeScreen(),
     LiveChatScreen(),
     MyBookingScreen(),
     ProfileScreen()
   ];
-
-  int selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -36,32 +43,37 @@ class _HomeState extends State<Home> {
             topRight: Radius.circular(15.r),
           ),
           child: BottomNavigationBar(
-              onTap: (index) {
-                setState(() {
-                  selectedIndex = index;
-                });
-              },
-
-              currentIndex: selectedIndex,
-              type: BottomNavigationBarType.fixed,
-              items: [
-                BottomNavigationBarItem(
-                    icon: const ImageIcon(AssetImage(AssetsManager.homeIcon),),
-                    label: AppLocalizations.of(context)!.home),
-                BottomNavigationBarItem(
-                    icon: const ImageIcon(AssetImage(AssetsManager.liveChatIcon)),
-                    label: AppLocalizations.of(context)!.liveChat),
-                BottomNavigationBarItem(
-                    icon: const ImageIcon(AssetImage(AssetsManager.scheduleIcon)),
-                    label: AppLocalizations.of(context)!.myBooking),
-                BottomNavigationBarItem(
-                  icon: const ImageIcon(AssetImage(AssetsManager.userIcon)),
-                  label: AppLocalizations.of(context)!.profile,
-                ),
-              ]),
+            onTap: (index) {
+              setState(() {
+                selectedIndex = index;
+              });
+            },
+            currentIndex: selectedIndex,
+            type: BottomNavigationBarType.fixed,
+            items: [
+              BottomNavigationBarItem(
+                icon: const ImageIcon(AssetImage(AssetsManager.homeIcon)),
+                label: AppLocalizations.of(context)!.home,
+              ),
+              BottomNavigationBarItem(
+                icon: const ImageIcon(AssetImage(AssetsManager.liveChatIcon)),
+                label: AppLocalizations.of(context)!.liveChat,
+              ),
+              BottomNavigationBarItem(
+                icon: const ImageIcon(AssetImage(AssetsManager.scheduleIcon)),
+                label: AppLocalizations.of(context)!.myBooking,
+              ),
+              BottomNavigationBarItem(
+                icon: const ImageIcon(AssetImage(AssetsManager.userIcon)),
+                label: AppLocalizations.of(context)!.profile,
+              ),
+            ],
+          ),
         ),
         body: tabs[selectedIndex],
       ),
     );
   }
 }
+
+
