@@ -1,27 +1,19 @@
-import 'dart:io';
-
 import 'package:aljoud_hospital/core/utils/constant_manager.dart';
 import 'package:aljoud_hospital/core/utils/dialog_utils/dialog_utils.dart';
 import 'package:aljoud_hospital/data/models/doctor_model.dart';
 import 'package:aljoud_hospital/presntation/screens/auth/widget/bottom_section.dart';
-import 'package:aljoud_hospital/presntation/screens/auth/widget/password_field_design.dart';
 import 'package:aljoud_hospital/presntation/screens/auth/widget/toggleButton.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:image_picker/image_picker.dart';
-import '../../../../core/utils/assets_manager.dart';
 import '../../../../core/utils/color_manager.dart';
 import '../../../../core/utils/email_validation.dart';
 import '../../../../core/utils/routes_manager.dart';
-
-import '../../../../data/models/user_dm.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../widget/doctor_item/doctor_passwordField.dart';
 import '../widget/doctor_item/doctor_textField.dart';
-import '../widget/field_design.dart';
 
 
 class DoctorRegisterScreen extends StatefulWidget {

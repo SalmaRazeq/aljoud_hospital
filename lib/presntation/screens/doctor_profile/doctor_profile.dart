@@ -29,7 +29,7 @@ class DoctorProfileScreen extends StatelessWidget {
                   width: double.infinity,
                   height: 210.h,
                   decoration: BoxDecoration(
-                      color: ColorsManager.fadedBlue3,
+                      color: ColorsManager.fadedBlue3.withOpacity(0.2),
                     borderRadius: BorderRadius.circular(20.r)
                   ),
                   child: Column(
