@@ -87,7 +87,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get plzPhone => 'من فضلك، أدخل رقم الهاتف';
 
   @override
-  String get enterEmail => 'من فضلك، أدخل عنوان البريد الإلكتروني';
+  String get enterEmail => 'أدخل عنوان البريد الإلكتروني';
 
   @override
   String get enterPassword => 'أدخل كلمة المرور الخاصة بك';
@@ -529,4 +529,19 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get appointments => 'المواعيد';
+
+  @override
+  String get medicalLicenseNumber => 'رقم الترخيص الطبي';
+
+  @override
+  String get plzEnterMedicalLicence => 'من فضلك، إدخال رقم الترخيص الطبي';
+
+  @override
+  String get specialization => 'التخصص';
+
+  @override
+  String get plzEnterSpecialization => 'من فضلك، إدخال التخصص';
+
+  @override
+  String get iAgreeToTheTermsConditions => 'أوافق على الشروط والأحكام';
 }

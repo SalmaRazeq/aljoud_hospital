@@ -529,4 +529,19 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get appointments => 'Appointments';
+
+  @override
+  String get medicalLicenseNumber => 'Medical License Number';
+
+  @override
+  String get plzEnterMedicalLicence => 'Please, Enter your medical license number';
+
+  @override
+  String get specialization => 'Specialization';
+
+  @override
+  String get plzEnterSpecialization => 'Please, Enter your specialization';
+
+  @override
+  String get iAgreeToTheTermsConditions => 'I Agree To The Terms & Conditions';
 }

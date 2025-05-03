@@ -1,1 +1,38 @@
-{"flutter":{"platforms":{"android":{"default":{"projectId":"aljoud-hospital","appId":"1:1075425091036:android:3b31ab5a2e0eb4629a8319","fileOutput":"android/app/google-services.json"}},"dart":{"lib/firebase_options.dart":{"projectId":"aljoud-hospital","configurations":{"android":"1:1075425091036:android:3b31ab5a2e0eb4629a8319","ios":"1:1075425091036:ios:848c0cf0f33e1f979a8319","web":"1:1075425091036:web:eeb8b9d777137bbc9a8319","windows":"1:1075425091036:web:7b2f7a71f4f06c3c9a8319"}}}}}}
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "aljoud-hospital",
+          "appId": "1:1075425091036:android:3b31ab5a2e0eb4629a8319",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "aljoud-hospital",
+          "configurations": {
+            "android": "1:1075425091036:android:3b31ab5a2e0eb4629a8319",
+            "ios": "1:1075425091036:ios:848c0cf0f33e1f979a8319",
+            "web": "1:1075425091036:web:eeb8b9d777137bbc9a8319",
+            "windows": "1:1075425091036:web:7b2f7a71f4f06c3c9a8319"
+          }
+        }
+      }
+    }
+  },
+  "hosting": {
+    "public": "public",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}

@@ -37,6 +37,7 @@ class _ToggleButtonWidgetState extends State<ToggleButtonWidget> {
           border: themeProvider.isLightTheme() ? Border.all(color: ColorsManager.hint) : Border.all(color: Colors.transparent),
         ),
         child: Row(
+          textDirection: TextDirection.ltr,
           children: [
             Expanded(
               child: GestureDetector(

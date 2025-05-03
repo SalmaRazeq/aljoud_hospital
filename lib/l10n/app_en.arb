@@ -172,5 +172,11 @@
   "bookingText": "Your appointment has been successfully booked. Please arrive 10 minutes early.",
   "viewMyBooking": "View my bookings",
   "backHome": "Back to home",
-  "appointments" : "Appointments"
+  "appointments" : "Appointments",
+  "medicalLicenseNumber": "Medical License Number",
+  "plzEnterMedicalLicence": "Please, Enter your medical license number",
+  "specialization": "Specialization",
+  "plzEnterSpecialization": "Please, Enter your specialization",
+  "iAgreeToTheTermsConditions": "I Agree To The Terms & Conditions"
+
 }

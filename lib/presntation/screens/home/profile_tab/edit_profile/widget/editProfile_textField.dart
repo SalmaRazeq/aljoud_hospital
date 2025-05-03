@@ -23,7 +23,8 @@ class EditprofileTextfield extends StatelessWidget {
       autofocus: false,
       validator: validator,
       keyboardType: keyBoardType,
-      controller: controller, style: TextStyle(fontSize: 14.sp,),
+      controller: controller,
+      style: GoogleFonts.inter(fontSize: 14.sp, color: ColorsManager.black),
       decoration: InputDecoration(
         isDense: true,
         hintText: hintText,

@@ -28,7 +28,7 @@ class _PasswordFieldDesignState extends State<PasswordFieldDesign> {
       obscureText: obscureText,
       keyboardType: widget.keyBoardType,
       controller: widget.controller,
-      style: GoogleFonts.inter(fontSize: 15.sp, color: ColorsManager.black),
+      style: GoogleFonts.inter(fontSize: 14.sp, color: ColorsManager.black),
       decoration: InputDecoration(
         isDense: true,
         hintText: widget.hintText,

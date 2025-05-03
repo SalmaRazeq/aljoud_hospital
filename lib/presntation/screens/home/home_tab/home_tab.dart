@@ -181,7 +181,9 @@ class HomeScreen extends StatelessWidget {
                           icon: Icons.local_hospital,
                           title: AppLocalizations.of(context)!.aboutHospital,
                           description: AppLocalizations.of(context)!.aboutHospitalText,
-                          onTap: (){}
+                          onTap: (){
+                            Navigator.pushNamed(context, RoutesManager.aboutHospital);
+                          }
                       ),
                       _buildBoxWidget(
                         icon: Icons.support_agent,

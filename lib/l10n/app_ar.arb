@@ -25,7 +25,7 @@
   "phone" : "رقم الهاتف",
   "enterPhone" : "أدخل رقم الهاتف",
   "plzPhone" : "من فضلك، أدخل رقم الهاتف",
-  "enterEmail" : "من فضلك، أدخل عنوان البريد الإلكتروني",
+  "enterEmail" : "أدخل عنوان البريد الإلكتروني",
   "enterPassword" : "أدخل كلمة المرور الخاصة بك",
   "confirmPassword" : "تأكيد كلمة المرور",
   "enterPassAgain" : "من فضلك، أدخل كلمة المرور مرة أخرى",
@@ -172,7 +172,13 @@
   "bookingText": "تم حجز موعدك بنجاح. يرجى الحضور قبل الموعد بـ10 دقائق.",
   "viewMyBooking": "عرض حجوزاتي",
   "backHome": "العودة إلى الصفحة الرئيسية",
-  "appointments" : "المواعيد"
+  "appointments" : "المواعيد",
+  "medicalLicenseNumber": "رقم الترخيص الطبي",
+  "plzEnterMedicalLicence": "من فضلك، إدخال رقم الترخيص الطبي",
+  "specialization": "التخصص",
+  "plzEnterSpecialization": "من فضلك، إدخال التخصص",
+  "iAgreeToTheTermsConditions": "أوافق على الشروط والأحكام"
+
 
 
 }

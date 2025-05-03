@@ -1138,6 +1138,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Appointments'**
   String get appointments;
+
+  /// No description provided for @medicalLicenseNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Medical License Number'**
+  String get medicalLicenseNumber;
+
+  /// No description provided for @plzEnterMedicalLicence.
+  ///
+  /// In en, this message translates to:
+  /// **'Please, Enter your medical license number'**
+  String get plzEnterMedicalLicence;
+
+  /// No description provided for @specialization.
+  ///
+  /// In en, this message translates to:
+  /// **'Specialization'**
+  String get specialization;
+
+  /// No description provided for @plzEnterSpecialization.
+  ///
+  /// In en, this message translates to:
+  /// **'Please, Enter your specialization'**
+  String get plzEnterSpecialization;
+
+  /// No description provided for @iAgreeToTheTermsConditions.
+  ///
+  /// In en, this message translates to:
+  /// **'I Agree To The Terms & Conditions'**
+  String get iAgreeToTheTermsConditions;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -140,7 +140,6 @@ class AppTheme {
     ),
 
     bottomSheetTheme: BottomSheetThemeData(
-
       elevation: 12,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(

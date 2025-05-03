@@ -4,6 +4,7 @@ import 'package:aljoud_hospital/presntation/screens/auth/log_in/login.dart';
 import 'package:aljoud_hospital/presntation/screens/auth/register/doctor_register.dart';
 import 'package:aljoud_hospital/presntation/screens/auth/register/register.dart';
 import 'package:aljoud_hospital/presntation/screens/doctor_profile/doctor_profile.dart';
+import 'package:aljoud_hospital/presntation/screens/home/home_tab/about_hospital/about_hospital.dart';
 import 'package:aljoud_hospital/presntation/screens/home/profile_tab/edit_profile/edit_profile.dart';
 import 'package:aljoud_hospital/presntation/screens/home/profile_tab/profile.dart';
 import 'package:aljoud_hospital/presntation/screens/home/profile_tab/settings/settings.dart';
@@ -41,7 +42,7 @@ class RoutesManager{
   static const String profile = '/profile';
   static const String editProfile = '/editProfile';
   static const String settingScreen = '/settingScreen';
-
+  static const String aboutHospital = '/aboutHospital';
 
 
 
@@ -95,6 +96,10 @@ class RoutesManager{
       case myBooking:
         return MaterialPageRoute(
           builder: (context) => MyBookingScreen(),
+        );
+      case aboutHospital:
+        return MaterialPageRoute(
+          builder: (context) => AboutHospitalScreen(),
         );
       case doctorRegister:
         return MaterialPageRoute(
