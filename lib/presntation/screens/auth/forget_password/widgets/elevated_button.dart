@@ -9,6 +9,7 @@ class ElevatedButtonDesign extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
+      width: double.infinity,
       height: 42.h,
       child: ElevatedButton(
         onPressed: onTap,

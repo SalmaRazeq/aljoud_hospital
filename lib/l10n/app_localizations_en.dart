@@ -15,10 +15,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get yourDoctor => 'Your Doctor,';
 
   @override
-  String get anyTime => 'Any time.';
+  String get anyTime => 'Anytime.';
 
   @override
-  String get anyWhere => 'Any Where.';
+  String get anyWhere => 'Anywhere.';
 
   @override
   String get startText => 'More than 100 doctors are ready to answer all your questions.';
@@ -129,10 +129,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get bookOnline => 'Book your online video consultation';
 
   @override
-  String get appointments => 'Appointments';
+  String get aboutHospital => 'About Hospital';
 
   @override
-  String get bookAppointment => 'Book appointment';
+  String get aboutHospitalText => 'Read information about the hospital';
 
   @override
   String get support => 'Support';
@@ -198,7 +198,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get myBooking => 'My Booking';
 
   @override
-  String get liveChat => 'Live chat';
+  String get chatBot => 'Chat Bot';
 
   @override
   String get profile => 'Profile';
@@ -259,9 +259,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get appointmentType => 'Appointment Type';
-
-  @override
-  String get appointment => 'Appointment';
 
   @override
   String get hospitalVisitSchedule => 'Hospital Visit Schedule';
@@ -466,4 +463,70 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get rating => 'Rating';
+
+  @override
+  String get name => 'Name';
+
+  @override
+  String get age => 'Age';
+
+  @override
+  String get cm => '(Cm)';
+
+  @override
+  String get kg => '(Kg)';
+
+  @override
+  String get save => 'Save';
+
+  @override
+  String get editProfile => 'Edit Profile';
+
+  @override
+  String get notification => 'Notification';
+
+  @override
+  String get darkMode => 'Dark mode';
+
+  @override
+  String get language => 'Language';
+
+  @override
+  String get security => 'Security';
+
+  @override
+  String get help => 'Help';
+
+  @override
+  String get settings => 'Settings';
+
+  @override
+  String get changePassword => 'Change password';
+
+  @override
+  String get logOut => 'Log out';
+
+  @override
+  String get appointment => 'Appointment';
+
+  @override
+  String get confirmed => 'Confirmed!';
+
+  @override
+  String get hospitalName => 'Hospital name:  AlJoud';
+
+  @override
+  String get paid => 'Paid:';
+
+  @override
+  String get bookingText => 'Your appointment has been successfully booked. Please arrive 10 minutes early.';
+
+  @override
+  String get viewMyBooking => 'View my bookings';
+
+  @override
+  String get backHome => 'Back to home';
+
+  @override
+  String get appointments => 'Appointments';
 }

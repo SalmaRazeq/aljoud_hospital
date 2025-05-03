@@ -2,6 +2,8 @@ import 'package:aljoud_hospital/core/utils/color_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../../l10n/app_localizations.dart';
+
 class ProfileDetailsWidget extends StatelessWidget {
   final String age;
   final String height;
@@ -9,13 +11,23 @@ class ProfileDetailsWidget extends StatelessWidget {
 
   const ProfileDetailsWidget({
     super.key,
-    this.age = '',   // القيمة الافتراضية فارغة
-    this.height = '', // القيمة الافتراضية فارغة
-    this.weight = '', // القيمة الافتراضية فارغة
+    required this.age,   // القيمة الافتراضية فارغة
+    required this.height, // القيمة الافتراضية فارغة
+    required this.weight, // القيمة الافتراضية فارغة
   });
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
+
+    Widget _verticalDivider() {
+      return Container(
+        height: 40.h,
+        width: 1.w,
+        color: Theme.of(context).colorScheme.onSecondary,
+      );
+    }
+
     return Container(
       width: double.infinity,
       height: 55.h,
@@ -26,11 +38,11 @@ class ProfileDetailsWidget extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          _buildDetailItem(context, title: 'Age', value: age.isEmpty ? '--' : age),
+          _buildDetailItem(context, title: loc.age, value: age.isEmpty || age == '--' ? '--' : age),
           _verticalDivider(),
-          _buildDetailItem(context, title: 'Height', value: height.isEmpty ? '--' : height),
+          _buildDetailItem(context, title: loc.height, value: height.isEmpty || height == '--' ? '--' : height),
           _verticalDivider(),
-          _buildDetailItem(context, title: 'Weight', value: weight.isEmpty ? '--' : weight),
+          _buildDetailItem(context, title: loc.weight, value: weight.isEmpty || weight == '--' ? '--' : weight),
         ],
       ),
     );
@@ -59,11 +71,6 @@ class ProfileDetailsWidget extends StatelessWidget {
     );
   }
 
-  Widget _verticalDivider() {
-    return Container(
-      height: 40.h,
-      width: 1.w,
-      color: ColorsManager.darkGray,
-    );
-  }
+
 }
+

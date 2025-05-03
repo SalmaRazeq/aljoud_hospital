@@ -60,7 +60,8 @@ class _DoctorRegisterScreenState extends State<DoctorRegisterScreen> {
                         IconButton(onPressed: (){Navigator.pushNamed(context, RoutesManager.login);},
                             icon: Icon(Icons.arrow_back_rounded,
                               color: Theme.of(context).colorScheme.onSecondary,
-                              size: 28.sp,)),
+                              size: 20.sp,)),
+                        SizedBox(width: 15.w,),
                         Center(
                           child: Text(loc.createAccount,
                             style: Theme.of(context).textTheme.titleMedium!.copyWith(
@@ -191,7 +192,7 @@ class _DoctorRegisterScreenState extends State<DoctorRegisterScreen> {
                           return null;
                         }),
 
-                    SizedBox(height: 14.h,),
+                    SizedBox(height: 20.h,),
 
                     Row(
                       children: [
@@ -207,7 +208,7 @@ class _DoctorRegisterScreenState extends State<DoctorRegisterScreen> {
                           }),
                         ),
                        SizedBox(width: 8.w,),
-                       Text('I Agree To The Terms & Conditions', style: GoogleFonts.inter(fontSize: 10, color: ColorsManager.darkGray),),
+                       Text('I Agree To The Terms & Conditions', style: GoogleFonts.inter(fontSize: 10, color: Theme.of(context).colorScheme.onSecondary),),
                       ],
                     ),
 

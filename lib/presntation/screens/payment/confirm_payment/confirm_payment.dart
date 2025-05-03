@@ -2,10 +2,12 @@ import 'package:aljoud_hospital/core/utils/color_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../core/utils/routes_manager.dart';
 import '../../../../data/models/doctor_model.dart';
 import '../../../../l10n/app_localizations.dart';
+import '../../../../providers/theme_provider.dart';
 
 class ConfirmPaymentScreen extends StatelessWidget {
   ConfirmPaymentScreen({super.key, required this.doctor});
@@ -15,10 +17,11 @@ class ConfirmPaymentScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
+    var themeProvider = Provider.of<ThemeProvider>(context);
 
-    return SafeArea(
-      child: Scaffold(
-        body: Padding(
+    return Scaffold(
+      body: SafeArea(
+        child: Padding(
           padding: REdgeInsets.only(top: 70.h, right: 25.w, left: 25.w, bottom: 20.h ),
           child: Center(
             child: Column(
@@ -33,29 +36,29 @@ class ConfirmPaymentScreen extends StatelessWidget {
                   ),
                   child: Icon(
                     Icons.check,
-                    color: ColorsManager.green,
+                    color: ColorsManager.lightGreen,
                     size: 56.sp,
                   ),
                 ),
                 SizedBox(height: 14.h,),
-                Text('Appointment\nConfirmed!', style: GoogleFonts.sourceSans3(fontSize: 22.sp, color: Theme.of(context).colorScheme.primaryFixed),textAlign: TextAlign.center,),
+                Text('${loc.appointment}\n${loc.confirmed}', style: GoogleFonts.sourceSans3(fontSize: 22.sp, color: Theme.of(context).colorScheme.primaryFixed),textAlign: TextAlign.center,),
                 SizedBox(height: 20.h,),
                 Text('${doctor.doctorName}' , style: GoogleFonts.sourceSans3(fontSize: 20.sp, color: Theme.of(context).colorScheme.onSecondary),),
                 SizedBox(height: 5.h,),
                 Text('${doctor.date} . ${doctor.time}' , style: GoogleFonts.sourceSans3(fontSize: 16.sp, fontWeight: FontWeight.w400, color: Theme.of(context).colorScheme.onSecondary),),
-                Text('Hospital name:  AlJoud' , style: GoogleFonts.sourceSans3(fontSize: 16.sp, fontWeight: FontWeight.w400, color: Theme.of(context).colorScheme.onSecondary),),
-                Text('Paid:  ${(doctor.price)}' , style: GoogleFonts.sourceSans3(fontSize: 16.sp, fontWeight: FontWeight.w400, color: Theme.of(context).colorScheme.onSecondary),),
-                SizedBox(height: 60.h,),
+                Text(loc.hospitalName , style: GoogleFonts.sourceSans3(fontSize: 16.sp, fontWeight: FontWeight.w400, color: Theme.of(context).colorScheme.onSecondary),),
+                Text('${loc.paid}  ${(doctor.price)}' , style: GoogleFonts.sourceSans3(fontSize: 16.sp, fontWeight: FontWeight.w400, color: Theme.of(context).colorScheme.onSecondary),),
+                SizedBox(height: 40.h,),
                 Center(
-                  child: Text('Your appointment has been successfully booked. Please arrive 10 minutes early.' ,
+                  child: Text(loc.bookingText ,
                     style: GoogleFonts.inter(fontSize: 16.sp,
                         fontWeight: FontWeight.w400,
                         color: Theme.of(context).colorScheme.onSecondary),
                     textAlign: TextAlign.center,
                   ),
                 ),
-
-                SizedBox(height: 80.h,),
+            
+                SizedBox(height: 40.h,),
                 Center(
                   child: SizedBox(
                       width: 260.w,
@@ -66,9 +69,10 @@ class ConfirmPaymentScreen extends StatelessWidget {
                             RoutesManager.home, // الشاشة اللي فيها الـ BottomNavigationBar
                                 (route) => false,
                             arguments: 2, // رقم التبويبة، 1 يعني MyBookings مثلا
-                          );                        },
+                          );
+                          },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: ColorsManager.beige,
+                          backgroundColor: ColorsManager.lightGray,
                           elevation: 0,
                           padding: REdgeInsets.all(6),
                           shape: RoundedRectangleBorder(
@@ -77,8 +81,8 @@ class ConfirmPaymentScreen extends StatelessWidget {
                           ),
                         ),
                         child: Text(
-                          'View my bookings',
-                          style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: ColorsManager.blue2),
+                          loc.viewMyBooking,
+                          style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: themeProvider.isLightTheme() ? ColorsManager.blue2 : ColorsManager.darkBlue1),
                         ),
                       )),
                 ),
@@ -91,7 +95,7 @@ class ConfirmPaymentScreen extends StatelessWidget {
                           Navigator.pushNamedAndRemoveUntil(context, RoutesManager.home, (route) => false);
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: ColorsManager.beige,
+                          backgroundColor: ColorsManager.lightGray,
                           elevation: 0,
                           padding: REdgeInsets.all(6),
                           shape: RoundedRectangleBorder(
@@ -100,12 +104,12 @@ class ConfirmPaymentScreen extends StatelessWidget {
                           ),
                         ),
                         child: Text(
-                          'Back to home',
-                          style: Theme.of(context).textTheme.bodyLarge,
+                          loc.backHome,
+                          style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: ColorsManager.black),
                         ),
                       )),
                 )
-
+            
               ],
             ),
           ),

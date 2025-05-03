@@ -49,9 +49,9 @@ class _VerificationScreenState extends State<VerificationScreen> {
       onTap: () {
         FocusManager.instance.primaryFocus?.unfocus();
       },
-      child: SafeArea(
-        child: Scaffold(
-          body: SingleChildScrollView(
+      child: Scaffold(
+        body: SafeArea(
+          child: SingleChildScrollView(
             child: Padding(
               padding: REdgeInsets.symmetric(vertical: 15),
               child: Column(
@@ -101,7 +101,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                               ),
                             ),
                             SizedBox(height: 40.h),
-
+                
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -154,7 +154,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                                 ),
                               ],
                             ),
-
+                
                             SizedBox(height: 30.h),
                             BottomSection(text: "Didn't receive OTP?", body: 'Resend',),
                             SizedBox(height: 75.h),

@@ -9,6 +9,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../core/utils/assets_manager.dart';
 import '../../../../core/utils/email_validation.dart';
@@ -16,6 +17,7 @@ import '../../../../core/utils/routes_manager.dart';
 
 import '../../../../data/models/user_dm.dart';
 import '../../../../l10n/app_localizations.dart';
+import '../../../../providers/theme_provider.dart';
 import '../widget/field_design.dart';
 
 
@@ -43,6 +45,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
+    var themeProvider = Provider.of<ThemeProvider>(context);
 
     return GestureDetector(
       onTap: () {
@@ -64,7 +67,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         IconButton(onPressed: (){Navigator.pushNamed(context, RoutesManager.login);},
                             icon: Icon(Icons.arrow_back_rounded,
                               color: Theme.of(context).colorScheme.onSecondary,
-                              size: 28.sp,)),
+                              size: 20.sp,)),
+                        SizedBox(width: 15.w,),
                         Center(
                           child: Text(loc.createAccount,
                             style: Theme.of(context).textTheme.titleMedium!.copyWith(
@@ -214,7 +218,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
 
                     SizedBox(height: 22.h,),
-                    Image.asset(AssetsManager.or,),
+                    Image.asset(themeProvider.isLightTheme() ? AssetsManager.or : AssetsManager.darkOr,),
                     SizedBox(height: 10.h),
                     InkWell(
                         onTap: () {},

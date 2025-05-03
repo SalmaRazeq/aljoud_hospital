@@ -1,3 +1,4 @@
+import 'package:aljoud_hospital/core/utils/color_manager.dart';
 import 'package:aljoud_hospital/core/utils/routes_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -22,7 +23,7 @@ class DoctorCard extends StatelessWidget {
         ),
         child: Row(
           children: [
-            Icon(icon, size: 9.sp, color: Theme.of(context).colorScheme.onSecondary),
+            Icon(icon, size: 9.sp, color: ColorsManager.darkGray),
             SizedBox(width: 2.w),
             Text(
               text,
@@ -59,7 +60,7 @@ class DoctorCard extends StatelessWidget {
                   children: [
                     Text(
                       doctor.name,
-                      style: Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: 13.sp),
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: 13.sp, color: ColorsManager.black),
                     ),
                     Text(
                       doctor.specialty,

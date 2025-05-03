@@ -2,8 +2,10 @@ import 'package:aljoud_hospital/core/utils/color_manager.dart';
 import 'package:aljoud_hospital/core/utils/routes_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../l10n/app_localizations.dart';
+import '../../../../providers/theme_provider.dart';
 
 class ToggleButtonWidget extends StatefulWidget {
   final bool isPatientSelected;
@@ -23,6 +25,7 @@ class _ToggleButtonWidgetState extends State<ToggleButtonWidget> {
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
+    var themeProvider = Provider.of<ThemeProvider>(context);
 
     return Center(
       child: Container(
@@ -31,7 +34,7 @@ class _ToggleButtonWidgetState extends State<ToggleButtonWidget> {
         decoration: BoxDecoration(
           color: ColorsManager.lightGray,
           borderRadius: BorderRadius.circular(30.r),
-          border: Border.all(color: ColorsManager.hint),
+          border: themeProvider.isLightTheme() ? Border.all(color: ColorsManager.hint) : Border.all(color: Colors.transparent),
         ),
         child: Row(
           children: [
@@ -40,7 +43,7 @@ class _ToggleButtonWidgetState extends State<ToggleButtonWidget> {
                 onTap: () => widget.onToggle(true),
                 child: Container(
                   decoration: BoxDecoration(
-                    color: widget.isPatientSelected ? ColorsManager.blue2 : Colors.transparent,
+                    color: widget.isPatientSelected ? themeProvider.isLightTheme() ? ColorsManager.blue2 : ColorsManager.darkBlue1 : Colors.transparent,
                     borderRadius: BorderRadius.horizontal(left: Radius.circular(30.r)),
                   ),
                   alignment: Alignment.center,
@@ -59,7 +62,7 @@ class _ToggleButtonWidgetState extends State<ToggleButtonWidget> {
                 onTap: () => widget.onToggle(false),
                 child: Container(
                   decoration: BoxDecoration(
-                    color: widget.isPatientSelected ? Colors.transparent : ColorsManager.blue2,
+                    color: widget.isPatientSelected ? Colors.transparent : themeProvider.isLightTheme() ? ColorsManager.blue2 : ColorsManager.darkBlue1,
                     borderRadius: BorderRadius.horizontal(right: Radius.circular(30.r)),
                   ),
                   alignment: Alignment.center,

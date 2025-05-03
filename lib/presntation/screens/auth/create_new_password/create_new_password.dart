@@ -31,9 +31,9 @@ class _CreateNewPasswordScreenState extends State<CreateNewPasswordScreen> {
       onTap: () {
         FocusManager.instance.primaryFocus?.unfocus();
       },
-      child: SafeArea(
-        child: Scaffold(
-          body: SingleChildScrollView(
+      child: Scaffold(
+        body: SafeArea(
+          child: SingleChildScrollView(
             child: Padding(
               padding: REdgeInsets.symmetric(vertical: 15),
               child: Column(
@@ -52,11 +52,11 @@ class _CreateNewPasswordScreenState extends State<CreateNewPasswordScreen> {
                               color: Theme.of(context).colorScheme.primaryFixed),),
                         ),
                       ),
-                      SizedBox(width: 50.h,),
-
+                      SizedBox(width: 40.h,),
+                
                     ],
                   ),
-                  SizedBox(height: 60.h,),
+                  SizedBox(height: 80.h,),
                   Padding(
                     padding: REdgeInsets.symmetric(horizontal: 16,),
                     child: Center(
@@ -69,9 +69,9 @@ class _CreateNewPasswordScreenState extends State<CreateNewPasswordScreen> {
                             Text('Your new password must be different from previous used password.',
                               style: Theme.of(context).textTheme.titleMedium, textAlign: TextAlign.center,
                             ),
-
-                            SizedBox(height: 50.h,),
-
+                
+                            SizedBox(height: 60.h,),
+                
                             Text(
                                 loc.password,
                                 style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Theme.of(context).colorScheme.primaryFixed, fontWeight: FontWeight.w600)
@@ -79,7 +79,7 @@ class _CreateNewPasswordScreenState extends State<CreateNewPasswordScreen> {
                             SizedBox(
                               height: 8.h,
                             ),
-
+                
                             PasswordFieldDesign(
                                 hintText: loc.enterPassword,
                                 controller: passwordController,
@@ -102,7 +102,7 @@ class _CreateNewPasswordScreenState extends State<CreateNewPasswordScreen> {
                             SizedBox(
                               height: 8.h,
                             ),
-
+                
                             PasswordFieldDesign(
                                 hintText: loc.enterPassword,
                                 controller: rePasswordController,
@@ -115,7 +115,7 @@ class _CreateNewPasswordScreenState extends State<CreateNewPasswordScreen> {
                                   }
                                   return null;
                                 }),
-                            SizedBox(height: 40.h,),
+                            SizedBox(height: 60.h,),
                             ElevatedButtonDesign(
                                 text: 'Reset password',
                                 onTap: (){

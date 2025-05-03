@@ -110,13 +110,13 @@ abstract class AppLocalizations {
   /// No description provided for @anyTime.
   ///
   /// In en, this message translates to:
-  /// **'Any time.'**
+  /// **'Anytime.'**
   String get anyTime;
 
   /// No description provided for @anyWhere.
   ///
   /// In en, this message translates to:
-  /// **'Any Where.'**
+  /// **'Anywhere.'**
   String get anyWhere;
 
   /// No description provided for @startText.
@@ -335,17 +335,17 @@ abstract class AppLocalizations {
   /// **'Book your online video consultation'**
   String get bookOnline;
 
-  /// No description provided for @appointments.
+  /// No description provided for @aboutHospital.
   ///
   /// In en, this message translates to:
-  /// **'Appointments'**
-  String get appointments;
+  /// **'About Hospital'**
+  String get aboutHospital;
 
-  /// No description provided for @bookAppointment.
+  /// No description provided for @aboutHospitalText.
   ///
   /// In en, this message translates to:
-  /// **'Book appointment'**
-  String get bookAppointment;
+  /// **'Read information about the hospital'**
+  String get aboutHospitalText;
 
   /// No description provided for @support.
   ///
@@ -473,11 +473,11 @@ abstract class AppLocalizations {
   /// **'My Booking'**
   String get myBooking;
 
-  /// No description provided for @liveChat.
+  /// No description provided for @chatBot.
   ///
   /// In en, this message translates to:
-  /// **'Live chat'**
-  String get liveChat;
+  /// **'Chat Bot'**
+  String get chatBot;
 
   /// No description provided for @profile.
   ///
@@ -598,12 +598,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Appointment Type'**
   String get appointmentType;
-
-  /// No description provided for @appointment.
-  ///
-  /// In en, this message translates to:
-  /// **'Appointment'**
-  String get appointment;
 
   /// No description provided for @hospitalVisitSchedule.
   ///
@@ -1012,6 +1006,138 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Rating'**
   String get rating;
+
+  /// No description provided for @name.
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get name;
+
+  /// No description provided for @age.
+  ///
+  /// In en, this message translates to:
+  /// **'Age'**
+  String get age;
+
+  /// No description provided for @cm.
+  ///
+  /// In en, this message translates to:
+  /// **'(Cm)'**
+  String get cm;
+
+  /// No description provided for @kg.
+  ///
+  /// In en, this message translates to:
+  /// **'(Kg)'**
+  String get kg;
+
+  /// No description provided for @save.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get save;
+
+  /// No description provided for @editProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Profile'**
+  String get editProfile;
+
+  /// No description provided for @notification.
+  ///
+  /// In en, this message translates to:
+  /// **'Notification'**
+  String get notification;
+
+  /// No description provided for @darkMode.
+  ///
+  /// In en, this message translates to:
+  /// **'Dark mode'**
+  String get darkMode;
+
+  /// No description provided for @language.
+  ///
+  /// In en, this message translates to:
+  /// **'Language'**
+  String get language;
+
+  /// No description provided for @security.
+  ///
+  /// In en, this message translates to:
+  /// **'Security'**
+  String get security;
+
+  /// No description provided for @help.
+  ///
+  /// In en, this message translates to:
+  /// **'Help'**
+  String get help;
+
+  /// No description provided for @settings.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get settings;
+
+  /// No description provided for @changePassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Change password'**
+  String get changePassword;
+
+  /// No description provided for @logOut.
+  ///
+  /// In en, this message translates to:
+  /// **'Log out'**
+  String get logOut;
+
+  /// No description provided for @appointment.
+  ///
+  /// In en, this message translates to:
+  /// **'Appointment'**
+  String get appointment;
+
+  /// No description provided for @confirmed.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirmed!'**
+  String get confirmed;
+
+  /// No description provided for @hospitalName.
+  ///
+  /// In en, this message translates to:
+  /// **'Hospital name:  AlJoud'**
+  String get hospitalName;
+
+  /// No description provided for @paid.
+  ///
+  /// In en, this message translates to:
+  /// **'Paid:'**
+  String get paid;
+
+  /// No description provided for @bookingText.
+  ///
+  /// In en, this message translates to:
+  /// **'Your appointment has been successfully booked. Please arrive 10 minutes early.'**
+  String get bookingText;
+
+  /// No description provided for @viewMyBooking.
+  ///
+  /// In en, this message translates to:
+  /// **'View my bookings'**
+  String get viewMyBooking;
+
+  /// No description provided for @backHome.
+  ///
+  /// In en, this message translates to:
+  /// **'Back to home'**
+  String get backHome;
+
+  /// No description provided for @appointments.
+  ///
+  /// In en, this message translates to:
+  /// **'Appointments'**
+  String get appointments;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

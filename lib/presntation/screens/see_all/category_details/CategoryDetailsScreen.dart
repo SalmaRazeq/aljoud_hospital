@@ -2,7 +2,6 @@
 import 'package:aljoud_hospital/core/utils/assets_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../core/utils/routes_manager.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../home/categories_item/categories_item.dart';
 import '../../widgets/build_circleButton.dart';
@@ -62,9 +61,9 @@ class CategoryDetailsScreen extends StatelessWidget {
       ),
     ];
 
-    return SafeArea(
-      child: Scaffold(
-        body: Padding(
+    return Scaffold(
+      body: SafeArea(
+        child: Padding(
           padding: REdgeInsets.symmetric(horizontal: 15.w, vertical: 16.h),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -86,7 +85,7 @@ class CategoryDetailsScreen extends StatelessWidget {
                   BuildCircleButton(
                       icon: Icons.search,
                       onTap: () {
-
+            
                       }
                   ),
                 ],
@@ -100,15 +99,15 @@ class CategoryDetailsScreen extends StatelessWidget {
                 child: ListView.builder(
                   itemCount: doctors.length,
                   itemBuilder: (context, index) {
-
+            
                     return Directionality(
                         textDirection: TextDirection.ltr, // يثبت الاتجاه من اليسار لليمين
                         child: DoctorCard(doctor: doctors[index]));
                   },
                 ),
               ),
-
-
+            
+            
             ],
           ),
         ),
