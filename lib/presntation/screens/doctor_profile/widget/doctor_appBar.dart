@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../core/utils/color_manager.dart';
 import '../../../../l10n/app_localizations.dart';
+import '../../../../providers/theme_provider.dart';
 import '../../widgets/build_circleButton.dart';
 
 class DoctorAppBar extends StatelessWidget {
@@ -11,10 +13,11 @@ class DoctorAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
+    var themeProvider = Provider.of<ThemeProvider>(context);
 
     return Container(
       padding: REdgeInsets.all(8),
-      color: ColorsManager.blue2,
+      color: themeProvider.isLightTheme() ? ColorsManager.blue2 : ColorsManager.darkBlue1,
       height: 90.h,
       child: Row(
         children: [

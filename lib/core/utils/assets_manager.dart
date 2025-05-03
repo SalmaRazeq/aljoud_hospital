@@ -3,8 +3,9 @@ class AssetsManager{
   static const String logo = '${base}logo.png';
   static const String bottomRight = '${base}bottomRight.png';
   static const String topLeft = '${base}topLeft.png';
-  static const String startMan = '${base}Medicine-bro.png';
+  static const String startMan = '${base}Medicine-bro 1.png';
   static const String or = '${base}or.png';
+  static const String darkOr = '${base}or_dark.png';
   static const String google = '${base}google.png';
   static const String faceBook = '${base}faceBook.png';
   static const String cardiology = '${base}heart.png';

@@ -14,42 +14,45 @@ class StartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: REdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            SizedBox(height: 60.h),
-            Image.asset(AssetsManager.startMan),
-            Text(
-              '${AppLocalizations.of(context)!.yourDoctor}\n${AppLocalizations.of(context)!.anyTime}\n${AppLocalizations.of(context)!.anyWhere}',
-              style: GoogleFonts.sansita(fontSize: 34.sp, fontWeight: FontWeight.bold, color: ColorsManager.blue),),
-
-            SizedBox(height: 6.h),
-            Text(AppLocalizations.of(context)!.startText,
-              style: GoogleFonts.sansita(fontSize: 20,color: Theme.of(context).colorScheme.secondary,fontWeight: FontWeight.w600 ),),
-
-            SizedBox(height: 60.h),
-
-            Container(
-              margin: REdgeInsets.symmetric(horizontal: 50),
-              alignment: Alignment.bottomCenter,
-              child: ElevatedButton(
-                  onPressed: (){
-                    Navigator.pushReplacementNamed(context, RoutesManager.login);
-                  },
-                style: ElevatedButton.styleFrom(
-                  padding: REdgeInsets.all(10),
-                  backgroundColor: ColorsManager.blue,
-                  elevation: 10,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(22))
-                ),
-                  child: Text(AppLocalizations.of(context)!.getStarted,
-                    style: GoogleFonts.sourceSerif4(fontSize: 28, fontWeight: FontWeight.w900, color: Theme.of(context).colorScheme.primary),),),
-            )
-
-          ],
+      body: SafeArea(
+        child: Padding(
+          padding: REdgeInsets.only(left: 16,right: 16, top:20, bottom: 15),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Image.asset(AssetsManager.startMan, height: 350.h,),
+              Text(
+                '${AppLocalizations.of(context)!.yourDoctor}\n${AppLocalizations.of(context)!.anyTime}',
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(color: Theme.of(context).colorScheme.primaryFixed, fontWeight: FontWeight.bold, fontSize: 30),
+              ),
+              Text(
+                AppLocalizations.of(context)!.anyWhere,
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(color: Theme.of(context).colorScheme.onPrimary, fontWeight: FontWeight.bold, fontSize: 30),
+              ),
+              SizedBox(height: 20.h),
+              Text(AppLocalizations.of(context)!.startText,
+                style: GoogleFonts.sansita(fontSize: 18.sp,color: Theme.of(context).colorScheme.secondary.withOpacity(0.6),fontWeight: FontWeight.w600 ),),
+        
+              SizedBox(height: 40.h),
+        
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: ElevatedButton(
+                    onPressed: (){
+                      Navigator.pushReplacementNamed(context, RoutesManager.login);
+                    },
+                  style: ElevatedButton.styleFrom(
+                      padding: REdgeInsets.symmetric(vertical: 6, horizontal: 20),
+                    elevation: 10,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(22.r))
+                  ),
+                    child: Text(AppLocalizations.of(context)!.getStarted,
+                      style: GoogleFonts.sourceSerif4(fontSize: 24.sp, fontWeight: FontWeight.w900, color: Theme.of(context).colorScheme.primary),),),
+              )
+        
+            ],
+          ),
         ),
       ),
     );

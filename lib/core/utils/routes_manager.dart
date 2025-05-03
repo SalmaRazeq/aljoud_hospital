@@ -4,6 +4,9 @@ import 'package:aljoud_hospital/presntation/screens/auth/log_in/login.dart';
 import 'package:aljoud_hospital/presntation/screens/auth/register/doctor_register.dart';
 import 'package:aljoud_hospital/presntation/screens/auth/register/register.dart';
 import 'package:aljoud_hospital/presntation/screens/doctor_profile/doctor_profile.dart';
+import 'package:aljoud_hospital/presntation/screens/home/profile_tab/edit_profile/edit_profile.dart';
+import 'package:aljoud_hospital/presntation/screens/home/profile_tab/profile.dart';
+import 'package:aljoud_hospital/presntation/screens/home/profile_tab/settings/settings.dart';
 import 'package:aljoud_hospital/presntation/screens/hospital_visit/hospital_visit.dart';
 import 'package:aljoud_hospital/presntation/screens/home/myBooking_tab/myBooking.dart';
 import 'package:aljoud_hospital/presntation/screens/patient_details/patient_details.dart';
@@ -35,12 +38,14 @@ class RoutesManager{
   static const String confirmPayment = '/confirmPayment';
   static const String doctorProfile = '/doctorProfile';
   static const String doctorRegister = '/doctorRegister';
+  static const String profile = '/profile';
+  static const String editProfile = '/editProfile';
+  static const String settingScreen = '/settingScreen';
 
 
 
 
   static Route? router(RouteSettings settings) {
-    final CategoriesItem category;
     switch (settings.name) {
       case splash:
         return MaterialPageRoute(
@@ -94,6 +99,18 @@ class RoutesManager{
       case doctorRegister:
         return MaterialPageRoute(
           builder: (context) => DoctorRegisterScreen(),
+        );
+      case profile:
+        return MaterialPageRoute(
+          builder: (context) => ProfileScreen(),
+        );
+      case editProfile:
+        return MaterialPageRoute(
+          builder: (context) => EditeProfileScreen(),
+        );
+      case settingScreen:
+        return MaterialPageRoute(
+          builder: (context) => SettingScreen(),
         );
       case payment:
         final args = settings.arguments as Map<String, dynamic>;

@@ -29,19 +29,19 @@ class SeeAllScreen extends StatelessWidget {
       CategoriesItem(imagePath: AssetsManager.eNT, title: AppLocalizations.of(context)!.eNT),
     ];
 
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Theme.of(context).colorScheme.onPrimary,
-          leading: IconButton(onPressed: () {
-            Navigator.pushReplacementNamed(context, RoutesManager.home);
-          },
-              icon: Icon(Icons.arrow_back_rounded, size: 26.sp, color: ColorsManager.white,)),
-          title: Text(AppLocalizations.of(context)!.categories, style: Theme.of(context).textTheme.bodyMedium),
-        ),
-
-        body: Padding(
-          padding: REdgeInsets.only(top: 14.h),
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.onPrimary,
+        leading: IconButton(onPressed: () {
+          Navigator.pushReplacementNamed(context, RoutesManager.home);
+        },
+            icon: Icon(Icons.arrow_back_rounded, size: 26.sp, color: ColorsManager.white,)),
+        title: Text(AppLocalizations.of(context)!.categories, style: Theme.of(context).textTheme.bodyMedium),
+      ),
+    
+      body: SafeArea(
+        child: Padding(
+          padding: REdgeInsets.only(top: 25.h),
           child: GridView.builder(
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 3,

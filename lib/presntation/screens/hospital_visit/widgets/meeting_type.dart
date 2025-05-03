@@ -41,7 +41,7 @@ class _MeetingTypeState extends State<MeetingType> {
               return Padding(
                 padding: REdgeInsets.only(left: 6.w, right: 6.w),
                 child: ChoiceChip(
-                  backgroundColor: ColorsManager.beige,
+                  backgroundColor: ColorsManager.lightGray,
                   selectedColor: ColorsManager.fadedBlue3,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.r),

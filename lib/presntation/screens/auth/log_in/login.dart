@@ -5,12 +5,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../core/utils/constant_manager.dart';
 import '../../../../core/utils/dialog_utils/dialog_utils.dart';
 import '../../../../core/utils/routes_manager.dart';
 import '../../../../data/models/user_dm.dart';
 import '../../../../l10n/app_localizations.dart';
+import '../../../../providers/theme_provider.dart';
 import '../widget/field_design.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -27,6 +29,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var themeProvider = Provider.of<ThemeProvider>(context);
+
     return GestureDetector(
       onTap: () {
         FocusManager.instance.primaryFocus?.unfocus();
@@ -93,11 +97,12 @@ class _LoginScreenState extends State<LoginScreen> {
                       Align(
                         alignment: Alignment.centerRight,
                         child: TextButton(
-                            onPressed: () {}, child: Text(AppLocalizations.of(
+                            onPressed: () {
+                              Navigator.pushNamed(context, RoutesManager.forgetPassword);
+                            }, child: Text(AppLocalizations.of(
                             context)!.forgetPassword,
                             style: Theme.of(context).textTheme.displaySmall
-                                ?.copyWith(fontSize: 10.sp, color: Theme
-                                .of(context).colorScheme.onPrimary),
+                                ?.copyWith(fontSize: 10.sp, color: Theme.of(context).colorScheme.onPrimary),
                         ),
                         ),
                       ),
@@ -128,7 +133,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
 
                       SizedBox(height: 22.h,),
-                      Image.asset(AssetsManager.or),
+                      Image.asset(themeProvider.isLightTheme() ? AssetsManager.or : AssetsManager.darkOr,),
                       SizedBox(height: 10.h),
                       InkWell(
                           onTap: () {

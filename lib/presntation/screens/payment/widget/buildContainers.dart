@@ -29,6 +29,7 @@ class BuildContainer extends StatelessWidget {
         width: double.infinity,
         height: 45.h,
         decoration: BoxDecoration(
+          color: ColorsManager.lightGray,
           borderRadius: BorderRadius.circular(15.r),
           border: Border.all(
             color: ColorsManager.darkGray, width: value == groupValue ? 1.5 : 1,
@@ -42,7 +43,7 @@ class BuildContainer extends StatelessWidget {
               child: Text(
                 label,
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: Theme.of(context).colorScheme.primaryFixed, fontSize: 16
+                  color: ColorsManager.black, fontSize: 16
                 ),
               ),
             ),

@@ -15,7 +15,7 @@ class AboutDoctor extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(title , style: Theme.of(context).textTheme.bodySmall!.
-          copyWith(fontSize: 16.sp)),
+          copyWith(fontSize: 16.sp, color: Theme.of(context).colorScheme.onSecondary)),
           Directionality(
             textDirection: decoration,
               child: Text(body , style: Theme.of(context).textTheme.labelMedium))

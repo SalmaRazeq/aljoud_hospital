@@ -24,14 +24,14 @@ class BottomBar extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Icon(Icons.phone_outlined, size: 22.sp,),
+            Icon(Icons.phone_outlined, size: 22.sp, color: Theme.of(context).colorScheme.primaryFixed,),
             SizedBox(width: 15.w,),
             Directionality(
               textDirection: TextDirection.ltr,
                 child: Text(Localizations.localeOf(context).languageCode == 'ar'
                     ? '( 2:00 pm - 3:00 pm)  ${loc.voiceCall}'
                     : '${loc.voiceCall} ( 2:00 pm - 3:00 pm)',
-                  style: Theme.of(context).textTheme.labelMedium!.copyWith(fontSize: 13.sp,color: ColorsManager.black),)),
+                  style: Theme.of(context).textTheme.labelMedium!.copyWith(fontSize: 13.sp,color: Theme.of(context).colorScheme.primaryFixed),)),
             SizedBox(width: 28.w,),
           ],
         ),

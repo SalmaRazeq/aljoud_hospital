@@ -32,21 +32,25 @@ class BuildOtpTextField extends StatelessWidget {
         focusNode: focusNode,
         keyboardType: TextInputType.number,
         textAlign: TextAlign.center,
+        style: TextStyle(fontSize: 16),
         maxLength: 1,
+
         decoration: InputDecoration(
+          contentPadding: REdgeInsets.symmetric(vertical: 11, horizontal: 12),
           counterText: "",
           border: OutlineInputBorder(
             borderSide: const BorderSide(color: ColorsManager.blue2),
             borderRadius: BorderRadius.circular(10.r),
           ),
           focusedBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: ColorsManager.darkGray),
+            borderSide: const BorderSide(color: ColorsManager.blue2,width: 1.5),
             borderRadius: BorderRadius.circular(10.r),
           ),
           errorBorder: OutlineInputBorder(
             borderSide: const BorderSide(color: Colors.red),
             borderRadius: BorderRadius.circular(10.r),
           ),
+
           filled: true,
           fillColor: ColorsManager.white,
         ),

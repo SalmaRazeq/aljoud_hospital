@@ -9,6 +9,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 import '../../../core/utils/constant_manager.dart';
 import '../../../core/utils/dialog_utils/dialog_utils.dart';
@@ -16,6 +17,7 @@ import '../../../data/models/booking_model.dart';
 import '../../../data/models/doctor_model.dart';
 import '../../../data/models/patient_model.dart';
 import '../../../l10n/app_localizations.dart';
+import '../../../providers/theme_provider.dart';
 import '../payment/payment.dart';
 
 class PatientDetailsScreen extends StatefulWidget {
@@ -32,8 +34,6 @@ class _PatientDetailsScreenState extends State<PatientDetailsScreen> {
   TextEditingController problemController = TextEditingController();
   TextEditingController heightController = TextEditingController();
   TextEditingController weightController = TextEditingController();
-
-
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   String selectedAge = '30+';
   String gender = 'female';
@@ -42,15 +42,16 @@ class _PatientDetailsScreenState extends State<PatientDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
+    var themeProvider = Provider.of<ThemeProvider>(context);
 
     return GestureDetector(
       onTap: () {
         FocusManager.instance.primaryFocus?.unfocus();
       },
-      child: SafeArea(
-        child: Scaffold(
-            backgroundColor: ColorsManager.lightGray,
-            body: SingleChildScrollView(
+      child: Scaffold(
+          backgroundColor: themeProvider.isLightTheme() ? ColorsManager.lightGray.withOpacity(0.9) : ColorsManager.darkBlue,
+          body: SafeArea(
+            child: SingleChildScrollView(
               child: Container(
                 padding: REdgeInsets.symmetric(horizontal: 5.w, vertical: 10.h),
                  margin: REdgeInsets.all(8) ,
@@ -79,7 +80,7 @@ class _PatientDetailsScreenState extends State<PatientDetailsScreen> {
                               SizedBox(width: 30.w),
                             ],
                           ),
-
+                  
                           SizedBox(
                             height: 32.h,
                           ),
@@ -87,7 +88,7 @@ class _PatientDetailsScreenState extends State<PatientDetailsScreen> {
                           SizedBox(
                             height: 10.h,
                           ),
-
+                  
                           BuildTextField(
                               icon: Icons.person,
                               hintText: loc.enterName,
@@ -137,12 +138,12 @@ class _PatientDetailsScreenState extends State<PatientDetailsScreen> {
                           SizedBox(
                             height: 20.h,
                           ),
-
+                  
                           Text(loc.phone, style: Theme.of(context).textTheme.bodySmall,),
                           SizedBox(
                             height: 10.h,
                           ),
-
+                  
                           BuildTextField(
                             icon: Icons.phone,
                             hintText: loc.enterPhone,
@@ -157,7 +158,7 @@ class _PatientDetailsScreenState extends State<PatientDetailsScreen> {
                               }
                               return null;
                             },),
-
+                  
                           SizedBox(
                             height: 16.h,
                           ),
@@ -224,7 +225,7 @@ class _PatientDetailsScreenState extends State<PatientDetailsScreen> {
                                               : ColorsManager.white,
                                           foregroundColor: gender == g
                                               ? ColorsManager.white
-                                              : Theme.of(context).colorScheme.primaryFixed,
+                                              : ColorsManager.black,
                                           side: const BorderSide(color: ColorsManager.blue2),
                                         ),
                                         onPressed: () {
@@ -236,7 +237,7 @@ class _PatientDetailsScreenState extends State<PatientDetailsScreen> {
                                   ));
                             }).toList(),
                           ),
-
+                  
                           SizedBox(
                             height: 16.h,
                           ),
@@ -260,9 +261,9 @@ class _PatientDetailsScreenState extends State<PatientDetailsScreen> {
                                       borderSide: BorderSide.none),
                                 ),
                               ),
-
+                  
                               SizedBox(height: 28.h,),
-
+                  
                               Center(
                                 child: SizedBox(
                                     width: 240.w,
@@ -286,8 +287,8 @@ class _PatientDetailsScreenState extends State<PatientDetailsScreen> {
                           ),
                         ]),
                   )),
-            )),
-      ),
+            ),
+          )),
     );
   }
 

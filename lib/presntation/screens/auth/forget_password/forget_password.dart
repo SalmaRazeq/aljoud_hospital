@@ -31,9 +31,9 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
       onTap: () {
         FocusManager.instance.primaryFocus?.unfocus();
       },
-      child: SafeArea(
-        child: Scaffold(
-          body: SingleChildScrollView(
+      child: Scaffold(
+        body: SafeArea(
+          child: SingleChildScrollView(
             child: Padding(
               padding: REdgeInsets.symmetric(vertical: 15),
               child: Column(
@@ -53,7 +53,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                         ),
                       ),
                       SizedBox(width: 50.h,),
-
+                
                     ],
                   ),
                   SizedBox(height: 90.h,),
@@ -70,7 +70,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                                 style: Theme.of(context).textTheme.titleMedium, textAlign: TextAlign.center,
                             ),
                             SizedBox(height: 40.h,),
-
+                
                             Container(
                               width: 100.w,
                               height: 100.h,
@@ -85,7 +85,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                               ),
                             ),
                             SizedBox(height: 50.h,),
-
+                
                             Container(
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(15.r),
@@ -149,7 +149,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                                 text: 'Reset password',
                                 onTap: (){
                                   sendOtpForPasswordReset(context);
-
+                
                                 }
                             ),
                           ],

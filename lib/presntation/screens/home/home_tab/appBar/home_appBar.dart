@@ -4,11 +4,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../../core/utils/color_manager.dart';
 import '../../../../../data/models/doctor_model.dart';
 import '../../../../../data/models/user_dm.dart';
 import '../../../../../l10n/app_localizations.dart';
+import '../../../../../providers/theme_provider.dart';
 
 
 class HomeAppBar extends StatefulWidget {
@@ -66,13 +68,15 @@ class _HomeAppBarState extends State<HomeAppBar> {
 
   @override
   Widget build(BuildContext context) {
+    var themeProvider = Provider.of<ThemeProvider>(context);
+
     return Container(
-      padding: REdgeInsets.only(right: 15.w, left: 15.w, top: 25.h, bottom: 18.h),
-      height: 230.h,
+      padding: REdgeInsets.only(right: 15.w, left: 15.w, top: 45.h, bottom: 18.h),
+      height: 240.h,
       width: double.infinity,
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [Colors.blue.shade700, Colors.blue.shade800],
+          colors:  themeProvider.isLightTheme() ? [Colors.blue.shade700, Colors.blue.shade900] : [Colors.blue.shade900, Color(0xFF003060)],
         ),
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(25.r),

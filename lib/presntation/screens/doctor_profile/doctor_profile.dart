@@ -5,7 +5,9 @@ import 'package:aljoud_hospital/presntation/screens/doctor_profile/widget/doctor
 import 'package:aljoud_hospital/presntation/screens/doctor_profile/widget/doctor_experience_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 import '../../../l10n/app_localizations.dart';
+import '../../../providers/theme_provider.dart';
 import '../see_all/category_details/CategoryDetailsScreen.dart';
 
 class DoctorProfileScreen extends StatelessWidget {
@@ -15,10 +17,12 @@ class DoctorProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
+    var themeProvider = Provider.of<ThemeProvider>(context);
 
-    return SafeArea(
-      child: Scaffold(
-        body:  SingleChildScrollView(
+    return Scaffold(
+      backgroundColor: themeProvider.isLightTheme() ? ColorsManager.white : ColorsManager.darkBlue,
+      body:  SafeArea(
+        child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -29,7 +33,7 @@ class DoctorProfileScreen extends StatelessWidget {
                   width: double.infinity,
                   height: 210.h,
                   decoration: BoxDecoration(
-                      color: ColorsManager.fadedBlue3.withOpacity(0.2),
+                      color:  themeProvider.isLightTheme() ? ColorsManager.lightBlue : ColorsManager.blue3.withOpacity(0.4),
                     borderRadius: BorderRadius.circular(20.r)
                   ),
                   child: Column(
@@ -45,12 +49,12 @@ class DoctorProfileScreen extends StatelessWidget {
                          ),),
                        SizedBox(height: 8.h,),
                        Text('${doctor.name}', style: Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: 16.sp),),
-                       Text('${doctor.specialty}', style: Theme.of(context).textTheme.labelSmall?.copyWith(fontSize: 14.sp)),
+                       Text('${doctor.specialty}', style: Theme.of(context).textTheme.labelSmall?.copyWith(fontSize: 14.sp, color: Theme.of(context).colorScheme.onSecondary)),
                      ],
                   ),
                 ),
               ),
-          
+
               Padding(
                 padding: REdgeInsets.symmetric(horizontal: 14.w),
                 child: Row(
@@ -80,8 +84,8 @@ class DoctorProfileScreen extends StatelessWidget {
                 body: doctor.price,
                 decoration: TextDirection.ltr,
               ),
-          
-              SizedBox(height: 5.h,),
+
+              SizedBox(height: 15.h,),
               const BottomBar(),
             ],
           ),

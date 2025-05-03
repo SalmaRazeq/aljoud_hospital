@@ -55,7 +55,6 @@ class DialogUtils {
               }, child: Text(negActionTitle))//cancel button
           ],
         ));
-
-
   }
+
 }

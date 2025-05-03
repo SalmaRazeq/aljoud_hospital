@@ -1,4 +1,3 @@
-import 'package:aljoud_hospital/core/utils/routes_manager.dart';
 import 'package:aljoud_hospital/presntation/screens/doctor_profile/doctor_profile.dart';
 import 'package:aljoud_hospital/presntation/screens/hospital_visit/widgets/available_days_widget.dart';
 import 'package:aljoud_hospital/presntation/screens/hospital_visit/widgets/localization_extension.dart';
@@ -6,12 +5,10 @@ import 'package:aljoud_hospital/presntation/screens/hospital_visit/widgets/meeti
 import 'package:aljoud_hospital/presntation/screens/patient_details/patient_details.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../core/utils/color_manager.dart';
 import '../../../data/models/doctor_model.dart';
 import '../../../l10n/app_localizations.dart';
 import '../see_all/category_details/CategoryDetailsScreen.dart';
-import '../widgets/build_circleButton.dart';
 
 class HospitalVisitScreen extends StatefulWidget {
   final Doctor doctor;
@@ -65,9 +62,9 @@ class _HospitalVisitScreenState extends State<HospitalVisitScreen> {
     final dayAfterAfterTomorrow = today.add(const Duration(days: 3));
     final formattedDayAfterAfterTomorrow = _getFormattedDate(dayAfterAfterTomorrow);
 
-    return SafeArea(
-      child: Scaffold(
-        body: SingleChildScrollView(
+    return Scaffold(
+      body: SafeArea(
+        child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -128,14 +125,14 @@ class _HospitalVisitScreenState extends State<HospitalVisitScreen> {
                                 Icon(Icons.arrow_forward_ios, size: 12.sp, color: ColorsManager.blue2,)
                               ],
                             ),
-                            Text(widget.doctor.specialty, style: Theme.of(context).textTheme.labelSmall?.copyWith(fontWeight: FontWeight.w600)),
+                            Text(widget.doctor.specialty, style: Theme.of(context).textTheme.labelSmall?.copyWith(fontWeight: FontWeight.w600, color: Theme.of(context).colorScheme.onSecondary)),
                           ],
                         ),
                       ),
                       const Spacer(),
                       Row(
                         children: [
-                          Icon(Icons.attach_money_rounded, size: 18.sp),
+                          Icon(Icons.attach_money_rounded, size: 18.sp, color: Theme.of(context).colorScheme.primaryFixed,),
                           Text(widget.doctor.price, style: Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: 12)),
                         ],
                       )
@@ -207,10 +204,10 @@ class _HospitalVisitScreenState extends State<HospitalVisitScreen> {
                           spacing: 6,
                           children: visitSlots[selectedDay]![period]!.map((time) {
                             return ChoiceChip(
-                              backgroundColor: ColorsManager.beige,
+                              backgroundColor: ColorsManager.lightGray,
                               selectedColor: ColorsManager.fadedBlue3,
                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.r)),
-                              labelStyle: Theme.of(context).textTheme.titleMedium?.copyWith(fontSize: 12.sp, color: Theme.of(context).colorScheme.primaryFixed),
+                              labelStyle: Theme.of(context).textTheme.titleMedium?.copyWith(fontSize: 12.sp, color: ColorsManager.black),
                               label: Directionality(
                                   textDirection: TextDirection.ltr,
                                   child: Text(time)),
@@ -225,7 +222,7 @@ class _HospitalVisitScreenState extends State<HospitalVisitScreen> {
                 ),
               ),
 
-              SizedBox(height: 24.h),
+              SizedBox(height: 20.h),
               if (selectedTime != null)
                 Padding(
                   padding: REdgeInsets.only(bottom: 24.h),

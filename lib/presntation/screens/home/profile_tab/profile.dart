@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:aljoud_hospital/core/utils/color_manager.dart';
 import 'package:aljoud_hospital/core/utils/routes_manager.dart';
-import 'package:aljoud_hospital/presntation/screens/home/profile_tab/widget/circleButton.dart';
 import 'package:aljoud_hospital/presntation/screens/home/profile_tab/widget/profile_details.dart';
 import 'package:aljoud_hospital/presntation/screens/home/profile_tab/widget/profile_tabs.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -11,10 +10,13 @@ import 'package:flutter_inner_shadow/flutter_inner_shadow.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../data/models/doctor_model.dart';
 import '../../../../data/models/user_dm.dart';
 import '../../../../l10n/app_localizations.dart';
+import '../../../../providers/language_provider.dart';
+import '../../../../providers/theme_provider.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -81,6 +83,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   String? userName;
+  String userAge = '--';
+  String userHeight = '--';
+  String userWeight = '--';
 
   @override
   void initState() {
@@ -104,53 +109,60 @@ class _ProfileScreenState extends State<ProfileScreen> {
         if (userDM.fullName != null && userDM.fullName!.isNotEmpty) {
           userName = userDM.fullName;
         }
-      } else {
 
+        // تعيين القيم الافتراضية فقط إذا كانت null أو فارغة
+        setState(() {
+          userAge = userDM.age?.isNotEmpty ?? false ? userDM.age.toString() : '';
+          userHeight = userDM.height?.isNotEmpty ?? false ? userDM.height.toString() : '';
+          userWeight = userDM.weight?.isNotEmpty ?? false ? userDM.weight.toString() : '';
+        });
+      } else {
         DocumentSnapshot doctorDoc =
         await firestore.collection(DoctorModel.collectionName).doc(user.uid).get();
 
         if (doctorDoc.exists && doctorDoc.data() != null) {
           DoctorModel doctor =
-          DoctorModel.fromFirestore(doctorDoc); // تعديل هنا عشان يستخدم الـ factory
+          DoctorModel.fromFirestore(doctorDoc);
           if (doctor.doctorName != null && doctor.doctorName!.isNotEmpty) {
             userName = "Dr. ${doctor.doctorName}";
           }
         }
       }
-      setState(() {});
+      setState(() {}); // تحديث واجهة المستخدم بعد تحميل البيانات
     }
   }
+
+
 
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final loc = AppLocalizations.of(context)!;
+    var langProvider = Provider.of<LanguageProvider>(context);
+    var themeProvider = Provider.of<ThemeProvider>(context);
 
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: Colors.blue.shade700,
-        body: Column(
+    return Scaffold(
+      backgroundColor: themeProvider.isLightTheme() ? Colors.blue.shade700 : ColorsManager.blue,
+      body: SafeArea(
+        child: Column(
           children: [
             Expanded(
               flex: 3,
               child:
                 Padding(
-                  padding: REdgeInsets.symmetric(horizontal: 14.w, vertical: 25.h),
+                  padding: REdgeInsets.symmetric(horizontal: 14.w, vertical: 20.h),
                   child: Column(
                     children: [
-                      Row(
-                        children: [
-                          Text('Profile',
-                              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                  fontSize: 22.sp,
-                                  color: Theme.of(context).colorScheme.primary)),
-                          const Spacer(),
-                          ProfileCircleButton(
-                              icon: Icons.search_rounded,
-                              onTap: () {}),
-                        ],
+                      Align(
+                        alignment: langProvider.currentLanguage == 'ar'
+                            ? Alignment.topRight // المحاذاة لليمين إذا كانت اللغة عربية
+                            : Alignment.topLeft,                        child: Text(loc.profile,
+                            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                fontSize: 20.sp,
+                                color: Theme.of(context).colorScheme.primary)),
                       ),
-                      SizedBox(height: 5.h,),
+                      SizedBox(height: 10.h,),
+            
                       Stack(
                         alignment: Alignment.bottomRight,
                         children: [
@@ -184,13 +196,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
                         ],
                       ),
-                      SizedBox(height: 10.h,),
-
-                      Text('${userName ?? '...'}',)
+                      SizedBox(height: 9.h,),
+            
+                      Text(userName ?? '...', style: GoogleFonts.sourceSerif4(fontSize: 20.sp, color: ColorsManager.white, fontWeight: FontWeight.w500 ),)
                     ],
                   ),)
                 ),
-
+            
             Expanded(
               flex: 5,
               child: InnerShadow(
@@ -198,11 +210,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   Shadow(
                     color: Colors.black.withOpacity(0.1),
                     blurRadius: 10,
-                    offset: const Offset(0, -4), // سحب الشادو للأعلى
+                    offset: const Offset(0, -4),
                   ),
                 ],
                 child: Container(
-                  height: height * 0.53,
+                  height: height * 0.51,
                   width: double.infinity,
                   clipBehavior: Clip.hardEdge,
                   decoration: BoxDecoration(
@@ -214,34 +226,42 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         offset: Offset(0, 7),
                       ),
                     ],
-                    color: ColorsManager.white,
+                    color: themeProvider.isLightTheme() ? ColorsManager.white : ColorsManager.darkBlue,
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(50.r),
                       topRight: Radius.circular(50.r),
                     ),
                   ),
-                  padding: REdgeInsets.symmetric(vertical: 18.h, horizontal: 24.w),
+                  padding: REdgeInsets.symmetric(vertical: 16.h, horizontal: 24.w),
                   child: SingleChildScrollView(
                     child: Column(
-
+            
                       children: [
-                        ProfileDetailsWidget(),
+                        ProfileDetailsWidget(
+                          age: userAge,
+                          height: userHeight,
+                          weight: userWeight,
+                        ),
                         SizedBox(height: 40.h,),
                         ProfileTabs(
-                          onTap: (){},
-                          text: 'Edit profile', icon: Icons.edit_outlined,
+                          onTap: (){
+                            Navigator.pushNamed(context, RoutesManager.editProfile);
+                          },
+                          text: loc.editProfile, icon: Icons.edit_outlined,
                         ),
                         ProfileTabs(
                           onTap: (){},
-                          text: 'Change password', icon: Icons.lock_open_rounded,
+                          text: loc.changePassword, icon: Icons.lock_open_rounded,
                         ),
                         ProfileTabs(
-                          onTap: (){},
-                          text: 'Settings', icon: Icons.settings_outlined,
+                          onTap: (){
+                            Navigator.pushNamed(context, RoutesManager.settingScreen);
+                          },
+                          text: loc.settings, icon: Icons.settings_outlined,
                         ),
-
+            
                         SizedBox(height: 10.h,),
-
+            
                         InkWell(
                           onTap: () async {
                             try {
@@ -258,12 +278,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 child: const Icon(Icons.exit_to_app_outlined, color: Colors.red),
                               ),
                               SizedBox(width: 15.w,),
-                              Text('Log out',
-                                style: GoogleFonts.sourceSerif4(fontSize: 16.sp, color: Theme.of(context).colorScheme.onPrimary, fontWeight: FontWeight.w400 ),),
+                              Text(loc.logOut,
+                                style: GoogleFonts.sourceSerif4(fontSize: 17.sp, color: ColorsManager.blue, fontWeight: FontWeight.w600 ),),
                             ],
                           ),
                         )
-
+            
                       ],
                     ),
                   ),

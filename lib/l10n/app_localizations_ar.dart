@@ -129,10 +129,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get bookOnline => 'احجز استشارة الفيديو الخاصة بك عبر الإنترنت';
 
   @override
-  String get appointments => 'المواعيد';
+  String get aboutHospital => 'حول المستشفى';
 
   @override
-  String get bookAppointment => 'حجز موعد';
+  String get aboutHospitalText => 'اقرأ معلومات عن المستشفى';
 
   @override
   String get support => 'الدعم';
@@ -198,7 +198,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get myBooking => 'حجوزاتي';
 
   @override
-  String get liveChat => 'الدردشة المباشرة';
+  String get chatBot => 'روبوت الدردشة';
 
   @override
   String get profile => 'الحساب الشخصي';
@@ -243,7 +243,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get ok => 'حسناً';
 
   @override
-  String get slotsAvailable => 'المواعيد المتاحة';
+  String get slotsAvailable => 'مواعيد متاحة';
 
   @override
   String get slots => 'فترات';
@@ -261,13 +261,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get appointmentType => 'نوع الموعد';
 
   @override
-  String get appointment => 'l,u]';
-
-  @override
   String get hospitalVisitSchedule => 'جدولة زيارة المستشفى';
 
   @override
-  String get continueText => 'استمرار';
+  String get continueText => 'الاستمرار';
 
   @override
   String get online => 'أونلاين';
@@ -312,7 +309,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get paymentMethods => 'طرق الدفع';
 
   @override
-  String get totalAmount => 'المبلغ الإجمالي';
+  String get totalAmount => 'السعر الإجمالي';
 
   @override
   String get cash => 'نقدًا';
@@ -466,4 +463,70 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get rating => 'التقييم';
+
+  @override
+  String get name => 'الأسم';
+
+  @override
+  String get age => 'السن';
+
+  @override
+  String get cm => '(سم)';
+
+  @override
+  String get kg => '(كيلو)';
+
+  @override
+  String get save => 'حفظ';
+
+  @override
+  String get editProfile => 'تعديل الملف الشخصي';
+
+  @override
+  String get notification => 'الإشعارات';
+
+  @override
+  String get darkMode => 'الوضع المظلم';
+
+  @override
+  String get language => 'اللغة';
+
+  @override
+  String get security => 'الأمان';
+
+  @override
+  String get help => 'المساعدة';
+
+  @override
+  String get settings => 'الإعدادات';
+
+  @override
+  String get changePassword => 'تغيير كلمة المرور';
+
+  @override
+  String get logOut => 'تسجيل الخروج';
+
+  @override
+  String get appointment => 'تم تأكيد';
+
+  @override
+  String get confirmed => 'الميعاد!';
+
+  @override
+  String get hospitalName => 'اسم المستشفى: الجود';
+
+  @override
+  String get paid => 'تم الدفع:';
+
+  @override
+  String get bookingText => 'تم حجز موعدك بنجاح. يرجى الحضور قبل الموعد بـ10 دقائق.';
+
+  @override
+  String get viewMyBooking => 'عرض حجوزاتي';
+
+  @override
+  String get backHome => 'العودة إلى الصفحة الرئيسية';
+
+  @override
+  String get appointments => 'المواعيد';
 }

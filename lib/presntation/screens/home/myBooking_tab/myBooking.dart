@@ -3,8 +3,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import '../../../../data/models/booking_model.dart';
 import '../../../../l10n/app_localizations.dart';
+import '../../../../providers/theme_provider.dart';
 
 
 class MyBookingScreen extends StatefulWidget {
@@ -20,7 +22,6 @@ class _MyBookingScreenState extends State<MyBookingScreen> with SingleTickerProv
 
   late List<String> tabs;
 
-
   @override
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
@@ -29,7 +30,6 @@ class _MyBookingScreenState extends State<MyBookingScreen> with SingleTickerProv
     tabs = [loc.upComing, loc.completed, loc.canceled];
     _tabController = TabController(length: tabs.length, vsync: this);
     _bookingsFuture = getBookings();
-
   }
 
   @override
@@ -72,6 +72,7 @@ class _MyBookingScreenState extends State<MyBookingScreen> with SingleTickerProv
     required BookingModel booking,
     required String headerTitle,
   }) {
+    var themeProvider = Provider.of<ThemeProvider>(context);
     return Container(
         margin: REdgeInsets.symmetric(vertical: 10.h),
         decoration: BoxDecoration(
@@ -82,7 +83,7 @@ class _MyBookingScreenState extends State<MyBookingScreen> with SingleTickerProv
           children: [
             Container(
               decoration: BoxDecoration(
-                color: ColorsManager.lightBlue, ///change for dark mood
+                color: themeProvider.isLightTheme() ? ColorsManager.lightBlue : ColorsManager.lightBlue2, ///change for dark mood
                 borderRadius: BorderRadius.vertical(top: Radius.circular(12.r)),
               ),
               padding: REdgeInsets.symmetric(horizontal: 16.w, vertical: 5.h),
@@ -104,9 +105,9 @@ class _MyBookingScreenState extends State<MyBookingScreen> with SingleTickerProv
                       SizedBox(height: 2.h),
 
                       Directionality(
-                        textDirection: TextDirection.ltr,
+                        textDirection: TextDirection.rtl,
                         child: Text(
-                          "${booking.appointmentDate} - ${booking.appointmentTime}",
+                          "${booking.appointmentDate} -  ${booking.appointmentTime}",
                           style: Theme.of(context).textTheme.labelSmall?.copyWith(
                             fontWeight: FontWeight.w600,
                             fontSize: 10.sp,
@@ -131,7 +132,7 @@ class _MyBookingScreenState extends State<MyBookingScreen> with SingleTickerProv
                         textDirection: TextDirection.ltr,
                         child: Text(
                           "${booking.price}",
-                          style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 10.sp)
+                          style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 10.sp, color: ColorsManager.black)
                         ),
                       ),
                     ],
@@ -156,7 +157,7 @@ class _MyBookingScreenState extends State<MyBookingScreen> with SingleTickerProv
                     children: [
                       Text(
                         '${booking.doctorName}',
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: 14.sp)
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: 14.sp, color: ColorsManager.black)
                       ),
                       Text(
                         "${booking.doctorSpecialty}",
@@ -186,15 +187,15 @@ class _MyBookingScreenState extends State<MyBookingScreen> with SingleTickerProv
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
+    var themeProvider = Provider.of<ThemeProvider>(context);
 
     return Scaffold(
-      backgroundColor: ColorsManager.lightGray.withOpacity(0.9),
+      backgroundColor: themeProvider.isLightTheme() ? ColorsManager.lightGray.withOpacity(0.9) : ColorsManager.darkBlue,
       body: SafeArea(
         child: Padding(
           padding: REdgeInsets.only(top: 26.h, left: 18.w, right: 18.w),
           child: Column(
             children: [
-
               Text(
                 loc.myBooking,
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: 24.sp)

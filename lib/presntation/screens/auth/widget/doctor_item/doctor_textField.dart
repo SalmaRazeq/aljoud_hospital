@@ -20,7 +20,8 @@ class DoctorTextField extends StatelessWidget {
       autofocus: true,
       validator: validator,
       keyboardType: keyBoardType,
-      controller: controller, style: TextStyle(fontSize: 14.sp, ),
+      controller: controller,
+      style: GoogleFonts.inter(fontSize: 15.sp, color: ColorsManager.black),
       decoration: InputDecoration(
         isDense: true,
         hintText: hintText,

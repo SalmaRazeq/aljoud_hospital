@@ -2,6 +2,9 @@ import 'package:aljoud_hospital/core/utils/color_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+
+import '../../../../providers/theme_provider.dart';
 
 typedef Validator = String? Function(String?);
 
@@ -16,17 +19,20 @@ class TextFieldDesign extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var themeProvider = Provider.of<ThemeProvider>(context);
+
     return TextFormField(
       autofocus: true,
       validator: validator,
       keyboardType: keyBoardType,
-      controller: controller, style: TextStyle(fontSize: 14.sp, ),
+      controller: controller,
+      style: GoogleFonts.inter(fontSize: 15.sp, color: ColorsManager.black),
       decoration: InputDecoration(
         isDense: true,
         hintText: hintText,
         hintStyle: GoogleFonts.roboto(fontSize: 12.sp,color: Theme.of(context).colorScheme.shadow),
         filled: true,
-        fillColor: ColorsManager.textField,
+        fillColor: themeProvider.isLightTheme() ? ColorsManager.textField : ColorsManager.lightGray,
         errorStyle: GoogleFonts.roboto(fontSize: 9.sp,fontWeight: FontWeight.w400),
         contentPadding: REdgeInsets.symmetric(vertical: 11, horizontal: 12),
         constraints: BoxConstraints(
