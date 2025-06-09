@@ -137,8 +137,9 @@ class _SettingScreenState extends State<SettingScreen> {
                             ? SizedBox(
                           height: 20.h,
                           width: 20.w,
-                          child: CircularProgressIndicator(strokeWidth: 2),
-                        )
+                                child: const CircularProgressIndicator(
+                                    strokeWidth: 2),
+                              )
                             : Switch(
                           value: isDarkMode,
                           onChanged: toggleDarkMode,
@@ -156,7 +157,10 @@ class _SettingScreenState extends State<SettingScreen> {
                           children: [
                             Text(
                               selectedLanguage == 'ar' ? 'العربية' : 'English',
-                              style: Theme.of(context).textTheme.titleMedium,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleMedium
+                                  ?.copyWith(color: ColorsManager.darkGray),
                             ),
                             SizedBox(width: 8.w),
                             Icon(

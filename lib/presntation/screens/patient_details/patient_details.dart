@@ -14,7 +14,7 @@ import 'package:provider/provider.dart';
 import '../../../core/utils/constant_manager.dart';
 import '../../../core/utils/dialog_utils/dialog_utils.dart';
 import '../../../data/models/booking_model.dart';
-import '../../../data/models/doctor_model.dart';
+import '../../../data/models/doctor/doctor_model.dart';
 import '../../../data/models/patient_model.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../providers/theme_provider.dart';

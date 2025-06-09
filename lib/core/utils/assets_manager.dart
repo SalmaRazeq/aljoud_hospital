@@ -36,7 +36,6 @@ class AssetsManager{
   static const String visaIcon = '${base}visa_icon.png';
   static const String circleIcon = '${base}plus-circle_icon.png';
   static const String hospital = '${base}hospital.png';
-
-
-
+  static const String girlVideo = '${base}girl_video.jpg';
+  static const String manVideo = '${base}man_video.jpg';
 }

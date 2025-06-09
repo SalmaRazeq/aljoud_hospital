@@ -1,6 +1,7 @@
 import 'package:aljoud_hospital/core/utils/assets_manager.dart';
 import 'package:aljoud_hospital/core/utils/routes_manager.dart';
 import 'package:aljoud_hospital/presntation/screens/home/categories_item/categories_item.dart';
+import 'package:aljoud_hospital/presntation/screens/home/home_tab/home_appBar/home_appBar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -8,7 +9,6 @@ import 'package:provider/provider.dart';
 import '../../../../core/utils/color_manager.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../../providers/theme_provider.dart';
-import 'appBar/home_appBar.dart';
 
 class HomeScreen extends StatelessWidget {
    HomeScreen({super.key});
@@ -175,8 +175,10 @@ class HomeScreen extends StatelessWidget {
                         icon: Icons.video_camera_front_outlined,
                         title: AppLocalizations.of(context)!.onlineConsultation,
                         description: AppLocalizations.of(context)!.bookOnline,
-                        onTap: (){}
-                      ),
+                      onTap: () {
+                        Navigator.pushNamed(
+                            context, RoutesManager.onlineConsultation);
+                      }),
                       _buildBoxWidget(
                           icon: Icons.local_hospital,
                           title: AppLocalizations.of(context)!.aboutHospital,
@@ -189,8 +191,9 @@ class HomeScreen extends StatelessWidget {
                         icon: Icons.support_agent,
                         title: AppLocalizations.of(context)!.support,
                         description: AppLocalizations.of(context)!.providingSupport,
-                        onTap: (){}
-                      ),
+                      onTap: () {
+                        Navigator.pushNamed(context, RoutesManager.support);
+                      }),
                       _buildBoxWidget(
                         icon: Icons.assignment,
                         title: AppLocalizations.of(context)!.medicalRecords,

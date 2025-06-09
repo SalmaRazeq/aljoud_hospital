@@ -76,7 +76,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   fontWeight: FontWeight.w600
                               ),),),
                         ),
-                        SizedBox(width: 45.w,),
+                        SizedBox(
+                          width: 30.w,
+                        ),
                       ],
                     ),
                     SizedBox(height: 8.h,),
@@ -177,7 +179,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             return loc.password6Char;
                           }
                           return null;
-                        }),
+                      },
+                    ),
                     SizedBox(
                       height: 9.h,
                     ),
@@ -200,8 +203,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             return loc.notMatch;
                           }
                           return null;
-                        }),
-
+                      },
+                      onSubmit: signUp,
+                    ),
                     SizedBox(height: 35.h,),
 
                     ElevatedButton(

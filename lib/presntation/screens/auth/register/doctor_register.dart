@@ -1,6 +1,6 @@
 import 'package:aljoud_hospital/core/utils/constant_manager.dart';
 import 'package:aljoud_hospital/core/utils/dialog_utils/dialog_utils.dart';
-import 'package:aljoud_hospital/data/models/doctor_model.dart';
+import 'package:aljoud_hospital/data/models/doctor/doctor_model.dart';
 import 'package:aljoud_hospital/presntation/screens/auth/widget/bottom_section.dart';
 import 'package:aljoud_hospital/presntation/screens/auth/widget/toggleButton.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -69,7 +69,9 @@ class _DoctorRegisterScreenState extends State<DoctorRegisterScreen> {
                                   fontWeight: FontWeight.w600
                               ),),),
                         ),
-                        SizedBox(width: 45.w,),
+                        SizedBox(
+                          width: 30.w,
+                        ),
                       ],
                     ),
                     SizedBox(height: 8.h,),

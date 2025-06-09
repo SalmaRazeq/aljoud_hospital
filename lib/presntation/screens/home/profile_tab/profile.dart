@@ -12,7 +12,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../data/models/doctor_model.dart';
+import '../../../../data/models/doctor/doctor_model.dart';
 import '../../../../data/models/user_dm.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../../providers/language_provider.dart';
@@ -52,9 +52,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.r)),
           title: Text('Edit Profile Picture',
-              style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 16.sp)),
+              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                  fontSize: 16.sp,
+                  color: Theme.of(context).colorScheme.primaryFixed)),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -250,7 +253,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           text: loc.editProfile, icon: Icons.edit_outlined,
                         ),
                         ProfileTabs(
-                          onTap: (){},
+                          onTap: () {
+                            Navigator.pushNamed(
+                                context, RoutesManager.forgetPassword);
+                          },
                           text: loc.changePassword, icon: Icons.lock_open_rounded,
                         ),
                         ProfileTabs(

@@ -544,4 +544,101 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get iAgreeToTheTermsConditions => 'I Agree To The Terms & Conditions';
+
+  @override
+  String get enterEmailToReset =>
+      'Enter your email address to reset your password.';
+
+  @override
+  String get sendResetLink => 'Send reset link';
+
+  @override
+  String get hint_type_message => 'Type a message...';
+
+  @override
+  String get bot_greeting => 'Hello! How can I help you today?';
+
+  @override
+  String get bot_feeling => 'I\'m doing great! How about you?';
+
+  @override
+  String get bot_glad_response =>
+      'That\'s great to hear! How can I assist you today?';
+
+  @override
+  String get bot_booking_prompt =>
+      'Of course! We have excellent doctors. Which specialty would you like to book? You can choose from:\n1. Internal Medicine\n2. Pediatrics\n3. Orthopedics\n4. Dentistry\n5. Pulmonology\n6. Cardiology\n7. Physical Therapy\n8. OB-GYN';
+
+  @override
+  String get bot_unknown =>
+      'Sorry, I didn\'t understand that. Could you please rephrase?';
+
+  @override
+  String bot_chosen_specialty(Object specialty) {
+    return 'You chose $specialty. Click below to continue.';
+  }
+
+  @override
+  String get button_view_doctors => 'View Doctors';
+
+  @override
+  String get hi => 'hi';
+
+  @override
+  String get helloo => 'hello';
+
+  @override
+  String get howAreU => 'how are you';
+
+  @override
+  String get iAmGood => 'i am good';
+
+  @override
+  String get doingGreat => 'doing great';
+
+  @override
+  String get fine => 'fine';
+
+  @override
+  String get wantToBookAppoi => 'i want to book an appointment';
+
+  @override
+  String get wantToBook => 'i want to book';
+
+  @override
+  String get ourHospitalDescription =>
+      'Our hospital has been dedicated to providing high-quality, compassionate care since its founding in 2016. We are committed to improving the health of our community by offering a wide range of medical services and state-of-the-art facilities.';
+
+  @override
+  String get ourVision => 'Our Vision';
+
+  @override
+  String get visionText => 'To be a leading healthcare provider';
+
+  @override
+  String get ourMission => 'Our Mission';
+
+  @override
+  String get missionText => 'Delivering exceptional patient care';
+
+  @override
+  String get ourValues => 'Our Values';
+
+  @override
+  String get valuesText => 'Compassion, quality, safety';
+
+  @override
+  String get supportSystem => 'Support System';
+
+  @override
+  String get faqs => 'FAQs';
+
+  @override
+  String get contactSupport => 'Contact support';
+
+  @override
+  String get trackTicketStatus => 'Track Ticket Status';
+
+  @override
+  String get systemGuide => 'System Guide';
 }

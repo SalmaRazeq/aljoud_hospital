@@ -1,7 +1,5 @@
 import 'dart:math';
-
 import 'package:aljoud_hospital/core/utils/color_manager.dart';
-import 'package:aljoud_hospital/core/utils/routes_manager.dart';
 import 'package:aljoud_hospital/data/models/user_dm.dart';
 import 'package:aljoud_hospital/presntation/screens/auth/forget_password/widgets/elevated_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -10,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../../core/utils/dialog_utils/dialog_utils.dart';
+import '../../../../core/utils/email_validation.dart';
 import '../../../../l10n/app_localizations.dart';
 
 class ForgetPasswordScreen extends StatefulWidget {
@@ -40,14 +39,14 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                     children: [
                       IconButton(
                         onPressed: () {
-                          Navigator.pushReplacementNamed(context, RoutesManager.login);
+                          Navigator.pop(context);
                         },
                         icon: Icon(Icons.arrow_back_rounded, size: 24.sp, color: Theme.of(context).colorScheme.primaryFixed),
                       ),
                       Expanded(
                         child: Center(
                           child: Text(
-                            'Forget password',
+                            loc.changePassword,
                             style: GoogleFonts.sourceSans3(
                               fontSize: 24,
                               color: Theme.of(context).colorScheme.primaryFixed,
@@ -68,8 +67,11 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
                             Text(
-                              'Enter your email address to reset your password.',
-                              style: Theme.of(context).textTheme.titleMedium,
+                              loc.enterEmailToReset,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleMedium
+                                  ?.copyWith(fontSize: 16.sp),
                               textAlign: TextAlign.center,
                             ),
                             SizedBox(height: 40.h),
@@ -102,18 +104,21 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                                 controller: emailController,
                                 keyboardType: TextInputType.emailAddress,
                                 style: TextStyle(fontSize: 14.sp, color: ColorsManager.black),
-                                validator: (value) {
-                                  if (value == null || value.trim().isEmpty) {
-                                    return 'Please enter your email';
+                                validator: (input) {
+                                  if (input == null || input.trim().isEmpty) {
+                                    return loc.plzEmail;
                                   }
-                                  if (!value.contains('@')) {
-                                    return 'Enter a valid email address';
+                                  if (!isEmailValid(input)) {
+                                    return loc.wrongFormat;
                                   }
                                   return null;
                                 },
+                                onFieldSubmitted: (_) =>
+                                    _resetPasswordWithEmail(context),
+                                // ← هنا الإضافة
                                 decoration: InputDecoration(
                                   isDense: true,
-                                  hintText: 'Email address',
+                                  hintText: loc.emailAddress,
                                   hintStyle: GoogleFonts.roboto(
                                     fontSize: 13.sp,
                                     color: ColorsManager.hint,
@@ -143,7 +148,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                             ),
                             SizedBox(height: 14.h),
                             ElevatedButtonDesign(
-                              text: 'Send reset link',
+                              text: loc.sendResetLink,
                               onTap: () {
                                 _resetPasswordWithEmail(context);
                               },

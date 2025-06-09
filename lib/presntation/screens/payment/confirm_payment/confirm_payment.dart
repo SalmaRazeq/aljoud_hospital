@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/utils/routes_manager.dart';
-import '../../../../data/models/doctor_model.dart';
+import '../../../../data/models/doctor/doctor_model.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../../providers/theme_provider.dart';
 

@@ -1,6 +1,6 @@
 import 'package:aljoud_hospital/core/utils/assets_manager.dart';
 import 'package:aljoud_hospital/core/utils/color_manager.dart';
-import 'package:aljoud_hospital/data/models/doctor_model.dart';
+import 'package:aljoud_hospital/data/models/doctor/doctor_model.dart';
 import 'package:aljoud_hospital/presntation/screens/payment/confirm_payment/confirm_payment.dart';
 import 'package:aljoud_hospital/presntation/screens/payment/widget/buildContainers.dart';
 import 'package:aljoud_hospital/presntation/screens/widgets/build_circleButton.dart';

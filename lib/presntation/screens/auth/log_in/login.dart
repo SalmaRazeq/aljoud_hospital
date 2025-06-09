@@ -79,21 +79,19 @@ class _LoginScreenState extends State<LoginScreen> {
                       SizedBox(height: 15.h,),
 
                       PasswordFieldDesign(
-                          hintText: AppLocalizations.of(context)!.password,
-                          controller: passwordController,
-                          validator: (input) {
-                            if (input == null || input
-                                .trim()
-                                .isEmpty) {
-                              return AppLocalizations.of(context)!.plzPassword;
+                        hintText: AppLocalizations.of(context)!.password,
+                        controller: passwordController,
+                        validator: (input) {
+                          if (input == null || input.trim().isEmpty) {
+                            return AppLocalizations.of(context)!.plzPassword;
                             }
                             if (input.length < 6) {
-                              return AppLocalizations.of(context)!
-                                  .password6Char;
-                            }
+                            return AppLocalizations.of(context)!.password6Char;
+                          }
                             return null;
-                          }),
-
+                        },
+                        onSubmit: signIn,
+                      ),
                       Align(
                         alignment: Alignment.centerRight,
                         child: TextButton(

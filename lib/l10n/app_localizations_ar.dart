@@ -544,4 +544,99 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get iAgreeToTheTermsConditions => 'أوافق على الشروط والأحكام';
+
+  @override
+  String get enterEmailToReset =>
+      'أدخل بريدك الإلكتروني لإعادة تعيين كلمة المرور.';
+
+  @override
+  String get sendResetLink => 'إرسال رابط إعادة التعيين';
+
+  @override
+  String get hint_type_message => 'اكتب رسالة...';
+
+  @override
+  String get bot_greeting => 'مرحبًا! كيف يمكنني مساعدتك اليوم؟';
+
+  @override
+  String get bot_feeling => 'أنا بخير! ماذا عنك؟';
+
+  @override
+  String get bot_glad_response => 'سعيد لسماع ذلك! كيف يمكنني مساعدتك اليوم؟';
+
+  @override
+  String get bot_booking_prompt =>
+      'بالتأكيد! لدينا أطباء ممتازون. ما التخصص الذي ترغب في الحجز فيه؟ يمكنك الاختيار من:\n1. الباطنية\n2. الأطفال\n3. العظام\n4. الأسنان\n5. الصدرية\n6. القلب\n7. العلاج الطبيعي\n8. النساء والتوليد';
+
+  @override
+  String get bot_unknown => 'عذرًا، لم أفهم ذلك. هل يمكنك إعادة الصياغة؟';
+
+  @override
+  String bot_chosen_specialty(Object specialty) {
+    return 'لقد اخترت $specialty. اضغط أدناه للمتابعة.';
+  }
+
+  @override
+  String get button_view_doctors => 'عرض الأطباء';
+
+  @override
+  String get hi => 'هاي';
+
+  @override
+  String get helloo => 'مرحبا';
+
+  @override
+  String get howAreU => 'كيف حالك';
+
+  @override
+  String get iAmGood => 'جيد';
+
+  @override
+  String get doingGreat => 'بخير الحمدلله';
+
+  @override
+  String get fine => 'كويس';
+
+  @override
+  String get wantToBookAppoi => 'اريد ان احجز معاد';
+
+  @override
+  String get wantToBook => 'اريد ان احجز';
+
+  @override
+  String get ourHospitalDescription =>
+      'كرّس مستشفانا نفسه لتقديم رعاية عالية الجودة ومبنية على الرحمة منذ تأسيسه في عام 2016. نحن ملتزمون بتحسين صحة مجتمعنا من خلال تقديم مجموعة واسعة من الخدمات الطبية والمرافق المتطورة.';
+
+  @override
+  String get ourVision => 'رؤيتنا';
+
+  @override
+  String get visionText => 'أن نكون مزود رعاية صحية رائد';
+
+  @override
+  String get ourMission => 'مهمتنا';
+
+  @override
+  String get missionText => 'تقديم رعاية متميزة للمرضى';
+
+  @override
+  String get ourValues => 'قيمنا';
+
+  @override
+  String get valuesText => 'الرحمة، الجودة، الأمان';
+
+  @override
+  String get supportSystem => 'نظام الدعم';
+
+  @override
+  String get faqs => 'الأسئلة الشائعة';
+
+  @override
+  String get contactSupport => 'تواصل مع الدعم';
+
+  @override
+  String get trackTicketStatus => 'تتبع حالة التذكرة';
+
+  @override
+  String get systemGuide => 'دليل النظام';
 }

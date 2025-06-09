@@ -47,7 +47,7 @@ class _MyAppState extends State<MyApp> {
         darkTheme: AppTheme.darkTheme,
         themeMode: themeProvider.currentTheme,
         onGenerateRoute: RoutesManager.router,
-        initialRoute: RoutesManager.login,
+        initialRoute: RoutesManager.home,
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: const [Locale("ar"), Locale("en")],
         locale: langProvider.locale,

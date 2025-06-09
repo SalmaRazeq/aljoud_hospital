@@ -19,8 +19,8 @@ class AboutHospitalScreen extends StatelessWidget {
             child: Padding(
               padding: REdgeInsets.only(top: 10.h, bottom: 30.h, left: 16.w, right: 16.w),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
                   Row(
                     children: [
                       IconButton(
@@ -32,34 +32,38 @@ class AboutHospitalScreen extends StatelessWidget {
                             color: Theme.of(context).colorScheme.primaryFixed,
                             size: 22.sp,
                           )),
-                      Text(
+                  Expanded(
+                    child: Center(
+                      child: Text(
                         loc.aboutHospital,
                         style: GoogleFonts.inter(
-                        fontSize: 22.sp,
-                        fontWeight: FontWeight.w600,
-                        color: Theme.of(context).colorScheme.primaryFixed,
+                          fontSize: 22.sp,
+                          fontWeight: FontWeight.w700,
+                          color: Theme.of(context).colorScheme.primaryFixed,
+                        ),
                       ),
-                      ),
-                    ],
+                    ),
                   ),
-                  SizedBox(height: 10.h),
-                  ClipRRect(
+                  SizedBox(
+                    width: 35.w,
+                  )
+                ],
+                  ),
+              SizedBox(height: 6.h),
+              ClipRRect(
                     borderRadius: BorderRadius.circular(40),
                     child: Image.asset(
                       AssetsManager.hospital,
                       fit: BoxFit.cover,
                     ),
                   ),
-                  SizedBox(height: 16.h),
-                  Text(
-                    'Our hospital has been dedicated to providing high -quality, compassionate '
-                        'care since its founding in 2016. we are committed to '
-                        'improving the health of our community by offering a wide range of medical '
-                        'services and state of the art facilities.',
-                    style: GoogleFonts.inter(
+              SizedBox(height: 25.h),
+              Text(
+                loc.ourHospitalDescription,
+                style: GoogleFonts.inter(
                       fontWeight: FontWeight.w600,
-                      fontSize: 16.sp,
-                      color: Theme.of(context).colorScheme.shadow,
+                  fontSize: 12.sp,
+                  color: Theme.of(context).colorScheme.shadow,
                     ),
                   ),
                   SizedBox(height: 24.h),
@@ -79,10 +83,10 @@ class AboutHospitalScreen extends StatelessWidget {
                                 ),
                                 SizedBox(width: 6.w),
                                 Text(
-                                  'Our Vision',
-                                  style: GoogleFonts.inter(
-                                    fontSize: 18.sp,
-                                    fontWeight: FontWeight.w600,
+                              loc.ourVision,
+                              style: GoogleFonts.inter(
+                                fontSize: 16.sp,
+                                fontWeight: FontWeight.w600,
                                     color: Theme.of(context).colorScheme.primaryFixed,
                                   ),
                                 ),
@@ -90,11 +94,11 @@ class AboutHospitalScreen extends StatelessWidget {
                             ),
                             SizedBox(height: 4.h),
                             Text(
-                              'To be a leading healthcare provider',
-                              style: GoogleFonts.inter(
-                                fontSize: 13.sp,
-                                fontWeight: FontWeight.w600,
-                                color: Theme.of(context).colorScheme.onSecondary,
+                          loc.visionText,
+                          style: GoogleFonts.inter(
+                            fontSize: 11.5.sp,
+                            fontWeight: FontWeight.w500,
+                            color: Theme.of(context).colorScheme.onSecondary,
                               ),
                             ),
                           ],
@@ -116,10 +120,10 @@ class AboutHospitalScreen extends StatelessWidget {
                                 ),
                                 SizedBox(width: 6.w),
                                 Text(
-                                  'Our Mission',
-                                  style: GoogleFonts.inter(
-                                    fontSize: 18.sp,
-                                    fontWeight: FontWeight.w600,
+                              loc.ourMission,
+                              style: GoogleFonts.inter(
+                                fontSize: 16.sp,
+                                fontWeight: FontWeight.w600,
                                     color: Theme.of(context).colorScheme.primaryFixed,
                                   ),
                                 ),
@@ -127,11 +131,11 @@ class AboutHospitalScreen extends StatelessWidget {
                             ),
                             SizedBox(height: 4.h),
                             Text(
-                              'Delivering exceptional patient care',
-                              style: GoogleFonts.inter(
-                                fontSize: 13.sp,
-                                fontWeight: FontWeight.w600,
-                                color: Theme.of(context).colorScheme.onSecondary,
+                          loc.missionText,
+                          style: GoogleFonts.inter(
+                            fontSize: 11.5.sp,
+                            fontWeight: FontWeight.w500,
+                            color: Theme.of(context).colorScheme.onSecondary,
                               ),
                             ),
                           ],
@@ -141,8 +145,9 @@ class AboutHospitalScreen extends StatelessWidget {
                   ),
 
                   SizedBox(height: 24.h),
-
-
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
                   Row(
                     children: [
                       Icon(
@@ -152,9 +157,9 @@ class AboutHospitalScreen extends StatelessWidget {
                       ),
                       SizedBox(width: 6.w),
                       Text(
-                        'Our Values',
+                        loc.ourValues,
                         style: GoogleFonts.inter(
-                          fontSize: 18.sp,
+                          fontSize: 16.sp,
                           fontWeight: FontWeight.w600,
                           color: Theme.of(context).colorScheme.primaryFixed,
                         ),
@@ -163,14 +168,16 @@ class AboutHospitalScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 4.h),
                   Text(
-                    'Compassion, quality, safety',
+                    loc.valuesText,
                     style: GoogleFonts.inter(
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w600,
+                      fontSize: 12.sp,
+                      fontWeight: FontWeight.w500,
                       color: Theme.of(context).colorScheme.onSecondary,
                     ),
                   ),
                 ],
+              ),
+            ],
               ),
             ),
           ),
