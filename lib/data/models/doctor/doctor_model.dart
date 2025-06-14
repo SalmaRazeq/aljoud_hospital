@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 
 class DoctorModel {
   static const String collectionName = "Doctors";
@@ -59,5 +58,15 @@ class DoctorModel {
     );
   }
 
-
+  DoctorModel.fromJson(dynamic json) {
+    //page = json['page'];
+    // totalPages = json['total_pages'];
+    // totalResults = json['total_results'];
+    if (json['results'] != null) {
+      // results = [];
+      json['results'].forEach((v) {
+        // results?.add(Results.fromJson(v));
+      });
+    }
+  }
 }

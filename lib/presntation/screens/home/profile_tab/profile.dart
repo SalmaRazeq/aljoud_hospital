@@ -12,7 +12,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../data/models/doctor_model.dart';
+import '../../../../data/models/doctor/doctor_model.dart';
 import '../../../../data/models/user_dm.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../../providers/language_provider.dart';
@@ -48,20 +48,25 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Future<void> _showImageOptions() async {
+    final loc = AppLocalizations.of(context)!;
+
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.r)),
-          title: Text('Edit Profile Picture',
-              style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 16.sp)),
+          title: Text(loc.editProfilePicture,
+              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                  fontSize: 16.sp,
+                  color: Theme.of(context).colorScheme.primaryFixed)),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               if (_imageFile != null)
                 ListTile(
                   leading: const Icon(Icons.delete, color: Colors.red),
-                  title: Text('Remove Image'),
+                  title: Text(loc.removeImage),
                   onTap: () {
                     Navigator.pop(context);
                     _removeImage();
@@ -69,7 +74,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ListTile(
                 leading: const Icon(Icons.photo, color: Colors.blue),
-                title: Text('Pick from Gallery'),
+                title: Text(loc.pickFromGallery),
                 onTap: () {
                   Navigator.pop(context);
                   _pickImage();
@@ -158,8 +163,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             ? Alignment.topRight // المحاذاة لليمين إذا كانت اللغة عربية
                             : Alignment.topLeft,                        child: Text(loc.profile,
                             style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                fontSize: 20.sp,
-                                color: Theme.of(context).colorScheme.primary)),
+                                    fontSize: 18.sp,
+                                    color: Theme.of(context).colorScheme.primary)),
                       ),
                       SizedBox(height: 10.h,),
             
@@ -250,7 +255,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           text: loc.editProfile, icon: Icons.edit_outlined,
                         ),
                         ProfileTabs(
-                          onTap: (){},
+                          onTap: () {
+                            Navigator.pushNamed(
+                                context, RoutesManager.forgetPassword);
+                          },
                           text: loc.changePassword, icon: Icons.lock_open_rounded,
                         ),
                         ProfileTabs(
@@ -279,7 +287,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ),
                               SizedBox(width: 15.w,),
                               Text(loc.logOut,
-                                style: GoogleFonts.sourceSerif4(fontSize: 17.sp, color: ColorsManager.blue, fontWeight: FontWeight.w600 ),),
+                                style: GoogleFonts.sourceSerif4(
+                                    fontSize: 16.sp,
+                                    color: ColorsManager.blue,
+                                    fontWeight: FontWeight.w600),
+                              ),
                             ],
                           ),
                         )

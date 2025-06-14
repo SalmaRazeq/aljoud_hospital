@@ -69,13 +69,13 @@ class DoctorCard extends StatelessWidget {
                     Row(
                       children: [
                         Icon(Icons.star, color: Colors.amber, size: 18.sp),
-                        SizedBox(width: 5.w),
+                        SizedBox(width: 3.w),
                         Text("${doctor.rating}", style: Theme.of(context).textTheme.labelSmall,),
                       ],
                     ),
                     Text(Localizations.localeOf(context).languageCode == 'ar'
-                        ? "${AppLocalizations.of(context)!.yearsOfExperience} ${doctor.experience}"
-                        : "${doctor.experience} ${AppLocalizations.of(context)!.yearsOfExperience}",
+                          ? "${AppLocalizations.of(context)!.yearsOfExperience}  ${doctor.experience} "
+                          : "${doctor.experience} ${AppLocalizations.of(context)!.yearsOfExperience}",
 
                       style: Theme.of(context).textTheme.labelSmall,
                     ),

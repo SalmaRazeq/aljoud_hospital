@@ -1,9 +1,14 @@
+import 'package:aljoud_hospital/presntation/notification/notification.dart';
 import 'package:aljoud_hospital/presntation/screens/auth/create_new_password/create_new_password.dart';
 import 'package:aljoud_hospital/presntation/screens/auth/forget_password/forget_password.dart';
 import 'package:aljoud_hospital/presntation/screens/auth/log_in/login.dart';
 import 'package:aljoud_hospital/presntation/screens/auth/register/doctor_register.dart';
 import 'package:aljoud_hospital/presntation/screens/auth/register/register.dart';
 import 'package:aljoud_hospital/presntation/screens/doctor_profile/doctor_profile.dart';
+import 'package:aljoud_hospital/presntation/screens/home/home_tab/about_hospital/about_hospital.dart';
+import 'package:aljoud_hospital/presntation/screens/home/home_tab/medical_record/medical_record.dart';
+import 'package:aljoud_hospital/presntation/screens/home/home_tab/online_consultation/online_consultation.dart';
+import 'package:aljoud_hospital/presntation/screens/home/home_tab/support/support.dart';
 import 'package:aljoud_hospital/presntation/screens/home/profile_tab/edit_profile/edit_profile.dart';
 import 'package:aljoud_hospital/presntation/screens/home/profile_tab/profile.dart';
 import 'package:aljoud_hospital/presntation/screens/home/profile_tab/settings/settings.dart';
@@ -16,7 +21,7 @@ import 'package:aljoud_hospital/presntation/screens/see_all/category_details/Cat
 import 'package:aljoud_hospital/presntation/screens/see_all/see_all.dart';
 import 'package:aljoud_hospital/presntation/screens/start/start.dart';
 import 'package:flutter/material.dart';
-import '../../data/models/doctor_model.dart';
+import '../../data/models/doctor/doctor_model.dart';
 import '../../presntation/screens/home/categories_item/categories_item.dart';
 import '../../presntation/screens/home/home.dart';
 import '../../presntation/screens/splash/splash.dart';
@@ -41,9 +46,11 @@ class RoutesManager{
   static const String profile = '/profile';
   static const String editProfile = '/editProfile';
   static const String settingScreen = '/settingScreen';
-
-
-
+  static const String aboutHospital = '/aboutHospital';
+  static const String support = '/support';
+  static const String onlineConsultation = '/onlineConsultation';
+  static const String notification = '/notification';
+  static const String medicalRecords = '/medicalRecords';
 
   static Route? router(RouteSettings settings) {
     switch (settings.name) {
@@ -95,6 +102,26 @@ class RoutesManager{
       case myBooking:
         return MaterialPageRoute(
           builder: (context) => MyBookingScreen(),
+        );
+      case aboutHospital:
+        return MaterialPageRoute(
+          builder: (context) => AboutHospitalScreen(),
+        );
+      case support:
+        return MaterialPageRoute(
+          builder: (context) => SupportScreen(),
+        );
+      case notification:
+        return MaterialPageRoute(
+          builder: (context) => NotificationScreen(),
+        );
+      case onlineConsultation:
+        return MaterialPageRoute(
+          builder: (context) => VideoCallScreen(),
+        );
+      case medicalRecords:
+        return MaterialPageRoute(
+          builder: (context) => MedicalRecordsScreen(),
         );
       case doctorRegister:
         return MaterialPageRoute(

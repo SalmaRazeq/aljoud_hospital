@@ -68,13 +68,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             icon: Icon(Icons.arrow_back_rounded,
                               color: Theme.of(context).colorScheme.onSecondary,
                               size: 20.sp,)),
-                        SizedBox(width: 15.w,),
-                        Center(
-                          child: Text(loc.createAccount,
-                            style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                              fontSize: 20.sp, color: Theme.of(context).colorScheme.onPrimary,
-                                fontWeight: FontWeight.w600
-                            ),),),
+                        Expanded(
+                          child: Center(
+                            child: Text(loc.createAccount,
+                              style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                                fontSize: 20.sp, color: Theme.of(context).colorScheme.onPrimary,
+                                  fontWeight: FontWeight.w600
+                              ),),),
+                        ),
+                        SizedBox(
+                          width: 30.w,
+                        ),
                       ],
                     ),
                     SizedBox(height: 8.h,),
@@ -175,7 +179,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             return loc.password6Char;
                           }
                           return null;
-                        }),
+                      },
+                    ),
                     SizedBox(
                       height: 9.h,
                     ),
@@ -198,8 +203,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             return loc.notMatch;
                           }
                           return null;
-                        }),
-
+                      },
+                      onSubmit: signUp,
+                    ),
                     SizedBox(height: 35.h,),
 
                     ElevatedButton(

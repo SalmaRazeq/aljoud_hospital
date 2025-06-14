@@ -2,6 +2,7 @@
 import 'package:aljoud_hospital/core/utils/color_manager.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -16,10 +17,14 @@ class DialogUtils {
           height: 40,
           child: Row(
             children: [
-              Text(message, style: GoogleFonts.poppins(fontSize: 14,fontWeight: FontWeight.w400),),
-              const Spacer(),
-              const SpinKitFadingCircle(
-                size: 36,
+              Text(
+                message,
+                style: GoogleFonts.poppins(
+                    fontSize: 12, fontWeight: FontWeight.w400),
+              ),
+              SizedBox(width: 20.w),
+              SpinKitFadingCircle(
+                size: 30.sp,
                 color: ColorsManager.blue2,
               ),
             ],

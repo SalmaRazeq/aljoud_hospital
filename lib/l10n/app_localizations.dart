@@ -188,7 +188,7 @@ abstract class AppLocalizations {
   /// No description provided for @emailAddress.
   ///
   /// In en, this message translates to:
-  /// **'Email Address'**
+  /// **'Email address'**
   String get emailAddress;
 
   /// No description provided for @plzEmail.
@@ -1138,6 +1138,396 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Appointments'**
   String get appointments;
+
+  /// No description provided for @medicalLicenseNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Medical License Number'**
+  String get medicalLicenseNumber;
+
+  /// No description provided for @plzEnterMedicalLicence.
+  ///
+  /// In en, this message translates to:
+  /// **'Please, Enter your medical license number'**
+  String get plzEnterMedicalLicence;
+
+  /// No description provided for @specialization.
+  ///
+  /// In en, this message translates to:
+  /// **'Specialization'**
+  String get specialization;
+
+  /// No description provided for @plzEnterSpecialization.
+  ///
+  /// In en, this message translates to:
+  /// **'Please, Enter your specialization'**
+  String get plzEnterSpecialization;
+
+  /// No description provided for @iAgreeToTheTermsConditions.
+  ///
+  /// In en, this message translates to:
+  /// **'I Agree To The Terms & Conditions'**
+  String get iAgreeToTheTermsConditions;
+
+  /// No description provided for @enterEmailToReset.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your email address to reset your password.'**
+  String get enterEmailToReset;
+
+  /// No description provided for @sendResetLink.
+  ///
+  /// In en, this message translates to:
+  /// **'Send reset link'**
+  String get sendResetLink;
+
+  /// No description provided for @hint_type_message.
+  ///
+  /// In en, this message translates to:
+  /// **'Type a message...'**
+  String get hint_type_message;
+
+  /// No description provided for @bot_greeting.
+  ///
+  /// In en, this message translates to:
+  /// **'Hello! How can I help you today?'**
+  String get bot_greeting;
+
+  /// No description provided for @bot_feeling.
+  ///
+  /// In en, this message translates to:
+  /// **'I\'m doing great! How about you?'**
+  String get bot_feeling;
+
+  /// No description provided for @bot_glad_response.
+  ///
+  /// In en, this message translates to:
+  /// **'That\'s great to hear! How can I assist you today?'**
+  String get bot_glad_response;
+
+  /// No description provided for @bot_booking_prompt.
+  ///
+  /// In en, this message translates to:
+  /// **'Of course! We have excellent doctors. Which specialty would you like to book? You can choose from:\n1. Internal Medicine\n2. Pediatrics\n3. Orthopedics\n4. Dentistry\n5. Pulmonology\n6. Cardiology\n7. Physical Therapy\n8. OB-GYN'**
+  String get bot_booking_prompt;
+
+  /// No description provided for @bot_unknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Sorry, I didn\'t understand that. Could you please rephrase?'**
+  String get bot_unknown;
+
+  /// No description provided for @bot_chosen_specialty.
+  ///
+  /// In en, this message translates to:
+  /// **'You chose {specialty}. Click below to continue.'**
+  String bot_chosen_specialty(Object specialty);
+
+  /// No description provided for @button_view_doctors.
+  ///
+  /// In en, this message translates to:
+  /// **'View Doctors'**
+  String get button_view_doctors;
+
+  /// No description provided for @hi.
+  ///
+  /// In en, this message translates to:
+  /// **'hi'**
+  String get hi;
+
+  /// No description provided for @helloo.
+  ///
+  /// In en, this message translates to:
+  /// **'hello'**
+  String get helloo;
+
+  /// No description provided for @howAreU.
+  ///
+  /// In en, this message translates to:
+  /// **'how are you'**
+  String get howAreU;
+
+  /// No description provided for @iAmGood.
+  ///
+  /// In en, this message translates to:
+  /// **'i am good'**
+  String get iAmGood;
+
+  /// No description provided for @doingGreat.
+  ///
+  /// In en, this message translates to:
+  /// **'doing great'**
+  String get doingGreat;
+
+  /// No description provided for @fine.
+  ///
+  /// In en, this message translates to:
+  /// **'fine'**
+  String get fine;
+
+  /// No description provided for @wantToBookAppoi.
+  ///
+  /// In en, this message translates to:
+  /// **'i want to book an appointment'**
+  String get wantToBookAppoi;
+
+  /// No description provided for @wantToBook.
+  ///
+  /// In en, this message translates to:
+  /// **'i want to book'**
+  String get wantToBook;
+
+  /// No description provided for @ourHospitalDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Our hospital has been dedicated to providing high-quality, compassionate care since its founding in 2016. We are committed to improving the health of our community by offering a wide range of medical services and state-of-the-art facilities.'**
+  String get ourHospitalDescription;
+
+  /// No description provided for @ourVision.
+  ///
+  /// In en, this message translates to:
+  /// **'Our Vision'**
+  String get ourVision;
+
+  /// No description provided for @visionText.
+  ///
+  /// In en, this message translates to:
+  /// **'To be a leading healthcare provider'**
+  String get visionText;
+
+  /// No description provided for @ourMission.
+  ///
+  /// In en, this message translates to:
+  /// **'Our Mission'**
+  String get ourMission;
+
+  /// No description provided for @missionText.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivering exceptional patient care'**
+  String get missionText;
+
+  /// No description provided for @ourValues.
+  ///
+  /// In en, this message translates to:
+  /// **'Our Values'**
+  String get ourValues;
+
+  /// No description provided for @valuesText.
+  ///
+  /// In en, this message translates to:
+  /// **'Compassion, quality, safety'**
+  String get valuesText;
+
+  /// No description provided for @supportSystem.
+  ///
+  /// In en, this message translates to:
+  /// **'Support System'**
+  String get supportSystem;
+
+  /// No description provided for @faqs.
+  ///
+  /// In en, this message translates to:
+  /// **'FAQs'**
+  String get faqs;
+
+  /// No description provided for @contactSupport.
+  ///
+  /// In en, this message translates to:
+  /// **'Contact support'**
+  String get contactSupport;
+
+  /// No description provided for @trackTicketStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Track Ticket Status'**
+  String get trackTicketStatus;
+
+  /// No description provided for @systemGuide.
+  ///
+  /// In en, this message translates to:
+  /// **'System Guide'**
+  String get systemGuide;
+
+  /// No description provided for @payment.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment'**
+  String get payment;
+
+  /// No description provided for @paymentSuccessMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Your payment has been successfully processed. Thank you!'**
+  String get paymentSuccessMessage;
+
+  /// No description provided for @yesterday.
+  ///
+  /// In en, this message translates to:
+  /// **'Yesterday'**
+  String get yesterday;
+
+  /// No description provided for @notifications.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get notifications;
+
+  /// No description provided for @updateSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Data updated successfully'**
+  String get updateSuccess;
+
+  /// No description provided for @noChanges.
+  ///
+  /// In en, this message translates to:
+  /// **'No changes detected'**
+  String get noChanges;
+
+  /// No description provided for @updateFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to update data'**
+  String get updateFailed;
+
+  /// No description provided for @loading.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading, please wait...'**
+  String get loading;
+
+  /// No description provided for @birthdate.
+  ///
+  /// In en, this message translates to:
+  /// **'Birthdate'**
+  String get birthdate;
+
+  /// No description provided for @day.
+  ///
+  /// In en, this message translates to:
+  /// **'Day'**
+  String get day;
+
+  /// No description provided for @month.
+  ///
+  /// In en, this message translates to:
+  /// **'Month'**
+  String get month;
+
+  /// No description provided for @year.
+  ///
+  /// In en, this message translates to:
+  /// **'Year'**
+  String get year;
+
+  /// No description provided for @medicalHistory.
+  ///
+  /// In en, this message translates to:
+  /// **'Medical History'**
+  String get medicalHistory;
+
+  /// No description provided for @medications.
+  ///
+  /// In en, this message translates to:
+  /// **'Medications'**
+  String get medications;
+
+  /// No description provided for @labResults.
+  ///
+  /// In en, this message translates to:
+  /// **'Lab Results'**
+  String get labResults;
+
+  /// No description provided for @date.
+  ///
+  /// In en, this message translates to:
+  /// **'Date'**
+  String get date;
+
+  /// No description provided for @diagnosis.
+  ///
+  /// In en, this message translates to:
+  /// **'Diagnosis'**
+  String get diagnosis;
+
+  /// No description provided for @medication.
+  ///
+  /// In en, this message translates to:
+  /// **'Medication'**
+  String get medication;
+
+  /// No description provided for @dosage.
+  ///
+  /// In en, this message translates to:
+  /// **'Dosage'**
+  String get dosage;
+
+  /// No description provided for @frequency.
+  ///
+  /// In en, this message translates to:
+  /// **'Frequency'**
+  String get frequency;
+
+  /// No description provided for @test.
+  ///
+  /// In en, this message translates to:
+  /// **'Test'**
+  String get test;
+
+  /// No description provided for @result.
+  ///
+  /// In en, this message translates to:
+  /// **'Result'**
+  String get result;
+
+  /// No description provided for @bloodType.
+  ///
+  /// In en, this message translates to:
+  /// **'Blood Type'**
+  String get bloodType;
+
+  /// No description provided for @id.
+  ///
+  /// In en, this message translates to:
+  /// **'ID'**
+  String get id;
+
+  /// No description provided for @addRecord.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Record'**
+  String get addRecord;
+
+  /// No description provided for @download.
+  ///
+  /// In en, this message translates to:
+  /// **'Download'**
+  String get download;
+
+  /// No description provided for @print.
+  ///
+  /// In en, this message translates to:
+  /// **'Print'**
+  String get print;
+
+  /// No description provided for @editProfilePicture.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Profile Picture'**
+  String get editProfilePicture;
+
+  /// No description provided for @removeImage.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove Image'**
+  String get removeImage;
+
+  /// No description provided for @pickFromGallery.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick from Gallery'**
+  String get pickFromGallery;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

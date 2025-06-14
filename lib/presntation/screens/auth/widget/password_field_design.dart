@@ -6,12 +6,20 @@ import 'package:google_fonts/google_fonts.dart';
 typedef Validator = String? Function(String?);
 
 class PasswordFieldDesign extends StatefulWidget {
-  PasswordFieldDesign({super.key,  required this.hintText,
-    required this.controller, required this.validator, this.keyBoardType = TextInputType.text});
-  String hintText;
-  TextEditingController controller;
-  Validator validator;
-  TextInputType keyBoardType;
+  PasswordFieldDesign({
+    super.key,
+    required this.hintText,
+    required this.controller,
+    required this.validator,
+    this.keyBoardType = TextInputType.text,
+    this.onSubmit,
+  });
+
+  final String hintText;
+  final TextEditingController controller;
+  final Validator validator;
+  final TextInputType keyBoardType;
+  final Function()? onSubmit; // إضافة هذا المتغير
 
   @override
   State<PasswordFieldDesign> createState() => _PasswordFieldDesignState();
@@ -28,21 +36,24 @@ class _PasswordFieldDesignState extends State<PasswordFieldDesign> {
       obscureText: obscureText,
       keyboardType: widget.keyBoardType,
       controller: widget.controller,
-      style: GoogleFonts.inter(fontSize: 15.sp, color: ColorsManager.black),
+      style: GoogleFonts.inter(fontSize: 14.sp, color: ColorsManager.black),
       decoration: InputDecoration(
         isDense: true,
         hintText: widget.hintText,
-        hintStyle: GoogleFonts.roboto(fontSize: 12.sp,color: Theme.of(context).colorScheme.shadow),
+        hintStyle: GoogleFonts.roboto(
+            fontSize: 12.sp, color: Theme.of(context).colorScheme.shadow),
         filled: true,
         fillColor: ColorsManager.textField,
         errorStyle: GoogleFonts.roboto(fontSize: 9.sp, fontWeight: FontWeight.w400),
         contentPadding: REdgeInsets.symmetric(vertical: 9, horizontal: 12),
         constraints: BoxConstraints(
-          minHeight: 50.h
+          minHeight: 50.h,
         ),
         suffixIcon: IconButton(
           icon: Icon(
-            obscureText ? Icons.visibility_off : Icons.visibility, color: ColorsManager.darkGray, size: 16,
+            obscureText ? Icons.visibility_off : Icons.visibility,
+            color: ColorsManager.darkGray,
+            size: 16,
           ),
           onPressed: () {
             setState(() {
@@ -51,22 +62,27 @@ class _PasswordFieldDesignState extends State<PasswordFieldDesign> {
           },
         ),
         border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(15.r),
-            borderSide: const BorderSide(color: ColorsManager.hint)
+          borderRadius: BorderRadius.circular(15.r),
+          borderSide: const BorderSide(color: ColorsManager.hint),
         ),
         enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(15.r),
-            borderSide: const BorderSide(color: ColorsManager.hint)
+          borderRadius: BorderRadius.circular(15.r),
+          borderSide: const BorderSide(color: ColorsManager.hint),
         ),
         focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(15.r),
-            borderSide: const BorderSide(color: ColorsManager.darkGray)
+          borderRadius: BorderRadius.circular(15.r),
+          borderSide: const BorderSide(color: ColorsManager.darkGray),
         ),
         errorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(15.r),
-            borderSide: const BorderSide(color: Colors.red,)
+          borderRadius: BorderRadius.circular(15.r),
+          borderSide: const BorderSide(color: Colors.red),
         ),
       ),
+      onFieldSubmitted: (_) {
+        if (widget.onSubmit != null) {
+          widget.onSubmit!();
+        }
+      },
     );
   }
 }

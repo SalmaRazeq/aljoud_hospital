@@ -1,6 +1,6 @@
 import 'package:aljoud_hospital/core/utils/constant_manager.dart';
 import 'package:aljoud_hospital/core/utils/dialog_utils/dialog_utils.dart';
-import 'package:aljoud_hospital/data/models/doctor_model.dart';
+import 'package:aljoud_hospital/data/models/doctor/doctor_model.dart';
 import 'package:aljoud_hospital/presntation/screens/auth/widget/bottom_section.dart';
 import 'package:aljoud_hospital/presntation/screens/auth/widget/toggleButton.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -61,13 +61,17 @@ class _DoctorRegisterScreenState extends State<DoctorRegisterScreen> {
                             icon: Icon(Icons.arrow_back_rounded,
                               color: Theme.of(context).colorScheme.onSecondary,
                               size: 20.sp,)),
-                        SizedBox(width: 15.w,),
-                        Center(
-                          child: Text(loc.createAccount,
-                            style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                                fontSize: 20.sp, color: Theme.of(context).colorScheme.onPrimary,
-                                fontWeight: FontWeight.w600
-                            ),),),
+                        Expanded(
+                          child: Center(
+                            child: Text(loc.createAccount,
+                              style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                                  fontSize: 20.sp, color: Theme.of(context).colorScheme.onPrimary,
+                                  fontWeight: FontWeight.w600
+                              ),),),
+                        ),
+                        SizedBox(
+                          width: 30.w,
+                        ),
                       ],
                     ),
                     SizedBox(height: 8.h,),
@@ -88,7 +92,7 @@ class _DoctorRegisterScreenState extends State<DoctorRegisterScreen> {
                     SizedBox(height: 30.h,),
 
                     DoctorTextField(
-                      hintText: 'Full Name',
+                      hintText: loc.fullName,
                       controller: fullNameController,
                       icon: Icons.person_outlined,
                       validator: (input) {
@@ -102,7 +106,7 @@ class _DoctorRegisterScreenState extends State<DoctorRegisterScreen> {
                     SizedBox(height: 14.h,),
 
                     DoctorTextField(
-                      hintText: 'Phone Number',
+                      hintText: loc.phone,
                       keyBoardType: const TextInputType.numberWithOptions(),
                       controller: phoneNumController,
                       icon: Icons.phone_outlined,
@@ -121,7 +125,7 @@ class _DoctorRegisterScreenState extends State<DoctorRegisterScreen> {
 
 
                     DoctorTextField(
-                        hintText: 'Email Address',
+                        hintText: loc.emailAddress,
                         controller: emailController,
                         icon: Icons.email_outlined,
                         validator: (input) {
@@ -137,7 +141,7 @@ class _DoctorRegisterScreenState extends State<DoctorRegisterScreen> {
                     SizedBox(height: 14.h,),
 
                     DoctorPasswordField(
-                        hintText: 'Password',
+                        hintText: loc.password,
                         controller: passwordController,
                         icon: Icons.lock_outline_rounded,
                         validator: (input) {
@@ -153,7 +157,7 @@ class _DoctorRegisterScreenState extends State<DoctorRegisterScreen> {
                     SizedBox(height: 14.h,),
 
                     DoctorPasswordField(
-                        hintText: 'Confirm Password',
+                        hintText: loc.confirmPassword,
                         controller: rePasswordController,
                         icon: Icons.lock_outline_rounded,
                         validator: (input) {
@@ -169,25 +173,25 @@ class _DoctorRegisterScreenState extends State<DoctorRegisterScreen> {
                     SizedBox(height: 14.h,),
 
                     DoctorTextField(
-                        hintText: 'Medical License Number',
+                        hintText: loc.medicalLicenseNumber,
                         controller: medicalLicenseNumController,
                         icon: Icons.school_outlined,
                         keyBoardType: const TextInputType.numberWithOptions(),
                         validator: (input) {
                           if (input == null || input.trim().isEmpty) {
-                            return 'Please, Enter your medical license number';
+                            return loc.plzEnterMedicalLicence;
                           }
                           return null;
                         }),
 
                     SizedBox(height: 14.h,),
                     DoctorTextField(
-                        hintText: 'Specialization',
+                        hintText: loc.specialization,
                         controller: specializationController,
                         icon: Icons.location_on_outlined,
                         validator: (input) {
                           if (input == null || input.trim().isEmpty) {
-                            return 'Please, Enter your specialization';
+                            return loc.plzEnterSpecialization;
                           }
                           return null;
                         }),
@@ -208,7 +212,7 @@ class _DoctorRegisterScreenState extends State<DoctorRegisterScreen> {
                           }),
                         ),
                        SizedBox(width: 8.w,),
-                       Text('I Agree To The Terms & Conditions', style: GoogleFonts.inter(fontSize: 10, color: Theme.of(context).colorScheme.onSecondary),),
+                       Text(loc.iAgreeToTheTermsConditions, style: GoogleFonts.inter(fontSize: 10, color: Theme.of(context).colorScheme.onSecondary),),
                       ],
                     ),
 

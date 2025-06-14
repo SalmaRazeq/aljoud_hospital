@@ -27,8 +27,12 @@ class ProfileTabs extends StatelessWidget {
                   Icon(icon, color: themeProvider.isLightTheme() ? ColorsManager.black : ColorsManager.blue),
                   SizedBox(width: 15.w,),
                   Text(text,
-                    style: GoogleFonts.sourceSerif4(fontSize: 16.sp, color: Theme.of(context).colorScheme.primaryFixed, fontWeight: FontWeight.w400 ),),
-                  const Spacer(),
+                  style: GoogleFonts.sourceSerif4(
+                      fontSize: 14.sp,
+                      color: Theme.of(context).colorScheme.primaryFixed,
+                      fontWeight: FontWeight.w400),
+                ),
+                const Spacer(),
                   Icon(Icons.arrow_forward_ios_rounded, color: Theme.of(context).colorScheme.onSecondary, size: 13.sp,)
                 ],
               ),

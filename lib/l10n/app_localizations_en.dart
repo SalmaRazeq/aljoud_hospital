@@ -54,7 +54,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get notHaveAccount => 'Don\'t have an account?';
 
   @override
-  String get emailAddress => 'Email Address';
+  String get emailAddress => 'Email address';
 
   @override
   String get plzEmail => 'Please, Enter email address';
@@ -529,4 +529,207 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get appointments => 'Appointments';
+
+  @override
+  String get medicalLicenseNumber => 'Medical License Number';
+
+  @override
+  String get plzEnterMedicalLicence => 'Please, Enter your medical license number';
+
+  @override
+  String get specialization => 'Specialization';
+
+  @override
+  String get plzEnterSpecialization => 'Please, Enter your specialization';
+
+  @override
+  String get iAgreeToTheTermsConditions => 'I Agree To The Terms & Conditions';
+
+  @override
+  String get enterEmailToReset =>
+      'Enter your email address to reset your password.';
+
+  @override
+  String get sendResetLink => 'Send reset link';
+
+  @override
+  String get hint_type_message => 'Type a message...';
+
+  @override
+  String get bot_greeting => 'Hello! How can I help you today?';
+
+  @override
+  String get bot_feeling => 'I\'m doing great! How about you?';
+
+  @override
+  String get bot_glad_response =>
+      'That\'s great to hear! How can I assist you today?';
+
+  @override
+  String get bot_booking_prompt =>
+      'Of course! We have excellent doctors. Which specialty would you like to book? You can choose from:\n1. Internal Medicine\n2. Pediatrics\n3. Orthopedics\n4. Dentistry\n5. Pulmonology\n6. Cardiology\n7. Physical Therapy\n8. OB-GYN';
+
+  @override
+  String get bot_unknown =>
+      'Sorry, I didn\'t understand that. Could you please rephrase?';
+
+  @override
+  String bot_chosen_specialty(Object specialty) {
+    return 'You chose $specialty. Click below to continue.';
+  }
+
+  @override
+  String get button_view_doctors => 'View Doctors';
+
+  @override
+  String get hi => 'hi';
+
+  @override
+  String get helloo => 'hello';
+
+  @override
+  String get howAreU => 'how are you';
+
+  @override
+  String get iAmGood => 'i am good';
+
+  @override
+  String get doingGreat => 'doing great';
+
+  @override
+  String get fine => 'fine';
+
+  @override
+  String get wantToBookAppoi => 'i want to book an appointment';
+
+  @override
+  String get wantToBook => 'i want to book';
+
+  @override
+  String get ourHospitalDescription =>
+      'Our hospital has been dedicated to providing high-quality, compassionate care since its founding in 2016. We are committed to improving the health of our community by offering a wide range of medical services and state-of-the-art facilities.';
+
+  @override
+  String get ourVision => 'Our Vision';
+
+  @override
+  String get visionText => 'To be a leading healthcare provider';
+
+  @override
+  String get ourMission => 'Our Mission';
+
+  @override
+  String get missionText => 'Delivering exceptional patient care';
+
+  @override
+  String get ourValues => 'Our Values';
+
+  @override
+  String get valuesText => 'Compassion, quality, safety';
+
+  @override
+  String get supportSystem => 'Support System';
+
+  @override
+  String get faqs => 'FAQs';
+
+  @override
+  String get contactSupport => 'Contact support';
+
+  @override
+  String get trackTicketStatus => 'Track Ticket Status';
+
+  @override
+  String get systemGuide => 'System Guide';
+
+  @override
+  String get payment => 'Payment';
+
+  @override
+  String get paymentSuccessMessage =>
+      'Your payment has been successfully processed. Thank you!';
+
+  @override
+  String get yesterday => 'Yesterday';
+
+  @override
+  String get notifications => 'Notifications';
+
+  @override
+  String get updateSuccess => 'Data updated successfully';
+
+  @override
+  String get noChanges => 'No changes detected';
+
+  @override
+  String get updateFailed => 'Failed to update data';
+
+  @override
+  String get loading => 'Loading, please wait...';
+
+  @override
+  String get birthdate => 'Birthdate';
+
+  @override
+  String get day => 'Day';
+
+  @override
+  String get month => 'Month';
+
+  @override
+  String get year => 'Year';
+
+  @override
+  String get medicalHistory => 'Medical History';
+
+  @override
+  String get medications => 'Medications';
+
+  @override
+  String get labResults => 'Lab Results';
+
+  @override
+  String get date => 'Date';
+
+  @override
+  String get diagnosis => 'Diagnosis';
+
+  @override
+  String get medication => 'Medication';
+
+  @override
+  String get dosage => 'Dosage';
+
+  @override
+  String get frequency => 'Frequency';
+
+  @override
+  String get test => 'Test';
+
+  @override
+  String get result => 'Result';
+
+  @override
+  String get bloodType => 'Blood Type';
+
+  @override
+  String get id => 'ID';
+
+  @override
+  String get addRecord => 'Add Record';
+
+  @override
+  String get download => 'Download';
+
+  @override
+  String get print => 'Print';
+
+  @override
+  String get editProfilePicture => 'Edit Profile Picture';
+
+  @override
+  String get removeImage => 'Remove Image';
+
+  @override
+  String get pickFromGallery => 'Pick from Gallery';
 }

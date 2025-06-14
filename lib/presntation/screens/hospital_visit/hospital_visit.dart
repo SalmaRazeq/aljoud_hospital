@@ -6,7 +6,7 @@ import 'package:aljoud_hospital/presntation/screens/patient_details/patient_deta
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../core/utils/color_manager.dart';
-import '../../../data/models/doctor_model.dart';
+import '../../../data/models/doctor/doctor_model.dart';
 import '../../../l10n/app_localizations.dart';
 import '../see_all/category_details/CategoryDetailsScreen.dart';
 

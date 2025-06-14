@@ -1,17 +1,17 @@
-
-import 'package:aljoud_hospital/presntation/screens/home/home_tab/AppBar/search_widget/search_widget.dart';
+import 'package:aljoud_hospital/core/utils/routes_manager.dart';
+import 'package:aljoud_hospital/presntation/screens/home/home_tab/home_appBar/search_widget/search_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
 import '../../../../../core/utils/color_manager.dart';
-import '../../../../../data/models/doctor_model.dart';
+import '../../../../../data/models/doctor/doctor_model.dart';
 import '../../../../../data/models/user_dm.dart';
 import '../../../../../l10n/app_localizations.dart';
+import '../../../../../providers/notification_provider.dart';
 import '../../../../../providers/theme_provider.dart';
-
 
 class HomeAppBar extends StatefulWidget {
    HomeAppBar({super.key});
@@ -76,7 +76,9 @@ class _HomeAppBarState extends State<HomeAppBar> {
       width: double.infinity,
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors:  themeProvider.isLightTheme() ? [Colors.blue.shade700, Colors.blue.shade900] : [Colors.blue.shade900, Color(0xFF003060)],
+          colors: themeProvider.isLightTheme()
+              ? [Colors.blue.shade700, Colors.blue.shade900]
+              : [Colors.blue.shade900, const Color(0xFF003060)],
         ),
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(25.r),
@@ -104,10 +106,40 @@ class _HomeAppBarState extends State<HomeAppBar> {
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
               const Spacer(),
-              IconButton(
-                onPressed: () {},
-                icon: Icon(Icons.notifications, color: Theme.of(context).colorScheme.primary, size: 24.sp),
-              ),
+              Consumer<NotificationProvider>(
+                builder: (context, notificationProvider, _) {
+                  bool hasUnread = notificationProvider.unreadCount > 0;
+
+                  return Stack(
+                    children: [
+                      IconButton(
+                        onPressed: () {
+                          Navigator.pushNamed(
+                              context, RoutesManager.notification);
+                        },
+                        icon: Icon(
+                          Icons.notifications,
+                          color: Theme.of(context).colorScheme.primary,
+                          size: 24.sp,
+                        ),
+                      ),
+                      if (hasUnread)
+                        Positioned(
+                          top: 8,
+                          right: 8,
+                          child: Container(
+                            width: 10.w,
+                            height: 10.h,
+                            decoration: const BoxDecoration(
+                              color: Colors.red,
+                              shape: BoxShape.circle,
+                            ),
+                          ),
+                        ),
+                    ],
+                  );
+                },
+              )
             ],
           ),
           SizedBox(height: 10.h),

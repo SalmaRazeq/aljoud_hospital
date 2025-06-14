@@ -57,15 +57,15 @@ class ProfileDetailsWidget extends StatelessWidget {
           style: Theme.of(context).textTheme.labelMedium?.copyWith(
             color: Theme.of(context).colorScheme.primaryFixed,
             fontWeight: FontWeight.w500,
-          ),
+              fontSize: 11.sp),
         ),
         SizedBox(height: 4.h),
         Text(
           value,
           style: Theme.of(context).textTheme.labelMedium?.copyWith(
               color: Theme.of(context).colorScheme.primaryFixed,
-              fontWeight: FontWeight.w400, fontSize: 11.sp
-          ),
+              fontWeight: FontWeight.w400,
+              fontSize: 10.sp),
         ),
       ],
     );

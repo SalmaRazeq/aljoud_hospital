@@ -18,9 +18,10 @@ class ElevatedButtonDesign extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10))),
         child: Text(
             text,
-            style: Theme.of(context).textTheme.displaySmall?.
-            copyWith(fontSize: 16.sp, fontWeight: FontWeight.w600, color: Theme.of(context).colorScheme.primary)
-        ),
+            style: Theme.of(context).textTheme.displaySmall?.copyWith(
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w600,
+                color: Theme.of(context).colorScheme.primary)),
       ),
     );
   }

@@ -87,7 +87,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get plzPhone => 'من فضلك، أدخل رقم الهاتف';
 
   @override
-  String get enterEmail => 'من فضلك، أدخل عنوان البريد الإلكتروني';
+  String get enterEmail => 'أدخل عنوان البريد الإلكتروني';
 
   @override
   String get enterPassword => 'أدخل كلمة المرور الخاصة بك';
@@ -529,4 +529,205 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get appointments => 'المواعيد';
+
+  @override
+  String get medicalLicenseNumber => 'رقم الترخيص الطبي';
+
+  @override
+  String get plzEnterMedicalLicence => 'من فضلك، إدخال رقم الترخيص الطبي';
+
+  @override
+  String get specialization => 'التخصص';
+
+  @override
+  String get plzEnterSpecialization => 'من فضلك، إدخال التخصص';
+
+  @override
+  String get iAgreeToTheTermsConditions => 'أوافق على الشروط والأحكام';
+
+  @override
+  String get enterEmailToReset =>
+      'أدخل بريدك الإلكتروني لإعادة تعيين كلمة المرور.';
+
+  @override
+  String get sendResetLink => 'إرسال رابط إعادة التعيين';
+
+  @override
+  String get hint_type_message => 'اكتب رسالة...';
+
+  @override
+  String get bot_greeting => 'مرحبًا! كيف يمكنني مساعدتك اليوم؟';
+
+  @override
+  String get bot_feeling => 'أنا بخير! ماذا عنك؟';
+
+  @override
+  String get bot_glad_response => 'سعيد لسماع ذلك! كيف يمكنني مساعدتك اليوم؟';
+
+  @override
+  String get bot_booking_prompt =>
+      'بالتأكيد! لدينا أطباء ممتازون. ما التخصص الذي ترغب في الحجز فيه؟ يمكنك الاختيار من:\n1. الباطنية\n2. الأطفال\n3. العظام\n4. الأسنان\n5. الصدرية\n6. القلب\n7. العلاج الطبيعي\n8. النساء والتوليد';
+
+  @override
+  String get bot_unknown => 'عذرًا، لم أفهم ذلك. هل يمكنك إعادة الصياغة؟';
+
+  @override
+  String bot_chosen_specialty(Object specialty) {
+    return 'لقد اخترت $specialty. اضغط أدناه للمتابعة.';
+  }
+
+  @override
+  String get button_view_doctors => 'عرض الأطباء';
+
+  @override
+  String get hi => 'هاي';
+
+  @override
+  String get helloo => 'مرحبا';
+
+  @override
+  String get howAreU => 'كيف حالك';
+
+  @override
+  String get iAmGood => 'جيد';
+
+  @override
+  String get doingGreat => 'بخير الحمدلله';
+
+  @override
+  String get fine => 'كويس';
+
+  @override
+  String get wantToBookAppoi => 'اريد ان احجز معاد';
+
+  @override
+  String get wantToBook => 'اريد ان احجز';
+
+  @override
+  String get ourHospitalDescription =>
+      'كرّس مستشفانا نفسه لتقديم رعاية عالية الجودة ومبنية على الرحمة منذ تأسيسه في عام 2016. نحن ملتزمون بتحسين صحة مجتمعنا من خلال تقديم مجموعة واسعة من الخدمات الطبية والمرافق المتطورة.';
+
+  @override
+  String get ourVision => 'رؤيتنا';
+
+  @override
+  String get visionText => 'أن نكون مزود رعاية صحية رائد';
+
+  @override
+  String get ourMission => 'مهمتنا';
+
+  @override
+  String get missionText => 'تقديم رعاية متميزة للمرضى';
+
+  @override
+  String get ourValues => 'قيمنا';
+
+  @override
+  String get valuesText => 'الرحمة، الجودة، الأمان';
+
+  @override
+  String get supportSystem => 'نظام الدعم';
+
+  @override
+  String get faqs => 'الأسئلة الشائعة';
+
+  @override
+  String get contactSupport => 'تواصل مع الدعم';
+
+  @override
+  String get trackTicketStatus => 'تتبع حالة التذكرة';
+
+  @override
+  String get systemGuide => 'دليل النظام';
+
+  @override
+  String get payment => 'الدفع';
+
+  @override
+  String get paymentSuccessMessage =>
+      'تم الدفع بنجاح. نشكرك على استخدامك لخدماتنا!';
+
+  @override
+  String get yesterday => 'البارحة';
+
+  @override
+  String get notifications => 'الإشعارات';
+
+  @override
+  String get updateSuccess => 'تم تحديث البيانات بنجاح';
+
+  @override
+  String get noChanges => 'لم يتم الكشف عن أي تغييرات';
+
+  @override
+  String get updateFailed => 'فشل في تحديث البيانات';
+
+  @override
+  String get loading => 'جاري التحميل، يرجى الانتظار...';
+
+  @override
+  String get birthdate => 'تاريخ الميلاد';
+
+  @override
+  String get day => 'اليوم';
+
+  @override
+  String get month => 'الشهر';
+
+  @override
+  String get year => 'السنة';
+
+  @override
+  String get medicalHistory => 'السجل الطبي';
+
+  @override
+  String get medications => 'الأدوية';
+
+  @override
+  String get labResults => 'نتائج التحاليل';
+
+  @override
+  String get date => 'التاريخ';
+
+  @override
+  String get diagnosis => 'التشخيص';
+
+  @override
+  String get medication => 'الدواء';
+
+  @override
+  String get dosage => 'الجرعة';
+
+  @override
+  String get frequency => 'التكرار';
+
+  @override
+  String get test => 'الفحص';
+
+  @override
+  String get result => 'النتيجة';
+
+  @override
+  String get bloodType => 'فصيلة الدم';
+
+  @override
+  String get id => 'الرقم التعريفي';
+
+  @override
+  String get addRecord => 'إضافة سجل';
+
+  @override
+  String get download => 'تحميل';
+
+  @override
+  String get print => 'طباعة';
+
+  @override
+  String get editProfilePicture => 'تعديل صورة الملف الشخصي';
+
+  @override
+  String get removeImage => 'حذف الصورة';
+
+  @override
+  String get pickFromGallery => 'اختيار من المعرض';
 }
