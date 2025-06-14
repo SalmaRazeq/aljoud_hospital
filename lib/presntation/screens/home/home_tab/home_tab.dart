@@ -198,8 +198,10 @@ class HomeScreen extends StatelessWidget {
                         icon: Icons.assignment,
                         title: AppLocalizations.of(context)!.medicalRecords,
                         description: AppLocalizations.of(context)!.patientInformation,
-                        onTap: (){}
-                      ),
+                      onTap: () {
+                        Navigator.pushNamed(
+                            context, RoutesManager.medicalRecords);
+                      }),
                     ],
                   ),
                 ],

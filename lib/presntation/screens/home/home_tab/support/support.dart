@@ -112,7 +112,7 @@ class SupportScreen extends StatelessWidget {
         style: GoogleFonts.inter(
           fontWeight: FontWeight.w600,
           color: ColorsManager.black,
-          fontSize: 16.sp,
+          fontSize: 15.sp,
         ),
       ),
       onTap: () {},

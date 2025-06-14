@@ -639,4 +639,95 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get systemGuide => 'دليل النظام';
+
+  @override
+  String get payment => 'الدفع';
+
+  @override
+  String get paymentSuccessMessage =>
+      'تم الدفع بنجاح. نشكرك على استخدامك لخدماتنا!';
+
+  @override
+  String get yesterday => 'البارحة';
+
+  @override
+  String get notifications => 'الإشعارات';
+
+  @override
+  String get updateSuccess => 'تم تحديث البيانات بنجاح';
+
+  @override
+  String get noChanges => 'لم يتم الكشف عن أي تغييرات';
+
+  @override
+  String get updateFailed => 'فشل في تحديث البيانات';
+
+  @override
+  String get loading => 'جاري التحميل، يرجى الانتظار...';
+
+  @override
+  String get birthdate => 'تاريخ الميلاد';
+
+  @override
+  String get day => 'اليوم';
+
+  @override
+  String get month => 'الشهر';
+
+  @override
+  String get year => 'السنة';
+
+  @override
+  String get medicalHistory => 'السجل الطبي';
+
+  @override
+  String get medications => 'الأدوية';
+
+  @override
+  String get labResults => 'نتائج التحاليل';
+
+  @override
+  String get date => 'التاريخ';
+
+  @override
+  String get diagnosis => 'التشخيص';
+
+  @override
+  String get medication => 'الدواء';
+
+  @override
+  String get dosage => 'الجرعة';
+
+  @override
+  String get frequency => 'التكرار';
+
+  @override
+  String get test => 'الفحص';
+
+  @override
+  String get result => 'النتيجة';
+
+  @override
+  String get bloodType => 'فصيلة الدم';
+
+  @override
+  String get id => 'الرقم التعريفي';
+
+  @override
+  String get addRecord => 'إضافة سجل';
+
+  @override
+  String get download => 'تحميل';
+
+  @override
+  String get print => 'طباعة';
+
+  @override
+  String get editProfilePicture => 'تعديل صورة الملف الشخصي';
+
+  @override
+  String get removeImage => 'حذف الصورة';
+
+  @override
+  String get pickFromGallery => 'اختيار من المعرض';
 }

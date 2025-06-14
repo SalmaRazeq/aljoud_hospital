@@ -6,6 +6,7 @@ import 'package:aljoud_hospital/presntation/screens/auth/register/doctor_registe
 import 'package:aljoud_hospital/presntation/screens/auth/register/register.dart';
 import 'package:aljoud_hospital/presntation/screens/doctor_profile/doctor_profile.dart';
 import 'package:aljoud_hospital/presntation/screens/home/home_tab/about_hospital/about_hospital.dart';
+import 'package:aljoud_hospital/presntation/screens/home/home_tab/medical_record/medical_record.dart';
 import 'package:aljoud_hospital/presntation/screens/home/home_tab/online_consultation/online_consultation.dart';
 import 'package:aljoud_hospital/presntation/screens/home/home_tab/support/support.dart';
 import 'package:aljoud_hospital/presntation/screens/home/profile_tab/edit_profile/edit_profile.dart';
@@ -49,6 +50,7 @@ class RoutesManager{
   static const String support = '/support';
   static const String onlineConsultation = '/onlineConsultation';
   static const String notification = '/notification';
+  static const String medicalRecords = '/medicalRecords';
 
   static Route? router(RouteSettings settings) {
     switch (settings.name) {
@@ -116,6 +118,10 @@ class RoutesManager{
       case onlineConsultation:
         return MaterialPageRoute(
           builder: (context) => VideoCallScreen(),
+        );
+      case medicalRecords:
+        return MaterialPageRoute(
+          builder: (context) => MedicalRecordsScreen(),
         );
       case doctorRegister:
         return MaterialPageRoute(

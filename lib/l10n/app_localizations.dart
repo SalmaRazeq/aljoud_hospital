@@ -188,7 +188,7 @@ abstract class AppLocalizations {
   /// No description provided for @emailAddress.
   ///
   /// In en, this message translates to:
-  /// **'Email Address'**
+  /// **'Email address'**
   String get emailAddress;
 
   /// No description provided for @plzEmail.
@@ -1348,6 +1348,186 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'System Guide'**
   String get systemGuide;
+
+  /// No description provided for @payment.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment'**
+  String get payment;
+
+  /// No description provided for @paymentSuccessMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Your payment has been successfully processed. Thank you!'**
+  String get paymentSuccessMessage;
+
+  /// No description provided for @yesterday.
+  ///
+  /// In en, this message translates to:
+  /// **'Yesterday'**
+  String get yesterday;
+
+  /// No description provided for @notifications.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get notifications;
+
+  /// No description provided for @updateSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Data updated successfully'**
+  String get updateSuccess;
+
+  /// No description provided for @noChanges.
+  ///
+  /// In en, this message translates to:
+  /// **'No changes detected'**
+  String get noChanges;
+
+  /// No description provided for @updateFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to update data'**
+  String get updateFailed;
+
+  /// No description provided for @loading.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading, please wait...'**
+  String get loading;
+
+  /// No description provided for @birthdate.
+  ///
+  /// In en, this message translates to:
+  /// **'Birthdate'**
+  String get birthdate;
+
+  /// No description provided for @day.
+  ///
+  /// In en, this message translates to:
+  /// **'Day'**
+  String get day;
+
+  /// No description provided for @month.
+  ///
+  /// In en, this message translates to:
+  /// **'Month'**
+  String get month;
+
+  /// No description provided for @year.
+  ///
+  /// In en, this message translates to:
+  /// **'Year'**
+  String get year;
+
+  /// No description provided for @medicalHistory.
+  ///
+  /// In en, this message translates to:
+  /// **'Medical History'**
+  String get medicalHistory;
+
+  /// No description provided for @medications.
+  ///
+  /// In en, this message translates to:
+  /// **'Medications'**
+  String get medications;
+
+  /// No description provided for @labResults.
+  ///
+  /// In en, this message translates to:
+  /// **'Lab Results'**
+  String get labResults;
+
+  /// No description provided for @date.
+  ///
+  /// In en, this message translates to:
+  /// **'Date'**
+  String get date;
+
+  /// No description provided for @diagnosis.
+  ///
+  /// In en, this message translates to:
+  /// **'Diagnosis'**
+  String get diagnosis;
+
+  /// No description provided for @medication.
+  ///
+  /// In en, this message translates to:
+  /// **'Medication'**
+  String get medication;
+
+  /// No description provided for @dosage.
+  ///
+  /// In en, this message translates to:
+  /// **'Dosage'**
+  String get dosage;
+
+  /// No description provided for @frequency.
+  ///
+  /// In en, this message translates to:
+  /// **'Frequency'**
+  String get frequency;
+
+  /// No description provided for @test.
+  ///
+  /// In en, this message translates to:
+  /// **'Test'**
+  String get test;
+
+  /// No description provided for @result.
+  ///
+  /// In en, this message translates to:
+  /// **'Result'**
+  String get result;
+
+  /// No description provided for @bloodType.
+  ///
+  /// In en, this message translates to:
+  /// **'Blood Type'**
+  String get bloodType;
+
+  /// No description provided for @id.
+  ///
+  /// In en, this message translates to:
+  /// **'ID'**
+  String get id;
+
+  /// No description provided for @addRecord.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Record'**
+  String get addRecord;
+
+  /// No description provided for @download.
+  ///
+  /// In en, this message translates to:
+  /// **'Download'**
+  String get download;
+
+  /// No description provided for @print.
+  ///
+  /// In en, this message translates to:
+  /// **'Print'**
+  String get print;
+
+  /// No description provided for @editProfilePicture.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Profile Picture'**
+  String get editProfilePicture;
+
+  /// No description provided for @removeImage.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove Image'**
+  String get removeImage;
+
+  /// No description provided for @pickFromGallery.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick from Gallery'**
+  String get pickFromGallery;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

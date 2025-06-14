@@ -50,6 +50,7 @@ dependencies:
   flutter_inner_shadow: ^0.0.1
   provider: ^6.1.5
   font_awesome_flutter: ^10.8.0
+  dropdown_button2: ^2.3.9
 
 
 dev_dependencies:

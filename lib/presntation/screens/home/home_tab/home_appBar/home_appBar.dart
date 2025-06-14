@@ -10,6 +10,7 @@ import '../../../../../core/utils/color_manager.dart';
 import '../../../../../data/models/doctor/doctor_model.dart';
 import '../../../../../data/models/user_dm.dart';
 import '../../../../../l10n/app_localizations.dart';
+import '../../../../../providers/notification_provider.dart';
 import '../../../../../providers/theme_provider.dart';
 
 class HomeAppBar extends StatefulWidget {
@@ -105,12 +106,40 @@ class _HomeAppBarState extends State<HomeAppBar> {
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
               const Spacer(),
-              IconButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, RoutesManager.notification);
+              Consumer<NotificationProvider>(
+                builder: (context, notificationProvider, _) {
+                  bool hasUnread = notificationProvider.unreadCount > 0;
+
+                  return Stack(
+                    children: [
+                      IconButton(
+                        onPressed: () {
+                          Navigator.pushNamed(
+                              context, RoutesManager.notification);
+                        },
+                        icon: Icon(
+                          Icons.notifications,
+                          color: Theme.of(context).colorScheme.primary,
+                          size: 24.sp,
+                        ),
+                      ),
+                      if (hasUnread)
+                        Positioned(
+                          top: 8,
+                          right: 8,
+                          child: Container(
+                            width: 10.w,
+                            height: 10.h,
+                            decoration: const BoxDecoration(
+                              color: Colors.red,
+                              shape: BoxShape.circle,
+                            ),
+                          ),
+                        ),
+                    ],
+                  );
                 },
-                icon: Icon(Icons.notifications, color: Theme.of(context).colorScheme.primary, size: 24.sp),
-              ),
+              )
             ],
           ),
           SizedBox(height: 10.h),

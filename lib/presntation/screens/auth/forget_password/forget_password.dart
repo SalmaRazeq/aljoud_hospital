@@ -48,7 +48,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                           child: Text(
                             loc.changePassword,
                             style: GoogleFonts.sourceSans3(
-                              fontSize: 24,
+                              fontSize: 22.sp,
                               color: Theme.of(context).colorScheme.primaryFixed,
                             ),
                           ),
@@ -71,7 +71,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                               style: Theme.of(context)
                                   .textTheme
                                   .titleMedium
-                                  ?.copyWith(fontSize: 16.sp),
+                                  ?.copyWith(fontSize: 14.sp),
                               textAlign: TextAlign.center,
                             ),
                             SizedBox(height: 40.h),

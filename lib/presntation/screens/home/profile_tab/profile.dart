@@ -48,13 +48,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Future<void> _showImageOptions() async {
+    final loc = AppLocalizations.of(context)!;
+
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.r)),
-          title: Text('Edit Profile Picture',
+          title: Text(loc.editProfilePicture,
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                   fontSize: 16.sp,
                   color: Theme.of(context).colorScheme.primaryFixed)),
@@ -64,7 +66,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               if (_imageFile != null)
                 ListTile(
                   leading: const Icon(Icons.delete, color: Colors.red),
-                  title: Text('Remove Image'),
+                  title: Text(loc.removeImage),
                   onTap: () {
                     Navigator.pop(context);
                     _removeImage();
@@ -72,7 +74,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ListTile(
                 leading: const Icon(Icons.photo, color: Colors.blue),
-                title: Text('Pick from Gallery'),
+                title: Text(loc.pickFromGallery),
                 onTap: () {
                   Navigator.pop(context);
                   _pickImage();
@@ -161,8 +163,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             ? Alignment.topRight // المحاذاة لليمين إذا كانت اللغة عربية
                             : Alignment.topLeft,                        child: Text(loc.profile,
                             style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                fontSize: 20.sp,
-                                color: Theme.of(context).colorScheme.primary)),
+                                    fontSize: 18.sp,
+                                    color: Theme.of(context).colorScheme.primary)),
                       ),
                       SizedBox(height: 10.h,),
             
@@ -285,7 +287,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ),
                               SizedBox(width: 15.w,),
                               Text(loc.logOut,
-                                style: GoogleFonts.sourceSerif4(fontSize: 17.sp, color: ColorsManager.blue, fontWeight: FontWeight.w600 ),),
+                                style: GoogleFonts.sourceSerif4(
+                                    fontSize: 16.sp,
+                                    color: ColorsManager.blue,
+                                    fontWeight: FontWeight.w600),
+                              ),
                             ],
                           ),
                         )

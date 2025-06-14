@@ -54,7 +54,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get notHaveAccount => 'Don\'t have an account?';
 
   @override
-  String get emailAddress => 'Email Address';
+  String get emailAddress => 'Email address';
 
   @override
   String get plzEmail => 'Please, Enter email address';
@@ -641,4 +641,95 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get systemGuide => 'System Guide';
+
+  @override
+  String get payment => 'Payment';
+
+  @override
+  String get paymentSuccessMessage =>
+      'Your payment has been successfully processed. Thank you!';
+
+  @override
+  String get yesterday => 'Yesterday';
+
+  @override
+  String get notifications => 'Notifications';
+
+  @override
+  String get updateSuccess => 'Data updated successfully';
+
+  @override
+  String get noChanges => 'No changes detected';
+
+  @override
+  String get updateFailed => 'Failed to update data';
+
+  @override
+  String get loading => 'Loading, please wait...';
+
+  @override
+  String get birthdate => 'Birthdate';
+
+  @override
+  String get day => 'Day';
+
+  @override
+  String get month => 'Month';
+
+  @override
+  String get year => 'Year';
+
+  @override
+  String get medicalHistory => 'Medical History';
+
+  @override
+  String get medications => 'Medications';
+
+  @override
+  String get labResults => 'Lab Results';
+
+  @override
+  String get date => 'Date';
+
+  @override
+  String get diagnosis => 'Diagnosis';
+
+  @override
+  String get medication => 'Medication';
+
+  @override
+  String get dosage => 'Dosage';
+
+  @override
+  String get frequency => 'Frequency';
+
+  @override
+  String get test => 'Test';
+
+  @override
+  String get result => 'Result';
+
+  @override
+  String get bloodType => 'Blood Type';
+
+  @override
+  String get id => 'ID';
+
+  @override
+  String get addRecord => 'Add Record';
+
+  @override
+  String get download => 'Download';
+
+  @override
+  String get print => 'Print';
+
+  @override
+  String get editProfilePicture => 'Edit Profile Picture';
+
+  @override
+  String get removeImage => 'Remove Image';
+
+  @override
+  String get pickFromGallery => 'Pick from Gallery';
 }

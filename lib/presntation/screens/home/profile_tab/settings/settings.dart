@@ -160,7 +160,9 @@ class _SettingScreenState extends State<SettingScreen> {
                               style: Theme.of(context)
                                   .textTheme
                                   .titleMedium
-                                  ?.copyWith(color: ColorsManager.darkGray),
+                                  ?.copyWith(
+                                      color: ColorsManager.darkGray,
+                                      fontSize: 12.sp),
                             ),
                             SizedBox(width: 8.w),
                             Icon(
@@ -235,7 +237,7 @@ class _SettingScreenState extends State<SettingScreen> {
         title: Text(
           title,
           style: GoogleFonts.inter(
-            fontSize: 16.sp,
+            fontSize: 14.sp,
             fontWeight: FontWeight.w600,
             color: ColorsManager.black,
           ),

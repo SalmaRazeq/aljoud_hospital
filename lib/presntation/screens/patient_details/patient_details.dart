@@ -1,19 +1,13 @@
 import 'package:aljoud_hospital/core/utils/color_manager.dart';
-import 'package:aljoud_hospital/core/utils/routes_manager.dart';
 import 'package:aljoud_hospital/data/models/user_dm.dart';
-import 'package:aljoud_hospital/presntation/screens/home/myBooking_tab/myBooking.dart';
 import 'package:aljoud_hospital/presntation/screens/patient_details/widget/build_textField.dart';
 import 'package:aljoud_hospital/presntation/screens/widgets/build_circleButton.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-
-import '../../../core/utils/constant_manager.dart';
 import '../../../core/utils/dialog_utils/dialog_utils.dart';
-import '../../../data/models/booking_model.dart';
 import '../../../data/models/doctor/doctor_model.dart';
 import '../../../data/models/patient_model.dart';
 import '../../../l10n/app_localizations.dart';
@@ -172,7 +166,7 @@ class _PatientDetailsScreenState extends State<PatientDetailsScreen> {
                                     Text(loc.height, style: Theme.of(context).textTheme.bodySmall),
                                     SizedBox(height: 8.h),
                                     BuildTextField(icon: Icons.height,
-                                        hintText: 'Cm',
+                                        hintText: loc.cm,
                                         controller: heightController,
                                         keyBoardType: const TextInputType.numberWithOptions(),
                                         validator: (input) {
@@ -193,7 +187,7 @@ class _PatientDetailsScreenState extends State<PatientDetailsScreen> {
                                     SizedBox(height: 8.h),
                                     BuildTextField(
                                       icon: Icons.monitor_weight_outlined,
-                                      hintText: 'Kg',
+                                      hintText: loc.kg,
                                       controller: weightController,
                                       keyBoardType: const TextInputType.numberWithOptions(),
                                       validator: (input) {
@@ -293,7 +287,7 @@ class _PatientDetailsScreenState extends State<PatientDetailsScreen> {
   }
 
   void savePatientDetails() async {
-    if (_formKey.currentState!.validate() == false) return;
+    //if (_formKey.currentState!.validate() == false) return;
 
     try {
       DialogUtils.showLoading(context, message: AppLocalizations.of(context)!.pleaseWait);
