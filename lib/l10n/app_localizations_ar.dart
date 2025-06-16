@@ -1,5 +1,6 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
+
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -534,13 +535,13 @@ class AppLocalizationsAr extends AppLocalizations {
   String get medicalLicenseNumber => 'رقم الترخيص الطبي';
 
   @override
-  String get plzEnterMedicalLicence => 'من فضلك، إدخال رقم الترخيص الطبي';
+  String get plzEnterMedicalLicence => 'من فضلك، أدخل رقم الترخيص الطبي';
 
   @override
   String get specialization => 'التخصص';
 
   @override
-  String get plzEnterSpecialization => 'من فضلك، إدخال التخصص';
+  String get plzEnterSpecialization => 'من فضلك، أدخل التخصص';
 
   @override
   String get iAgreeToTheTermsConditions => 'أوافق على الشروط والأحكام';
@@ -638,7 +639,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get trackTicketStatus => 'تتبع حالة التذكرة';
 
   @override
-  String get systemGuide => 'دليل النظام';
+  String get admin => 'المسؤل';
 
   @override
   String get payment => 'الدفع';
@@ -730,4 +731,98 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get pickFromGallery => 'اختيار من المعرض';
+
+  @override
+  String get updateDoctor => 'تحديث بيانات طبيب';
+
+  @override
+  String get insertDoctor => 'إضافة طبيب جديد';
+
+  @override
+  String get deleteDoctor => 'حذف طبيب';
+
+  @override
+  String get selectDoctor => 'اختر طبيبًا';
+
+  @override
+  String get confirmDelete => 'تأكيد الحذف';
+
+  @override
+  String get deleteSuccess => 'تم حذف الطبيب بنجاح';
+
+  @override
+  String get insert => 'إضافة';
+
+  @override
+  String get update => 'تحديث';
+
+  @override
+  String get plzEnterYearsOfExperience => 'من فضلك، أدخل سنوات الخبرة';
+
+  @override
+  String get plzEnterPrice => 'من فضلك، أدخل السعر';
+
+  @override
+  String get cancelConfirmation => 'هل أنت متأكد أنك تريد الإلغاء؟';
+
+  @override
+  String get yes => 'نعم';
+
+  @override
+  String get no => 'لا';
+
+  @override
+  String get cancel => 'إلغاء';
+
+  @override
+  String get faq => 'الأسئلة الشائعة';
+
+  @override
+  String get faq1Q => '١. كيف يمكنني حجز موعد مع طبيب؟';
+
+  @override
+  String get faq1A =>
+      'يمكنك اختيار الطبيب المناسب من قائمة الأطباء، ثم تحديد التاريخ والوقت المناسبين، وبعد ذلك تأكيد الحجز من خلال التطبيق.';
+
+  @override
+  String get faq2Q => '٢. هل يمكنني تعديل موعد الحجز بعد تأكيده؟';
+
+  @override
+  String get faq2A =>
+      'نعم، يمكنك تعديل الموعد من خلال التطبيق إذا لم يكن الموعد قريبًا جدًا أو ملغى من قبل الطبيب.';
+
+  @override
+  String get faq3Q => '٣. كيف أتمكن من مشاهدة سجل مواعيدي الطبية؟';
+
+  @override
+  String get faq3A =>
+      'يمكنك الدخول إلى قسم حجوزاتي داخل التطبيق لعرض جميع مواعيدك السابقة والحالية.';
+
+  @override
+  String get faq4Q =>
+      '٤. هل يمكنني إلغاء موعد الحجز؟ وهل هناك رسوم على الإلغاء؟';
+
+  @override
+  String get faq4A =>
+      'نعم، يمكنك إلغاء الموعد من خلال التطبيق قبل وقت معين دون أي رسوم. قد تختلف سياسة الإلغاء حسب الطبيب أو المركز الطبي.';
+
+  @override
+  String get faq5Q => '٥. هل التطبيق يحفظ معلوماتي الطبية بشكل آمن؟';
+
+  @override
+  String get faq5A =>
+      'نعم، يتم تخزين بياناتك الشخصية والطبية بشكل آمن ووفقًا لأعلى معايير الخصوصية.';
+
+  @override
+  String get faq6Q => '٦. ماذا أفعل إذا نسيت كلمة المرور الخاصة بي؟';
+
+  @override
+  String get faq6A =>
+      'يمكنك استخدام خيار \"نسيت كلمة المرور\" داخل التطبيق لاستعادة حسابك عن طريق البريد الإلكتروني.';
+
+  @override
+  String get faq7Q => '٧. كيف أعرف إذا تم تأكيد موعدي؟';
+
+  @override
+  String get faq7A => 'سيصلك إشعار عبر التطبيق ورسالة نصية تؤكد حجز موعدك.';
 }

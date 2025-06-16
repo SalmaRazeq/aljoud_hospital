@@ -1,6 +1,8 @@
+import 'package:aljoud_hospital/core/utils/color_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 import '../../../../../../l10n/app_localizations.dart';
 
 
@@ -23,9 +25,10 @@ class SearchWidget extends StatelessWidget {
         ],
       ),
       child: SizedBox(
-        height: 40,
+        height: 40.h,
         child: TextField(
           textAlign: TextAlign.left,
+          style: const TextStyle(color: ColorsManager.black),
           decoration: InputDecoration(
             hintText: AppLocalizations.of(context)!.search,
             hintStyle: GoogleFonts.poppins(fontSize: 12.sp,fontWeight: FontWeight.w600 ,color: Theme.of(context).colorScheme.shadow),

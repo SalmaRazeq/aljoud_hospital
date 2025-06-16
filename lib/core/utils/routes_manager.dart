@@ -8,12 +8,16 @@ import 'package:aljoud_hospital/presntation/screens/doctor_profile/doctor_profil
 import 'package:aljoud_hospital/presntation/screens/home/home_tab/about_hospital/about_hospital.dart';
 import 'package:aljoud_hospital/presntation/screens/home/home_tab/medical_record/medical_record.dart';
 import 'package:aljoud_hospital/presntation/screens/home/home_tab/online_consultation/online_consultation.dart';
+import 'package:aljoud_hospital/presntation/screens/home/home_tab/support/admin_screen/Insert_doctor/insert_doctor.dart';
+import 'package:aljoud_hospital/presntation/screens/home/home_tab/support/admin_screen/admin_screen.dart';
+import 'package:aljoud_hospital/presntation/screens/home/home_tab/support/admin_screen/update_doctor/update_doctor.dart';
+import 'package:aljoud_hospital/presntation/screens/home/home_tab/support/faq_screen/faq_screen.dart';
 import 'package:aljoud_hospital/presntation/screens/home/home_tab/support/support.dart';
+import 'package:aljoud_hospital/presntation/screens/home/myBooking_tab/myBooking.dart';
 import 'package:aljoud_hospital/presntation/screens/home/profile_tab/edit_profile/edit_profile.dart';
 import 'package:aljoud_hospital/presntation/screens/home/profile_tab/profile.dart';
 import 'package:aljoud_hospital/presntation/screens/home/profile_tab/settings/settings.dart';
 import 'package:aljoud_hospital/presntation/screens/hospital_visit/hospital_visit.dart';
-import 'package:aljoud_hospital/presntation/screens/home/myBooking_tab/myBooking.dart';
 import 'package:aljoud_hospital/presntation/screens/patient_details/patient_details.dart';
 import 'package:aljoud_hospital/presntation/screens/payment/confirm_payment/confirm_payment.dart';
 import 'package:aljoud_hospital/presntation/screens/payment/payment.dart';
@@ -21,6 +25,7 @@ import 'package:aljoud_hospital/presntation/screens/see_all/category_details/Cat
 import 'package:aljoud_hospital/presntation/screens/see_all/see_all.dart';
 import 'package:aljoud_hospital/presntation/screens/start/start.dart';
 import 'package:flutter/material.dart';
+
 import '../../data/models/doctor/doctor_model.dart';
 import '../../presntation/screens/home/categories_item/categories_item.dart';
 import '../../presntation/screens/home/home.dart';
@@ -51,6 +56,10 @@ class RoutesManager{
   static const String onlineConsultation = '/onlineConsultation';
   static const String notification = '/notification';
   static const String medicalRecords = '/medicalRecords';
+  static const String admin = '/admin';
+  static const String insertDoctor = '/insertDoctor';
+  static const String updateDoctor = '/updateDoctor';
+  static const String faq = '/faq';
 
   static Route? router(RouteSettings settings) {
     switch (settings.name) {
@@ -88,6 +97,22 @@ class RoutesManager{
       case seeAll:
         return MaterialPageRoute(
           builder: (context) => SeeAllScreen(),
+        );
+      case admin:
+        return MaterialPageRoute(
+          builder: (context) => AdminScreen(),
+        );
+      case insertDoctor:
+        return MaterialPageRoute(
+          builder: (context) => InsertDoctorScreen(),
+        );
+      case faq:
+        return MaterialPageRoute(
+          builder: (context) => FAQScreen(),
+        );
+      case updateDoctor:
+        return MaterialPageRoute(
+          builder: (context) => UpdateDoctorScreen(),
         );
       case hospitalVisit:
         final doctor = settings.arguments as Doctor;

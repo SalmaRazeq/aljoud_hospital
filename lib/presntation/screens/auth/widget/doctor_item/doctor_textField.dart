@@ -21,16 +21,20 @@ class DoctorTextField extends StatelessWidget {
       validator: validator,
       keyboardType: keyBoardType,
       controller: controller,
-      style: GoogleFonts.inter(fontSize: 15.sp, color: ColorsManager.black),
+      style: GoogleFonts.inter(fontSize: 13.sp, color: ColorsManager.black),
       decoration: InputDecoration(
         isDense: true,
         hintText: hintText,
         hintStyle: GoogleFonts.roboto(fontSize: 12.sp,color: Theme.of(context).colorScheme.shadow),
         filled: true,
-        prefixIcon: Icon(icon, size: 24, color: ColorsManager.hint,),
+        prefixIcon: Icon(
+          icon,
+          size: 22,
+          color: ColorsManager.hint,
+        ),
         fillColor: ColorsManager.textField,
         errorStyle: GoogleFonts.roboto(fontSize: 9.sp,fontWeight: FontWeight.w400),
-        contentPadding: REdgeInsets.symmetric(vertical: 10, horizontal: 12),
+        contentPadding: REdgeInsets.symmetric(vertical: 9, horizontal: 9),
         constraints: BoxConstraints(
             minHeight: 50.h
         ),

@@ -8,12 +8,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+
 import '../../../core/utils/dialog_utils/dialog_utils.dart';
 import '../../../data/models/booking_model.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../providers/notification_provider.dart';
 import '../../../providers/theme_provider.dart';
-import '../../notification/notification.dart';
 
 class PaymentScreen extends StatefulWidget {
   const PaymentScreen({required this.doctor, super.key});
@@ -178,7 +178,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                     loc.paymentSuccessMessage,
                                     const Icon(
                                       Icons.payment_outlined,
-                                      color: ColorsManager.lightGreen,
+                                      color: Colors.green,
                                     ));
                           },
 

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+
 import '../../../../../../core/utils/color_manager.dart';
 import '../../../../../../providers/theme_provider.dart';
 
@@ -24,7 +25,7 @@ class EditprofileTextfield extends StatelessWidget {
       validator: validator,
       keyboardType: keyBoardType,
       controller: controller,
-      style: GoogleFonts.inter(fontSize: 14.sp, color: ColorsManager.black),
+      style: GoogleFonts.inter(fontSize: 12.sp, color: ColorsManager.black),
       decoration: InputDecoration(
         isDense: true,
         hintText: hintText,
@@ -32,7 +33,7 @@ class EditprofileTextfield extends StatelessWidget {
         errorStyle: GoogleFonts.roboto(fontSize: 10.sp,fontWeight: FontWeight.w500),
         filled: true,
         fillColor: themeProvider.isLightTheme() ? ColorsManager.lightBlue : ColorsManager.lightBlue2,
-        contentPadding: REdgeInsets.symmetric(vertical: 12.h, horizontal: 12.w),
+        contentPadding: REdgeInsets.symmetric(vertical: 10.h, horizontal: 12.w),
         constraints: BoxConstraints(
             minHeight: 50.h
         ),

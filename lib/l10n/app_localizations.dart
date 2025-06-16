@@ -1328,7 +1328,7 @@ abstract class AppLocalizations {
   /// No description provided for @faqs.
   ///
   /// In en, this message translates to:
-  /// **'FAQs'**
+  /// **'Frequently Asked Questions'**
   String get faqs;
 
   /// No description provided for @contactSupport.
@@ -1343,11 +1343,11 @@ abstract class AppLocalizations {
   /// **'Track Ticket Status'**
   String get trackTicketStatus;
 
-  /// No description provided for @systemGuide.
+  /// No description provided for @admin.
   ///
   /// In en, this message translates to:
-  /// **'System Guide'**
-  String get systemGuide;
+  /// **'Admin'**
+  String get admin;
 
   /// No description provided for @payment.
   ///
@@ -1528,6 +1528,180 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Pick from Gallery'**
   String get pickFromGallery;
+
+  /// No description provided for @updateDoctor.
+  ///
+  /// In en, this message translates to:
+  /// **'Update Doctor'**
+  String get updateDoctor;
+
+  /// No description provided for @insertDoctor.
+  ///
+  /// In en, this message translates to:
+  /// **'Insert New Doctor'**
+  String get insertDoctor;
+
+  /// No description provided for @deleteDoctor.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Doctor'**
+  String get deleteDoctor;
+
+  /// No description provided for @selectDoctor.
+  ///
+  /// In en, this message translates to:
+  /// **'Select a doctor'**
+  String get selectDoctor;
+
+  /// No description provided for @confirmDelete.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm Delete'**
+  String get confirmDelete;
+
+  /// No description provided for @deleteSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Doctor deleted successfully'**
+  String get deleteSuccess;
+
+  /// No description provided for @insert.
+  ///
+  /// In en, this message translates to:
+  /// **'Insert'**
+  String get insert;
+
+  /// No description provided for @update.
+  ///
+  /// In en, this message translates to:
+  /// **'Update'**
+  String get update;
+
+  /// No description provided for @plzEnterYearsOfExperience.
+  ///
+  /// In en, this message translates to:
+  /// **'Please, Enter the years of experience'**
+  String get plzEnterYearsOfExperience;
+
+  /// No description provided for @plzEnterPrice.
+  ///
+  /// In en, this message translates to:
+  /// **'Please, Enter the price'**
+  String get plzEnterPrice;
+
+  /// No description provided for @cancelConfirmation.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to cancel?'**
+  String get cancelConfirmation;
+
+  /// No description provided for @yes.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes'**
+  String get yes;
+
+  /// No description provided for @no.
+  ///
+  /// In en, this message translates to:
+  /// **'No'**
+  String get no;
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// No description provided for @faq.
+  ///
+  /// In en, this message translates to:
+  /// **'FAQ'**
+  String get faq;
+
+  /// No description provided for @faq1Q.
+  ///
+  /// In en, this message translates to:
+  /// **'1. How can I book an appointment with a doctor?'**
+  String get faq1Q;
+
+  /// No description provided for @faq1A.
+  ///
+  /// In en, this message translates to:
+  /// **'You can select the suitable doctor from the doctors list, then choose the preferred date and time, and confirm the appointment through the app.'**
+  String get faq1A;
+
+  /// No description provided for @faq2Q.
+  ///
+  /// In en, this message translates to:
+  /// **'2. Can I modify my appointment after confirming it?'**
+  String get faq2Q;
+
+  /// No description provided for @faq2A.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes, you can modify your appointment through the app if the appointment is not too close or hasn’t been canceled by the doctor.'**
+  String get faq2A;
+
+  /// No description provided for @faq3Q.
+  ///
+  /// In en, this message translates to:
+  /// **'3. How can I view my medical appointment history?'**
+  String get faq3Q;
+
+  /// No description provided for @faq3A.
+  ///
+  /// In en, this message translates to:
+  /// **'You can go to My Booking section in the app to view all your past and current appointments.'**
+  String get faq3A;
+
+  /// No description provided for @faq4Q.
+  ///
+  /// In en, this message translates to:
+  /// **'4. Can I cancel an appointment? Are there any cancellation fees?'**
+  String get faq4Q;
+
+  /// No description provided for @faq4A.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes, you can cancel your appointment through the app within a certain timeframe without any fees. Cancellation policies may vary depending on the doctor or medical center.'**
+  String get faq4A;
+
+  /// No description provided for @faq5Q.
+  ///
+  /// In en, this message translates to:
+  /// **'5. Does the app securely store my medical information?'**
+  String get faq5Q;
+
+  /// No description provided for @faq5A.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes, your personal and medical data are securely stored according to the highest privacy standards.'**
+  String get faq5A;
+
+  /// No description provided for @faq6Q.
+  ///
+  /// In en, this message translates to:
+  /// **'6. What should I do if I forget my password?'**
+  String get faq6Q;
+
+  /// No description provided for @faq6A.
+  ///
+  /// In en, this message translates to:
+  /// **'You can use the \"Forgot Password\" option within the app to recover your account via email.'**
+  String get faq6A;
+
+  /// No description provided for @faq7Q.
+  ///
+  /// In en, this message translates to:
+  /// **'7. How do I know if my appointment is confirmed?'**
+  String get faq7Q;
+
+  /// No description provided for @faq7A.
+  ///
+  /// In en, this message translates to:
+  /// **'You will receive a notification in the app and a text message confirming your appointment.'**
+  String get faq7A;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

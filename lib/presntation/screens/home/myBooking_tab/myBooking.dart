@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+
+import '../../../../core/utils/dialog_utils/dialog_utils.dart';
 import '../../../../data/models/booking_model.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../../providers/theme_provider.dart';
@@ -27,9 +29,14 @@ class _MyBookingScreenState extends State<MyBookingScreen> with SingleTickerProv
     // TODO: implement didChangeDependencies
     super.didChangeDependencies();
     final loc = AppLocalizations.of(context)!;
-    tabs = [loc.upComing, loc.completed, loc.canceled];
-    _tabController = TabController(length: tabs.length, vsync: this);
+    tabs = [loc.upComing, loc.canceled];
     _bookingsFuture = getBookings();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 2, vsync: this);
   }
 
   @override
@@ -73,6 +80,8 @@ class _MyBookingScreenState extends State<MyBookingScreen> with SingleTickerProv
     required String headerTitle,
   }) {
     var themeProvider = Provider.of<ThemeProvider>(context);
+    final loc = AppLocalizations.of(context)!;
+
     return Container(
         margin: REdgeInsets.symmetric(vertical: 10.h),
         decoration: BoxDecoration(
@@ -142,12 +151,12 @@ class _MyBookingScreenState extends State<MyBookingScreen> with SingleTickerProv
               ),
             ),
             Padding(
-              padding: REdgeInsets.all(12),
-              child: Row(
+            padding: REdgeInsets.all(10),
+            child: Row(
                 children: [
                   CircleAvatar(
-                    radius: 26.r,
-                    backgroundImage: AssetImage('${booking.image}'),
+                  radius: 24.r,
+                  backgroundImage: AssetImage('${booking.image}'),
                   ),
 
                   SizedBox(width: 12.w),
@@ -157,20 +166,54 @@ class _MyBookingScreenState extends State<MyBookingScreen> with SingleTickerProv
                     children: [
                       Text(
                         '${booking.doctorName}',
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: 14.sp, color: ColorsManager.black)
-                      ),
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                            fontSize: 13.sp, color: ColorsManager.black)),
                       Text(
                         "${booking.doctorSpecialty}",
                         style: Theme.of(context).textTheme.labelSmall?.copyWith(fontWeight: FontWeight.w600)
                       ),
                     ],
+                ),
+                const Spacer(),
+                if (booking.status?.toLowerCase() != 'canceled')
+                  TextButton(
+                    onPressed: () {
+                      DialogUtils.showMessage(
+                        context,
+                        body: loc.cancelConfirmation,
+                        posActionTitle: loc.yes,
+                        negActionTitle: loc.no,
+                        posAction: () async {
+                          await cancelBooking(booking.documentId!);
+                          _bookingsFuture = getBookings();
+                          setState(() {});
+                        },
+                      );
+                    },
+                    child: Text(
+                      loc.cancel,
+                      style: TextStyle(
+                          fontSize: 12.sp, color: ColorsManager.darkGray),
+                    ),
                   )
-                ],
+              ],
               ),
             )
           ],
         ),
     );
+  }
+
+  Future<void> cancelBooking(String documentId) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection(BookingModel.collectionName)
+          .doc(documentId)
+          .update({'status': 'canceled'});
+      print('Booking status updated to canceled');
+    } catch (e) {
+      print('Error updating booking status: $e');
+    }
   }
 
   List<Widget> buildBookingList(List<BookingModel> bookings, String status) {
@@ -192,61 +235,69 @@ class _MyBookingScreenState extends State<MyBookingScreen> with SingleTickerProv
     return Scaffold(
       backgroundColor: themeProvider.isLightTheme() ? ColorsManager.lightGray.withOpacity(0.9) : ColorsManager.darkBlue,
       body: SafeArea(
-        child: Padding(
-          padding: REdgeInsets.only(top: 26.h, left: 18.w, right: 18.w),
-          child: Column(
-            children: [
-              Text(
-                loc.myBooking,
-                style: Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: 24.sp)
-              ),
-              SizedBox(height: 20.h),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: List.generate(
-                  tabs.length,
-                      (index) => buildTab(index, tabs[index]),
+        child: FutureBuilder<List<BookingModel>>(
+          future: _bookingsFuture,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return Center(
+                  child: CircularProgressIndicator(
+                      color: Theme.of(context).colorScheme.primary));
+            } else if (snapshot.hasError) {
+              return Center(child: Text("${loc.error}: ${snapshot.error}"));
+            } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+              return Center(child: Text(loc.noBookingsFound));
+            } else {
+              List<BookingModel> bookings = snapshot.data!;
+              return NestedScrollView(
+                headerSliverBuilder: (context, innerBoxIsScrolled) => [
+                  SliverToBoxAdapter(
+                    child: Padding(
+                      padding:
+                          REdgeInsets.only(top: 26.h, left: 18.w, right: 18.w),
+                      child: Column(
+                        children: [
+                          Text(
+                            loc.myBooking,
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodySmall
+                                ?.copyWith(fontSize: 24.sp),
+                          ),
+                          SizedBox(height: 20.h),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: List.generate(tabs.length,
+                                (index) => buildTab(index, tabs[index])),
+                          ),
+                          SizedBox(height: 12.h),
+                        ],
+                      ),
+                    ),
+                  )
+                ],
+                body: TabBarView(
+                  controller: _tabController,
+                  physics: const NeverScrollableScrollPhysics(),
+                  // منع السحب باللمس
+                  children: tabs.map((tab) {
+                    List<BookingModel> filteredBookings =
+                        bookings.where((booking) {
+                      if (tab == loc.upComing) {
+                        return booking.status?.toLowerCase() == 'upcoming';
+                      } else {
+                        return booking.status?.toLowerCase() == 'canceled';
+                      }
+                    }).toList();
+
+                    return ListView(
+                      padding: REdgeInsets.symmetric(horizontal: 18.w),
+                      children: buildBookingList(filteredBookings, tab),
+                    );
+                  }).toList(),
                 ),
-              ),
-
-              SizedBox(height: 16.h),
-              Expanded(
-                  child: FutureBuilder<List<BookingModel>>(
-                      future: _bookingsFuture,
-                      builder: (context, snapshot) {
-                        if (snapshot.connectionState == ConnectionState.waiting) {
-                          return Center(child: CircularProgressIndicator(color: Theme.of(context).colorScheme.primary));
-                        } else if (snapshot.hasError) {
-                          return Center(child: Text("${loc.error}: ${snapshot.error}"));
-                        } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                          return  Center(child: Text(loc.noBookingsFound));
-                        }
-                        else {
-                          List<BookingModel> bookings = snapshot.data!;
-                          return TabBarView(
-                            controller: _tabController,
-                            children: tabs.map((tab) {
-                              List<BookingModel> filteredBookings = bookings.where((booking) {
-                                if (tab == loc.upComing) {
-                                  return booking.status?.toLowerCase() == 'upcoming';
-                                } else if (tab == loc.completed) {
-                                  return booking.status?.toLowerCase() == 'completed';
-                                } else {
-                                  return booking.status?.toLowerCase() == 'canceled';
-                                }
-                              }).toList();
-
-
-                              return ListView(
-                                children: buildBookingList(filteredBookings, tab),
-                              );
-                            }).toList(),
-                          );
-                        }
-                      }),
-              ),
-            ],
-          ),
+              );
+            }
+          },
         ),
       ),
     );

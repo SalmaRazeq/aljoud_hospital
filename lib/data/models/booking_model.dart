@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class BookingModel {
   static const String collectionName = 'Bookings';
+  final String? documentId;
   num? bookingId;
   String? doctorName;
   String? doctorSpecialty;
@@ -12,8 +13,8 @@ class BookingModel {
   String? image;
   String? status;
 
-
   BookingModel({
+    this.documentId,
     this.bookingId,
     this.doctorName,
     this.doctorSpecialty,
@@ -22,14 +23,13 @@ class BookingModel {
     this.meetingType,
     this.price,
     this.image,
-    this.status
+    this.status,
   });
 
-
-  // دالة لتحويل البيانات من Firestore إلى BookingModel
   factory BookingModel.fromFirestore(DocumentSnapshot doc) {
     var data = doc.data() as Map<String, dynamic>;
     return BookingModel(
+      documentId: doc.id,
       bookingId: data['bookingId'],
       doctorName: data['doctorName'],
       doctorSpecialty: data['doctorSpecialty'],
@@ -42,7 +42,6 @@ class BookingModel {
     );
   }
 
-  // دالة لتحويل بيانات BookingModel إلى Firestore
   Map<String, dynamic> toFirestore() {
     return {
       'bookingId': bookingId,

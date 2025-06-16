@@ -38,4 +38,7 @@ class AssetsManager{
   static const String hospital = '${base}hospital.png';
   static const String girlVideo = '${base}girl_video.jpg';
   static const String manVideo = '${base}man_video.jpg';
+  static const String updateDr = '${base}for_Update.jpg';
+  static const String insertDr = '${base}doctor2.jpg';
+  static const String faqBg = '${base}background.jpg';
 }

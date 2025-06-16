@@ -5,17 +5,14 @@ import 'package:aljoud_hospital/presntation/screens/auth/forget_password/widgets
 import 'package:aljoud_hospital/presntation/screens/home/profile_tab/edit_profile/widget/editProfile_textField.dart';
 import 'package:aljoud_hospital/presntation/screens/widgets/build_circleButton.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+
 import '../../../../../core/utils/email_validation.dart';
 import '../../../../../data/models/user_dm.dart';
 import '../../../../../l10n/app_localizations.dart';
-import 'package:intl/intl.dart';
-
 import '../../../../../providers/theme_provider.dart';
 
 class EditeProfileScreen extends StatefulWidget {
@@ -129,7 +126,7 @@ class _EditeProfileScreenState extends State<EditeProfileScreen> {
         child: Text(
           label,
           style:
-              Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 16.sp),
+              Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 14.sp),
         ),
       );
     }
@@ -165,7 +162,7 @@ class _EditeProfileScreenState extends State<EditeProfileScreen> {
                               style: Theme.of(context)
                                   .textTheme
                                   .bodySmall
-                                  ?.copyWith(fontSize: 24.sp),
+                                  ?.copyWith(fontSize: 22.sp),
                             ),
                           ),
                         ),
@@ -297,7 +294,7 @@ class _EditeProfileScreenState extends State<EditeProfileScreen> {
                           children: [loc.male, loc.female].map((g) {
                             return Expanded(
                                 child: Padding(
-                              padding: REdgeInsets.symmetric(horizontal: 5),
+                              padding: REdgeInsets.symmetric(horizontal: 4),
                               child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
                                       backgroundColor: selectedGender == g
@@ -308,9 +305,11 @@ class _EditeProfileScreenState extends State<EditeProfileScreen> {
                                           : ColorsManager.black,
                                       side: const BorderSide(
                                           color: ColorsManager.blue2),
+                                      padding:
+                                          REdgeInsets.symmetric(vertical: 10),
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
-                                              BorderRadius.circular(10))),
+                                              BorderRadius.circular(10.r))),
                                   onPressed: () {
                                     setState(() {
                                       selectedGender = g;
@@ -465,7 +464,6 @@ class _EditeProfileScreenState extends State<EditeProfileScreen> {
         );
       }
     }
-
     setState(() {
       isLoading = false;
     });

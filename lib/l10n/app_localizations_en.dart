@@ -1,5 +1,6 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
+
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -631,7 +632,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get supportSystem => 'Support System';
 
   @override
-  String get faqs => 'FAQs';
+  String get faqs => 'Frequently Asked Questions';
 
   @override
   String get contactSupport => 'Contact support';
@@ -640,7 +641,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get trackTicketStatus => 'Track Ticket Status';
 
   @override
-  String get systemGuide => 'System Guide';
+  String get admin => 'Admin';
 
   @override
   String get payment => 'Payment';
@@ -732,4 +733,100 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get pickFromGallery => 'Pick from Gallery';
+
+  @override
+  String get updateDoctor => 'Update Doctor';
+
+  @override
+  String get insertDoctor => 'Insert New Doctor';
+
+  @override
+  String get deleteDoctor => 'Delete Doctor';
+
+  @override
+  String get selectDoctor => 'Select a doctor';
+
+  @override
+  String get confirmDelete => 'Confirm Delete';
+
+  @override
+  String get deleteSuccess => 'Doctor deleted successfully';
+
+  @override
+  String get insert => 'Insert';
+
+  @override
+  String get update => 'Update';
+
+  @override
+  String get plzEnterYearsOfExperience =>
+      'Please, Enter the years of experience';
+
+  @override
+  String get plzEnterPrice => 'Please, Enter the price';
+
+  @override
+  String get cancelConfirmation => 'Are you sure you want to cancel?';
+
+  @override
+  String get yes => 'Yes';
+
+  @override
+  String get no => 'No';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get faq => 'FAQ';
+
+  @override
+  String get faq1Q => '1. How can I book an appointment with a doctor?';
+
+  @override
+  String get faq1A =>
+      'You can select the suitable doctor from the doctors list, then choose the preferred date and time, and confirm the appointment through the app.';
+
+  @override
+  String get faq2Q => '2. Can I modify my appointment after confirming it?';
+
+  @override
+  String get faq2A =>
+      'Yes, you can modify your appointment through the app if the appointment is not too close or hasn’t been canceled by the doctor.';
+
+  @override
+  String get faq3Q => '3. How can I view my medical appointment history?';
+
+  @override
+  String get faq3A =>
+      'You can go to My Booking section in the app to view all your past and current appointments.';
+
+  @override
+  String get faq4Q =>
+      '4. Can I cancel an appointment? Are there any cancellation fees?';
+
+  @override
+  String get faq4A =>
+      'Yes, you can cancel your appointment through the app within a certain timeframe without any fees. Cancellation policies may vary depending on the doctor or medical center.';
+
+  @override
+  String get faq5Q => '5. Does the app securely store my medical information?';
+
+  @override
+  String get faq5A =>
+      'Yes, your personal and medical data are securely stored according to the highest privacy standards.';
+
+  @override
+  String get faq6Q => '6. What should I do if I forget my password?';
+
+  @override
+  String get faq6A =>
+      'You can use the \"Forgot Password\" option within the app to recover your account via email.';
+
+  @override
+  String get faq7Q => '7. How do I know if my appointment is confirmed?';
+
+  @override
+  String get faq7A =>
+      'You will receive a notification in the app and a text message confirming your appointment.';
 }

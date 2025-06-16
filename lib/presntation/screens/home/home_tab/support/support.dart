@@ -1,3 +1,4 @@
+import 'package:aljoud_hospital/core/utils/routes_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -62,7 +63,11 @@ class SupportScreen extends StatelessWidget {
                   ),
                   child: Column(
                     children: [
-                      buildOption(text: loc.faqs),
+                      buildOption(
+                          text: loc.faqs,
+                          onTab: () {
+                            Navigator.pushNamed(context, RoutesManager.faq);
+                          }),
                       buildDivider(),
                       buildOption(
                           icon: Icons.support_agent, text: loc.contactSupport),
@@ -72,8 +77,12 @@ class SupportScreen extends StatelessWidget {
                           text: loc.trackTicketStatus),
                       buildDivider(),
                       buildOption(
-                          icon: Icons.menu_book_outlined,
-                          text: loc.systemGuide),
+                        icon: Icons.person_outlined,
+                        text: loc.admin,
+                        onTab: () {
+                          Navigator.pushNamed(context, RoutesManager.admin);
+                        },
+                      ),
                     ],
                   ),
                 ),
@@ -88,6 +97,7 @@ class SupportScreen extends StatelessWidget {
   Widget buildOption({
     IconData? icon,
     required String text,
+    VoidCallback? onTab,
   }) {
     return ListTile(
       leading: CircleAvatar(
@@ -115,7 +125,7 @@ class SupportScreen extends StatelessWidget {
           fontSize: 15.sp,
         ),
       ),
-      onTap: () {},
+      onTap: onTab,
     );
   }
 

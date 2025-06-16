@@ -16,16 +16,22 @@ class DialogUtils {
         content: SizedBox(
           height: 40,
           child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text(
-                message,
-                style: GoogleFonts.poppins(
-                    fontSize: 12, fontWeight: FontWeight.w400),
+              Expanded(
+                flex: 2,
+                child: Text(
+                  message,
+                  style: GoogleFonts.poppins(
+                      fontSize: 11, fontWeight: FontWeight.w400),
+                ),
               ),
-              SizedBox(width: 20.w),
-              SpinKitFadingCircle(
-                size: 30.sp,
-                color: ColorsManager.blue2,
+              Expanded(
+                flex: 1,
+                child: SpinKitFadingCircle(
+                  size: 30.sp,
+                  color: ColorsManager.blue2,
+                ),
               ),
             ],
           ),
@@ -45,9 +51,19 @@ class DialogUtils {
     String? posActionTitle, String? negActionTitle, VoidCallback? posAction, VoidCallback? negAction}) {
     showDialog(context: context,
         builder: (context) => CupertinoAlertDialog(
-          title: title != null ? Text(title, style: GoogleFonts.poppins(fontSize: 14,fontWeight: FontWeight.w400),) : null,
-          content: body != null ? Text(body) : null,
-          actions: [
+              title: title != null
+                  ? Text(
+                      title,
+                      style: GoogleFonts.poppins(
+                          fontSize: 14.sp, fontWeight: FontWeight.w400),
+                    )
+                  : null,
+              content: body != null
+                  ? Text(body,
+                      style: GoogleFonts.poppins(
+                          fontSize: 14, fontWeight: FontWeight.w400))
+                  : null,
+              actions: [
             if(posActionTitle != null)
               MaterialButton(onPressed: (){
                 Navigator.pop(context);  //hide dialog
