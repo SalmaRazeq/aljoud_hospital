@@ -45,7 +45,7 @@ class SeeAllScreen extends StatelessWidget {
           onPressed: () {
             Navigator.pushReplacementNamed(context, RoutesManager.home);
           },
-          icon: Icon(Icons.arrow_back_rounded, size: 26.sp, color: ColorsManager.white),
+          icon: Icon(Icons.arrow_back_rounded, size: 25.sp, color: ColorsManager.white),
         ),
         title: Text(AppLocalizations.of(context)!.categories, style: Theme.of(context).textTheme.bodyMedium),
       ),
