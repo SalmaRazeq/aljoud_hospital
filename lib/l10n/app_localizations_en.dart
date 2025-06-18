@@ -1,6 +1,5 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
-
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -22,7 +21,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get anyWhere => 'Anywhere.';
 
   @override
-  String get startText => 'More than 100 doctors are ready to answer all your questions.';
+  String get startText =>
+      'More than 100 doctors are ready to answer all your questions.';
 
   @override
   String get getStarted => 'Get Started';
@@ -139,13 +139,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get support => 'Support';
 
   @override
-  String get providingSupport => 'Providing direct support with the customer service team';
+  String get providingSupport =>
+      'Providing direct support with the customer service team';
 
   @override
   String get medicalRecords => 'Medical Records';
 
   @override
-  String get patientInformation => 'It provides the patient with information about his medical history';
+  String get patientInformation =>
+      'It provides the patient with information about his medical history';
 
   @override
   String get cardiology => 'Cardiology';
@@ -235,7 +237,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get passwordTooWeak => 'Sorry, your password is too weak.';
 
   @override
-  String get accountAlreadyExists => 'The account already exists for that email.';
+  String get accountAlreadyExists =>
+      'The account already exists for that email.';
 
   @override
   String get wrongEorP => 'Wrong email or password';
@@ -448,7 +451,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get aboutText1 => 'Consultant of';
 
   @override
-  String get aboutText2 => 'at Smouha Hospital, More than 30 years of experience';
+  String get aboutText2 =>
+      'at Smouha Hospital, More than 30 years of experience';
 
   @override
   String get workingTimeText => 'Tuesday - Sunday';
@@ -520,7 +524,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get paid => 'Paid:';
 
   @override
-  String get bookingText => 'Your appointment has been successfully booked. Please arrive 10 minutes early.';
+  String get bookingText =>
+      'Your appointment has been successfully booked. Please arrive 10 minutes early.';
 
   @override
   String get viewMyBooking => 'View my bookings';
@@ -535,7 +540,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get medicalLicenseNumber => 'Medical License Number';
 
   @override
-  String get plzEnterMedicalLicence => 'Please, Enter your medical license number';
+  String get plzEnterMedicalLicence =>
+      'Please, Enter your medical license number';
 
   @override
   String get specialization => 'Specialization';

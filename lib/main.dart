@@ -1,3 +1,4 @@
+import 'package:aljoud_hospital/presntation/screens/see_all/view_model/doctor_view_model.dart';
 import 'package:aljoud_hospital/providers/firebase_notification.dart';
 import 'package:aljoud_hospital/providers/language_provider.dart';
 import 'package:aljoud_hospital/providers/notification_provider.dart';
@@ -16,6 +17,8 @@ void main()async{
   runApp( MultiProvider(
     providers: [
       ChangeNotifierProvider(create: (_) => LanguageProvider(),),
+      ChangeNotifierProvider(create: (_) => DoctorViewModel(),),
+
       ChangeNotifierProvider(create: (_) => ThemeProvider(),),
     ChangeNotifierProvider(create: (_) => NotificationProvider()),
   ],

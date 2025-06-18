@@ -32,7 +32,7 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => CategoryDetailsScreen(category: category),
+        builder: (context) => const CategoryDetailsScreen(),
       ),
     );
   }

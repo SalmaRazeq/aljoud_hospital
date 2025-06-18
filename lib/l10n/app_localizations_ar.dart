@@ -1,6 +1,5 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
-
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -106,7 +105,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get notMatch => 'كلمة المرور لا تتطابق';
 
   @override
-  String get password6Char => 'يجب أن تكون كلمة المرور مكونة من 6 أحرف على الأقل';
+  String get password6Char =>
+      'يجب أن تكون كلمة المرور مكونة من 6 أحرف على الأقل';
 
   @override
   String get search => 'بحث';
@@ -235,7 +235,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get passwordTooWeak => 'عذراً، كلمة المرور الخاصة بك ضعيفة جدًا.';
 
   @override
-  String get accountAlreadyExists => 'الحساب موجود بالفعل لهذا البريد الإلكتروني.';
+  String get accountAlreadyExists =>
+      'الحساب موجود بالفعل لهذا البريد الإلكتروني.';
 
   @override
   String get wrongEorP => 'البريد الإلكتروني أو كلمة المرور خاطئة';
@@ -520,7 +521,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get paid => 'تم الدفع:';
 
   @override
-  String get bookingText => 'تم حجز موعدك بنجاح. يرجى الحضور قبل الموعد بـ10 دقائق.';
+  String get bookingText =>
+      'تم حجز موعدك بنجاح. يرجى الحضور قبل الموعد بـ10 دقائق.';
 
   @override
   String get viewMyBooking => 'عرض حجوزاتي';

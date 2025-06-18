@@ -51,6 +51,7 @@ dependencies:
   provider: ^6.1.5
   font_awesome_flutter: ^10.8.0
   dropdown_button2: ^2.3.9
+  web_socket_channel: ^3.0.1
 
 
 dev_dependencies:

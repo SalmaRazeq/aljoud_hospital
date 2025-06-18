@@ -22,14 +22,16 @@ import 'package:aljoud_hospital/presntation/screens/patient_details/patient_deta
 import 'package:aljoud_hospital/presntation/screens/payment/confirm_payment/confirm_payment.dart';
 import 'package:aljoud_hospital/presntation/screens/payment/payment.dart';
 import 'package:aljoud_hospital/presntation/screens/see_all/category_details/CategoryDetailsScreen.dart';
-import 'package:aljoud_hospital/presntation/screens/see_all/see_all.dart';
+import 'package:aljoud_hospital/presntation/screens/see_all/view/see_all.dart';
 import 'package:aljoud_hospital/presntation/screens/start/start.dart';
 import 'package:flutter/material.dart';
 
+import '../../data/model_api/selectedDoctor/Data.dart';
 import '../../data/models/doctor/doctor_model.dart';
 import '../../presntation/screens/home/categories_item/categories_item.dart';
 import '../../presntation/screens/home/home.dart';
 import '../../presntation/screens/splash/splash.dart';
+import '../../test.dart';
 
 class RoutesManager{
   static const String splash = '/splash';
@@ -60,9 +62,15 @@ class RoutesManager{
   static const String insertDoctor = '/insertDoctor';
   static const String updateDoctor = '/updateDoctor';
   static const String faq = '/faq';
+  static const String testApiScreen = '/TestApiScreen';
 
   static Route? router(RouteSettings settings) {
     switch (settings.name) {
+
+      case testApiScreen:
+        return MaterialPageRoute(
+          builder: (context) =>  const TestScreen(),
+        );
       case splash:
         return MaterialPageRoute(
           builder: (context) => const SplashScreen(),
@@ -84,11 +92,11 @@ class RoutesManager{
         );
       case forgetPassword:
         return MaterialPageRoute(
-          builder: (context) => ForgetPasswordScreen(),
+          builder: (context) => const ForgetPasswordScreen(),
         );
       case createNewPassword:
         return MaterialPageRoute(
-          builder: (context) => CreateNewPasswordScreen(),
+          builder: (context) => const CreateNewPasswordScreen(),
         );
       case register:
         return MaterialPageRoute(
@@ -100,53 +108,53 @@ class RoutesManager{
         );
       case admin:
         return MaterialPageRoute(
-          builder: (context) => AdminScreen(),
+          builder: (context) => const AdminScreen(),
         );
       case insertDoctor:
         return MaterialPageRoute(
-          builder: (context) => InsertDoctorScreen(),
+          builder: (context) => const InsertDoctorScreen(),
         );
       case faq:
         return MaterialPageRoute(
-          builder: (context) => FAQScreen(),
+          builder: (context) => const FAQScreen(),
         );
       case updateDoctor:
         return MaterialPageRoute(
-          builder: (context) => UpdateDoctorScreen(),
+          builder: (context) => const UpdateDoctorScreen(),
         );
       case hospitalVisit:
-        final doctor = settings.arguments as Doctor;
+        final doctor = settings.arguments ;
         return MaterialPageRoute(
-          builder: (context) => HospitalVisitScreen(doctor: doctor),
+          builder: (context) => const HospitalVisitScreen(),
         );
       case doctorProfile:
-        final doctor = settings.arguments as Doctor;
+        final doctor = settings.arguments ;
         return MaterialPageRoute(
-          builder: (context) => DoctorProfileScreen(doctor: doctor),
+          builder: (context) => const DoctorProfileScreen(),
         );
       case myBooking:
         return MaterialPageRoute(
-          builder: (context) => MyBookingScreen(),
+          builder: (context) => const MyBookingScreen(),
         );
       case aboutHospital:
         return MaterialPageRoute(
-          builder: (context) => AboutHospitalScreen(),
+          builder: (context) => const AboutHospitalScreen(),
         );
       case support:
         return MaterialPageRoute(
-          builder: (context) => SupportScreen(),
+          builder: (context) => const SupportScreen(),
         );
       case notification:
         return MaterialPageRoute(
-          builder: (context) => NotificationScreen(),
+          builder: (context) => const NotificationScreen(),
         );
       case onlineConsultation:
         return MaterialPageRoute(
-          builder: (context) => VideoCallScreen(),
+          builder: (context) => const VideoCallScreen(),
         );
       case medicalRecords:
         return MaterialPageRoute(
-          builder: (context) => MedicalRecordsScreen(),
+          builder: (context) => const MedicalRecordsScreen(),
         );
       case doctorRegister:
         return MaterialPageRoute(
@@ -154,7 +162,7 @@ class RoutesManager{
         );
       case profile:
         return MaterialPageRoute(
-          builder: (context) => ProfileScreen(),
+          builder: (context) => const ProfileScreen(),
         );
       case editProfile:
         return MaterialPageRoute(
@@ -162,7 +170,7 @@ class RoutesManager{
         );
       case settingScreen:
         return MaterialPageRoute(
-          builder: (context) => SettingScreen(),
+          builder: (context) => const SettingScreen(),
         );
       case payment:
         final args = settings.arguments as Map<String, dynamic>;
@@ -186,12 +194,11 @@ class RoutesManager{
           ),
         );
       case categoryDetails:
-        final category = settings.arguments as CategoriesItem;
         return MaterialPageRoute(
-          builder: (_) => CategoryDetailsScreen(category: category),
+          builder: (_) => const CategoryDetailsScreen(),
+          settings: RouteSettings(arguments: settings.arguments as String?), // تعديل الـ cast لـ String?
         );
-      default:
-        return MaterialPageRoute(
+      default:return MaterialPageRoute(
           builder: (_) => const Scaffold(
             body: Center(child: Text("No route defined")),
           ),
