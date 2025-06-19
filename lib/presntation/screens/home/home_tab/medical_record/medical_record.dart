@@ -27,16 +27,10 @@ class _MedicalRecordsScreenState extends State<MedicalRecordsScreen>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
-  String? fullName, gender, day, month, year;
-  String? medicalRecordId;
-
   @override
   void initState() {
     _tabController = TabController(length: 3, vsync: this);
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      loadUserData();
-    });
   }
 
   @override
@@ -45,44 +39,20 @@ class _MedicalRecordsScreenState extends State<MedicalRecordsScreen>
     super.dispose();
   }
 
-  Future<void> loadUserData() async {
-    DialogUtils.showLoading(context,
-        message: AppLocalizations.of(context)!.loading);
+  Stream<DocumentSnapshot> getUserStream() {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null) {
+      throw Exception("User not logged in");
+    }
+    return FirebaseFirestore.instance.collection('Users').doc(user.uid).snapshots();
+  }
 
-    try {
-      User? user = FirebaseAuth.instance.currentUser;
-      if (user != null) {
-        final firestore = FirebaseFirestore.instance;
-        final userDocRef = firestore.collection('Users').doc(user.uid);
-
-        DocumentSnapshot userDoc = await userDocRef.get();
-
-        if (userDoc.exists && userDoc.data() != null) {
-          Map<String, dynamic> userData =
-              userDoc.data() as Map<String, dynamic>;
-          UserDM userDM = UserDM.fromFireStore(userData);
-
-          if (userData['medicalRecordId'] == null ||
-              (userData['medicalRecordId'] as String).isEmpty) {
-            String generatedId =
-                generateMedicalRecordId(userDM.fullName ?? "USR");
-            await userDocRef.update({'medicalRecordId': generatedId});
-          }
-
-          setState(() {
-            fullName = userDM.fullName ?? '...';
-            gender = userDM.gender;
-            day = userDM.day;
-            month = userDM.month;
-            year = userDM.year;
-            medicalRecordId = userData['medicalRecordId'];
-          });
-        }
-      }
-    } catch (e) {
-      DialogUtils.showMessage(e);
-    } finally {
-      Navigator.of(context).pop();
+  Future<void> _generateMedicalRecordIdIfMissing(
+      DocumentSnapshot snapshot, UserDM userDM) async {
+    final docRef = FirebaseFirestore.instance.collection('Users').doc(userDM.id);
+    if (snapshot['medicalRecordId'] == null || (snapshot['medicalRecordId'] as String).isEmpty) {
+      String generatedId = generateMedicalRecordId(userDM.fullName ?? "USR");
+      await docRef.update({'medicalRecordId': generatedId});
     }
   }
 
@@ -111,7 +81,6 @@ class _MedicalRecordsScreenState extends State<MedicalRecordsScreen>
 
   Widget _buildMedicalHistoryTab() {
     final loc = AppLocalizations.of(context)!;
-
     return CustomDataTable(
       rows: [
         [loc.date, loc.diagnosis, loc.doctor],
@@ -149,11 +118,7 @@ class _MedicalRecordsScreenState extends State<MedicalRecordsScreen>
     );
   }
 
-  Widget _buildInfoRow({
-    IconData? icon,
-    String? title,
-    required String value,
-  }) {
+  Widget _buildInfoRow({IconData? icon, String? title, required String value}) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 6.h),
       child: Row(
@@ -194,156 +159,157 @@ class _MedicalRecordsScreenState extends State<MedicalRecordsScreen>
     final loc = AppLocalizations.of(context)!;
 
     return Scaffold(
-        body: SingleChildScrollView(
-            child: SafeArea(
-      child: Padding(
-        padding: REdgeInsets.symmetric(vertical: 20.h),
-        child: Column(children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(
-                width: 5.w,
-              ),
-              BuildCircleButton(
-                  icon: Icons.arrow_back_ios_new_outlined,
-                  onTap: () {
-                    Navigator.pop(context);
-                  }),
-              Expanded(
-                child: Center(
-                  child: Text(loc.medicalRecords,
-                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          fontSize: 20.sp,
-                          color: Theme.of(context).colorScheme.primaryFixed)),
+      body: SafeArea(
+        child: Padding(
+          padding: REdgeInsets.symmetric(vertical: 20.h),
+          child: StreamBuilder<DocumentSnapshot>(
+            stream: getUserStream(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(child: CircularProgressIndicator());
+              }
+              if (!snapshot.hasData || !snapshot.data!.exists) {
+                return const Center(child: Text("مافيش داتا "));
+              }
+
+              final userData = snapshot.data!.data() as Map<String, dynamic>;
+              final userDM = UserDM.fromFireStore(userData);
+
+              // تحقق وإنشاء المعرف إذا كان مفقود
+              _generateMedicalRecordIdIfMissing(snapshot.data!, userDM);
+
+              return SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SizedBox(width: 5.w),
+                        BuildCircleButton(
+                          icon: Icons.arrow_back_ios_new_outlined,
+                          onTap: () => Navigator.pop(context),
+                        ),
+                        Expanded(
+                          child: Center(
+                            child: Text(
+                              loc.medicalRecords,
+                              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                fontSize: 20.sp,
+                                color: Theme.of(context).colorScheme.primaryFixed,
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(width: 30.w),
+                      ],
+                    ),
+                    SizedBox(height: 10.h),
+                    Divider(
+                      color: Theme.of(context).dividerColor,
+                      thickness: 0.6.w,
+                      height: 20.h,
+                    ),
+                    SizedBox(height: 18.h),
+                    Padding(
+                      padding: REdgeInsets.symmetric(horizontal: 15),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            '${loc.name} : ${userDM.fullName ?? '...'}',
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyLarge!
+                                .copyWith(fontSize: 15.sp),
+                          ),
+                          SizedBox(height: 10.h),
+                          _buildInfoRow(
+                              title: "${loc.id} :", value: "${userData['medicalRecordId'] ?? '..'}"),
+                          _buildInfoRow(
+                              icon: Icons.calendar_today,
+                              value: "${userDM.day ?? '..'}/${userDM.month ?? '..'}/${userDM.year ?? '..'}"),
+                          _buildInfoRow(
+                              icon: Icons.person_outlined, value: "${userDM.gender ?? '..'}"),
+                          _buildInfoRow(
+                            title: "${loc.bloodType} :",
+                            value: "---",
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: 10.h),
+                    Container(
+                      height: 40.h,
+                      width: double.infinity,
+                      decoration: const BoxDecoration(
+                        border: Border(
+                          bottom: BorderSide(color: ColorsManager.hint),
+                        ),
+                      ),
+                      child: TabBar(
+                        controller: _tabController,
+                        isScrollable: false,
+                        labelColor: Theme.of(context).colorScheme.primaryFixed,
+                        unselectedLabelColor: ColorsManager.hint,
+                        indicator: UnderlineTabIndicator(
+                          borderSide: BorderSide(width: 1.5.w, color: ColorsManager.blue2),
+                          insets: EdgeInsets.symmetric(horizontal: 14.w),
+                        ),
+                        indicatorSize: TabBarIndicatorSize.tab,
+                        unselectedLabelStyle: GoogleFonts.inter(
+                            fontSize: 13.5.sp, fontWeight: FontWeight.w500),
+                        labelStyle: GoogleFonts.inter(
+                            fontSize: 14.sp, fontWeight: FontWeight.w600),
+                        tabs: [
+                          Tab(text: loc.medicalHistory),
+                          Tab(text: loc.medications),
+                          Tab(text: loc.labResults),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 350.h,
+                      child: TabBarView(
+                        controller: _tabController,
+                        children: [
+                          _buildMedicalHistoryTab(),
+                          _buildMedicationsTab(),
+                          _buildLabResultsTab(),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 10.w),
+                      child: Row(
+                        children: [
+                          Expanded(child: _buildButton(loc.addRecord, () {})),
+                          SizedBox(width: 10.w),
+                          Expanded(child: _buildButton(loc.download, () {})),
+                          SizedBox(width: 10.w),
+                          Expanded(child: _buildButton(loc.print, () {})),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-              SizedBox(width: 30.w),
-            ],
+              );
+            },
           ),
-          SizedBox(height: 10.h),
-          Divider(
-            color: Theme.of(context).dividerColor,
-            thickness: 0.6.w,
-            height: 20.h,
-          ),
-          SizedBox(
-            height: 18.h,
-          ),
-          Padding(
-            padding: REdgeInsets.symmetric(horizontal: 15),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  '${loc.name} : ${fullName ?? '...'}',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyLarge!
-                      .copyWith(fontSize: 15.sp),
-                ),
-                SizedBox(
-                  height: 10.h,
-                ),
-                _buildInfoRow(
-                    title: "${loc.id} :", value: "${medicalRecordId ?? '..'}"),
-                _buildInfoRow(
-                    icon: Icons.calendar_today,
-                    value: "${day ?? '..'}/${month ?? '..'}/${year ?? '..'}"),
-                _buildInfoRow(
-                    icon: Icons.person_outlined, value: "${gender ?? '..'}"),
-                _buildInfoRow(
-                  title: "${loc.bloodType} :",
-                  value: "---",
-                ),
-              ],
-            ),
-          ),
-          SizedBox(height: 10.h),
-          Container(
-            height: 40.h,
-            width: double.infinity,
-            decoration: const BoxDecoration(
-              border: Border(
-                bottom: BorderSide(color: ColorsManager.hint),
-              ),
-            ),
-            child: TabBar(
-              controller: _tabController,
-              isScrollable: false,
-              // هنا تم تعديلها عشان التابات تتوزع بالتساوي
-              labelColor: Theme.of(context).colorScheme.primaryFixed,
-              unselectedLabelColor: ColorsManager.hint,
-              indicator: UnderlineTabIndicator(
-                borderSide:
-                    BorderSide(width: 1.5.w, color: ColorsManager.blue2),
-                insets: EdgeInsets.symmetric(horizontal: 14.w),
-              ),
-              indicatorSize: TabBarIndicatorSize.tab,
-              unselectedLabelStyle: GoogleFonts.inter(
-                  fontSize: 13.5.sp, fontWeight: FontWeight.w500),
-              labelStyle: GoogleFonts.inter(
-                  fontSize: 14.sp, fontWeight: FontWeight.w600),
-              tabs: [
-                Tab(text: loc.medicalHistory),
-                Tab(text: loc.medications),
-                Tab(text: loc.labResults),
-              ],
-            ),
-          ),
-          SizedBox(
-            height: 350.h,
-            child: TabBarView(
-              controller: _tabController,
-              children: [
-                _buildMedicalHistoryTab(),
-                _buildMedicationsTab(),
-                _buildLabResultsTab(),
-              ],
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: 10.w,
-            ),
-            child: Row(
-              children: [
-                Expanded(
-                  child: _buildButton(loc.addRecord, () {}),
-                ),
-                SizedBox(width: 10.w),
-                Expanded(
-                  child: _buildButton(loc.download, () {}),
-                ),
-                SizedBox(width: 10.w),
-                Expanded(
-                  child: _buildButton(loc.print, () {}),
-                ),
-              ],
-            ),
-          ),
-        ]),
+        ),
       ),
-    )));
+    );
   }
 }
 
 String generateMedicalRecordId(String fullName) {
-  // ناخد أول 3 حروف من الاسم (لو الاسم قصير ناخد طول الاسم كله)
   String namePart = fullName.trim().replaceAll(' ', '');
   if (namePart.length > 3) {
     namePart = namePart.substring(0, 3);
   }
-
-  // نحول الحروف دي لأرقام عن طريق تحويل كل حرف لرقم ASCII ونجمعهم أو نعمل لهم صيغة رقمية
   int numericPart = 0;
   for (int i = 0; i < namePart.length; i++) {
     numericPart += namePart.codeUnitAt(i);
   }
-
-  // نولد رقم عشوائي 3 أرقام
   int randomNumber = Random().nextInt(900) + 100; // من 100 إلى 999
-
-  // ندمج الرقم الناتج من الحروف مع الرقم العشوائي
-  return "${numericPart}${randomNumber}";
+  return "$numericPart$randomNumber";
 }

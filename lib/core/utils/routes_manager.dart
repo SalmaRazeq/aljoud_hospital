@@ -25,6 +25,7 @@ import 'package:aljoud_hospital/presntation/screens/see_all/category_details/Cat
 import 'package:aljoud_hospital/presntation/screens/see_all/view/see_all.dart';
 import 'package:aljoud_hospital/presntation/screens/start/start.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../data/model_api/selectedDoctor/Data.dart';
 import '../../data/models/doctor/doctor_model.dart';
@@ -104,7 +105,7 @@ class RoutesManager{
         );
       case seeAll:
         return MaterialPageRoute(
-          builder: (context) => SeeAllScreen(),
+          builder: (context) => const SeeAllScreen(),
         );
       case admin:
         return MaterialPageRoute(
@@ -123,14 +124,47 @@ class RoutesManager{
           builder: (context) => const UpdateDoctorScreen(),
         );
       case hospitalVisit:
-        final doctor = settings.arguments ;
+        final doctor = settings.arguments as Data?;
+        if (doctor == null) {
+          // لو الـ arguments null، ارجع صفحة بديلة أو اعمل شيء تاني
+          return MaterialPageRoute(
+            builder: (context) => Scaffold(
+              body: Center(
+                child: Text(
+                  " لانوجد داتا ",
+                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                    color: Colors.red,
+                    fontSize: 16.sp,
+                  ),
+                ),
+              ),
+            ),
+          );
+        }
         return MaterialPageRoute(
           builder: (context) => const HospitalVisitScreen(),
+          settings: RouteSettings(arguments: doctor),
         );
-      case doctorProfile:
-        final doctor = settings.arguments ;
+      case RoutesManager.doctorProfile:
+        final doctor = settings.arguments as Data?;
+        if (doctor == null) {
+          return MaterialPageRoute(
+            builder: (context) => Scaffold(
+              body: Center(
+                child: Text(
+                  " لا توجد داتا ",
+                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                    color: Colors.red,
+                    fontSize: 16.sp,
+                  ),
+                ),
+              ),
+            ),
+          );
+        }
         return MaterialPageRoute(
           builder: (context) => const DoctorProfileScreen(),
+          settings: RouteSettings(arguments: doctor),
         );
       case myBooking:
         return MaterialPageRoute(

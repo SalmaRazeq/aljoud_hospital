@@ -10,7 +10,6 @@ import '../../../../data/models/booking_model.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../../providers/theme_provider.dart';
 
-
 class MyBookingScreen extends StatefulWidget {
   const MyBookingScreen({super.key});
 
@@ -20,17 +19,16 @@ class MyBookingScreen extends StatefulWidget {
 
 class _MyBookingScreenState extends State<MyBookingScreen> with SingleTickerProviderStateMixin {
   late TabController _tabController;
-  late Future<List<BookingModel>> _bookingsFuture;
+  late Stream<List<BookingModel>> _bookingsStream;
 
   late List<String> tabs;
 
   @override
   void didChangeDependencies() {
-    // TODO: implement didChangeDependencies
     super.didChangeDependencies();
     final loc = AppLocalizations.of(context)!;
     tabs = [loc.upComing, loc.canceled];
-    _bookingsFuture = getBookings();
+    _bookingsStream = getBookingsStream();
   }
 
   @override
@@ -83,96 +81,111 @@ class _MyBookingScreenState extends State<MyBookingScreen> with SingleTickerProv
     final loc = AppLocalizations.of(context)!;
 
     return Container(
-        margin: REdgeInsets.symmetric(vertical: 10.h),
-        decoration: BoxDecoration(
-          color: ColorsManager.white,
-          borderRadius: BorderRadius.circular(12.r),
-        ),
-        child: Column(
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                color: themeProvider.isLightTheme() ? ColorsManager.lightBlue : ColorsManager.lightBlue2, ///change for dark mood
-                borderRadius: BorderRadius.vertical(top: Radius.circular(12.r)),
-              ),
-              padding: REdgeInsets.symmetric(horizontal: 16.w, vertical: 5.h),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        headerTitle,
-                        style: GoogleFonts.sourceSans3(
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w500,
-                          color: ColorsManager.lightGreen,
-                        ),
-                      ),
-
-                      SizedBox(height: 2.h),
-
-                      Directionality(
-                        textDirection: TextDirection.rtl,
-                        child: Text(
-                          "${booking.appointmentDate} -  ${booking.appointmentTime}",
-                          style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 10.sp,
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 2.h),
-                    ],
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Icon(
-                        booking.meetingType == 'Online'
-                            ? Icons.videocam_outlined
-                            : Icons.calendar_month_outlined,
-                        color: Theme.of(context).colorScheme.onPrimary,
-                        size: 22.sp,
-                      ),
-                      SizedBox(height: 4.h,),
-                      Directionality(
-                        textDirection: TextDirection.ltr,
-                        child: Text(
-                          "${booking.price}",
-                          style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 10.sp, color: ColorsManager.black)
-                        ),
-                      ),
-                    ],
-                  ),
-
-                ],
-              ),
+      margin: REdgeInsets.symmetric(vertical: 10.h),
+      decoration: BoxDecoration(
+        color: ColorsManager.white,
+        borderRadius: BorderRadius.circular(12.r),
+      ),
+      child: Column(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              color: themeProvider.isLightTheme() ? ColorsManager.lightBlue : ColorsManager.lightBlue2,
+              borderRadius: BorderRadius.vertical(top: Radius.circular(12.r)),
             ),
-            Padding(
+            padding: REdgeInsets.symmetric(horizontal: 16.w, vertical: 5.h),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      headerTitle,
+                      style: GoogleFonts.sourceSans3(
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.w500,
+                        color: ColorsManager.lightGreen,
+                      ),
+                    ),
+                    SizedBox(height: 2.h),
+                    Directionality(
+                      textDirection: TextDirection.rtl,
+                      child: Text(
+                        "${booking.appointmentDate} - ${booking.appointmentTime}",
+                        style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 10.sp,
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 2.h),
+                  ],
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Icon(
+                      booking.meetingType == 'Online'
+                          ? Icons.videocam_outlined
+                          : Icons.calendar_month_outlined,
+                      color: Theme.of(context).colorScheme.onPrimary,
+                      size: 22.sp,
+                    ),
+                    SizedBox(height: 4.h),
+                    Directionality(
+                      textDirection: TextDirection.ltr,
+                      child: Text(
+                        "${booking.price}",
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyLarge
+                            ?.copyWith(fontSize: 10.sp, color: ColorsManager.black),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          Padding(
             padding: REdgeInsets.all(10),
             child: Row(
-                children: [
-                  CircleAvatar(
-                  radius: 24.r,
-                  backgroundImage: AssetImage('${booking.image}'),
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(24.r),
+                  child: Image.network(
+                    booking.image ?? "https://cdn-icons-png.flaticon.com/512/3870/3870822.png",
+                    height: 20.h,
+                    width: 20.w,
+                    fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) => Image.network(
+                      'https://cdn-icons-png.flaticon.com/512/3870/3870822.png',
+                      height: 20.h,
+                      width: 20.w,
+                      fit: BoxFit.cover,
+                    ),
                   ),
-
-                  SizedBox(width: 12.w),
-
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        '${booking.doctorName}',
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            fontSize: 13.sp, color: ColorsManager.black)),
-                      Text(
-                        "${booking.doctorSpecialty}",
-                        style: Theme.of(context).textTheme.labelSmall?.copyWith(fontWeight: FontWeight.w600)
+                ),
+                SizedBox(width: 12.w),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      '${booking.doctorName}',
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        fontSize: 13.sp,
+                        color: ColorsManager.black,
                       ),
-                    ],
+                    ),
+                    Text(
+                      "${booking.doctorSpecialty}",
+                      style: Theme.of(context)
+                          .textTheme
+                          .labelSmall
+                          ?.copyWith(fontWeight: FontWeight.w600),
+                    ),
+                  ],
                 ),
                 const Spacer(),
                 if (booking.status?.toLowerCase() != 'canceled')
@@ -185,22 +198,19 @@ class _MyBookingScreenState extends State<MyBookingScreen> with SingleTickerProv
                         negActionTitle: loc.no,
                         posAction: () async {
                           await cancelBooking(booking.documentId!);
-                          _bookingsFuture = getBookings();
-                          setState(() {});
                         },
                       );
                     },
                     child: Text(
                       loc.cancel,
-                      style: TextStyle(
-                          fontSize: 12.sp, color: ColorsManager.darkGray),
+                      style: TextStyle(fontSize: 12.sp, color: ColorsManager.darkGray),
                     ),
                   )
               ],
-              ),
-            )
-          ],
-        ),
+            ),
+          )
+        ],
+      ),
     );
   }
 
@@ -227,23 +237,48 @@ class _MyBookingScreenState extends State<MyBookingScreen> with SingleTickerProv
     }).toList();
   }
 
+  Stream<List<BookingModel>> getBookingsStream() {
+    try {
+      return FirebaseFirestore.instance
+          .collection(BookingModel.collectionName)
+          .snapshots()
+          .map((snapshot) {
+        return snapshot.docs.map((doc) {
+          return BookingModel.fromFirestore(doc);
+        }).toList();
+      });
+    } catch (e) {
+      print("Error retrieving bookings stream: $e");
+      return Stream.value([]);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
     var themeProvider = Provider.of<ThemeProvider>(context);
 
     return Scaffold(
-      backgroundColor: themeProvider.isLightTheme() ? ColorsManager.lightGray.withOpacity(0.9) : ColorsManager.darkBlue,
+      backgroundColor: themeProvider.isLightTheme()
+          ? ColorsManager.lightGray.withOpacity(0.9)
+          : ColorsManager.darkBlue,
       body: SafeArea(
-        child: FutureBuilder<List<BookingModel>>(
-          future: _bookingsFuture,
+        child: StreamBuilder<List<BookingModel>>(
+          stream: _bookingsStream,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(
-                  child: CircularProgressIndicator(
-                      color: Theme.of(context).colorScheme.primary));
+                child: CircularProgressIndicator(
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+              );
             } else if (snapshot.hasError) {
-              return Center(child: Text("${loc.error}: ${snapshot.error}"));
+              return Center(
+                child: Text(
+                  "${loc.error}: ${snapshot.error}",
+                  style: TextStyle(color: ColorsManager.red, fontSize: 16.sp),
+                ),
+              );
             } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
               return Center(child: Text(loc.noBookingsFound));
             } else {
@@ -252,8 +287,7 @@ class _MyBookingScreenState extends State<MyBookingScreen> with SingleTickerProv
                 headerSliverBuilder: (context, innerBoxIsScrolled) => [
                   SliverToBoxAdapter(
                     child: Padding(
-                      padding:
-                          REdgeInsets.only(top: 26.h, left: 18.w, right: 18.w),
+                      padding: REdgeInsets.only(top: 26.h, left: 18.w, right: 18.w),
                       child: Column(
                         children: [
                           Text(
@@ -266,8 +300,10 @@ class _MyBookingScreenState extends State<MyBookingScreen> with SingleTickerProv
                           SizedBox(height: 20.h),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: List.generate(tabs.length,
-                                (index) => buildTab(index, tabs[index])),
+                            children: List.generate(
+                              tabs.length,
+                                  (index) => buildTab(index, tabs[index]),
+                            ),
                           ),
                           SizedBox(height: 12.h),
                         ],
@@ -278,14 +314,12 @@ class _MyBookingScreenState extends State<MyBookingScreen> with SingleTickerProv
                 body: TabBarView(
                   controller: _tabController,
                   physics: const NeverScrollableScrollPhysics(),
-                  // منع السحب باللمس
                   children: tabs.map((tab) {
-                    List<BookingModel> filteredBookings =
-                        bookings.where((booking) {
+                    List<BookingModel> filteredBookings = bookings.where((booking) {
                       if (tab == loc.upComing) {
-                        return booking.status?.toLowerCase() == 'upcoming';
+                        return booking.status?.toLowerCase() == 'upcoming' ?? false;
                       } else {
-                        return booking.status?.toLowerCase() == 'canceled';
+                        return booking.status?.toLowerCase() == 'canceled' ?? false;
                       }
                     }).toList();
 
@@ -302,24 +336,4 @@ class _MyBookingScreenState extends State<MyBookingScreen> with SingleTickerProv
       ),
     );
   }
-
-  Future<List<BookingModel>> getBookings() async {
-    try {
-      // استرجاع بيانات الحجوزات من Firestore
-      QuerySnapshot snapshot = await FirebaseFirestore.instance
-          .collection(BookingModel.collectionName).get();
-
-      // تحويل البيانات إلى قائمة من BookingModel
-      List<BookingModel> bookings = snapshot.docs.map((doc) {
-        return BookingModel.fromFirestore(doc);
-      }).toList();
-
-      return bookings;
-    } catch (e) {
-      print("Error retrieving bookings: $e");
-      return [];
-    }
-  }
-
 }
-

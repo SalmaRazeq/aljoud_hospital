@@ -3,6 +3,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:http/http.dart' as http;
+
+import '../../../../data/api_manager/api_manager.dart'; // تأكد إن المسار صحيح
 
 class UpdateDoctorForm extends StatefulWidget {
   final int doctorId;
@@ -60,8 +63,6 @@ class _UpdateDoctorFormState extends State<UpdateDoctorForm> {
   bool isLoading = false;
 
   late TextEditingController nameController;
-  late TextEditingController emailController;
-  late TextEditingController passwordController;
   late TextEditingController phoneController;
   late TextEditingController degreeController;
   late TextEditingController ratingController;
@@ -92,8 +93,6 @@ class _UpdateDoctorFormState extends State<UpdateDoctorForm> {
     super.initState();
     // Initialize controllers with empty values
     nameController = TextEditingController();
-    emailController = TextEditingController();
-    passwordController = TextEditingController();
     phoneController = TextEditingController();
     degreeController = TextEditingController();
     ratingController = TextEditingController();
@@ -158,47 +157,72 @@ class _UpdateDoctorFormState extends State<UpdateDoctorForm> {
       return;
     }
 
+    // Additional validation for age and years of experience
+    final age = int.tryParse(ageController.text);
+    final yearsExperience = int.tryParse(yearController.text);
+    if (age == null || age < 18 || age > 120) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("يرجى إدخال عمر بين 18 و 120 سنة"),
+          backgroundColor: Colors.red,
+          duration: Duration(seconds: 3),
+        ),
+      );
+      return;
+    }
+    if (yearsExperience == null || yearsExperience < 0 || yearsExperience > 100) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("يرجى إدخال سنوات خبرة بين 0 و 100 سنة"),
+          backgroundColor: Colors.red,
+          duration: Duration(seconds: 3),
+        ),
+      );
+      return;
+    }
+
     setState(() {
       isLoading = true;
     });
 
     try {
-      // TODO: Replace with actual API call when ready
-      // Example: final response = await ApiManger().sendDoctorData(
-      //   drId: widget.doctorId,
-      //   drEmail: emailController.text.trim(),
-      //   drName: nameController.text.trim(),
-      //   drPassword: passwordController.text.isEmpty ? null : passwordController.text,
-      //   drPhone: phoneController.text.trim(),
-      //   drGender: gender,
-      //   drDegree: degreeController.text.trim(),
-      //   specialty: specialty!,
-      //   rating: double.parse(ratingController.text),
-      //   drAge: int.parse(ageController.text),
-      //   drAddress: addressController.text.trim(),
-      //   drPhoto: imageToBase64(selectedImage),
-      //   yearExperience: int.parse(yearController.text),
-      //   price: double.parse(priceController.text),
-      //   drDay: day!,
-      //   drTime: timeController.text,
-      // );
+      final response = await ApiManger.updateDoctor(
+        drId: widget.doctorId.toString(),
+        drName: nameController.text.trim(),
+        drPhone: phoneController.text.trim(),
+        drGender: gender,
+        drDegree: degreeController.text.trim(),
+        specialty: specialty!,
+        rating: double.parse(ratingController.text),
+        drAge: age,
+        drAddress: addressController.text.trim(),
+        drPhoto: imageToBase64(selectedImage) ?? '',
+        yearExperience: yearsExperience,
+        price: double.parse(priceController.text),
+        drDay: day!,
+        drTime: timeController.text,
+      );
+
+      print("📝 UpdateResponse: message=${response.message}, status=${response.status}");
 
       setState(() {
         isLoading = false;
       });
 
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
+        SnackBar(
           content: Text(
-            "تم تعديل بيانات الدكتور بنجاح",
-            style: TextStyle(color: Colors.black),
+            response.status == "success" ? (response.message ?? "تم تعديل بيانات الدكتور بنجاح") : "فشل التعديل: ${response.message ?? 'خطأ غير معروف'}",
+            style: const TextStyle(color: Colors.black),
           ),
-          backgroundColor: Colors.green,
-          duration: Duration(seconds: 3),
+          backgroundColor: response.status == "success" ? Colors.green : Colors.red,
+          duration: const Duration(seconds: 3),
         ),
       );
 
-      Navigator.pop(context); // Close the dialog on success
+      if (response.status == "success") {
+        Navigator.pop(context); // Close the dialog on success
+      }
     } catch (e) {
       setState(() {
         isLoading = false;
@@ -282,33 +306,6 @@ class _UpdateDoctorFormState extends State<UpdateDoctorForm> {
               prefixIcon: Icons.person,
             ),
             buildTextFormField(
-              controller: emailController,
-              label: 'البريد الإلكتروني',
-              prefixIcon: Icons.email,
-              keyboardType: TextInputType.emailAddress,
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'يرجى إدخال البريد الإلكتروني';
-                }
-                if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value)) {
-                  return 'يرجى إدخال بريد إلكتروني صحيح';
-                }
-                return null;
-              },
-            ),
-            buildTextFormField(
-              controller: passwordController,
-              label: 'كلمة المرور (اختياري)',
-              prefixIcon: Icons.lock,
-              obscureText: true,
-              validator: (value) {
-                if (value != null && value.isNotEmpty && value.length < 6) {
-                  return 'كلمة المرور يجب أن تكون 6 أحرف على الأقل';
-                }
-                return null;
-              },
-            ),
-            buildTextFormField(
               controller: phoneController,
               label: 'رقم الهاتف',
               prefixIcon: Icons.phone,
@@ -376,8 +373,9 @@ class _UpdateDoctorFormState extends State<UpdateDoctorForm> {
                 if (value == null || value.isEmpty) {
                   return 'يرجى إدخال العمر';
                 }
-                if (int.tryParse(value) == null || int.parse(value) <= 0) {
-                  return 'يرجى إدخال عمر صحيح';
+                final age = int.tryParse(value);
+                if (age == null || age <= 0 || age > 120) {
+                  return 'يرجى إدخال عمر بين 1 و 120 سنة';
                 }
                 return null;
               },
@@ -396,8 +394,9 @@ class _UpdateDoctorFormState extends State<UpdateDoctorForm> {
                 if (value == null || value.isEmpty) {
                   return 'يرجى إدخال سنوات الخبرة';
                 }
-                if (int.tryParse(value) == null || int.parse(value) < 0) {
-                  return 'يرجى إدخال عدد صحيح';
+                final years = int.tryParse(value);
+                if (years == null || years < 0 || years > 100) {
+                  return 'يرجى إدخال سنوات خبرة بين 0 و 100 سنة';
                 }
                 return null;
               },

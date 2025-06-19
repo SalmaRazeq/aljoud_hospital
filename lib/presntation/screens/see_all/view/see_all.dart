@@ -10,7 +10,7 @@ import '../category_details/CategoryDetailsScreen.dart';
 import '../view_model/doctor_view_model.dart';
 
 class SeeAllScreen extends StatelessWidget {
-  SeeAllScreen({super.key});
+  const SeeAllScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

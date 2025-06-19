@@ -6,9 +6,9 @@ import 'package:provider/provider.dart';
 import '../../../../providers/theme_provider.dart';
 
 class DoctorExperienceWidget extends StatelessWidget {
-  DoctorExperienceWidget({required this.text, required this.icon,super.key});
-  IconData icon;
-  String text;
+  const DoctorExperienceWidget({required this.text, required this.icon,super.key});
+ final IconData icon;
+  final String text;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class DoctorExperienceWidget extends StatelessWidget {
       padding: REdgeInsets.symmetric(vertical: 5.h),
       child: Container(
         width: 90.w,
-        height: 100.h,
+        height: 120.h,
         padding: REdgeInsets.symmetric(vertical: 6.h),
         decoration: BoxDecoration(
           color:  themeProvider.isLightTheme() ? ColorsManager.lightBlue : ColorsManager.blue3.withOpacity(0.4),
