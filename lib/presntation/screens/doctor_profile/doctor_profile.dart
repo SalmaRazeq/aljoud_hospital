@@ -66,7 +66,7 @@ class DoctorProfileScreen extends StatelessWidget {
                          ),
 
                          ),
-                       SizedBox(height: 8.h,),
+                       SizedBox(height: 7.h,),
                        Text('${data.drName}', style: Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: 16.sp),),
                        Text('${data.specialty}', style: Theme.of(context).textTheme.labelSmall?.copyWith(fontSize: 14.sp, color: Theme.of(context).colorScheme.onSecondary)),
                      ],
