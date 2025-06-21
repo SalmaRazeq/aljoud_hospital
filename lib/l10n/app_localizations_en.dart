@@ -21,8 +21,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get anyWhere => 'Anywhere.';
 
   @override
-  String get startText =>
-      'More than 100 doctors are ready to answer all your questions.';
+  String get startText => 'More than 100 doctors are ready to answer all your questions.';
 
   @override
   String get getStarted => 'Get Started';
@@ -139,15 +138,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get support => 'Support';
 
   @override
-  String get providingSupport =>
-      'Providing direct support with the customer service team';
+  String get providingSupport => 'Providing direct support with the customer service team';
 
   @override
   String get medicalRecords => 'Medical Records';
 
   @override
-  String get patientInformation =>
-      'It provides the patient with information about his medical history';
+  String get patientInformation => 'It provides the patient with information about his medical history';
 
   @override
   String get cardiology => 'Cardiology';
@@ -165,7 +162,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get eNT => 'ENT';
 
   @override
-  String get internalMedicine => 'Internal Medicine';
+  String get internalMedicine => 'Internal medicine';
 
   @override
   String get neurology => 'Neurology';
@@ -186,7 +183,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get pediatrics => 'Pediatrics';
 
   @override
-  String get physicalTherapy => 'Physical Therapy';
+  String get physicalTherapy => 'Physical therapy';
 
   @override
   String get surgery => 'Surgery';
@@ -237,8 +234,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get passwordTooWeak => 'Sorry, your password is too weak.';
 
   @override
-  String get accountAlreadyExists =>
-      'The account already exists for that email.';
+  String get accountAlreadyExists => 'The account already exists for that email.';
 
   @override
   String get wrongEorP => 'Wrong email or password';
@@ -451,8 +447,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get aboutText1 => 'Consultant of';
 
   @override
-  String get aboutText2 =>
-      'at Smouha Hospital, More than 30 years of experience';
+  String get aboutText2 => 'at Smouha Hospital, More than 30 years of experience';
 
   @override
   String get workingTimeText => 'Tuesday - Sunday';
@@ -524,8 +519,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get paid => 'Paid:';
 
   @override
-  String get bookingText =>
-      'Your appointment has been successfully booked. Please arrive 10 minutes early.';
+  String get bookingText => 'Your appointment has been successfully booked. Please arrive 10 minutes early.';
 
   @override
   String get viewMyBooking => 'View my bookings';
@@ -540,8 +534,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get medicalLicenseNumber => 'Medical License Number';
 
   @override
-  String get plzEnterMedicalLicence =>
-      'Please, Enter your medical license number';
+  String get plzEnterMedicalLicence => 'Please, Enter your medical license number';
 
   @override
   String get specialization => 'Specialization';
@@ -553,8 +546,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get iAgreeToTheTermsConditions => 'I Agree To The Terms & Conditions';
 
   @override
-  String get enterEmailToReset =>
-      'Enter your email address to reset your password.';
+  String get enterEmailToReset => 'Enter your email address to reset your password.';
 
   @override
   String get sendResetLink => 'Send reset link';
@@ -569,16 +561,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get bot_feeling => 'I\'m doing great! How about you?';
 
   @override
-  String get bot_glad_response =>
-      'That\'s great to hear! How can I assist you today?';
+  String get bot_glad_response => 'That\'s great to hear! How can I assist you today?';
 
   @override
-  String get bot_booking_prompt =>
-      'Of course! We have excellent doctors. Which specialty would you like to book? You can choose from:\n1. Internal Medicine\n2. Pediatrics\n3. Orthopedics\n4. Dentistry\n5. Pulmonology\n6. Cardiology\n7. Physical Therapy\n8. OB-GYN';
+  String get bot_booking_prompt => 'Of course! We have excellent doctors. Which specialty would you like to book? You can choose from:\n1. Internal Medicine\n2. Pediatrics\n3. Orthopedics\n4. Dentistry\n5. Pulmonology\n6. Cardiology\n7. Physical Therapy\n8. OB-GYN';
 
   @override
-  String get bot_unknown =>
-      'Sorry, I didn\'t understand that. Could you please rephrase?';
+  String get bot_unknown => 'Sorry, I didn\'t understand that. Could you please rephrase?';
 
   @override
   String bot_chosen_specialty(Object specialty) {
@@ -613,8 +602,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get wantToBook => 'i want to book';
 
   @override
-  String get ourHospitalDescription =>
-      'Our hospital has been dedicated to providing high-quality, compassionate care since its founding in 2016. We are committed to improving the health of our community by offering a wide range of medical services and state-of-the-art facilities.';
+  String get ourHospitalDescription => 'Our hospital has been dedicated to providing high-quality, compassionate care since its founding in 2016. We are committed to improving the health of our community by offering a wide range of medical services and state-of-the-art facilities.';
 
   @override
   String get ourVision => 'Our Vision';
@@ -653,8 +641,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get payment => 'Payment';
 
   @override
-  String get paymentSuccessMessage =>
-      'Your payment has been successfully processed. Thank you!';
+  String get paymentSuccessMessage => 'Your payment has been successfully processed. Thank you!';
 
   @override
   String get yesterday => 'Yesterday';
@@ -765,8 +752,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get update => 'Update';
 
   @override
-  String get plzEnterYearsOfExperience =>
-      'Please, Enter the years of experience';
+  String get plzEnterYearsOfExperience => 'Please, Enter the years of experience';
 
   @override
   String get plzEnterPrice => 'Please, Enter the price';
@@ -790,49 +776,140 @@ class AppLocalizationsEn extends AppLocalizations {
   String get faq1Q => '1. How can I book an appointment with a doctor?';
 
   @override
-  String get faq1A =>
-      'You can select the suitable doctor from the doctors list, then choose the preferred date and time, and confirm the appointment through the app.';
+  String get faq1A => 'You can select the suitable doctor from the doctors list, then choose the preferred date and time, and confirm the appointment through the app.';
 
   @override
   String get faq2Q => '2. Can I modify my appointment after confirming it?';
 
   @override
-  String get faq2A =>
-      'Yes, you can modify your appointment through the app if the appointment is not too close or hasn’t been canceled by the doctor.';
+  String get faq2A => 'Yes, you can modify your appointment through the app if the appointment is not too close or hasn’t been canceled by the doctor.';
 
   @override
   String get faq3Q => '3. How can I view my medical appointment history?';
 
   @override
-  String get faq3A =>
-      'You can go to My Booking section in the app to view all your past and current appointments.';
+  String get faq3A => 'You can go to My Booking section in the app to view all your past and current appointments.';
 
   @override
-  String get faq4Q =>
-      '4. Can I cancel an appointment? Are there any cancellation fees?';
+  String get faq4Q => '4. Can I cancel an appointment? Are there any cancellation fees?';
 
   @override
-  String get faq4A =>
-      'Yes, you can cancel your appointment through the app within a certain timeframe without any fees. Cancellation policies may vary depending on the doctor or medical center.';
+  String get faq4A => 'Yes, you can cancel your appointment through the app within a certain timeframe without any fees. Cancellation policies may vary depending on the doctor or medical center.';
 
   @override
   String get faq5Q => '5. Does the app securely store my medical information?';
 
   @override
-  String get faq5A =>
-      'Yes, your personal and medical data are securely stored according to the highest privacy standards.';
+  String get faq5A => 'Yes, your personal and medical data are securely stored according to the highest privacy standards.';
 
   @override
   String get faq6Q => '6. What should I do if I forget my password?';
 
   @override
-  String get faq6A =>
-      'You can use the \"Forgot Password\" option within the app to recover your account via email.';
+  String get faq6A => 'You can use the \"Forgot Password\" option within the app to recover your account via email.';
 
   @override
   String get faq7Q => '7. How do I know if my appointment is confirmed?';
 
   @override
-  String get faq7A =>
-      'You will receive a notification in the app and a text message confirming your appointment.';
+  String get faq7A => 'You will receive a notification in the app and a text message confirming your appointment.';
+
+  @override
+  String get noData => 'There is no data';
+
+  @override
+  String get degree => 'Degree';
+
+  @override
+  String get plzEnterDegree => 'Please enter your degree';
+
+  @override
+  String get address => 'Address';
+
+  @override
+  String get plzEnterAddress => 'Please enter your address';
+
+  @override
+  String get plzEnterExperience => 'Please enter your years of experience';
+
+  @override
+  String get workingDay => 'Working day';
+
+  @override
+  String get plzChooseDay => 'Please select the day';
+
+  @override
+  String get plzChooseTime => 'Please select the time';
+
+  @override
+  String get noPhotoSelected => 'No photo selected';
+
+  @override
+  String get selectPhoto => 'Select photo';
+
+  @override
+  String get plzEnterValidInteger => 'Please enter a valid integer';
+
+  @override
+  String get plzEnterAge => 'Please enter the age';
+
+  @override
+  String get ratingRangeError => 'Rating must be between 0 and 5';
+
+  @override
+  String get plzEnterRating => 'Please enter the rating';
+
+  @override
+  String get experienceRangeError => 'Please enter years of experience between 0 and 100';
+
+  @override
+  String get ageRangeError => 'Please enter age between 18 and 120';
+
+  @override
+  String get fillAllFields => 'Please fill all fields and select specialty, day, and time';
+
+  @override
+  String get errorImage => 'Error displaying the image';
+
+  @override
+  String get monday => 'Monday';
+
+  @override
+  String get tuesday => 'Tuesday';
+
+  @override
+  String get wednesday => 'Wednesday';
+
+  @override
+  String get thursday => 'Thursday';
+
+  @override
+  String get friday => 'Friday';
+
+  @override
+  String get saturday => 'Saturday';
+
+  @override
+  String get sunday => 'Sunday';
+
+  @override
+  String get unavailable => 'Unavailable';
+
+  @override
+  String get doctorIdNotAvailable => 'Doctor ID is not available';
+
+  @override
+  String get deleteConfirmation => 'Delete Confirmation';
+
+  @override
+  String get deleteQuestion => 'Are you sure you want to delete this doctor?';
+
+  @override
+  String get delete => 'Delete';
+
+  @override
+  String get deleteError => 'An error occurred: ';
+
+  @override
+  String get noDoctorFound => 'Sorry, There is no doctor.';
 }

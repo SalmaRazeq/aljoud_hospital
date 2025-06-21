@@ -105,8 +105,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get notMatch => 'كلمة المرور لا تتطابق';
 
   @override
-  String get password6Char =>
-      'يجب أن تكون كلمة المرور مكونة من 6 أحرف على الأقل';
+  String get password6Char => 'يجب أن تكون كلمة المرور مكونة من 6 أحرف على الأقل';
 
   @override
   String get search => 'بحث';
@@ -235,8 +234,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get passwordTooWeak => 'عذراً، كلمة المرور الخاصة بك ضعيفة جدًا.';
 
   @override
-  String get accountAlreadyExists =>
-      'الحساب موجود بالفعل لهذا البريد الإلكتروني.';
+  String get accountAlreadyExists => 'الحساب موجود بالفعل لهذا البريد الإلكتروني.';
 
   @override
   String get wrongEorP => 'البريد الإلكتروني أو كلمة المرور خاطئة';
@@ -521,8 +519,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get paid => 'تم الدفع:';
 
   @override
-  String get bookingText =>
-      'تم حجز موعدك بنجاح. يرجى الحضور قبل الموعد بـ10 دقائق.';
+  String get bookingText => 'تم حجز موعدك بنجاح. يرجى الحضور قبل الموعد بـ10 دقائق.';
 
   @override
   String get viewMyBooking => 'عرض حجوزاتي';
@@ -549,8 +546,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get iAgreeToTheTermsConditions => 'أوافق على الشروط والأحكام';
 
   @override
-  String get enterEmailToReset =>
-      'أدخل بريدك الإلكتروني لإعادة تعيين كلمة المرور.';
+  String get enterEmailToReset => 'أدخل بريدك الإلكتروني لإعادة تعيين كلمة المرور.';
 
   @override
   String get sendResetLink => 'إرسال رابط إعادة التعيين';
@@ -568,8 +564,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get bot_glad_response => 'سعيد لسماع ذلك! كيف يمكنني مساعدتك اليوم؟';
 
   @override
-  String get bot_booking_prompt =>
-      'بالتأكيد! لدينا أطباء ممتازون. ما التخصص الذي ترغب في الحجز فيه؟ يمكنك الاختيار من:\n1. الباطنية\n2. الأطفال\n3. العظام\n4. الأسنان\n5. الصدرية\n6. القلب\n7. العلاج الطبيعي\n8. النساء والتوليد';
+  String get bot_booking_prompt => 'بالتأكيد! لدينا أطباء ممتازون. ما التخصص الذي ترغب في الحجز فيه؟ يمكنك الاختيار من:\n1. الباطنية\n2. الأطفال\n3. العظام\n4. الأسنان\n5. الصدرية\n6. القلب\n7. العلاج الطبيعي\n8. النساء والتوليد';
 
   @override
   String get bot_unknown => 'عذرًا، لم أفهم ذلك. هل يمكنك إعادة الصياغة؟';
@@ -607,8 +602,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get wantToBook => 'اريد ان احجز';
 
   @override
-  String get ourHospitalDescription =>
-      'كرّس مستشفانا نفسه لتقديم رعاية عالية الجودة ومبنية على الرحمة منذ تأسيسه في عام 2016. نحن ملتزمون بتحسين صحة مجتمعنا من خلال تقديم مجموعة واسعة من الخدمات الطبية والمرافق المتطورة.';
+  String get ourHospitalDescription => 'كرّس مستشفانا نفسه لتقديم رعاية عالية الجودة ومبنية على الرحمة منذ تأسيسه في عام 2016. نحن ملتزمون بتحسين صحة مجتمعنا من خلال تقديم مجموعة واسعة من الخدمات الطبية والمرافق المتطورة.';
 
   @override
   String get ourVision => 'رؤيتنا';
@@ -647,8 +641,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get payment => 'الدفع';
 
   @override
-  String get paymentSuccessMessage =>
-      'تم الدفع بنجاح. نشكرك على استخدامك لخدماتنا!';
+  String get paymentSuccessMessage => 'تم الدفع بنجاح. نشكرك على استخدامك لخدماتنا!';
 
   @override
   String get yesterday => 'البارحة';
@@ -783,48 +776,140 @@ class AppLocalizationsAr extends AppLocalizations {
   String get faq1Q => '١. كيف يمكنني حجز موعد مع طبيب؟';
 
   @override
-  String get faq1A =>
-      'يمكنك اختيار الطبيب المناسب من قائمة الأطباء، ثم تحديد التاريخ والوقت المناسبين، وبعد ذلك تأكيد الحجز من خلال التطبيق.';
+  String get faq1A => 'يمكنك اختيار الطبيب المناسب من قائمة الأطباء، ثم تحديد التاريخ والوقت المناسبين، وبعد ذلك تأكيد الحجز من خلال التطبيق.';
 
   @override
   String get faq2Q => '٢. هل يمكنني تعديل موعد الحجز بعد تأكيده؟';
 
   @override
-  String get faq2A =>
-      'نعم، يمكنك تعديل الموعد من خلال التطبيق إذا لم يكن الموعد قريبًا جدًا أو ملغى من قبل الطبيب.';
+  String get faq2A => 'نعم، يمكنك تعديل الموعد من خلال التطبيق إذا لم يكن الموعد قريبًا جدًا أو ملغى من قبل الطبيب.';
 
   @override
   String get faq3Q => '٣. كيف أتمكن من مشاهدة سجل مواعيدي الطبية؟';
 
   @override
-  String get faq3A =>
-      'يمكنك الدخول إلى قسم حجوزاتي داخل التطبيق لعرض جميع مواعيدك السابقة والحالية.';
+  String get faq3A => 'يمكنك الدخول إلى قسم حجوزاتي داخل التطبيق لعرض جميع مواعيدك السابقة والحالية.';
 
   @override
-  String get faq4Q =>
-      '٤. هل يمكنني إلغاء موعد الحجز؟ وهل هناك رسوم على الإلغاء؟';
+  String get faq4Q => '٤. هل يمكنني إلغاء موعد الحجز؟ وهل هناك رسوم على الإلغاء؟';
 
   @override
-  String get faq4A =>
-      'نعم، يمكنك إلغاء الموعد من خلال التطبيق قبل وقت معين دون أي رسوم. قد تختلف سياسة الإلغاء حسب الطبيب أو المركز الطبي.';
+  String get faq4A => 'نعم، يمكنك إلغاء الموعد من خلال التطبيق قبل وقت معين دون أي رسوم. قد تختلف سياسة الإلغاء حسب الطبيب أو المركز الطبي.';
 
   @override
   String get faq5Q => '٥. هل التطبيق يحفظ معلوماتي الطبية بشكل آمن؟';
 
   @override
-  String get faq5A =>
-      'نعم، يتم تخزين بياناتك الشخصية والطبية بشكل آمن ووفقًا لأعلى معايير الخصوصية.';
+  String get faq5A => 'نعم، يتم تخزين بياناتك الشخصية والطبية بشكل آمن ووفقًا لأعلى معايير الخصوصية.';
 
   @override
   String get faq6Q => '٦. ماذا أفعل إذا نسيت كلمة المرور الخاصة بي؟';
 
   @override
-  String get faq6A =>
-      'يمكنك استخدام خيار \"نسيت كلمة المرور\" داخل التطبيق لاستعادة حسابك عن طريق البريد الإلكتروني.';
+  String get faq6A => 'يمكنك استخدام خيار \"نسيت كلمة المرور\" داخل التطبيق لاستعادة حسابك عن طريق البريد الإلكتروني.';
 
   @override
   String get faq7Q => '٧. كيف أعرف إذا تم تأكيد موعدي؟';
 
   @override
   String get faq7A => 'سيصلك إشعار عبر التطبيق ورسالة نصية تؤكد حجز موعدك.';
+
+  @override
+  String get noData => 'لا يوجد بيانات';
+
+  @override
+  String get degree => 'الدرجة العلمية';
+
+  @override
+  String get plzEnterDegree => 'يرجى إدخال الدرجة العلمية';
+
+  @override
+  String get address => 'العنوان';
+
+  @override
+  String get plzEnterAddress => 'يرجى إدخال العنوان';
+
+  @override
+  String get plzEnterExperience => 'يرجى إدخال سنوات الخبرة';
+
+  @override
+  String get workingDay => 'يوم العمل';
+
+  @override
+  String get plzChooseDay => 'يرجى اختيار اليوم';
+
+  @override
+  String get plzChooseTime => 'يرجى اختيار الوقت';
+
+  @override
+  String get noPhotoSelected => 'لم يتم اختيار صورة';
+
+  @override
+  String get selectPhoto => 'اختر صورة';
+
+  @override
+  String get plzEnterValidInteger => 'يرجى إدخال عدد صحيح';
+
+  @override
+  String get plzEnterAge => 'يرجى إدخال العمر';
+
+  @override
+  String get ratingRangeError => 'التقييم يجب أن يكون بين 0 و 5';
+
+  @override
+  String get plzEnterRating => 'يرجى إدخال التقييم';
+
+  @override
+  String get experienceRangeError => 'يرجى إدخال سنوات خبرة بين 0 و 100 سنة';
+
+  @override
+  String get ageRangeError => 'يرجى إدخال عمر بين 18 و 120 سنة';
+
+  @override
+  String get fillAllFields => 'يرجى ملء جميع الحقول واختيار التخصص واليوم والوقت';
+
+  @override
+  String get errorImage => 'خطأ في عرض الصورة';
+
+  @override
+  String get monday => 'الإثنين';
+
+  @override
+  String get tuesday => 'الثلاثاء';
+
+  @override
+  String get wednesday => 'الأربعاء';
+
+  @override
+  String get thursday => 'الخميس';
+
+  @override
+  String get friday => 'الجمعة';
+
+  @override
+  String get saturday => 'السبت';
+
+  @override
+  String get sunday => 'الأحد';
+
+  @override
+  String get unavailable => 'غير متوفر';
+
+  @override
+  String get doctorIdNotAvailable => 'معرف الدكتور غير متوفر';
+
+  @override
+  String get deleteConfirmation => 'تأكيد الحذف';
+
+  @override
+  String get deleteQuestion => 'هل أنت متأكد أنك تريد حذف هذا الدكتور؟';
+
+  @override
+  String get delete => 'حذف';
+
+  @override
+  String get deleteError => 'حدث خطأ: ';
+
+  @override
+  String get noDoctorFound => 'بعتذر، لا يوجد دكاترة.';
 }

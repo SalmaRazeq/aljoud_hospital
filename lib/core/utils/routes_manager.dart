@@ -1,4 +1,3 @@
-import 'package:aljoud_hospital/presntation/notification/notification.dart';
 import 'package:aljoud_hospital/presntation/screens/auth/create_new_password/create_new_password.dart';
 import 'package:aljoud_hospital/presntation/screens/auth/forget_password/forget_password.dart';
 import 'package:aljoud_hospital/presntation/screens/auth/log_in/login.dart';
@@ -10,7 +9,6 @@ import 'package:aljoud_hospital/presntation/screens/home/home_tab/medical_record
 import 'package:aljoud_hospital/presntation/screens/home/home_tab/online_consultation/online_consultation.dart';
 import 'package:aljoud_hospital/presntation/screens/home/home_tab/support/admin_screen/Insert_doctor/insert_doctor.dart';
 import 'package:aljoud_hospital/presntation/screens/home/home_tab/support/admin_screen/admin_screen.dart';
-import 'package:aljoud_hospital/presntation/screens/home/home_tab/support/admin_screen/update_doctor/update_doctor.dart';
 import 'package:aljoud_hospital/presntation/screens/home/home_tab/support/faq_screen/faq_screen.dart';
 import 'package:aljoud_hospital/presntation/screens/home/home_tab/support/support.dart';
 import 'package:aljoud_hospital/presntation/screens/home/myBooking_tab/myBooking.dart';
@@ -31,6 +29,7 @@ import '../../data/model_api/selectedDoctor/Data.dart';
 import '../../data/models/doctor/doctor_model.dart';
 import '../../presntation/screens/home/categories_item/categories_item.dart';
 import '../../presntation/screens/home/home.dart';
+import '../../presntation/screens/notification/notification.dart';
 import '../../presntation/screens/splash/splash.dart';
 import '../../test.dart';
 
@@ -119,10 +118,7 @@ class RoutesManager{
         return MaterialPageRoute(
           builder: (context) => const FAQScreen(),
         );
-      case updateDoctor:
-        return MaterialPageRoute(
-          builder: (context) => const UpdateDoctorScreen(),
-        );
+
       case hospitalVisit:
         final doctor = settings.arguments as Data?;
         if (doctor == null) {

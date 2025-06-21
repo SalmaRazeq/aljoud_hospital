@@ -7,12 +7,14 @@ import '../../../../../core/utils/color_manager.dart';
 
 class DoctorTextField extends StatelessWidget {
   DoctorTextField({required this.icon, required this.hintText,required this.controller, required this.validator,
-    this.keyBoardType = TextInputType.text, super.key});
+    this.keyBoardType = TextInputType.text, this.onTap, super.key});
   String hintText;
   IconData icon;
   TextEditingController controller;
   Validator validator;
   TextInputType keyBoardType;
+  VoidCallback? onTap;
+
 
   @override
   Widget build(BuildContext context) {
@@ -21,15 +23,17 @@ class DoctorTextField extends StatelessWidget {
       validator: validator,
       keyboardType: keyBoardType,
       controller: controller,
+      onTap: onTap,
       style: GoogleFonts.inter(fontSize: 13.sp, color: ColorsManager.black),
       decoration: InputDecoration(
         isDense: true,
         hintText: hintText,
+
         hintStyle: GoogleFonts.roboto(fontSize: 12.sp,color: Theme.of(context).colorScheme.shadow),
         filled: true,
         prefixIcon: Icon(
           icon,
-          size: 22,
+          size: 22.sp,
           color: ColorsManager.hint,
         ),
         fillColor: ColorsManager.textField,

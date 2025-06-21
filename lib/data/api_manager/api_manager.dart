@@ -24,11 +24,12 @@ class ApiManger {
     required String drDay, // حقل اليوم
     required String drTime, // حقل الوقت
   }) async {
-    final url = Uri.parse("http://192.168.1.7/c43/handleInsertDoctor.php");
+    final url = Uri.parse("http://192.168.1.61/c43/handleInsertDoctor.php");
     // تحضير البيانات
     final body = {
-      'Dr_Email': drEmail.trim(),
+      'Dr_ID': drId,
       'Dr_Name': drName.trim(),
+      'Dr_Email': drEmail.trim(),
       'Dr_Password': drPassword,
       'Dr_Phone': drPhone.trim(),
       'Dr_Gender': drGender,
@@ -36,9 +37,8 @@ class ApiManger {
       'Specialty': specialty,
       'Rating': rating.toStringAsFixed(2),
       'Dr_Age': drAge.toString(),
-      'Dr_Address': drAddress.trim(),
       'Dr_Photo': drPhoto.isEmpty ? '' : drPhoto,
-      'Dr_ID': drId,
+      'Dr_Address': drAddress.trim(),
       'Year_Experience': yearExperience.toString(),
       'price': price.toStringAsFixed(2),
       'Day': drDay.trim(), // حقل اليوم
@@ -69,6 +69,7 @@ class ApiManger {
       print("📥 Response body: ${response.body}");
 
       if (response.statusCode == 200) {
+        final cleanBody = response.body.replaceAll('\uFEFF', '');
         final json = jsonDecode(response.body);
         final insertResponse = InsertResponse.fromJson(json);
         print("✅ Parsed InsertResponse: ${insertResponse.toJson()}");
@@ -87,7 +88,7 @@ class ApiManger {
       String specialty)
   async {try {
       const String apiUrl =
-          'http://192.168.1.7/c43/Select-doctor-Specialty.php';
+          'http://192.168.1.61/c43/Select-doctor-Specialty.php';
       final response = await http.get(
         Uri.parse('$apiUrl?Specialty=$specialty'),
         headers: {
@@ -139,7 +140,7 @@ class ApiManger {
   })
   async {
     final url =
-        Uri.parse("http://192.168.1.7/c43/handleupdatedoctor.php?DR_ID=$drId");
+        Uri.parse("http://192.168.1.61/c43/handleupdatedoctor.php?DR_ID=$drId");
     final body = {
       'Dr_Name': drName.trim(),
       'Dr_Phone': drPhone.trim(),
@@ -197,7 +198,7 @@ class ApiManger {
   static Future<UpdateResponse> deleteDoctor({
     required String drId,
   }) async {
-    final url = Uri.parse("http://192.168.1.7/c43/DOCTOR-DELETE.php?Dr_ID=$drId");
+    final url = Uri.parse("http://192.168.1.61/c43/DOCTOR-DELETE.php?Dr_ID=$drId");
 
     print("📤 Preparing to send DELETE request to API:");
     print("  URL: $url");

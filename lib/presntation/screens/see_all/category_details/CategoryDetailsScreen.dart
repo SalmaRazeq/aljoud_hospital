@@ -34,6 +34,7 @@ class _CategoryDetailsScreenState extends State<CategoryDetailsScreen> {
     });
   }
 
+
   @override
   void dispose() {
     _viewModel?.stopPolling();
@@ -45,7 +46,27 @@ class _CategoryDetailsScreenState extends State<CategoryDetailsScreen> {
     if (specialty == null) {
       return const Scaffold(body: Center(child: CircularProgressIndicator()));
     }
+    final loc = AppLocalizations.of(context)!;
+    final Map<String, String> specialtyMap = {
+      'Cardiology': loc.cardiology,
+      'Pulmonology': loc.pulmonology,
+      'Dentistry': loc.dentistry,
+      'Orthopedics': loc.orthopedics,
+      'Pediatrics': loc.pediatrics,
+      'Oncology': loc.oncology,
+      'Ophthalmology': loc.ophthalmology,
+      'Dermatology': loc.dermatology,
+      'OB-GYN': loc.oBGYN,
+      'Surgery': loc.surgery,
+      'Physical therapy': loc.physicalTherapy,
+      'Psychiatry': loc.psychiatry,
+      'Neurology': loc.neurology,
+      'Internal medicine': loc.internalMedicine,
+      'ENT': loc.eNT,
+    };
 
+    final specialtyKey = specialty ?? "Unknown";
+    String displayedSpecialty = specialtyMap[specialtyKey] ?? specialtyKey;
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -67,10 +88,11 @@ class _CategoryDetailsScreenState extends State<CategoryDetailsScreen> {
                       ),
                       Text(
                         Localizations.localeOf(context).languageCode == 'ar'
-                            ? "${AppLocalizations.of(context)!.doctors} $specialty"
-                            : "$specialty ${AppLocalizations.of(context)!.doctors}",
+                            ? "${AppLocalizations.of(context)!.doctors} $displayedSpecialty"
+                            : "$displayedSpecialty ${AppLocalizations.of(context)!.doctors}",
                         style: Theme.of(context).textTheme.bodySmall,
                       ),
+
                       BuildCircleButton(
                         icon: Icons.refresh,
                         onTap: () async {
@@ -112,7 +134,7 @@ class _CategoryDetailsScreenState extends State<CategoryDetailsScreen> {
                             return Center(child: Text(snapshot.error.toString()));
                           }
                           if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                            return const Center(child: Text("مافيش داتا"));
+                            return Center(child: Text(loc.noData));
                           }
 
                           return ListView.builder(

@@ -14,7 +14,7 @@ import '../../../../../providers/notification_provider.dart';
 import '../../../../../providers/theme_provider.dart';
 
 class HomeAppBar extends StatefulWidget {
-   HomeAppBar({super.key});
+  HomeAppBar({super.key});
 
   @override
   State<HomeAppBar> createState() => _HomeAppBarState();

@@ -60,7 +60,7 @@ class _HospitalVisitScreenState extends State<HospitalVisitScreen> {
       return Scaffold(
         body: Center(
           child: Text(
-            " لا توجد داتا ",
+            loc.noData,
             style: Theme.of(context).textTheme.bodyLarge?.copyWith(
               color: Colors.red,
               fontSize: 16.sp,
@@ -129,7 +129,7 @@ class _HospitalVisitScreenState extends State<HospitalVisitScreen> {
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(50.r),
                           child: Image.network(
-                            'https://cdn-icons-png.flaticon.com/512/3870/3870822.png',
+                            'https://www.gravatar.com/avatar/?d=mp&f=y&s=200',
                             height: 65.h,
                             width: 65.w,
                             fit: BoxFit.cover,

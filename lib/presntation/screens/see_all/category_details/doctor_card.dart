@@ -1,8 +1,9 @@
 import 'package:aljoud_hospital/core/utils/color_manager.dart';
 import 'package:aljoud_hospital/core/utils/routes_manager.dart';
-import 'package:aljoud_hospital/presntation/screens/see_all/category_details/ubdate.dart';
+import 'package:aljoud_hospital/presntation/screens/see_all/category_details/update.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../../../../data/api_manager/api_manager.dart';
 import '../../../../data/model_api/selectedDoctor/Data.dart';
 import '../../../../l10n/app_localizations.dart';
@@ -12,8 +13,58 @@ class DoctorCard extends StatelessWidget {
 
   final Data doctor;
 
+  // خرائط الترجمة
+  static const Map<String, String> daysTranslations = {
+    "Monday": "الإثنين",
+    "Tuesday": "الثلاثاء",
+    "Wednesday": "الأربعاء",
+    "Thursday": "الخميس",
+    "Friday": "الجمعة",
+    "Saturday": "السبت",
+    "Sunday": "الأحد",
+  };
+
+  static const Map<String, String> specialtyTranslations = {
+    "Pulmonology": "طب الرئة",
+    "Cardiology": "طب القلب",
+    "Neurology": "طب الأعصاب",
+    "Dentistry": "طب الأسنان",
+    "Orthopedics": "طب العظام",
+    "Pediatrics": "طب الأطفال",
+    "Oncology": "طب الأورام",
+    "Ophthalmology": "طب العيون",
+    "Dermatology": "طب الجلدية",
+    "OB-GYN": "نساء وتوليد",
+    "Surgery": "جراحة",
+    "Physical therapy": "العلاج الطبيعي",
+    "Psychiatry": "الطب النفسي",
+    "Internal medicine": "الطب الباطني",
+    "ENT": "أنف وأذن وحنجرة",
+  };
+
+  String translateDay(BuildContext context, String? day) {
+    if (day == null) return AppLocalizations.of(context)!.unavailable;
+    if (Localizations.localeOf(context).languageCode == 'ar') {
+      return daysTranslations[day] ?? day;
+    }
+    return day;
+  }
+
+  String translateSpecialty(BuildContext context, String? specialty) {
+    if (specialty == null) return AppLocalizations.of(context)!.unavailable;
+    if (Localizations.localeOf(context).languageCode == 'ar') {
+      return specialtyTranslations[specialty] ?? specialty;
+    }
+    return specialty;
+  }
+
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
+
+    final translatedDay = translateDay(context, doctor.day);
+    final translatedSpecialty = translateSpecialty(context, doctor.specialty);
+
     Widget _buildInfoChip(IconData icon, String text) {
       return Container(
         padding: REdgeInsets.symmetric(horizontal: 5.w, vertical: 2.h),
@@ -53,7 +104,7 @@ class DoctorCard extends StatelessWidget {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(50.r),
                   child: Image.network(
-                    'https://cdn-icons-png.flaticon.com/512/3870/3870822.png',
+                    'https://www.gravatar.com/avatar/?d=mp&f=y&s=200',
                     height: 65.h,
                     width: 65.w,
                     fit: BoxFit.cover,
@@ -65,19 +116,19 @@ class DoctorCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        doctor.drName ?? "غير متوفر",
+                        doctor.drName ?? loc.unavailable,
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                              fontSize: 12.sp,
-                              color: ColorsManager.black,
-                            ),
+                          fontSize: 12.sp,
+                          color: ColorsManager.black,
+                        ),
                         overflow: TextOverflow.ellipsis,
                         maxLines: 1,
                       ),
                       Text(
-                        doctor.specialty ?? "غير متوفر",
+                        translatedSpecialty,
                         style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                              fontSize: 10.sp,
-                            ),
+                          fontSize: 10.sp,
+                        ),
                         overflow: TextOverflow.ellipsis,
                         maxLines: 1,
                       ),
@@ -86,23 +137,23 @@ class DoctorCard extends StatelessWidget {
                           Icon(Icons.star, color: Colors.amber, size: 16.sp),
                           SizedBox(width: 3.w),
                           Text(
-                            "${doctor.rating ?? 'غير متوفر'}",
+                            "${doctor.rating ?? loc.unavailable}",
                             style: Theme.of(context)
                                 .textTheme
                                 .labelSmall
                                 ?.copyWith(
-                                  fontSize: 10.sp,
-                                ),
+                              fontSize: 10.sp,
+                            ),
                           ),
                         ],
                       ),
                       Text(
                         Localizations.localeOf(context).languageCode == 'ar'
                             ? "${AppLocalizations.of(context)!.yearsOfExperience} ${doctor.yearExperience ?? 'غير متوفر'}"
-                            : "${doctor.yearExperience ?? 'غير متوفر'} ${AppLocalizations.of(context)!.yearsOfExperience}",
+                            : "${doctor.yearExperience ?? loc.unavailable} ${AppLocalizations.of(context)!.yearsOfExperience}",
                         style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                              fontSize: 10.sp,
-                            ),
+                          fontSize: 10.sp,
+                        ),
                         overflow: TextOverflow.ellipsis,
                         maxLines: 1,
                       ),
@@ -112,11 +163,9 @@ class DoctorCard extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            _buildInfoChip(Icons.calendar_today,
-                                doctor.day ?? 'غير متوفر'),
+                            _buildInfoChip(Icons.calendar_today, translatedDay),
                             SizedBox(width: 8.w),
-                            _buildInfoChip(
-                                Icons.access_time, doctor.date ?? 'غير متوفر'),
+                            _buildInfoChip(Icons.access_time, doctor.date ?? loc.unavailable),
                           ],
                         ),
                       ),
@@ -136,21 +185,17 @@ class DoctorCard extends StatelessWidget {
                       onPressed: () {},
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Theme.of(context).colorScheme.primary,
-                        side: BorderSide(
-                            color:
-                                Theme.of(context).colorScheme.onPrimaryFixed),
+                        side: BorderSide(color: Theme.of(context).colorScheme.onPrimaryFixed),
                         elevation: 0,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20.r)),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.r)),
                       ),
                       child: Text(
-                        AppLocalizations.of(context)!.contactHospital,
+                        loc.contactHospital,
                         style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                              fontWeight: FontWeight.w700,
-                              fontSize: 10.sp,
-                              color:
-                                  Theme.of(context).colorScheme.onPrimaryFixed,
-                            ),
+                          fontWeight: FontWeight.w700,
+                          fontSize: 10.sp,
+                          color: Theme.of(context).colorScheme.onPrimaryFixed,
+                        ),
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
@@ -159,35 +204,30 @@ class DoctorCard extends StatelessWidget {
                   Expanded(
                     child: ElevatedButton(
                       onPressed: () {
-                        if ( doctor.drName!=null ) {
-                          Navigator.pushNamed(
-                              context, RoutesManager.hospitalVisit,
-                              arguments: doctor);
+                        if (doctor.drName != null) {
+                          Navigator.pushNamed(context, RoutesManager.hospitalVisit, arguments: doctor);
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text(
-                                  " No data"),
+                            SnackBar(
+                              content: Text(loc.noData),
                               backgroundColor: Colors.red,
-                              duration: Duration(seconds: 2),
+                              duration: const Duration(seconds: 2),
                             ),
                           );
                         }
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor:
-                            Theme.of(context).colorScheme.onPrimaryFixed,
+                        backgroundColor: Theme.of(context).colorScheme.onPrimaryFixed,
                         elevation: 0,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20.r)),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.r)),
                       ),
                       child: Text(
-                        AppLocalizations.of(context)!.bookHospitalVisit,
+                        loc.bookHospitalVisit,
                         style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                              fontWeight: FontWeight.w700,
-                              fontSize: 10.sp,
-                              color: Theme.of(context).colorScheme.primary,
-                            ),
+                          fontWeight: FontWeight.w700,
+                          fontSize: 10.sp,
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
@@ -210,16 +250,15 @@ class DoctorCard extends StatelessWidget {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.blueGrey,
                         elevation: 0,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20.r)),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.r)),
                       ),
                       child: Text(
-                        "Update",
+                        loc.update,
                         style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                              fontWeight: FontWeight.w700,
-                              fontSize: 10.sp,
-                              color: Colors.white,
-                            ),
+                          fontWeight: FontWeight.w700,
+                          fontSize: 10.sp,
+                          color: Colors.white,
+                        ),
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
@@ -229,74 +268,72 @@ class DoctorCard extends StatelessWidget {
                     child: ElevatedButton(
                       onPressed: () {
                         if (doctor.drID == null) {
-                          print("⚠️ drID is null");
+                          print("⚠️ Doctor ID is not available");
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
-                              content: Text("معرف الدكتور غير متوفر"),
+                              content: Text("Doctor ID is not available"),
                               backgroundColor: Colors.red,
                               duration: Duration(seconds: 2),
                             ),
                           );
                           return;
                         }
-                        print("🔔 Initiating delete for Dr_ID: ${doctor.drID}");
+                        print("🔔Deleting doctor with ID: ${doctor.drID}");
                         showDialog(
                           context: context,
                           builder: (BuildContext context) {
                             return AlertDialog(
-                              title: const Text("تأكيد الحذف",
-                                  style: TextStyle(color: Colors.black)),
-                              content: const Text(
-                                  "هل أنت متأكد أنك تريد حذف هذا الدكتور؟",
-                                  style: TextStyle(color: Colors.black)),
+                              backgroundColor: ColorsManager.lightGray,
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.r)),
+                              title: Text(
+                                loc.deleteConfirmation,
+                                style: GoogleFonts.inter(fontSize: 18.sp, color: ColorsManager.black, fontWeight: FontWeight.w600),
+                              ),
+                              content: Text(
+                                loc.deleteQuestion,
+                                style: GoogleFonts.inter(fontSize: 14.sp, color: ColorsManager.black),
+                              ),
                               actions: [
                                 TextButton(
                                   onPressed: () {
                                     Navigator.of(context).pop();
                                   },
-                                  child: const Text("لا",
-                                      style: TextStyle(color: Colors.black)),
+                                  child: Text(
+                                    loc.no,
+                                    style: GoogleFonts.inter(fontSize: 14.sp, color: ColorsManager.black, fontWeight: FontWeight.w500),
+                                  ),
                                 ),
                                 TextButton(
                                   onPressed: () async {
                                     Navigator.of(context).pop();
                                     try {
-                                      final response =
-                                          await ApiManger.deleteDoctor(
-                                        drId: doctor.drID.toString(),
-                                      );
-                                      print(
-                                          "✅ Delete successful: ${response.message}");
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(
+                                      final response = await ApiManger.deleteDoctor(drId: doctor.drID.toString());
+                                      print("✅ Delete successfully: ${response.message}");
+                                      ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(
                                           content: Text(
-                                            response.message ??
-                                                "تم حذف الدكتور بنجاح",
-                                            style: const TextStyle(
-                                                color: Colors.black),
+                                            response.message ?? loc.deleteSuccess,
+                                            style: const TextStyle(color: Colors.black),
                                           ),
                                           backgroundColor: Colors.green,
                                           duration: const Duration(seconds: 2),
                                         ),
                                       );
                                       // TODO: Refresh the doctor list here
-                                      // Example: Provider.of<DoctorProvider>(context, listen: false).refreshDoctors();
                                     } catch (e) {
                                       print("❌ Delete failed: $e");
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(
+                                      ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(
-                                          content: Text("حدث خطأ: $e"),
+                                          content: Text("${loc.deleteError} $e"),
                                           backgroundColor: Colors.red,
                                           duration: const Duration(seconds: 2),
                                         ),
                                       );
                                     }
                                   },
-                                  child: const Text(
-                                    "نعم",
-                                    style: TextStyle(color: Colors.black),
+                                  child: Text(
+                                    loc.yes,
+                                    style: GoogleFonts.inter(fontSize: 14.sp, color: Colors.red, fontWeight: FontWeight.w500),
                                   ),
                                 ),
                               ],
@@ -312,12 +349,12 @@ class DoctorCard extends StatelessWidget {
                         ),
                       ),
                       child: Text(
-                        "Delete",
+                        loc.delete,
                         style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                              fontWeight: FontWeight.w700,
-                              fontSize: 10.sp,
-                              color: Colors.white,
-                            ),
+                          fontWeight: FontWeight.w700,
+                          fontSize: 10.sp,
+                          color: Colors.white,
+                        ),
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),

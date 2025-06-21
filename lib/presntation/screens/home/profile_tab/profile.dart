@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:convert';
 import 'package:aljoud_hospital/core/utils/color_manager.dart';
 import 'package:aljoud_hospital/core/utils/routes_manager.dart';
 import 'package:aljoud_hospital/presntation/screens/home/profile_tab/widget/profile_details.dart';
@@ -11,6 +12,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../data/models/doctor/doctor_model.dart';
 import '../../../../data/models/user_dm.dart';
@@ -38,6 +40,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       setState(() {
         _imageFile = File(pickedFile.path);
       });
+      await saveProfileImageToPrefs(_imageFile!);
     }
   }
 
@@ -45,6 +48,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     setState(() {
       _imageFile = null;
     });
+    removeProfileImageFromPrefs();
   }
 
   Future<void> _showImageOptions() async {
@@ -87,6 +91,32 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
+  Future<void> saveProfileImageToPrefs(File image) async {
+    final prefs = await SharedPreferences.getInstance();
+    final bytes = await image.readAsBytes();
+    final base64Image = base64Encode(bytes);
+    await prefs.setString('profile_image', base64Image);
+  }
+
+  Future<void> loadProfileImageFromPrefs() async {
+    final prefs = await SharedPreferences.getInstance();
+    final base64Image = prefs.getString('profile_image');
+
+    if (base64Image != null) {
+      final bytes = base64Decode(base64Image);
+      final tempDir = Directory.systemTemp;
+      final file = await File('${tempDir.path}/profile_image.png').writeAsBytes(bytes);
+      setState(() {
+        _imageFile = file;
+      });
+    }
+  }
+
+  Future<void> removeProfileImageFromPrefs() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove('profile_image');
+  }
+
   String? userName;
   String userAge = '--';
   String userHeight = '--';
@@ -97,6 +127,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       loadUserName();
+      loadProfileImageFromPrefs();
     });
   }
 
@@ -115,7 +146,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
           userName = userDM.fullName;
         }
 
-        // تعيين القيم الافتراضية فقط إذا كانت null أو فارغة
         setState(() {
           userAge = userDM.age?.isNotEmpty ?? false ? userDM.age.toString() : '';
           userHeight = userDM.height?.isNotEmpty ?? false ? userDM.height.toString() : '';
@@ -133,11 +163,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
           }
         }
       }
-      setState(() {}); // تحديث واجهة المستخدم بعد تحميل البيانات
+      setState(() {});
     }
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -152,30 +180,30 @@ class _ProfileScreenState extends State<ProfileScreen> {
         child: Column(
           children: [
             Expanded(
-              flex: 3,
-              child:
+                flex: 3,
+                child:
                 Padding(
                   padding: REdgeInsets.symmetric(horizontal: 14.w, vertical: 20.h),
                   child: Column(
                     children: [
                       Align(
                         alignment: langProvider.currentLanguage == 'ar'
-                            ? Alignment.topRight // المحاذاة لليمين إذا كانت اللغة عربية
-                            : Alignment.topLeft,                        child: Text(loc.profile,
+                            ? Alignment.topRight
+                            : Alignment.topLeft,
+                        child: Text(loc.profile,
                             style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                    fontSize: 18.sp,
-                                    color: Theme.of(context).colorScheme.primary)),
+                                fontSize: 18.sp,
+                                color: Theme.of(context).colorScheme.primary)),
                       ),
                       SizedBox(height: 10.h,),
-            
                       Stack(
                         alignment: Alignment.bottomRight,
                         children: [
                           CircleAvatar(
                             radius: 60.r,
-                            backgroundColor: ColorsManager.lightGray, // اللون الخلفي للصورة الفارغة
+                            backgroundColor: ColorsManager.lightGray,
                             backgroundImage: _imageFile != null
-                                ? FileImage(_imageFile!) // عرض الصورة إذا كانت موجودة
+                                ? FileImage(_imageFile!)
                                 : null,
                             child: _imageFile == null
                                 ? Icon(
@@ -190,24 +218,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             width: 34.w,
                             alignment: Alignment.center,
                             decoration: const BoxDecoration(
-                              color: ColorsManager.white,
-                              shape: BoxShape.circle
+                                color: ColorsManager.white,
+                                shape: BoxShape.circle
                             ),
                             child: IconButton(
                               icon: Icon(Icons.edit, color: ColorsManager.hint, size: 20.sp),
-                              onPressed:  _showImageOptions, // عند الضغط يتم استدعاء دالة تغيير الصورة
+                              onPressed:  _showImageOptions,
                               tooltip: 'Edit Profile Picture',
                             ),
                           ),
                         ],
                       ),
                       SizedBox(height: 9.h,),
-            
                       Text(userName ?? '...', style: GoogleFonts.sourceSerif4(fontSize: 20.sp, color: ColorsManager.white, fontWeight: FontWeight.w500 ),)
                     ],
                   ),)
-                ),
-            
+            ),
             Expanded(
               flex: 5,
               child: InnerShadow(
@@ -240,7 +266,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   padding: REdgeInsets.symmetric(vertical: 16.h, horizontal: 24.w),
                   child: SingleChildScrollView(
                     child: Column(
-            
                       children: [
                         ProfileDetailsWidget(
                           age: userAge,
@@ -267,14 +292,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           },
                           text: loc.settings, icon: Icons.settings_outlined,
                         ),
-            
                         SizedBox(height: 10.h,),
-            
                         InkWell(
                           onTap: () async {
                             try {
                               await FirebaseAuth.instance.signOut();
-                               Navigator.pushReplacementNamed(context, RoutesManager.login);
+                              Navigator.pushReplacementNamed(context, RoutesManager.login);
                             } catch (e) {
                               print("Error signing out: $e");
                             }
@@ -295,7 +318,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             ],
                           ),
                         )
-            
                       ],
                     ),
                   ),

@@ -2,6 +2,7 @@ import 'package:aljoud_hospital/core/utils/color_manager.dart';
 import 'package:aljoud_hospital/presntation/screens/home/categories_item/categories_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../../../../core/utils/assets_manager.dart';
 import '../../../../core/utils/routes_manager.dart';
@@ -72,7 +73,7 @@ class SeeAllScreen extends StatelessWidget {
                     } else {
                       print('No data available for specialty: ${specialties[index]}');
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('جاري تحميل البيانات، حاول مرة أخرى بعد لحظات')),
+                        SnackBar(content: Text(AppLocalizations.of(context)!.noDoctorFound, style: GoogleFonts.inter(fontSize: 14),)),
                       );
                     }
                   },

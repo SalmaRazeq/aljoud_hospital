@@ -62,8 +62,7 @@ import 'app_localizations_en.dart';
 /// be consistent with the languages listed in the AppLocalizations.supportedLocales
 /// property.
 abstract class AppLocalizations {
-  AppLocalizations(String locale)
-      : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+  AppLocalizations(String locale) : localeName = intl.Intl.canonicalizedLocale(locale.toString());
 
   final String localeName;
 
@@ -71,8 +70,7 @@ abstract class AppLocalizations {
     return Localizations.of<AppLocalizations>(context, AppLocalizations);
   }
 
-  static const LocalizationsDelegate<AppLocalizations> delegate =
-      _AppLocalizationsDelegate();
+  static const LocalizationsDelegate<AppLocalizations> delegate = _AppLocalizationsDelegate();
 
   /// A list of this localizations delegate along with the default localizations
   /// delegates.
@@ -84,8 +82,7 @@ abstract class AppLocalizations {
   /// Additional delegates can be added by appending to this list in
   /// MaterialApp. This list does not have to be used at all if a custom list
   /// of delegates is preferred or required.
-  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates =
-      <LocalizationsDelegate<dynamic>>[
+  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates = <LocalizationsDelegate<dynamic>>[
     delegate,
     GlobalMaterialLocalizations.delegate,
     GlobalCupertinoLocalizations.delegate,
@@ -407,7 +404,7 @@ abstract class AppLocalizations {
   /// No description provided for @internalMedicine.
   ///
   /// In en, this message translates to:
-  /// **'Internal Medicine'**
+  /// **'Internal medicine'**
   String get internalMedicine;
 
   /// No description provided for @neurology.
@@ -449,7 +446,7 @@ abstract class AppLocalizations {
   /// No description provided for @physicalTherapy.
   ///
   /// In en, this message translates to:
-  /// **'Physical Therapy'**
+  /// **'Physical therapy'**
   String get physicalTherapy;
 
   /// No description provided for @surgery.
@@ -1705,10 +1702,207 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'You will receive a notification in the app and a text message confirming your appointment.'**
   String get faq7A;
+
+  /// No description provided for @noData.
+  ///
+  /// In en, this message translates to:
+  /// **'There is no data'**
+  String get noData;
+
+  /// No description provided for @degree.
+  ///
+  /// In en, this message translates to:
+  /// **'Degree'**
+  String get degree;
+
+  /// No description provided for @plzEnterDegree.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter your degree'**
+  String get plzEnterDegree;
+
+  /// No description provided for @address.
+  ///
+  /// In en, this message translates to:
+  /// **'Address'**
+  String get address;
+
+  /// No description provided for @plzEnterAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter your address'**
+  String get plzEnterAddress;
+
+  /// No description provided for @plzEnterExperience.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter your years of experience'**
+  String get plzEnterExperience;
+
+  /// No description provided for @workingDay.
+  ///
+  /// In en, this message translates to:
+  /// **'Working day'**
+  String get workingDay;
+
+  /// No description provided for @plzChooseDay.
+  ///
+  /// In en, this message translates to:
+  /// **'Please select the day'**
+  String get plzChooseDay;
+
+  /// No description provided for @plzChooseTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Please select the time'**
+  String get plzChooseTime;
+
+  /// No description provided for @noPhotoSelected.
+  ///
+  /// In en, this message translates to:
+  /// **'No photo selected'**
+  String get noPhotoSelected;
+
+  /// No description provided for @selectPhoto.
+  ///
+  /// In en, this message translates to:
+  /// **'Select photo'**
+  String get selectPhoto;
+
+  /// No description provided for @plzEnterValidInteger.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid integer'**
+  String get plzEnterValidInteger;
+
+  /// No description provided for @plzEnterAge.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter the age'**
+  String get plzEnterAge;
+
+  /// No description provided for @ratingRangeError.
+  ///
+  /// In en, this message translates to:
+  /// **'Rating must be between 0 and 5'**
+  String get ratingRangeError;
+
+  /// No description provided for @plzEnterRating.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter the rating'**
+  String get plzEnterRating;
+
+  /// No description provided for @experienceRangeError.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter years of experience between 0 and 100'**
+  String get experienceRangeError;
+
+  /// No description provided for @ageRangeError.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter age between 18 and 120'**
+  String get ageRangeError;
+
+  /// No description provided for @fillAllFields.
+  ///
+  /// In en, this message translates to:
+  /// **'Please fill all fields and select specialty, day, and time'**
+  String get fillAllFields;
+
+  /// No description provided for @errorImage.
+  ///
+  /// In en, this message translates to:
+  /// **'Error displaying the image'**
+  String get errorImage;
+
+  /// No description provided for @monday.
+  ///
+  /// In en, this message translates to:
+  /// **'Monday'**
+  String get monday;
+
+  /// No description provided for @tuesday.
+  ///
+  /// In en, this message translates to:
+  /// **'Tuesday'**
+  String get tuesday;
+
+  /// No description provided for @wednesday.
+  ///
+  /// In en, this message translates to:
+  /// **'Wednesday'**
+  String get wednesday;
+
+  /// No description provided for @thursday.
+  ///
+  /// In en, this message translates to:
+  /// **'Thursday'**
+  String get thursday;
+
+  /// No description provided for @friday.
+  ///
+  /// In en, this message translates to:
+  /// **'Friday'**
+  String get friday;
+
+  /// No description provided for @saturday.
+  ///
+  /// In en, this message translates to:
+  /// **'Saturday'**
+  String get saturday;
+
+  /// No description provided for @sunday.
+  ///
+  /// In en, this message translates to:
+  /// **'Sunday'**
+  String get sunday;
+
+  /// No description provided for @unavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Unavailable'**
+  String get unavailable;
+
+  /// No description provided for @doctorIdNotAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Doctor ID is not available'**
+  String get doctorIdNotAvailable;
+
+  /// No description provided for @deleteConfirmation.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Confirmation'**
+  String get deleteConfirmation;
+
+  /// No description provided for @deleteQuestion.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete this doctor?'**
+  String get deleteQuestion;
+
+  /// No description provided for @delete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get delete;
+
+  /// No description provided for @deleteError.
+  ///
+  /// In en, this message translates to:
+  /// **'An error occurred: '**
+  String get deleteError;
+
+  /// No description provided for @noDoctorFound.
+  ///
+  /// In en, this message translates to:
+  /// **'Sorry, There is no doctor.'**
+  String get noDoctorFound;
 }
 
-class _AppLocalizationsDelegate
-    extends LocalizationsDelegate<AppLocalizations> {
+class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
   const _AppLocalizationsDelegate();
 
   @override
@@ -1717,25 +1911,25 @@ class _AppLocalizationsDelegate
   }
 
   @override
-  bool isSupported(Locale locale) =>
-      <String>['ar', 'en'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => <String>['ar', 'en'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
 }
 
 AppLocalizations lookupAppLocalizations(Locale locale) {
+
+
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
-    case 'ar':
-      return AppLocalizationsAr();
-    case 'en':
-      return AppLocalizationsEn();
+    case 'ar': return AppLocalizationsAr();
+    case 'en': return AppLocalizationsEn();
   }
 
   throw FlutterError(
-      'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
-      'an issue with the localizations generation tool. Please file an issue '
-      'on GitHub with a reproducible sample app and the gen-l10n configuration '
-      'that was used.');
+    'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
+    'an issue with the localizations generation tool. Please file an issue '
+    'on GitHub with a reproducible sample app and the gen-l10n configuration '
+    'that was used.'
+  );
 }

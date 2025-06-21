@@ -22,7 +22,7 @@ class DoctorProfileScreen extends StatelessWidget {
       return Scaffold(
         body: Center(
           child: Text(
-            " لا توجد داتا ",
+            AppLocalizations.of(context)!.noData,
             style: Theme.of(context).textTheme.bodyLarge?.copyWith(
               color: Colors.red,
               fontSize: 16.sp,
@@ -56,16 +56,16 @@ class DoctorProfileScreen extends StatelessWidget {
                        ClipRRect(
                          borderRadius: BorderRadius.circular(1.r),
                          child:ClipRRect(
-                           borderRadius: BorderRadius.circular(50.r),
+                           borderRadius: BorderRadius.circular(20.r),
                            child: Image.network(
-                             'https://cdn-icons-png.flaticon.com/512/3870/3870822.png',
-                             height: 65.h,
-                             width: 65.w,
+                             'https://www.gravatar.com/avatar/?d=mp&f=y&s=200',
+                             height: 100.h,
+                             width: 100.w,
                              fit: BoxFit.cover,
                            ),
                          ),
 
-                         ),
+                       ),
                        SizedBox(height: 7.h,),
                        Text('${data.drName}', style: Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: 16.sp),),
                        Text('${data.specialty}', style: Theme.of(context).textTheme.labelSmall?.copyWith(fontSize: 14.sp, color: Theme.of(context).colorScheme.onSecondary)),

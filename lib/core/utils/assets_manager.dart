@@ -27,10 +27,6 @@ class AssetsManager{
   static const String scheduleIcon = '${base}table icon.png';
   static const String liveChatIcon = '${base}chat icon.png';
   static const String userIcon = '${base}user icon.png';
-  static const String doctor1 = '${base}man doctor.png';
-  static const String doctor2 = '${base}women doctor1.png';
-  static const String doctor3 = '${base}man doctor2.png';
-  static const String doctor4 = '${base}woman doctor 2.png';
   static const String cashIcon = '${base}cash_icon.png';
   static const String monsterCardIcon = '${base}Mastercard_icon.png';
   static const String visaIcon = '${base}visa_icon.png';
@@ -41,4 +37,8 @@ class AssetsManager{
   static const String updateDr = '${base}for_Update.jpg';
   static const String insertDr = '${base}doctor2.jpg';
   static const String faqBg = '${base}background.jpg';
+  static const String admin = '${base}admin.jpg';
+  static const String emptyProfile = '${base}empty.webp';
+
+
 }

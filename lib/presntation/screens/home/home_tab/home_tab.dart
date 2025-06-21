@@ -55,7 +55,7 @@ class HomeScreen extends StatelessWidget {
                 child: Text(
                   description,
                   style: GoogleFonts.sourceSerif4(
-                    fontSize: 10.sp,
+                    fontSize: 9.sp,
                     fontWeight: FontWeight.w400,
                     color: ColorsManager.hint,
                   ),
