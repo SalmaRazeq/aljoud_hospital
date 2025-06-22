@@ -1,3 +1,4 @@
+import 'package:aljoud_hospital/l10n/app_localizations.dart';
 import 'package:aljoud_hospital/presntation/screens/auth/create_new_password/create_new_password.dart';
 import 'package:aljoud_hospital/presntation/screens/auth/forget_password/forget_password.dart';
 import 'package:aljoud_hospital/presntation/screens/auth/log_in/login.dart';
@@ -24,10 +25,8 @@ import 'package:aljoud_hospital/presntation/screens/see_all/view/see_all.dart';
 import 'package:aljoud_hospital/presntation/screens/start/start.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../data/model_api/selectedDoctor/Data.dart';
 import '../../data/models/doctor/doctor_model.dart';
-import '../../presntation/screens/home/categories_item/categories_item.dart';
 import '../../presntation/screens/home/home.dart';
 import '../../presntation/screens/notification/notification.dart';
 import '../../presntation/screens/splash/splash.dart';
@@ -66,7 +65,6 @@ class RoutesManager{
 
   static Route? router(RouteSettings settings) {
     switch (settings.name) {
-
       case testApiScreen:
         return MaterialPageRoute(
           builder: (context) =>  const TestScreen(),
@@ -83,8 +81,7 @@ class RoutesManager{
         final args = settings.arguments;
         return MaterialPageRoute(
           builder: (context) {
-            return Home(selectedIndex: args as int? ?? 0);
-          },
+            return Home(selectedIndex: args as int? ?? 0);},
         );
       case login:
         return MaterialPageRoute(
@@ -118,7 +115,6 @@ class RoutesManager{
         return MaterialPageRoute(
           builder: (context) => const FAQScreen(),
         );
-
       case hospitalVisit:
         final doctor = settings.arguments as Data?;
         if (doctor == null) {
@@ -126,16 +122,9 @@ class RoutesManager{
           return MaterialPageRoute(
             builder: (context) => Scaffold(
               body: Center(
-                child: Text(
-                  " لانوجد داتا ",
-                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    color: Colors.red,
-                    fontSize: 16.sp,
-                  ),
-                ),
-              ),
-            ),
-          );
+                child: Text(AppLocalizations.of(context)!.noData,
+                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: Colors.red, fontSize: 16.sp,),),),
+            ),);
         }
         return MaterialPageRoute(
           builder: (context) => const HospitalVisitScreen(),
@@ -147,15 +136,8 @@ class RoutesManager{
           return MaterialPageRoute(
             builder: (context) => Scaffold(
               body: Center(
-                child: Text(
-                  " لا توجد داتا ",
-                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    color: Colors.red,
-                    fontSize: 16.sp,
-                  ),
-                ),
-              ),
-            ),
+                child: Text(AppLocalizations.of(context)!.noData,
+                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: Colors.red, fontSize: 16.sp,),),),),
           );
         }
         return MaterialPageRoute(
@@ -214,14 +196,12 @@ class RoutesManager{
         return MaterialPageRoute(
           builder: (context) => ConfirmPaymentScreen(doctor: doctor,),
         );
-
       case patientDetails:
         final args = settings.arguments as Map<String, dynamic>;
         final doctor = args['doctor'] as DoctorModel;
         return MaterialPageRoute(
           builder: (context) => PatientDetailsScreen(
-            doctor: doctor,
-          ),
+            doctor: doctor,),
         );
       case categoryDetails:
         return MaterialPageRoute(
@@ -230,8 +210,7 @@ class RoutesManager{
         );
       default:return MaterialPageRoute(
           builder: (_) => const Scaffold(
-            body: Center(child: Text("No route defined")),
-          ),
+            body: Center(child: Text("No route defined")),),
         );
     }
   }

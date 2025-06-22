@@ -2,7 +2,6 @@ import 'package:aljoud_hospital/presntation/screens/auth/widget/field_design.dar
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import '../../../../../core/utils/color_manager.dart';
 
 class DoctorTextField extends StatelessWidget {
@@ -14,7 +13,6 @@ class DoctorTextField extends StatelessWidget {
   Validator validator;
   TextInputType keyBoardType;
   VoidCallback? onTap;
-
 
   @override
   Widget build(BuildContext context) {
@@ -28,12 +26,9 @@ class DoctorTextField extends StatelessWidget {
       decoration: InputDecoration(
         isDense: true,
         hintText: hintText,
-
         hintStyle: GoogleFonts.roboto(fontSize: 12.sp,color: Theme.of(context).colorScheme.shadow),
         filled: true,
-        prefixIcon: Icon(
-          icon,
-          size: 22.sp,
+        prefixIcon: Icon(icon, size: 22.sp,
           color: ColorsManager.hint,
         ),
         fillColor: ColorsManager.textField,

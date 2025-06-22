@@ -15,9 +15,8 @@ import '../../../../l10n/app_localizations.dart';
 import '../widget/doctor_item/doctor_passwordField.dart';
 import '../widget/doctor_item/doctor_textField.dart';
 
-
 class DoctorRegisterScreen extends StatefulWidget {
-  DoctorRegisterScreen({super.key});
+  const DoctorRegisterScreen({super.key});
 
   @override
   State<DoctorRegisterScreen> createState() => _DoctorRegisterScreenState();
@@ -57,24 +56,32 @@ class _DoctorRegisterScreenState extends State<DoctorRegisterScreen> {
                   children: [
                     Row(
                       children: [
-                        IconButton(onPressed: (){Navigator.pushNamed(context, RoutesManager.login);},
-                            icon: Icon(Icons.arrow_back_rounded,
-                              color: Theme.of(context).colorScheme.onSecondary,
-                              size: 20.sp,)),
+                        IconButton(
+                          onPressed: () {
+                            Navigator.pushNamed(context, RoutesManager.login);
+                          },
+                          icon: Icon(
+                            Icons.arrow_back_rounded,
+                            color: Theme.of(context).colorScheme.onSecondary,
+                            size: 20.sp,
+                          ),
+                        ),
                         Expanded(
                           child: Center(
-                            child: Text(loc.createAccount,
+                            child: Text(
+                              loc.createAccount,
                               style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                                  fontSize: 20.sp, color: Theme.of(context).colorScheme.onPrimary,
-                                  fontWeight: FontWeight.w600
-                              ),),),
+                                fontSize: 20.sp,
+                                color: Theme.of(context).colorScheme.onPrimary,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
                         ),
-                        SizedBox(
-                          width: 30.w,
-                        ),
+                        SizedBox(width: 30.w),
                       ],
                     ),
-                    SizedBox(height: 8.h,),
+                    SizedBox(height: 8.h),
                     ToggleButtonWidget(
                       isPatientSelected: isPatient,
                       onToggle: (value) {
@@ -83,14 +90,12 @@ class _DoctorRegisterScreenState extends State<DoctorRegisterScreen> {
                         });
                         if (isPatient) {
                           Navigator.pushNamed(context, RoutesManager.register);
-                        }
-                        else {
+                        } else {
                           Navigator.pushNamed(context, RoutesManager.doctorRegister);
                         }
                       },
                     ),
-                    SizedBox(height: 30.h,),
-
+                    SizedBox(height: 30.h),
                     DoctorTextField(
                       hintText: loc.fullName,
                       controller: fullNameController,
@@ -102,9 +107,7 @@ class _DoctorRegisterScreenState extends State<DoctorRegisterScreen> {
                         return null;
                       },
                     ),
-
-                    SizedBox(height: 14.h,),
-
+                    SizedBox(height: 14.h),
                     DoctorTextField(
                       hintText: loc.phone,
                       keyBoardType: const TextInputType.numberWithOptions(),
@@ -120,104 +123,103 @@ class _DoctorRegisterScreenState extends State<DoctorRegisterScreen> {
                         return null;
                       },
                     ),
-
-                    SizedBox(height: 14.h,),
-
-
+                    SizedBox(height: 14.h),
                     DoctorTextField(
-                        hintText: loc.emailAddress,
-                        controller: emailController,
-                        icon: Icons.email_outlined,
-                        validator: (input) {
-                          if (input == null || input.trim().isEmpty) {
-                            return loc.plzEmail;
-                          }
-                          if (!isEmailValid(input)) {
-                            return loc.wrongFormat;
-                          }
-                          return null;
-                        }),
-
-                    SizedBox(height: 14.h,),
-
+                      hintText: loc.emailAddress,
+                      controller: emailController,
+                      icon: Icons.email_outlined,
+                      keyBoardType: TextInputType.emailAddress,
+                      validator: (input) {
+                        if (input == null || input.trim().isEmpty) {
+                          return loc.plzEmail;
+                        }
+                        if (!isEmailValid(input)) {
+                          return loc.wrongFormat;
+                        }
+                        return null;
+                      },
+                    ),
+                    SizedBox(height: 14.h),
                     DoctorPasswordField(
-                        hintText: loc.password,
-                        controller: passwordController,
-                        icon: Icons.lock_outline_rounded,
-                        validator: (input) {
-                          if (input == null || input.trim().isEmpty) {
-                            return loc.plzPassword;
-                          }
-                          if (input.length < 6) {
-                            return loc.password6Char;
-                          }
-                          return null;
-                        }),
-
-                    SizedBox(height: 14.h,),
-
+                      hintText: loc.password,
+                      controller: passwordController,
+                      icon: Icons.lock_outline_rounded,
+                      validator: (input) {
+                        if (input == null || input.trim().isEmpty) {
+                          return loc.plzPassword;
+                        }
+                        if (input.length < 6) {
+                          return loc.password6Char;
+                        }
+                        return null;
+                      },
+                    ),
+                    SizedBox(height: 14.h),
                     DoctorPasswordField(
-                        hintText: loc.confirmPassword,
-                        controller: rePasswordController,
-                        icon: Icons.lock_outline_rounded,
-                        validator: (input) {
-                          if (input == null || input.trim().isEmpty) {
-                            return loc.plzPassword;
-                          }
-                          if (input.length < 6) {
-                            return loc.password6Char;
-                          }
-                          return null;
-                        }),
-
-                    SizedBox(height: 14.h,),
-
+                      hintText: loc.confirmPassword,
+                      controller: rePasswordController,
+                      icon: Icons.lock_outline_rounded,
+                      validator: (input) {
+                        if (input == null || input.trim().isEmpty) {
+                          return loc.plzPassword;
+                        }
+                        if (input != passwordController.text) {
+                          return loc.notMatch;
+                        }
+                        return null;
+                      },
+                    ),
+                    SizedBox(height: 14.h),
                     DoctorTextField(
-                        hintText: loc.medicalLicenseNumber,
-                        controller: medicalLicenseNumController,
-                        icon: Icons.school_outlined,
-                        keyBoardType: const TextInputType.numberWithOptions(),
-                        validator: (input) {
-                          if (input == null || input.trim().isEmpty) {
-                            return loc.plzEnterMedicalLicence;
-                          }
-                          return null;
-                        }),
-
-                    SizedBox(height: 14.h,),
+                      hintText: loc.medicalLicenseNumber,
+                      controller: medicalLicenseNumController,
+                      icon: Icons.school_outlined,
+                      keyBoardType: const TextInputType.numberWithOptions(),
+                      validator: (input) {
+                        if (input == null || input.trim().isEmpty) {
+                          return loc.plzEnterMedicalLicence;
+                        }
+                        return null;
+                      },
+                    ),
+                    SizedBox(height: 14.h),
                     DoctorTextField(
-                        hintText: loc.specialization,
-                        controller: specializationController,
-                        icon: Icons.location_on_outlined,
-                        validator: (input) {
-                          if (input == null || input.trim().isEmpty) {
-                            return loc.plzEnterSpecialization;
-                          }
-                          return null;
-                        }),
-
-                    SizedBox(height: 20.h,),
-
+                      hintText: loc.specialization,
+                      controller: specializationController,
+                      icon: Icons.location_on_outlined,
+                      validator: (input) {
+                        if (input == null || input.trim().isEmpty) {
+                          return loc.plzEnterSpecialization;
+                        }
+                        return null;
+                      },
+                    ),
+                    SizedBox(height: 20.h),
                     Row(
                       children: [
                         SizedBox(
                           height: 20.h,
                           width: 20.w,
                           child: Checkbox(
-                              value: value,
-                              onChanged: (bool? newValue) {
-                                setState(() {
-                                  value = newValue!;
-                                });
-                          }),
+                            value: value,
+                            onChanged: (bool? newValue) {
+                              setState(() {
+                                value = newValue!;
+                              });
+                            },
+                          ),
                         ),
-                       SizedBox(width: 8.w,),
-                       Text(loc.iAgreeToTheTermsConditions, style: GoogleFonts.inter(fontSize: 10, color: Theme.of(context).colorScheme.onSecondary),),
+                        SizedBox(width: 8.w),
+                        Text(
+                          loc.iAgreeToTheTermsConditions,
+                          style: GoogleFonts.inter(
+                            fontSize: 10,
+                            color: Theme.of(context).colorScheme.onSecondary,
+                          ),
+                        ),
                       ],
                     ),
-
-                    SizedBox(height: 14.h,),
-
+                    SizedBox(height: 14.h),
                     ElevatedButton(
                       onPressed: () {
                         drSignUp();
@@ -226,17 +228,21 @@ class _DoctorRegisterScreenState extends State<DoctorRegisterScreen> {
                       child: Padding(
                         padding: REdgeInsets.all(6),
                         child: Text(
-                            loc.signUp,
-                            style: Theme.of(context).textTheme.titleMedium
-                                ?.copyWith(fontSize: 16.sp, fontWeight: FontWeight.w700, color: Theme.of(context).colorScheme.primary)
+                          loc.signUp,
+                          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.w700,
+                            color: Theme.of(context).colorScheme.primary,
+                          ),
                         ),
                       ),
                     ),
-
-
                     SizedBox(height: 30.h),
-
-                    BottomSection(text: loc.haveAccount, body: loc.login, routeName: RoutesManager.login,)
+                    BottomSection(
+                      text: loc.haveAccount,
+                      body: loc.login,
+                      routeName: RoutesManager.login,
+                    ),
                   ],
                 ),
               ),
@@ -255,15 +261,14 @@ class _DoctorRegisterScreenState extends State<DoctorRegisterScreen> {
     try {
       DialogUtils.showLoading(context, message: loc.pleaseWait);
 
-      UserCredential credential = await FirebaseAuth.instance
-          .createUserWithEmailAndPassword(
-          email: emailController.text,
-          password: passwordController.text);
+      UserCredential credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: emailController.text,
+        password: passwordController.text,
+      );
 
       if (credential.user == null) {
         DialogUtils.hide(context);
-        DialogUtils.showMessage(context,
-            title: loc.error, body: loc.registrationFailed);
+        DialogUtils.showMessage(context, title: loc.error, body: loc.registrationFailed);
         return;
       }
 
@@ -271,13 +276,14 @@ class _DoctorRegisterScreenState extends State<DoctorRegisterScreen> {
 
       if (mounted) DialogUtils.hide(context);
 
-      DialogUtils.showMessage(context,
-          title: loc.registeredSuccessfully,
-          posActionTitle: loc.ok,
-          posAction: () {
-            Navigator.pushReplacementNamed(context, RoutesManager.login);
-          });
-
+      DialogUtils.showMessage(
+        context,
+        title: loc.registeredSuccessfully,
+        posActionTitle: loc.ok,
+        posAction: () {
+          Navigator.pushReplacementNamed(context, RoutesManager.login);
+        },
+      );
     } on FirebaseAuthException catch (error) {
       DialogUtils.hide(context);
 
@@ -297,29 +303,19 @@ class _DoctorRegisterScreenState extends State<DoctorRegisterScreen> {
   }
 
   Future<void> addDoctorToFireStore(String uid) async {
-    CollectionReference doctorCollection =
-    FirebaseFirestore.instance.collection(DoctorModel.collectionName);
+    CollectionReference doctorCollection = FirebaseFirestore.instance.collection(DoctorModel.collectionName);
 
     DocumentReference doctorDocument = doctorCollection.doc(uid);
 
     DoctorModel doctorDM = DoctorModel(
-        doctorId: uid,
-        doctorEmail: emailController.text,
-        doctorName: fullNameController.text,
-        phoneNumber : phoneNumController.text,
+      doctorId: uid,
+      doctorEmail: emailController.text,
+      doctorName: fullNameController.text,
+      phoneNumber: phoneNumController.text,
       specialty: specializationController.text,
-      medicalLicense: medicalLicenseNumController.text
+      medicalLicense: medicalLicenseNumController.text,
+      userType: "doctor", // إضافة userType
     );
     await doctorDocument.set(doctorDM.toFirestore());
-  }
-
-  Future<DoctorModel> getDoctorFromFirestore(String doctorId) async {
-    DocumentSnapshot doc = await FirebaseFirestore.instance
-        .collection(DoctorModel.collectionName).doc(doctorId).get();
-
-    return DoctorModel.fromFirestore(doc);
-  }
-
-
-
+    }
 }

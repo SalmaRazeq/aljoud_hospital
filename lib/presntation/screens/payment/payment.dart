@@ -8,7 +8,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-
 import '../../../core/utils/dialog_utils/dialog_utils.dart';
 import '../../../data/models/booking_model.dart';
 import '../../../l10n/app_localizations.dart';
@@ -96,7 +95,6 @@ class _PaymentScreenState extends State<PaymentScreen> {
                     ],
                   ),
                   SizedBox(height: 40.h),
-
                   Container(
                     width: 125.w,
                     height: 36.h,
@@ -115,8 +113,6 @@ class _PaymentScreenState extends State<PaymentScreen> {
                     ),
                   ),
                   SizedBox(height: 40.h),
-
-                  // Payment Options
                   BuildContainer(
                     label: loc.cash,
                     value: 'cash',
@@ -162,9 +158,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                       });
                     },
                   ),
-
                   const Spacer(),
-
                   Center(
                     child: SizedBox(
                         width: 200.w,

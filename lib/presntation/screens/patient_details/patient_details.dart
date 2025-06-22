@@ -287,7 +287,7 @@ class _PatientDetailsScreenState extends State<PatientDetailsScreen> {
   }
 
   void savePatientDetails() async {
-    //if (_formKey.currentState!.validate() == false) return;
+    if (_formKey.currentState!.validate() == false) return;
 
     try {
       DialogUtils.showLoading(context, message: AppLocalizations.of(context)!.pleaseWait);

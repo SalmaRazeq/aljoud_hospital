@@ -8,21 +8,17 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../../../../../core/utils/email_validation.dart';
 import '../../../../../../../data/api_manager/api_manager.dart';
-import '../../../../../../../data/model_api/insertResponse/InsertResponse.dart';
 import '../../../../../../../l10n/app_localizations.dart';
 import '../../../../../auth/widget/doctor_item/doctor_passwordField.dart';
 
 class InsertDoctorScreen extends StatefulWidget {
   const InsertDoctorScreen({super.key});
-
   @override
   State<InsertDoctorScreen> createState() => _InsertDoctorScreenState();
 }
-
 class _InsertDoctorScreenState extends State<InsertDoctorScreen> {
   final _formKey = GlobalKey<FormState>();
   bool isLoading = false;
-
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -34,14 +30,11 @@ class _InsertDoctorScreenState extends State<InsertDoctorScreen> {
   TextEditingController yearController = TextEditingController();
   TextEditingController priceController = TextEditingController();
   TextEditingController timeController = TextEditingController(); // حقل الوقت
-
   String gender = 'Male';
   String? specialty;
   String? day;
   File? selectedImage;
-
   late List<String> specialties ;
-
   late List<String> days;
 
   Future<void> pickImage() async {
@@ -68,7 +61,6 @@ class _InsertDoctorScreenState extends State<InsertDoctorScreen> {
     gender = AppLocalizations.of(context)!.male;
     specialty = null;
     day = null;
-
     final loc = AppLocalizations.of(context)!;
     specialties = [
       loc.cardiology,
@@ -87,7 +79,6 @@ class _InsertDoctorScreenState extends State<InsertDoctorScreen> {
       loc.internalMedicine,
       loc.eNT,
     ];
-
     days = [
       loc.monday,
       loc.tuesday,
@@ -99,14 +90,11 @@ class _InsertDoctorScreenState extends State<InsertDoctorScreen> {
     ];
   }
 
-
-  // دالة لتحويل الصورة إلى Base64
   String? imageToBase64(File? image) {
     if (image == null) return null;
     final bytes = image.readAsBytesSync();
     return base64Encode(bytes);
   }
-
 
   Future<void> pickTime() async {
     final TimeOfDay? picked = await showTimePicker(
@@ -122,7 +110,7 @@ class _InsertDoctorScreenState extends State<InsertDoctorScreen> {
             ),
             textButtonTheme: TextButtonThemeData(
               style: TextButton.styleFrom(
-                foregroundColor: Colors.red, // لون أزرار الغاء/موافق
+                foregroundColor: Colors.red,
               ),
             ),
           ),
@@ -139,7 +127,6 @@ class _InsertDoctorScreenState extends State<InsertDoctorScreen> {
 
   String getDayKey(String translatedDay) {
     final loc = AppLocalizations.of(context)!;
-
     final Map<String, String> dayMap = {
       loc.monday: 'Monday',
       loc.tuesday: 'Tuesday',
@@ -149,10 +136,8 @@ class _InsertDoctorScreenState extends State<InsertDoctorScreen> {
       loc.saturday: 'Saturday',
       loc.sunday: 'Sunday',
     };
-
     return dayMap[translatedDay] ?? 'Unknown';
   }
-
 
   String getGenderKey(String localized) {
     final loc = AppLocalizations.of(context)!;
@@ -160,9 +145,9 @@ class _InsertDoctorScreenState extends State<InsertDoctorScreen> {
     if (localized == loc.female) return 'Female';
     return 'unKnown';
   }
+
   String getSpecialtyKey(String translatedSpecialty) {
     final loc = AppLocalizations.of(context)!;
-
     final Map<String, String> specialtyMap = {
       loc.cardiology: 'Cardiology',
       loc.pulmonology: 'Pulmonology',
@@ -180,10 +165,8 @@ class _InsertDoctorScreenState extends State<InsertDoctorScreen> {
       loc.internalMedicine: 'Internal medicine',
       loc.eNT: 'ENT',
     };
-
     return specialtyMap[translatedSpecialty] ?? 'Unknown';
   }
-
 
   Future<void> registerDoctor() async {
     if (!_formKey.currentState!.validate() || specialty == null || selectedImage == null || day == null || timeController.text.isEmpty) {
@@ -193,37 +176,12 @@ class _InsertDoctorScreenState extends State<InsertDoctorScreen> {
           backgroundColor: Colors.red,
           duration: const Duration(seconds: 3),
         ),
-
       );
       return;
     }
-
     setState(() {
       isLoading = true;
     });
-
-    // جمع البيانات للطباعة
-    String formData = '''
-تفاصيل التسجيل:
-الاسم: ${nameController.text}
-البريد الإلكتروني: ${emailController.text}
-كلمة المرور: ${passwordController.text}
-رقم الهاتف: ${phoneController.text}
-الجنس: $gender
-الدرجة العلمية: ${degreeController.text}
-التخصص: $specialty
-التقييم: ${ratingController.text}
-العمر: ${ageController.text}
-العنوان: ${addressController.text}
-سنوات الخبرة: ${yearController.text}
-السعر: ${priceController.text}
-اليوم: $day
-الوقت: ${timeController.text}
-مسار الصورة: ${selectedImage!.path}
-''';
-
-    print(formData);
-
     try {
       final response = await ApiManger().sendDoctorData(
         drId: null,
@@ -241,13 +199,11 @@ class _InsertDoctorScreenState extends State<InsertDoctorScreen> {
         yearExperience: int.parse(yearController.text),
         price: double.parse(priceController.text),
         drDay: getDayKey(day!),
-        drTime: timeController.text, // تمرير الوقت
+        drTime: timeController.text,
       );
-
       setState(() {
         isLoading = false;
       });
-
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
@@ -258,8 +214,6 @@ class _InsertDoctorScreenState extends State<InsertDoctorScreen> {
           duration: const Duration(seconds: 3),
         ),
       );
-
-      // إذا نجح التسجيل، نقدر ننظف النموذج
       _formKey.currentState!.reset();
       nameController.clear();
       emailController.clear();
@@ -277,14 +231,12 @@ class _InsertDoctorScreenState extends State<InsertDoctorScreen> {
         selectedImage = null;
         day = null;
       });
-
       print("✅ Success! Data received:");
       print(response.toJson());
     } catch (e) {
       setState(() {
         isLoading = false;
       });
-
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text("حدث خطأ: $e"),
@@ -292,17 +244,14 @@ class _InsertDoctorScreenState extends State<InsertDoctorScreen> {
           duration: const Duration(seconds: 3),
         ),
       );
-
       print("❌ Error occurred: $e");
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
     final genders = [loc.male, loc.female];
-
     final specialties = [
       loc.cardiology,
       loc.pulmonology,
@@ -320,7 +269,6 @@ class _InsertDoctorScreenState extends State<InsertDoctorScreen> {
       loc.internalMedicine,
       loc.eNT,
     ];
-
     final days = [
       loc.monday,
       loc.tuesday,
@@ -351,7 +299,6 @@ class _InsertDoctorScreenState extends State<InsertDoctorScreen> {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-
                     DoctorTextField(
                       icon: Icons.person,
                       hintText: loc.name,
@@ -363,7 +310,6 @@ class _InsertDoctorScreenState extends State<InsertDoctorScreen> {
                         return null;
                       },),
                     SizedBox(height: 8.h),
-
                     DoctorTextField(
                       icon: Icons.email_outlined,
                       hintText: loc.emailAddress,
@@ -379,7 +325,6 @@ class _InsertDoctorScreenState extends State<InsertDoctorScreen> {
                         return null;
                       },),
                     SizedBox(height: 8.h),
-
                     DoctorPasswordField(
                         hintText: loc.password,
                         controller: passwordController,
@@ -393,9 +338,7 @@ class _InsertDoctorScreenState extends State<InsertDoctorScreen> {
                           }
                           return null;
                         }),
-
                     SizedBox(height: 8.h),
-
                     DoctorTextField(
                       hintText: loc.phone,
                       keyBoardType: TextInputType.phone,
@@ -447,7 +390,6 @@ class _InsertDoctorScreenState extends State<InsertDoctorScreen> {
                       ),
                     ),
                     SizedBox(height: 8.h),
-
                     DoctorTextField(
                         hintText: loc.degree,
                         controller: degreeController,
@@ -459,7 +401,6 @@ class _InsertDoctorScreenState extends State<InsertDoctorScreen> {
                           return null;
                         }),
                     SizedBox(height: 8.h),
-
                     DropdownButtonFormField<String>(
                       style: GoogleFonts.roboto(
                         fontSize: 12.sp,
@@ -498,7 +439,6 @@ class _InsertDoctorScreenState extends State<InsertDoctorScreen> {
                       validator: (value) => value == null ? loc.plzEnterSpecialization : null,
                     ),
                     SizedBox(height: 8.h),
-
                     DoctorTextField(
                         hintText: loc.rating,
                         controller: ratingController,
@@ -515,7 +455,6 @@ class _InsertDoctorScreenState extends State<InsertDoctorScreen> {
                       },),
 
                     SizedBox(height: 8.h),
-
                     DoctorTextField(
                       hintText: loc.age,
                       controller: ageController,
@@ -531,7 +470,6 @@ class _InsertDoctorScreenState extends State<InsertDoctorScreen> {
                           return null;
                         },),
                     SizedBox(height: 8.h),
-
                     DoctorTextField(
                         hintText: loc.address,
                         controller: addressController,
@@ -543,7 +481,6 @@ class _InsertDoctorScreenState extends State<InsertDoctorScreen> {
                           return null;
                         }),
                     SizedBox(height: 8.h),
-
                     DoctorTextField(
                         hintText: loc.yearsOfExperience,
                         controller: yearController,
@@ -559,7 +496,6 @@ class _InsertDoctorScreenState extends State<InsertDoctorScreen> {
                           return null;
                         }),
                     SizedBox(height: 8.h),
-
                     DoctorTextField(
                         hintText: loc.plzEnterPrice,
                         controller: priceController,
@@ -574,9 +510,7 @@ class _InsertDoctorScreenState extends State<InsertDoctorScreen> {
                           }
                           return null;
                         }),
-
                     SizedBox(height: 8.h),
-
                     DropdownButtonFormField<String>(
                       style: GoogleFonts.roboto(
                         fontSize: 12.sp,
@@ -614,7 +548,6 @@ class _InsertDoctorScreenState extends State<InsertDoctorScreen> {
                       validator: (value) => value == null ? loc.plzChooseDay : null,
                     ),
                     SizedBox(height: 8.h),
-
                     DoctorTextField(
                         hintText: loc.workingTime,
                         controller: timeController,
@@ -626,9 +559,7 @@ class _InsertDoctorScreenState extends State<InsertDoctorScreen> {
                         }
                         return null;
                       },),
-
                     SizedBox(height: 10.h),
-
                     selectedImage != null
                         ? ClipRRect(
                       borderRadius: BorderRadius.circular(10.r),
@@ -656,7 +587,8 @@ class _InsertDoctorScreenState extends State<InsertDoctorScreen> {
                     ElevatedButton.icon(
                       onPressed: pickImage,
                       icon:  Icon(Icons.image, color: Colors.white, size: 22.sp,),
-                      label: Text(loc.selectPhoto, style: GoogleFonts.inter(fontSize: 14.sp,color: ColorsManager.white)),
+                      label: Text(loc.selectPhoto, style: GoogleFonts.inter(fontSize: 14.sp,
+                          color: ColorsManager.white)),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: ColorsManager.blue2,
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.r)),
@@ -673,10 +605,9 @@ class _InsertDoctorScreenState extends State<InsertDoctorScreen> {
                         minimumSize: Size(double.infinity, 30.sp),
                       ),
                       child: isLoading
-                          ? const CircularProgressIndicator(color: Colors.white)
-                          :  Text(
-                        loc.insert,
-                        style: GoogleFonts.inter(fontSize: 18.sp,color: ColorsManager.white, fontWeight: FontWeight.bold),
+                          ? const CircularProgressIndicator(color: Colors.white) :  Text(loc.insert,
+                        style: GoogleFonts.inter(fontSize: 18.sp,
+                            color: ColorsManager.white, fontWeight: FontWeight.bold),
                       ),
                     ),
                   ],
@@ -685,8 +616,7 @@ class _InsertDoctorScreenState extends State<InsertDoctorScreen> {
             ),
           ),
           if (isLoading)
-            Container(
-              color: Colors.black.withOpacity(0.5),
+            Container(color: Colors.black.withOpacity(0.5),
               child: const Center(child: CircularProgressIndicator()),
             ),
         ],

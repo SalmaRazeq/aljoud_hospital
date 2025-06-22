@@ -3,12 +3,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import '../../../../data/model_api/selectedDoctor/Data.dart';
 import '../../../../l10n/app_localizations.dart';
+import '../../home/categories_item/categories_item.dart';
 import '../../widgets/build_circleButton.dart';
 import '../view_model/doctor_view_model.dart';
 import 'doctor_card.dart';
 
 class CategoryDetailsScreen extends StatefulWidget {
-  const CategoryDetailsScreen({super.key});
+  const CategoryDetailsScreen({Key? key,}) : super(key: key);
 
   @override
   State<CategoryDetailsScreen> createState() => _CategoryDetailsScreenState();

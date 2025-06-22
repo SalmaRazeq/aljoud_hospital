@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class PatientModel {
   static const String collectionName = 'Patients details';
   String? patientId;
@@ -32,10 +30,7 @@ class PatientModel {
         'height': height,
         'weight': weight,
         'problemDescription': problemDescription,
-
-
       };
-
   PatientModel.fromFireStore(Map<String, dynamic> data) : this(
     patientId: data['patientId'],
     patientName: data['patientName'],

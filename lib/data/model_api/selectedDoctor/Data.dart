@@ -71,6 +71,4 @@ class Data {
     map['Day'] = day;
     map['Date'] = date;
     return map;
-  }
-
-}
+  }}

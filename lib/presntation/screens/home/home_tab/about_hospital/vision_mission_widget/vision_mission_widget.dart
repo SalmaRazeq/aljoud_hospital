@@ -24,8 +24,7 @@ class VisionMissionWidget extends StatelessWidget {
           Row(
             children: [
               Icon(
-                icon,
-                size: 24.sp,
+                icon, size: 24.sp,
                 color: ColorsManager.lightGreen,
               ),
               SizedBox(width: 6.w),
@@ -33,11 +32,9 @@ class VisionMissionWidget extends StatelessWidget {
                 child: Text(
                   title,
                   style: GoogleFonts.inter(
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w600,
+                    fontSize: 14.sp, fontWeight: FontWeight.w600,
                     color: Theme.of(context).colorScheme.primaryFixed,
-                  ),
-                  overflow: TextOverflow.ellipsis,
+                  ), overflow: TextOverflow.ellipsis,
                 ),
               ),
             ],
@@ -46,7 +43,7 @@ class VisionMissionWidget extends StatelessWidget {
           Text(
             description,
             style: GoogleFonts.inter(
-              fontSize: 12.sp,
+              fontSize: 10.sp,
               fontWeight: FontWeight.w500,
               color: Theme.of(context).colorScheme.onSecondary,
             ),

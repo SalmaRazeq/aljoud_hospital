@@ -596,7 +596,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get fine => 'كويس';
 
   @override
-  String get wantToBookAppoi => 'اريد ان احجز معاد';
+  String get wantToBookAppoi => 'عايز احجز معاد';
 
   @override
   String get wantToBook => 'اريد ان احجز';

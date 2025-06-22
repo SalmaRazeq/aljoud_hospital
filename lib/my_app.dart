@@ -7,17 +7,13 @@ import 'package:provider/provider.dart';
 import 'core/utils/routes_manager.dart';
 import 'l10n/app_localizations.dart';
 
-
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
-
   @override
   _MyAppState createState() => _MyAppState();
 }
-
 class _MyAppState extends State<MyApp> {
   bool isInitialized = false;
-
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -26,12 +22,10 @@ class _MyAppState extends State<MyApp> {
       isInitialized = true;
     }
   }
-
   Future<void> loadAppSettings() async {
     await Provider.of<LanguageProvider>(context, listen: false).getLang();
     await Provider.of<ThemeProvider>(context, listen: false).getTheme();
   }
-
   @override
   Widget build(BuildContext context) {
     var langProvider = Provider.of<LanguageProvider>(context);
@@ -47,7 +41,7 @@ class _MyAppState extends State<MyApp> {
         darkTheme: AppTheme.darkTheme,
         themeMode: themeProvider.currentTheme,
         onGenerateRoute: RoutesManager.router,
-        initialRoute: RoutesManager.home,
+        initialRoute: RoutesManager.splash,
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: const [Locale("ar"), Locale("en")],
         locale: langProvider.locale,

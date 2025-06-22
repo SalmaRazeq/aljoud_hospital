@@ -17,6 +17,12 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
+
+    // استخدمي Future.microtask لضمان التنفيذ بعد بناء السياق
+    Future.microtask(() {
+      FocusScope.of(context).unfocus();
+    });
+
     Timer(const Duration(seconds: 2), () {
       Navigator.pushReplacement(
         context,
@@ -25,8 +31,11 @@ class _SplashScreenState extends State<SplashScreen> {
     });
   }
 
+
   @override
   Widget build(BuildContext context) {
+    FocusScope.of(context).unfocus();
+
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -53,7 +62,6 @@ class _SplashScreenState extends State<SplashScreen> {
                 textAlign: TextAlign.center,
               ),
             ),
-
             SizedBox(height: 20.h,),
             Align(
               alignment: Alignment.bottomRight,

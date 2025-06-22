@@ -13,11 +13,9 @@ import '../../../../l10n/app_localizations.dart';
 
 class ForgetPasswordScreen extends StatefulWidget {
   const ForgetPasswordScreen({super.key});
-
   @override
   State<ForgetPasswordScreen> createState() => _ForgetPasswordScreenState();
 }
-
 class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
   final TextEditingController emailController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -25,7 +23,6 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
-
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
@@ -38,17 +35,13 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                   Row(
                     children: [
                       IconButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
+                        onPressed: () {Navigator.pop(context);},
                         icon: Icon(Icons.arrow_back_rounded, size: 24.sp, color: Theme.of(context).colorScheme.primaryFixed),
                       ),
                       Expanded(
                         child: Center(
-                          child: Text(
-                            loc.changePassword,
-                            style: GoogleFonts.sourceSans3(
-                              fontSize: 22.sp,
+                          child: Text(loc.changePassword,
+                            style: GoogleFonts.sourceSans3(fontSize: 22.sp,
                               color: Theme.of(context).colorScheme.primaryFixed,
                             ),
                           ),
@@ -68,9 +61,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                           children: [
                             Text(
                               loc.enterEmailToReset,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleMedium
+                              style: Theme.of(context).textTheme.titleMedium
                                   ?.copyWith(fontSize: 14.sp),
                               textAlign: TextAlign.center,
                             ),
@@ -83,8 +74,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                                 shape: BoxShape.circle,
                               ),
                               child: Icon(
-                                Icons.email_outlined,
-                                color: ColorsManager.white,
+                                Icons.email_outlined, color: ColorsManager.white,
                                 size: 56.sp,
                               ),
                             ),
@@ -115,7 +105,6 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                                 },
                                 onFieldSubmitted: (_) =>
                                     _resetPasswordWithEmail(context),
-                                // ← هنا الإضافة
                                 decoration: InputDecoration(
                                   isDense: true,
                                   hintText: loc.emailAddress,
@@ -170,18 +159,13 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
 
   Future<void> _resetPasswordWithEmail(BuildContext context) async {
     if (!_formKey.currentState!.validate()) return;
-
     final email = emailController.text.trim().toLowerCase();
     try {
       DialogUtils.showLoading(context, message: 'Please wait...');
-
-      // تحقق أولاً من أن الإيميل مسجل في Firestore
       final snapshot = await FirebaseFirestore.instance
           .collection(UserDM.collectionName)
           .where('email', isEqualTo: email)
-          .limit(1)
-          .get();
-
+          .limit(1).get();
       if (snapshot.docs.isEmpty) {
         DialogUtils.hide(context);
         DialogUtils.showMessage(
@@ -191,10 +175,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
         );
         return;
       }
-
-      // إذا الإيميل موجود بالفعل، أرسل رابط إعادة التعيين
       await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
-
       DialogUtils.hide(context);
       DialogUtils.showMessage(
         context,
@@ -210,12 +191,8 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
       );
     }
   }
-
-
-
   String generateOtp() {
     final random = Random();
     return (100000 + random.nextInt(900000)).toString(); // كود من 6 أرقام
   }
-
 }

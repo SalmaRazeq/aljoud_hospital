@@ -1,6 +1,4 @@
-
 import 'package:aljoud_hospital/core/utils/routes_manager.dart';
-import 'package:aljoud_hospital/presntation/screens/doctor_profile/doctor_profile.dart';
 import 'package:aljoud_hospital/presntation/screens/hospital_visit/widgets/available_days_widget.dart';
 import 'package:aljoud_hospital/presntation/screens/hospital_visit/widgets/localization_extension.dart';
 import 'package:aljoud_hospital/presntation/screens/hospital_visit/widgets/meeting_type.dart';
@@ -53,8 +51,6 @@ class _HospitalVisitScreenState extends State<HospitalVisitScreen> {
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
     final data = ModalRoute.of(context)?.settings.arguments;
-
-    // Check if arguments are null or not of type Data
     print("Received arguments in HospitalVisitScreen: $data");
     if (data == null || data is! Data) {
       return Scaffold(

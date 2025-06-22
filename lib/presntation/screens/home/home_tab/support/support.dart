@@ -2,7 +2,6 @@ import 'package:aljoud_hospital/core/utils/routes_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import '../../../../../core/utils/color_manager.dart';
 import '../../../../../l10n/app_localizations.dart';
 
@@ -12,7 +11,6 @@ class SupportScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
-
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -42,14 +40,10 @@ class SupportScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(
-                    width: 40.w,
-                  )
+                  SizedBox(width: 40.w,)
                 ],
               ),
-              SizedBox(
-                height: 40.h,
-              ),
+              SizedBox(height: 40.h,),
               Card(
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20.r)),
@@ -93,7 +87,6 @@ class SupportScreen extends StatelessWidget {
       ),
     );
   }
-
   Widget buildOption({
     IconData? icon,
     required String text,
@@ -103,18 +96,15 @@ class SupportScreen extends StatelessWidget {
       leading: CircleAvatar(
         backgroundColor: ColorsManager.fadedBlue3,
         child: icon == null
-            ? Text(
-                'FAQ',
+            ? Text('FAQ',
                 style: GoogleFonts.sourceSerif4(
                   fontWeight: FontWeight.w700,
                   color: ColorsManager.blue2,
                   fontSize: 14.sp,
                 ),
               )
-            : Icon(
-                icon,
-                color: ColorsManager.blue2,
-                size: 20,
+            : Icon(icon, color: ColorsManager.blue2,
+                size: 20.sp,
               ),
       ),
       title: Text(
@@ -128,7 +118,6 @@ class SupportScreen extends StatelessWidget {
       onTap: onTab,
     );
   }
-
   Widget buildDivider() {
     return const Divider(
       color: ColorsManager.hint,

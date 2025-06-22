@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import '../../../../../../core/utils/color_manager.dart';
 import '../../../../../../l10n/app_localizations.dart';
 
@@ -14,18 +13,13 @@ class AdminScreen extends StatefulWidget {
   @override
   State<AdminScreen> createState() => _AdminScreenState();
 }
-
-
 class _AdminScreenState extends State<AdminScreen> {
   List<String> doctors = ['Dr. Ahmed', 'Dr. Salma', 'Dr. Tarek'];
   String? selectedDoctor;
   bool showDropdown = false;
-
-
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
-
     return Scaffold(
         appBar: AppBar(
           title: Text(
@@ -53,7 +47,6 @@ class _AdminScreenState extends State<AdminScreen> {
                     padding:
                         REdgeInsets.symmetric(vertical: 20, horizontal: 15),
                     child: Column(children: [
-
                       ClipRRect(
                         borderRadius: BorderRadius.circular(10.r),
                         child: Image.asset(
@@ -62,7 +55,6 @@ class _AdminScreenState extends State<AdminScreen> {
                           fit: BoxFit.cover,
                         ),
                       ),
-
                       SizedBox(height: 30.h,),
                       _buildListTitle(
                           icon: FontAwesomeIcons.add,
@@ -80,7 +72,6 @@ class _AdminScreenState extends State<AdminScreen> {
           ),
         ));
   }
-
   Widget _buildListTitle({
     required IconData icon,
     required String title,

@@ -13,7 +13,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../../../data/models/doctor/doctor_model.dart';
 import '../../../../data/models/user_dm.dart';
 import '../../../../l10n/app_localizations.dart';
@@ -35,7 +34,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
     final XFile? pickedFile = await _picker.pickImage(
       source: ImageSource.gallery,
     );
-
     if (pickedFile != null) {
       setState(() {
         _imageFile = File(pickedFile.path);
@@ -53,7 +51,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   Future<void> _showImageOptions() async {
     final loc = AppLocalizations.of(context)!;
-
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -101,7 +98,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Future<void> loadProfileImageFromPrefs() async {
     final prefs = await SharedPreferences.getInstance();
     final base64Image = prefs.getString('profile_image');
-
     if (base64Image != null) {
       final bytes = base64Decode(base64Image);
       final tempDir = Directory.systemTemp;
@@ -116,7 +112,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
     final prefs = await SharedPreferences.getInstance();
     await prefs.remove('profile_image');
   }
-
   String? userName;
   String userAge = '--';
   String userHeight = '--';
@@ -135,17 +130,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
     User? user = FirebaseAuth.instance.currentUser;
     if (user != null) {
       final firestore = FirebaseFirestore.instance;
-
       DocumentSnapshot userDoc =
       await firestore.collection(UserDM.collectionName).doc(user.uid).get();
-
       if (userDoc.exists && userDoc.data() != null) {
         UserDM userDM =
         UserDM.fromFireStore(userDoc.data() as Map<String, dynamic>);
         if (userDM.fullName != null && userDM.fullName!.isNotEmpty) {
           userName = userDM.fullName;
         }
-
         setState(() {
           userAge = userDM.age?.isNotEmpty ?? false ? userDM.age.toString() : '';
           userHeight = userDM.height?.isNotEmpty ?? false ? userDM.height.toString() : '';
@@ -173,7 +165,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
     final loc = AppLocalizations.of(context)!;
     var langProvider = Provider.of<LanguageProvider>(context);
     var themeProvider = Provider.of<ThemeProvider>(context);
-
     return Scaffold(
       backgroundColor: themeProvider.isLightTheme() ? Colors.blue.shade700 : ColorsManager.blue,
       body: SafeArea(

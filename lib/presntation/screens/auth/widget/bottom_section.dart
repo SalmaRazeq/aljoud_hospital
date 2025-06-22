@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../../../core/utils/routes_manager.dart';
-import '../../../../l10n/app_localizations.dart';
 
 class BottomSection extends StatelessWidget {
   BottomSection({super.key, required this.text, required this.body, this.routeName});
@@ -22,9 +20,6 @@ class BottomSection extends StatelessWidget {
           onPressed: () {
             if (routeName != null && routeName!.isNotEmpty) {
               Navigator.pushNamed(context, routeName!);
-            } else {
-              // ممكن تحط هنا أكشن تاني زي مثلا إعادة إرسال الكود
-              // أو تسيبه فاضي ما يعملش شيء
             }
           },
           child: Text(

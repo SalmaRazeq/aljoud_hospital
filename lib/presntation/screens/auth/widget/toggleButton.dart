@@ -1,9 +1,7 @@
 import 'package:aljoud_hospital/core/utils/color_manager.dart';
-import 'package:aljoud_hospital/core/utils/routes_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-
 import '../../../../l10n/app_localizations.dart';
 import '../../../../providers/theme_provider.dart';
 
@@ -16,17 +14,14 @@ class ToggleButtonWidget extends StatefulWidget {
     required this.isPatientSelected,
     required this.onToggle,
   }) : super(key: key);
-
   @override
   State<ToggleButtonWidget> createState() => _ToggleButtonWidgetState();
 }
-
 class _ToggleButtonWidgetState extends State<ToggleButtonWidget> {
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
     var themeProvider = Provider.of<ThemeProvider>(context);
-
     return Center(
       child: Container(
         width: 185.w,

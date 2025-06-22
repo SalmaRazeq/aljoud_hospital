@@ -6,11 +6,9 @@ import 'package:aljoud_hospital/presntation/screens/doctor_profile/widget/doctor
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import '../../../core/utils/assets_manager.dart';
 import '../../../data/model_api/selectedDoctor/Data.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../providers/theme_provider.dart';
-import '../see_all/category_details/CategoryDetailsScreen.dart';
 
 class DoctorProfileScreen extends StatelessWidget {
 

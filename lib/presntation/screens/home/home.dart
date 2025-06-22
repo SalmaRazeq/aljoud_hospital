@@ -18,13 +18,11 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   late int selectedIndex;
-
   @override
   void initState() {
     super.initState();
     selectedIndex = widget.selectedIndex;  // استخدام القيمة من الـ constructor
   }
-
   List<Widget> tabs = [
     HomeScreen(),
     ChatBotScreen(),

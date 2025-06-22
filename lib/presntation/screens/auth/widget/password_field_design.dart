@@ -2,12 +2,10 @@ import 'package:aljoud_hospital/core/utils/color_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 typedef Validator = String? Function(String?);
 
 class PasswordFieldDesign extends StatefulWidget {
-  PasswordFieldDesign({
-    super.key,
+  PasswordFieldDesign({super.key,
     required this.hintText,
     required this.controller,
     required this.validator,
@@ -19,7 +17,7 @@ class PasswordFieldDesign extends StatefulWidget {
   final TextEditingController controller;
   final Validator validator;
   final TextInputType keyBoardType;
-  final Function()? onSubmit; // إضافة هذا المتغير
+  final Function()? onSubmit;
 
   @override
   State<PasswordFieldDesign> createState() => _PasswordFieldDesignState();
@@ -27,7 +25,6 @@ class PasswordFieldDesign extends StatefulWidget {
 
 class _PasswordFieldDesignState extends State<PasswordFieldDesign> {
   bool obscureText = true;
-
   @override
   Widget build(BuildContext context) {
     return TextFormField(

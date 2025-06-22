@@ -9,7 +9,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-
 import '../../../../../core/utils/email_validation.dart';
 import '../../../../../data/models/user_dm.dart';
 import '../../../../../l10n/app_localizations.dart';
@@ -21,7 +20,6 @@ class EditeProfileScreen extends StatefulWidget {
   @override
   State<EditeProfileScreen> createState() => _EditeProfileScreenState();
 }
-
 class _EditeProfileScreenState extends State<EditeProfileScreen> {
   TextEditingController nameController = TextEditingController();
   TextEditingController phoneNumController = TextEditingController();
@@ -31,9 +29,7 @@ class _EditeProfileScreenState extends State<EditeProfileScreen> {
   TextEditingController dayController = TextEditingController();
   TextEditingController monthController = TextEditingController();
   TextEditingController yearController = TextEditingController();
-
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
   String? userName,
       userPhone,
       userEmail,
@@ -57,15 +53,12 @@ class _EditeProfileScreenState extends State<EditeProfileScreen> {
   Future<void> loadUserName() async {
     DialogUtils.showLoading(context,
         message: AppLocalizations.of(context)!.loading);
-
     User? user = FirebaseAuth.instance.currentUser;
     if (user != null) {
       final firestore = FirebaseFirestore.instance;
       DocumentSnapshot userDoc = await firestore.collection(UserDM.collectionName).doc(user.uid).get();
-
       if (userDoc.exists && userDoc.data() != null) {
         UserDM userDM = UserDM.fromFireStore(userDoc.data() as Map<String, dynamic>);
-
         if (userDM.fullName != null) nameController.text = userDM.fullName!;
         if (userDM.email != null) emailController.text = userDM.email!;
         if (userDM.phoneNumber != null) phoneNumController.text = userDM.phoneNumber!;
@@ -74,11 +67,9 @@ class _EditeProfileScreenState extends State<EditeProfileScreen> {
         day = userDM.day ?? null;
         month = userDM.month ?? null;
         year = userDM.year ?? null;
-
         if (userDM.age != null) {
           calculatedAge = userDM.age;
         }
-
         setState(() {
           userName = userDM.fullName;
           userPhone = userDM.phoneNumber;
@@ -108,8 +99,6 @@ class _EditeProfileScreenState extends State<EditeProfileScreen> {
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
-    var themeProvider = Provider.of<ThemeProvider>(context);
-
     Widget _TextLabelSmall(String label) {
       return Padding(
         padding: REdgeInsets.only(top: 18.h, bottom: 6.h),
@@ -147,8 +136,7 @@ class _EditeProfileScreenState extends State<EditeProfileScreen> {
                         BuildCircleButton(
                           icon: Icons.arrow_back_ios_new_rounded,
                           onTap: () {
-                            Navigator.pushNamedAndRemoveUntil(
-                              context,
+                            Navigator.pushNamedAndRemoveUntil(context,
                               RoutesManager.home,
                               (route) => false,
                               arguments: 3,
@@ -159,9 +147,7 @@ class _EditeProfileScreenState extends State<EditeProfileScreen> {
                           child: Center(
                             child: Text(
                               loc.editProfile,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodySmall
+                              style: Theme.of(context).textTheme.bodySmall
                                   ?.copyWith(fontSize: 22.sp),
                             ),
                           ),
@@ -345,27 +331,20 @@ class _EditeProfileScreenState extends State<EditeProfileScreen> {
 
   Future<void> updateUserData() async {
     final loc = AppLocalizations.of(context)!;
-
     setState(() {
       isLoading = true;
     });
-
     DialogUtils.showLoading(context, message: loc.loading);
-
     User? user = FirebaseAuth.instance.currentUser;
     if (user != null) {
       final firestore = FirebaseFirestore.instance;
       DocumentReference userDoc = firestore.collection(UserDM.collectionName).doc(user.uid);
-
       try {
         DocumentSnapshot userSnapshot = await userDoc.get();
         if (userSnapshot.exists) {
           UserDM userDM = UserDM.fromFireStore(userSnapshot.data() as Map<String, dynamic>);
-
           Map<String, dynamic> updatedData = {};
           bool isUpdated = false;
-
-          // التحقق من التغييرات
           if (nameController.text != userDM.fullName) {
             updatedData['fullName'] = nameController.text;
             isUpdated = true;
@@ -386,7 +365,6 @@ class _EditeProfileScreenState extends State<EditeProfileScreen> {
             updatedData['weight'] = double.tryParse(weightController.text);
             isUpdated = true;
           }
-
           if (dayController.text != userDM.day) {
             updatedData['day'] = dayController.text;
             isUpdated = true;
@@ -403,8 +381,6 @@ class _EditeProfileScreenState extends State<EditeProfileScreen> {
             updatedData['gender'] = selectedGender;
             isUpdated = true;
           }
-
-          // معالجة تاريخ الميلاد والعمر
           String? age;
           if (dayController.text.isNotEmpty &&
               monthController.text.isNotEmpty &&
@@ -415,20 +391,17 @@ class _EditeProfileScreenState extends State<EditeProfileScreen> {
                 int.parse(monthController.text),
                 int.parse(dayController.text),
               );
-
               age = calculateAge(birthDate).toString();
               calculatedAge = age;
-
               Timestamp? oldBirthTimestamp = userDM.birthDate;
               DateTime? oldBirthDate = oldBirthTimestamp?.toDate();
-
               if (oldBirthDate == null || oldBirthDate != birthDate) {
                 updatedData['birthDate'] = Timestamp.fromDate(birthDate);
                 updatedData['age'] = age;
                 isUpdated = true;
               }
             } catch (_) {
-              // تجاهل الخطأ
+              DialogUtils.showMessage(context, body: '${loc.error} : ${_}');
             }
           } else {
             updatedData['age'] = null;
@@ -468,5 +441,4 @@ class _EditeProfileScreenState extends State<EditeProfileScreen> {
       isLoading = false;
     });
   }
-
 }

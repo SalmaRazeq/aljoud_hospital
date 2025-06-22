@@ -7,11 +7,7 @@ class NotificationProvider with ChangeNotifier {
   final List<NotificationModel> _notifications = [];
 
   List<NotificationModel> get notifications => _notifications;
-
-  NotificationProvider() {
-    loadNotifications();
-  }
-
+  NotificationProvider() {loadNotifications();}
   void addNotification(String title, String message, Icon icon) {
     _notifications.insert(
       0,
@@ -25,27 +21,22 @@ class NotificationProvider with ChangeNotifier {
     saveNotifications();
     notifyListeners();
   }
-
   void markAsRead(int index) {
     _notifications[index].isRead = true;
     saveNotifications();
     notifyListeners();
   }
-
   void removeNotification(int index) {
     _notifications.removeAt(index);
     saveNotifications();
     notifyListeners();
   }
-
   int get unreadCount => _notifications.where((n) => !n.isRead).length;
-
   Future<void> saveNotifications() async {
     final prefs = await SharedPreferences.getInstance();
     final data = _notifications.map((e) => jsonEncode(e.toJson())).toList();
     await prefs.setStringList('notifications', data);
   }
-
   Future<void> loadNotifications() async {
     final prefs = await SharedPreferences.getInstance();
     final data = prefs.getStringList('notifications');

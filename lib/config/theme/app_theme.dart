@@ -1,6 +1,5 @@
 import 'package:aljoud_hospital/core/utils/color_manager.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
@@ -15,22 +14,15 @@ class AppTheme {
       secondary: ColorsManager.lightGreen,
       onPrimaryFixed: ColorsManager.blue3,
       onSecondaryFixed: ColorsManager.blue,
-      primaryFixed: ColorsManager.black,
-
-    ),
-
+      primaryFixed: ColorsManager.black,),
       scaffoldBackgroundColor: ColorsManager.white,
-
       dividerColor: ColorsManager.black,
-
       elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
               backgroundColor: ColorsManager.blue2,
               elevation: 2,
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(25)))
-      ),
-
+                  borderRadius: BorderRadius.circular(25)))),
       textTheme: TextTheme(
         titleLarge: GoogleFonts.sansita(fontSize: 34,
             fontWeight: FontWeight.w600, color: ColorsManager.black),
@@ -49,9 +41,7 @@ class AppTheme {
         labelMedium: GoogleFonts.poppins(fontSize: 12,
           fontWeight: FontWeight.w500, color: ColorsManager.hint,),
       ),
-
     cardColor: ColorsManager.lightGray,
-
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       backgroundColor: const Color(0xFFF2F0EF),
       selectedItemColor: ColorsManager.blue2,
@@ -63,21 +53,14 @@ class AppTheme {
       unselectedLabelStyle: GoogleFonts.inter(fontSize: 12,
           fontWeight: FontWeight.w600, color: ColorsManager.darkGray),
     ),
-
     bottomSheetTheme: BottomSheetThemeData(
-
       elevation: 12,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(25),
-          topRight: Radius.circular(25),
-        ),
-      ),
-      backgroundColor: ColorsManager.lightBlue.withOpacity(0.7),
-    ),
+          topRight: Radius.circular(25),),),
+      backgroundColor: ColorsManager.lightBlue.withOpacity(0.7),),
   );
-
-
 
   static final ThemeData darkTheme = ThemeData(
     useMaterial3: false,
@@ -90,22 +73,15 @@ class AppTheme {
       secondary: ColorsManager.darkGreen,
       onPrimaryFixed: ColorsManager.blue3,
       onSecondaryFixed: ColorsManager.darkBlue,
-      primaryFixed: ColorsManager.white,
-
-    ),
-
+      primaryFixed: ColorsManager.white,),
     scaffoldBackgroundColor: ColorsManager.darkBlue,
-
     dividerColor: ColorsManager.white,
-
     elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
             backgroundColor: ColorsManager.darkBlue1,
             elevation: 2,
             shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(25)))
-    ),
-
+                borderRadius: BorderRadius.circular(25)))),
     textTheme: TextTheme(
       titleLarge: GoogleFonts.sansita(fontSize: 34,
           fontWeight: FontWeight.w600, color: ColorsManager.white),
@@ -122,11 +98,8 @@ class AppTheme {
       labelSmall:  GoogleFonts.sourceSans3(fontSize: 10,
         fontWeight: FontWeight.w500, color: ColorsManager.black,),
       labelMedium: GoogleFonts.poppins(fontSize: 12,
-        fontWeight: FontWeight.w500, color: ColorsManager.hint,),
-    ),
-
+        fontWeight: FontWeight.w500, color: ColorsManager.hint,),),
     cardColor: ColorsManager.lightGray,
-
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       backgroundColor:  ColorsManager.darkGray.withOpacity(0.2),
       selectedItemColor: ColorsManager.white,
@@ -138,16 +111,12 @@ class AppTheme {
       unselectedLabelStyle: GoogleFonts.inter(fontSize: 12,
           fontWeight: FontWeight.w600, color: ColorsManager.darkGray),
     ),
-
     bottomSheetTheme: BottomSheetThemeData(
       elevation: 12,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(25),
-          topRight: Radius.circular(25),
-        ),
-      ),
-      backgroundColor: ColorsManager.lightBlue.withOpacity(0.7),
-    ),
+          topRight: Radius.circular(25),),),
+      backgroundColor: ColorsManager.lightBlue.withOpacity(0.7),),
   );
 }

@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import '../model_api/insertResponse/InsertResponse.dart';
 import '../model_api/selectedDoctor/DoctorResponse.dart';
@@ -25,7 +24,6 @@ class ApiManger {
     required String drTime, // حقل الوقت
   }) async {
     final url = Uri.parse("http://192.168.1.61/c43/handleInsertDoctor.php");
-    // تحضير البيانات
     final body = {
       'Dr_ID': drId,
       'Dr_Name': drName.trim(),
@@ -44,32 +42,20 @@ class ApiManger {
       'Day': drDay.trim(), // حقل اليوم
       'Date': drTime.trim(), // حقل الوقت
     };
-
-    // طباعة كل حقل لوحده
     print("📤 Preparing to send data to API:");
-    body.forEach((key, value) {
-      print("  $key: $value");
-    });
-
+    body.forEach((key, value) {print("  $key: $value");});
     try {
-      // محاولة إرسال كـ form-data
       final request = http.MultipartRequest('POST', url);
       body.forEach((key, value) {
         request.fields[key] = value.toString();
       });
-
       print("📤 Sending as form-data: ${request.fields}");
-
       final streamedResponse = await request.send();
       final response = await http.Response.fromStream(streamedResponse);
-
-      // طباعة تفاصيل الاستجابة
       print("📥 Response status: ${response.statusCode}");
       print("📥 Response headers: ${response.headers}");
       print("📥 Response body: ${response.body}");
-
       if (response.statusCode == 200) {
-        final cleanBody = response.body.replaceAll('\uFEFF', '');
         final json = jsonDecode(response.body);
         final insertResponse = InsertResponse.fromJson(json);
         print("✅ Parsed InsertResponse: ${insertResponse.toJson()}");
@@ -87,21 +73,17 @@ class ApiManger {
   static Future<DoctorResponse?> fetchDoctorsBySpecialty(
       String specialty)
   async {try {
-      const String apiUrl =
-          'http://192.168.1.61/c43/Select-doctor-Specialty.php';
-      final response = await http.get(
-        Uri.parse('$apiUrl?Specialty=$specialty'),
+      const String apiUrl = 'http://192.168.1.61/c43/Select-doctor-Specialty.php';
+      final response = await http.get(Uri.parse('$apiUrl?Specialty=$specialty'),
         headers: {
           'Cache-Control': 'no-cache, no-store, must-revalidate',
           'Pragma': 'no-cache',
           'Expires': '0',
         },
       );
-
       print('API Response Status Code: ${response.statusCode}');
       print('API Response Headers: ${response.headers}');
       print('API Response Body: ${response.body}');
-
       if (response.statusCode == 200) {
         try {
           final jsonData = jsonDecode(response.body);
@@ -161,13 +143,11 @@ class ApiManger {
     body.forEach((key, value) {
       print("  $key: $value");
     });
-
     try {
       final request = http.MultipartRequest('POST', url);
       body.forEach((key, value) {
         request.fields[key] = value.toString();
       });
-
       print("📤 Sending as form-data: ${request.fields}");
 
       final streamedResponse = await request.send();
@@ -191,9 +171,6 @@ class ApiManger {
       throw Exception('Error sending data to API: $e');
     }
   }
-
-
-
 
   static Future<UpdateResponse> deleteDoctor({
     required String drId,
@@ -236,9 +213,5 @@ class ApiManger {
     } catch (e) {
       print("❌ Error in deleteDoctor: $e");
       throw Exception('Error sending DELETE request to API: $e');
-    }
-  }
-
-
-}
+    }}}
 

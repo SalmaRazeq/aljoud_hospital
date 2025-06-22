@@ -3,11 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-
 import '../../../../providers/theme_provider.dart';
-
 typedef Validator = String? Function(String?);
-
 
 class TextFieldDesign extends StatelessWidget {
   TextFieldDesign({super.key,  required this.hintText,
@@ -20,7 +17,6 @@ class TextFieldDesign extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var themeProvider = Provider.of<ThemeProvider>(context);
-
     return TextFormField(
       autofocus: true,
       validator: validator,

@@ -1,19 +1,15 @@
-// بقية import موجودة كما هي
+import 'package:aljoud_hospital/core/utils/routes_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-
 import '../../../../core/utils/color_manager.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../../providers/theme_provider.dart';
-import '../../home/categories_item/categories_item.dart';
-import '../../see_all/category_details/CategoryDetailsScreen.dart';
 
 class ChatBotScreen extends StatefulWidget {
   const ChatBotScreen({super.key});
-
   @override
   State<ChatBotScreen> createState() => _ChatBotScreenState();
 }
@@ -21,31 +17,39 @@ class ChatBotScreen extends StatefulWidget {
 class _ChatBotScreenState extends State<ChatBotScreen> {
   final TextEditingController _controller = TextEditingController();
   final ScrollController _scrollController = ScrollController();
-
   List<Map<String, dynamic>> messages = [];
 
   void _navigateToSpecialtyScreen(String specialty) {
-    final category = CategoriesItem(
-      title: specialty,
-      imagePath: '',
-    );
-    Navigator.push(
+    Navigator.pushNamed(
       context,
-      MaterialPageRoute(
-        builder: (context) => const CategoryDetailsScreen(),
-      ),
+      RoutesManager.categoryDetails,
+      arguments: specialty,
     );
   }
 
   void _sendMessage(String message) {
     String time = DateFormat.jm().format(DateTime.now());
+    final loc = AppLocalizations.of(context)!;
 
     setState(() {
       messages.add({'sender': 'user', 'message': message, 'time': time});
-      final loc = AppLocalizations.of(context)!;
 
+      // رقم مختار
       if (['1', '2', '3', '4', '5', '6', '7', '8'].contains(message)) {
-        final specialties = {
+        // التخصص بالإنجليزي (للداتا بيز)
+        final specialtiesEnglish = {
+          '1': 'Internal medicine',
+          '2': 'Pediatrics',
+          '3': 'Orthopedics',
+          '4': 'Dentistry',
+          '5': 'Pulmonology',
+          '6': 'Cardiology',
+          '7': 'Physical therapy',
+          '8': 'OB-GYN',
+        };
+
+        // التخصص بالعربي/المحلي (للواجهة فقط)
+        final specialtiesLocalized = {
           '1': loc.internalMedicine,
           '2': loc.pediatrics,
           '3': loc.orthopedics,
@@ -55,14 +59,17 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
           '7': loc.physicalTherapy,
           '8': loc.oBGYN,
         };
-        String selected = specialties[message]!;
+
+        String selectedEnglish = specialtiesEnglish[message]!;
+        String selectedLocalized = specialtiesLocalized[message]!;
+
         messages.add({
           'sender': 'bot',
           'type': 'button',
-          'specialty': selected,
+          'specialty': selectedEnglish, // للتمرير
           'message': Localizations.localeOf(context).languageCode == 'ar'
-              ? "انت اخترت قسم $selected.\nانقر اسفله للمتابعة."
-              : "You chose $selected department.\nClick below to continue.",
+              ? "انت اخترت قسم $selectedLocalized.\nانقر أسفله للمتابعة."
+              : "You chose $selectedLocalized department.\nClick below to continue.",
           'time': time,
         });
       } else {
@@ -72,7 +79,6 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
     });
 
     _controller.clear();
-
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _scrollController.animateTo(
         _scrollController.position.maxScrollExtent,
@@ -81,8 +87,6 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
       );
     });
   }
-
-  final FocusNode _focusNode = FocusNode();
 
   String _generateBotResponse(String message) {
     final loc = AppLocalizations.of(context)!;
@@ -107,7 +111,6 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
   Widget build(BuildContext context) {
     var themeProvider = Provider.of<ThemeProvider>(context);
     final loc = AppLocalizations.of(context)!;
-
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -126,15 +129,14 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
               itemBuilder: (context, index) {
                 final isUser = messages[index]['sender'] == 'user';
                 final isButton = messages[index]['type'] == 'button';
-
                 return Align(
                   alignment:
-                      isUser ? Alignment.centerRight : Alignment.centerLeft,
+                  isUser ? Alignment.centerRight : Alignment.centerLeft,
                   child: Container(
                     margin:
-                        EdgeInsets.symmetric(vertical: 10.h, horizontal: 8.w),
+                    EdgeInsets.symmetric(vertical: 10.h, horizontal: 8.w),
                     padding:
-                        EdgeInsets.symmetric(vertical: 12.h, horizontal: 14.w),
+                    EdgeInsets.symmetric(vertical: 12.h, horizontal: 14.w),
                     constraints: BoxConstraints(maxWidth: 250.w),
                     decoration: BoxDecoration(
                       color: isUser ? ColorsManager.blue2 : Colors.grey[200],
@@ -151,55 +153,56 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
                     ),
                     child: isButton
                         ? Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                messages[index]['message'],
-                                style: GoogleFonts.inter(
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.w600,
-                                  color: ColorsManager.black,
-                                ),
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          messages[index]['message'],
+                          style: GoogleFonts.inter(
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w600,
+                            color: ColorsManager.black,
+                          ),
+                        ),
+                        SizedBox(height: 8.h),
+                        Align(
+                          alignment: Localizations.localeOf(context)
+                              .languageCode ==
+                              'ar'
+                              ? Alignment.bottomLeft
+                              : Alignment.bottomRight,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: ColorsManager.blue4,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5.r),
                               ),
-                              SizedBox(height: 8.h),
-                              Align(
-                                alignment: Localizations.localeOf(context)
-                                            .languageCode ==
-                                        'ar'
-                                    ? Alignment.bottomLeft
-                                    : Alignment.bottomRight,
-                                child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: ColorsManager.blue4,
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(5.r)),
-                                  ),
-                                  onPressed: () {
-                                    _navigateToSpecialtyScreen(
-                                        messages[index]['specialty']);
-                                  },
-                                  child: Text(
-                                    loc.button_view_doctors,
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 12.sp,
-                                    ),
-                                  ),
-                                ),
-                              )
-                            ],
-                          )
-                        : Text(
-                            messages[index]['message'],
-                            style: GoogleFonts.inter(
-                              color: isUser
-                                  ? ColorsManager.white
-                                  : ColorsManager.black,
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.w600,
+                            ),
+                            onPressed: () {
+                              _navigateToSpecialtyScreen(
+                                messages[index]['specialty'],
+                              );
+                            },
+                            child: Text(
+                              loc.button_view_doctors,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 12.sp,
+                              ),
                             ),
                           ),
+                        )
+                      ],
+                    )
+                        : Text(
+                      messages[index]['message'],
+                      style: GoogleFonts.inter(
+                        color: isUser
+                            ? ColorsManager.white
+                            : ColorsManager.black,
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
                   ),
                 );
               },
@@ -213,7 +216,6 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
                   child: TextField(
                     controller: _controller,
                     autofocus: true,
-                    focusNode: FocusNode(),
                     textInputAction: TextInputAction.send,
                     onSubmitted: (value) {
                       if (value.trim().isNotEmpty) {
@@ -222,9 +224,10 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
                     },
                     decoration: InputDecoration(
                       hintText: loc.hint_type_message,
-                      hintStyle: const TextStyle(color: ColorsManager.hint),
-                      contentPadding:
-                          REdgeInsets.symmetric(horizontal: 5, vertical: 10),
+                      hintStyle:
+                      const TextStyle(color: ColorsManager.hint),
+                      contentPadding: REdgeInsets.symmetric(
+                          horizontal: 5, vertical: 10),
                       enabledBorder: const UnderlineInputBorder(
                         borderSide: BorderSide(color: ColorsManager.hint),
                       ),
@@ -239,8 +242,8 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
                   ),
                 ),
                 IconButton(
-                  icon:
-                      Icon(Icons.send, size: 24.sp, color: ColorsManager.blue2),
+                  icon: Icon(Icons.send,
+                      size: 24.sp, color: ColorsManager.blue2),
                   onPressed: () {
                     if (_controller.text.isNotEmpty) {
                       _sendMessage(_controller.text.trim());

@@ -12,7 +12,6 @@ class BookingModel {
   String? price;
   String? image;
   String? status;
-
   BookingModel({
     this.documentId,
     this.bookingId,
@@ -25,7 +24,6 @@ class BookingModel {
     this.image,
     this.status,
   });
-
   factory BookingModel.fromFirestore(DocumentSnapshot doc) {
     var data = doc.data() as Map<String, dynamic>;
     return BookingModel(
@@ -41,7 +39,6 @@ class BookingModel {
       status: data['status'],
     );
   }
-
   Map<String, dynamic> toFirestore() {
     return {
       'bookingId': bookingId,

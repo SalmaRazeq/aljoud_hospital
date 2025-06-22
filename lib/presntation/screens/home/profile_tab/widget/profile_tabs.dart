@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-
 import '../../../../../providers/theme_provider.dart';
 
 class ProfileTabs extends StatelessWidget {
@@ -15,7 +14,6 @@ class ProfileTabs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var themeProvider = Provider.of<ThemeProvider>(context);
-
     return InkWell(
         onTap: onTap,
         child: Column(
@@ -27,8 +25,7 @@ class ProfileTabs extends StatelessWidget {
                   Icon(icon, color: themeProvider.isLightTheme() ? ColorsManager.black : ColorsManager.blue),
                   SizedBox(width: 15.w,),
                   Text(text,
-                  style: GoogleFonts.sourceSerif4(
-                      fontSize: 14.sp,
+                  style: GoogleFonts.sourceSerif4(fontSize: 14.sp,
                       color: Theme.of(context).colorScheme.primaryFixed,
                       fontWeight: FontWeight.w400),
                 ),

@@ -16,7 +16,6 @@ class DoctorResponse {
   }
   String? status;
   List<Data>? data;
-
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['status'] = status;
@@ -24,6 +23,4 @@ class DoctorResponse {
       map['data'] = data?.map((v) => v.toJson()).toList();
     }
     return map;
-  }
-
-}
+  }}

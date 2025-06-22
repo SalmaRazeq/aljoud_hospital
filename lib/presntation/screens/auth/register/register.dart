@@ -1,4 +1,3 @@
-import 'package:aljoud_hospital/core/utils/color_manager.dart';
 import 'package:aljoud_hospital/core/utils/constant_manager.dart';
 import 'package:aljoud_hospital/core/utils/dialog_utils/dialog_utils.dart';
 import 'package:aljoud_hospital/presntation/screens/auth/widget/bottom_section.dart';
@@ -8,13 +7,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../core/utils/assets_manager.dart';
 import '../../../../core/utils/email_validation.dart';
 import '../../../../core/utils/routes_manager.dart';
-
 import '../../../../data/models/user_dm.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../../providers/theme_provider.dart';
@@ -23,30 +19,21 @@ import '../widget/field_design.dart';
 
 class RegisterScreen extends StatefulWidget {
    RegisterScreen({super.key});
-
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
 }
-
 class _RegisterScreenState extends State<RegisterScreen> {
   TextEditingController fullNameController = TextEditingController();
-
   TextEditingController phoneNumController = TextEditingController();
-
   TextEditingController emailController = TextEditingController();
-
   TextEditingController passwordController = TextEditingController();
-
   TextEditingController rePasswordController = TextEditingController();
-
   GlobalKey<FormState> formKey = GlobalKey();
   bool isPatient = true;
-
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
     var themeProvider = Provider.of<ThemeProvider>(context);
-
     return GestureDetector(
       onTap: () {
         FocusManager.instance.primaryFocus?.unfocus();
@@ -76,13 +63,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   fontWeight: FontWeight.w600
                               ),),),
                         ),
-                        SizedBox(
-                          width: 30.w,
-                        ),
+                        SizedBox(width: 30.w,),
                       ],
                     ),
                     SizedBox(height: 8.h,),
-
                     ToggleButtonWidget(
                       isPatientSelected: isPatient,
                       onToggle: (value) {
@@ -97,15 +81,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         }
                       },
                     ),
-
                     SizedBox(height: 20.h,),
-                    Text(
-                        loc.fullName,
+                    Text(loc.fullName,
                         style: Theme.of(context).textTheme.titleMedium
                     ),
-
                     SizedBox(height: 5.h,),
-
                     TextFieldDesign(
                       hintText: loc.enterFullName,
                       controller: fullNameController,
@@ -116,13 +96,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         return null;
                       },
                     ),
-
                     SizedBox(height: 8.h,),
-                    Text(
-                        loc.phone,
+                    Text(loc.phone,
                         style: Theme.of(context).textTheme.titleMedium),
                     SizedBox(height: 5.h,),
-
                     TextFieldDesign(
                       hintText: loc.enterPhone,
                       keyBoardType: const TextInputType.numberWithOptions(),
@@ -138,15 +115,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       },
                     ),
                     SizedBox(height: 8.h,),
-
-                    Text(
-                        loc.emailAddress,
+                    Text(loc.emailAddress,
                         style: Theme.of(context).textTheme.titleMedium
                     ),
                     SizedBox(height: 5.h,),
                     TextFieldDesign(
                         hintText: loc.enterEmail,
                         controller: emailController,
+                        keyBoardType: TextInputType.emailAddress,
                         validator: (input) {
                           if (input == null || input.trim().isEmpty) {
                             return loc.plzEmail;
@@ -156,17 +132,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           }
                           return null;
                         }),
-
-                    SizedBox(
-                      height: 8.h,
-                    ),
-                    Text(
-                        loc.password,
+                    SizedBox(height: 8.h,),
+                    Text(loc.password,
                         style: Theme.of(context).textTheme.titleMedium
                     ),
-                    SizedBox(
-                      height: 5.h,
-                    ),
+                    SizedBox(height: 5.h,),
 
                     PasswordFieldDesign(
                         hintText: loc.enterPassword,
@@ -181,17 +151,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           return null;
                       },
                     ),
-                    SizedBox(
-                      height: 9.h,
-                    ),
-                    Text(
-                        loc.confirmPassword,
+                    SizedBox(height: 9.h,),
+                    Text(loc.confirmPassword,
                         style: Theme.of(context).textTheme.titleMedium
                     ),
-                    SizedBox(
-                      height: 5.h,
-                    ),
-
+                    SizedBox(height: 5.h,),
                     PasswordFieldDesign(
                         hintText: loc.enterPassword,
                         controller: rePasswordController,
@@ -207,7 +171,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       onSubmit: signUp,
                     ),
                     SizedBox(height: 35.h,),
-
                     ElevatedButton(
                       onPressed: () {
                         signUp();
@@ -215,27 +178,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       style: Theme.of(context).elevatedButtonTheme.style,
                       child: Padding(
                         padding: REdgeInsets.all(6),
-                        child: Text(
-                            loc.signUp,
+                        child: Text(loc.signUp,
                             style: Theme.of(context).textTheme.titleMedium
                                 ?.copyWith(fontSize: 16.sp, fontWeight: FontWeight.w700, color: Theme.of(context).colorScheme.primary)
                         ),
                       ),
                     ),
-
                     SizedBox(height: 22.h,),
                     Image.asset(themeProvider.isLightTheme() ? AssetsManager.or : AssetsManager.darkOr,),
                     SizedBox(height: 10.h),
-                    InkWell(
-                        onTap: () {},
+                    InkWell(onTap: () {},
                         child: Image.asset(AssetsManager.google)),
                     SizedBox(height: 10.h),
-
-                    InkWell(
-                        onTap: () {},
+                    InkWell(onTap: () {},
                         child: Image.asset(AssetsManager.faceBook)),
                     SizedBox(height: 40.h),
-
                     BottomSection(text: loc.haveAccount, body: loc.login, routeName: RoutesManager.login,)
                   ],
                 ),
@@ -248,45 +205,35 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
   void signUp() async {
     final loc = AppLocalizations.of(context)!;
-
     if (formKey.currentState!.validate() == false) return;
-
     try {
       DialogUtils.showLoading(context, message: loc.pleaseWait);
-
       UserCredential credential = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(
           email: emailController.text,
           password: passwordController.text);
-
       if (credential.user == null) {
         DialogUtils.hide(context);
         DialogUtils.showMessage(context,
             title: loc.error, body: loc.registrationFailed);
         return;
       }
-
       await addUserToFireStore(credential.user!.uid);
-
       if (mounted) DialogUtils.hide(context);
-
       DialogUtils.showMessage(context,
           title: loc.registeredSuccessfully,
           posActionTitle: loc.ok,
           posAction: () {
             Navigator.pushReplacementNamed(context, RoutesManager.login);
           });
-
     } on FirebaseAuthException catch (error) {
       DialogUtils.hide(context);
-
       String message = loc.somethingWentWrong;
       if (error.code == ConstantManager.weakPassword) {
         message = loc.passwordTooWeak;
       } else if (error.code == ConstantManager.emailUsed) {
         message = loc.accountAlreadyExists;
       }
-
       DialogUtils.showMessage(context, title: loc.error, body: message);
     } catch (error) {
       DialogUtils.hide(context);
@@ -294,13 +241,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
       print(error);
     }
   }
-
   Future<void> addUserToFireStore(String uid) async {
     CollectionReference userCollection =
     FirebaseFirestore.instance.collection(UserDM.collectionName);
-
     DocumentReference userDocument = userCollection.doc(uid);
-
     UserDM userDM = UserDM(
         id: uid,
         email: emailController.text,
@@ -309,6 +253,4 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
     await userDocument.set(userDM.toFireStore());
   }
-
-
 }

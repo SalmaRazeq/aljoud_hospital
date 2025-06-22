@@ -24,7 +24,4 @@ class ColorsManager{
   static const Color darkBlue = Color(0xFF1E1E2F);
   static const Color darkBlue1 = Color(0xFF003060);
   static const Color lightBlue2 = Color(0xFFBFD7ED);
-
-
-
 }

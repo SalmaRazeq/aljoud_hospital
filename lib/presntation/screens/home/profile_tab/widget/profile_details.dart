@@ -1,7 +1,6 @@
 import 'package:aljoud_hospital/core/utils/color_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../../../l10n/app_localizations.dart';
 
 class ProfileDetailsWidget extends StatelessWidget {
@@ -11,15 +10,14 @@ class ProfileDetailsWidget extends StatelessWidget {
 
   const ProfileDetailsWidget({
     super.key,
-    required this.age,   // القيمة الافتراضية فارغة
-    required this.height, // القيمة الافتراضية فارغة
-    required this.weight, // القيمة الافتراضية فارغة
+    required this.age,
+    required this.height,
+    required this.weight,
   });
 
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
-
     Widget _verticalDivider() {
       return Container(
         height: 40.h,
@@ -52,16 +50,14 @@ class ProfileDetailsWidget extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(
-          title,
+        Text(title,
           style: Theme.of(context).textTheme.labelMedium?.copyWith(
             color: Theme.of(context).colorScheme.primaryFixed,
             fontWeight: FontWeight.w500,
               fontSize: 11.sp),
         ),
         SizedBox(height: 4.h),
-        Text(
-          value,
+        Text(value,
           style: Theme.of(context).textTheme.labelMedium?.copyWith(
               color: Theme.of(context).colorScheme.primaryFixed,
               fontWeight: FontWeight.w400,
@@ -70,7 +66,5 @@ class ProfileDetailsWidget extends StatelessWidget {
       ],
     );
   }
-
-
 }
 

@@ -11,12 +11,13 @@ import '../../../../core/utils/constant_manager.dart';
 import '../../../../core/utils/dialog_utils/dialog_utils.dart';
 import '../../../../core/utils/routes_manager.dart';
 import '../../../../data/models/user_dm.dart';
+import '../../../../data/models/doctor/doctor_model.dart'; // إضافة DoctorModel
 import '../../../../l10n/app_localizations.dart';
 import '../../../../providers/theme_provider.dart';
 import '../widget/field_design.dart';
 
 class LoginScreen extends StatefulWidget {
-   LoginScreen({super.key});
+  const LoginScreen({super.key});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -43,144 +44,116 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Form(
                 key: formKey,
                 child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Text(AppLocalizations.of(context)!.welcomeBack,
-                          style: Theme
-                              .of(context)
-                              .textTheme
-                              .titleLarge),
-                      SizedBox(height: 16.h,),
-                      Text('${AppLocalizations.of(context)!
-                          .loginText1}\n${AppLocalizations.of(context)!
-                          .loginText2}',
-                          style: Theme
-                              .of(context)
-                              .textTheme
-                              .displaySmall),
-                      SizedBox(height: 40.h,),
-
-                      TextFieldDesign(
-                          hintText: AppLocalizations.of(context)!.emailAddress,
-                          controller: emailController,
-                          validator: (input) {
-                            if (input == null || input
-                                .trim()
-                                .isEmpty) {
-                              return AppLocalizations.of(context)!.plzEmail;
-                            }
-                            if (!isEmailValid(input)) {
-                              return AppLocalizations.of(context)!.wrongFormat;
-                            }
-                            return null;
-                          }),
-
-                      SizedBox(height: 15.h,),
-
-                      PasswordFieldDesign(
-                        hintText: AppLocalizations.of(context)!.password,
-                        controller: passwordController,
-                        validator: (input) {
-                          if (input == null || input.trim().isEmpty) {
-                            return AppLocalizations.of(context)!.plzPassword;
-                            }
-                            if (input.length < 6) {
-                            return AppLocalizations.of(context)!.password6Char;
-                          }
-                            return null;
-                        },
-                        onSubmit: signIn,
-                      ),
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: TextButton(
-                            onPressed: () {
-                              Navigator.pushNamed(context, RoutesManager.forgetPassword);
-                            }, child: Text(AppLocalizations.of(
-                            context)!.forgetPassword,
-                            style: Theme.of(context).textTheme.displaySmall
-                                ?.copyWith(fontSize: 10.sp, color: Theme.of(context).colorScheme.onPrimary),
-                        ),
-                        ),
-                      ),
-
-                      SizedBox(height: 8.h,),
-                      ElevatedButton(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Text(
+                      AppLocalizations.of(context)!.welcomeBack,
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
+                    SizedBox(height: 16.h),
+                    Text(
+                      '${AppLocalizations.of(context)!.loginText1}\n${AppLocalizations.of(context)!.loginText2}',
+                      style: Theme.of(context).textTheme.displaySmall,
+                    ),
+                    SizedBox(height: 40.h),
+                    TextFieldDesign(
+                      hintText: AppLocalizations.of(context)!.emailAddress,
+                      controller: emailController,
+                      keyBoardType: TextInputType.emailAddress,
+                      validator: (input) {
+                        if (input == null || input.trim().isEmpty) {
+                          return AppLocalizations.of(context)!.plzEmail;
+                        }
+                        if (!isEmailValid(input)) {
+                          return AppLocalizations.of(context)!.wrongFormat;
+                        }
+                        return null;
+                      },
+                    ),
+                    SizedBox(height: 15.h),
+                    PasswordFieldDesign(
+                      hintText: AppLocalizations.of(context)!.password,
+                      controller: passwordController,
+                      validator: (input) {
+                        if (input == null || input.trim().isEmpty) {
+                          return AppLocalizations.of(context)!.plzPassword;
+                        }
+                        if (input.length < 6) {
+                          return AppLocalizations.of(context)!.password6Char;
+                        }
+                        return null;
+                      },
+                      onSubmit: signIn,
+                    ),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: TextButton(
                         onPressed: () {
-                          signIn();
+                          Navigator.pushNamed(context, RoutesManager.forgetPassword);
                         },
-                        style: Theme
-                            .of(context)
-                            .elevatedButtonTheme
-                            .style,
-                        child: Padding(
-                          padding: REdgeInsets.all(10),
-                          child: Text(
-                              AppLocalizations.of(context)!.login,
-                              style: Theme
-                                  .of(context)
-                                  .textTheme
-                                  .displaySmall
-                                  ?.copyWith(
-                                  fontSize: 16.sp,
-                                  fontWeight: FontWeight.w700,
-                                  color: Theme.of(context).colorScheme.primary)
+                        child: Text(
+                          AppLocalizations.of(context)!.forgetPassword,
+                          style: Theme.of(context).textTheme.displaySmall?.copyWith(
+                            fontSize: 10.sp,
+                            color: Theme.of(context).colorScheme.onPrimary,
                           ),
                         ),
                       ),
-
-                      SizedBox(height: 22.h,),
-                      Image.asset(themeProvider.isLightTheme() ? AssetsManager.or : AssetsManager.darkOr,),
-                      SizedBox(height: 10.h),
-                      InkWell(
-                          onTap: () {
-
-                          },
-                          child: Image.asset(AssetsManager.google)),
-                      SizedBox(height: 10.h),
-
-                      InkWell(
-                          onTap: () {
-                            // signInWithFacebook();
-                          },
-                          child: Image.asset(AssetsManager.faceBook)),
-
-                      SizedBox(height: 60.h),
-
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                              AppLocalizations.of(context)!.notHaveAccount,
-                              style: Theme
-                                  .of(context)
-                                  .textTheme
-                                  .displaySmall
+                    ),
+                    SizedBox(height: 8.h),
+                    ElevatedButton(
+                      onPressed: () {
+                        signIn();
+                      },
+                      style: Theme.of(context).elevatedButtonTheme.style,
+                      child: Padding(
+                        padding: REdgeInsets.all(10),
+                        child: Text(
+                          AppLocalizations.of(context)!.login,
+                          style: Theme.of(context).textTheme.displaySmall?.copyWith(
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.w700,
+                            color: Theme.of(context).colorScheme.primary,
                           ),
-                          TextButton(
-                            onPressed: () {
-                              Navigator.pushReplacementNamed(
-                                  context, RoutesManager.register);
-                            },
-                            child: Text(
-                                AppLocalizations.of(context)!.signUp,
-                                style: Theme
-                                    .of(context)
-                                    .textTheme
-                                    .displaySmall
-                                    ?.copyWith(
-                                    color: Theme
-                                        .of(context)
-                                        .colorScheme
-                                        .onPrimary,
-                                    decoration: TextDecoration.underline
-                                )
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 22.h),
+                    Image.asset(themeProvider.isLightTheme() ? AssetsManager.or : AssetsManager.darkOr),
+                    SizedBox(height: 10.h),
+                    InkWell(
+                      onTap: () {},
+                      child: Image.asset(AssetsManager.google),
+                    ),
+                    SizedBox(height: 10.h),
+                    InkWell(
+                      onTap: () {},
+                      child: Image.asset(AssetsManager.faceBook),
+                    ),
+                    SizedBox(height: 60.h),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          AppLocalizations.of(context)!.notHaveAccount,
+                          style: Theme.of(context).textTheme.displaySmall,
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pushReplacementNamed(context, RoutesManager.register);
+                          },
+                          child: Text(
+                            AppLocalizations.of(context)!.signUp,
+                            style: Theme.of(context).textTheme.displaySmall?.copyWith(
+                              color: Theme.of(context).colorScheme.onPrimary,
+                              decoration: TextDecoration.underline,
                             ),
-                          )
-                        ],
-                      )
-                    ]
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -196,21 +169,29 @@ class _LoginScreenState extends State<LoginScreen> {
     try {
       DialogUtils.showLoading(context, message: AppLocalizations.of(context)!.pleaseWait);
 
-      UserCredential credential = await FirebaseAuth.instance
-          .signInWithEmailAndPassword(
-          email: emailController.text.trim(),
-          password: passwordController.text.trim()
+      UserCredential credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: emailController.text.trim(),
+        password: passwordController.text.trim(),
       );
-      UserDM.currentUser = await readUserFromFireStore(credential.user!.uid);
+
+      var userData = await readUserFromFireStore(credential.user!.uid);
+
+      if (userData is DoctorModel) {
+        // لو المستخدم دكتور، خزن بياناته في مكان مناسب
+        // مثال: DoctorDM.currentDoctor = userData;
+        print("Logged in as Doctor: ${userData.doctorName}");
+      } else if (userData is UserDM) {
+        UserDM.currentUser = userData;
+        print("Logged in as User: ${userData.fullName}");
+      }
 
       if (mounted) {
         DialogUtils.hide(context);
         Navigator.pushReplacementNamed(context, RoutesManager.home);
       }
-
     } on FirebaseAuthException catch (error) {
       DialogUtils.hide(context);
-      late String message;
+      String message = AppLocalizations.of(context)!.somethingWentWrong;
       if (error.code == ConstantManager.invalidCredential) {
         message = AppLocalizations.of(context)!.wrongEorP;
       }
@@ -222,17 +203,27 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
-  Future<UserDM> readUserFromFireStore(String uid) async{
-    CollectionReference userCollection =
-    FirebaseFirestore.instance.collection(UserDM.collectionName);
+  Future<dynamic> readUserFromFireStore(String uid) async {
+    // تحقق إذا كان المستخدم دكتور
+    DocumentSnapshot doctorDoc = await FirebaseFirestore.instance
+        .collection(DoctorModel.collectionName)
+        .doc(uid)
+        .get();
 
-    DocumentReference userDocument = userCollection.doc(uid);
+    if (doctorDoc.exists && doctorDoc.data() != null) {
+      return DoctorModel.fromFirestore(doctorDoc);
+    }
 
-    DocumentSnapshot userDocSnapShot = await userDocument.get();
-    Map<String, dynamic> json =userDocSnapShot.data() as Map<String, dynamic>;
-    UserDM userDM = UserDM.fromFireStore(json);
-    return userDM;
-  }
+    // تحقق إذا كان المستخدم عادي
+    DocumentSnapshot userDoc = await FirebaseFirestore.instance
+        .collection(UserDM.collectionName)
+        .doc(uid)
+        .get();
 
+    if (userDoc.exists && userDoc.data() != null) {
+      return UserDM.fromFireStore(userDoc.data() as Map<String, dynamic>);
+    }
 
+    throw Exception("User not found in Firestore");
+    }
 }

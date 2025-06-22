@@ -3,7 +3,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class UserDM {
   static const String collectionName = 'Users';
   static UserDM? currentUser;
-
   String id;
   String email;
   String? fullName;

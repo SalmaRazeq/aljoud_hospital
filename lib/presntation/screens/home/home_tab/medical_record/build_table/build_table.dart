@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import '../../../../../../core/utils/color_manager.dart';
 
 class CustomDataTable extends StatelessWidget {
@@ -12,11 +11,8 @@ class CustomDataTable extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (rows.isEmpty) return SizedBox.shrink();
-
-    // أول صف هو العناوين
     final headers = rows.first;
     final dataRows = rows.sublist(1);
-
     Widget _textRow(String text, {bool isHeader = false}) {
       return Container(
         color: isHeader ? ColorsManager.lightBlue2 : Colors.transparent,
@@ -41,7 +37,6 @@ class CustomDataTable extends StatelessWidget {
         ),
       );
     }
-
     return Padding(
       padding: REdgeInsets.symmetric(vertical: 10.h, horizontal: 1),
       child: Column(

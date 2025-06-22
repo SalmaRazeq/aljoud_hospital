@@ -18,7 +18,6 @@ class ConfirmPaymentScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
     var themeProvider = Provider.of<ThemeProvider>(context);
-
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -57,7 +56,6 @@ class ConfirmPaymentScreen extends StatelessWidget {
                     textAlign: TextAlign.center,
                   ),
                 ),
-            
                 SizedBox(height: 40.h,),
                 Center(
                   child: SizedBox(
@@ -109,7 +107,6 @@ class ConfirmPaymentScreen extends StatelessWidget {
                         ),
                       )),
                 )
-            
               ],
             ),
           ),

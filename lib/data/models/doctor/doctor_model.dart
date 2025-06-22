@@ -9,12 +9,12 @@ class DoctorModel {
   String? phoneNumber;
   String? specialty;
   String? medicalLicense;
+  String? userType; // حقل جديد لتحديد نوع المستخدم
   String? date;
   String? time;
   String? price;
   String? image;
   String? meetingType;
-
 
   DoctorModel({
     this.doctorId,
@@ -23,12 +23,12 @@ class DoctorModel {
     this.phoneNumber,
     this.specialty,
     this.medicalLicense,
+    this.userType = "doctor", // القيمة الافتراضية
     this.date,
     this.time,
     this.price,
     this.image,
     this.meetingType,
-
   });
 
   Map<String, dynamic> toFirestore() {
@@ -39,6 +39,12 @@ class DoctorModel {
       'phoneNumber': phoneNumber,
       'specialty': specialty,
       'medicalLicense': medicalLicense,
+      'userType': userType,
+      'date': date,
+      'time': time,
+      'price': price,
+      'image': image,
+      'meetingType': meetingType,
     };
   }
 
@@ -49,24 +55,25 @@ class DoctorModel {
 
     final data = doc.data() as Map<String, dynamic>;
     return DoctorModel(
-      doctorId: data['doctorId'],
-      doctorName: data['doctorName'],
-      doctorEmail: data['doctorEmail'],
-      phoneNumber: data['phoneNumber'],
-      specialty: data['specialty'],
-      medicalLicense: data['medicalLicense'],
+      doctorId: data['doctorId'] as String?,
+      doctorName: data['doctorName'] as String?,
+      doctorEmail: data['doctorEmail'] as String?,
+      phoneNumber: data['phoneNumber'] as String?,
+      specialty: data['specialty'] as String?,
+      medicalLicense: data['medicalLicense'] as String?,
+      userType: data['userType'] as String? ?? "doctor",
+      date: data['date'] as String?,
+      time: data['time'] as String?,
+      price: data['price'] as String?,
+      image: data['image'] as String?,
+      meetingType: data['meetingType'] as String?,
     );
   }
 
   DoctorModel.fromJson(dynamic json) {
-    //page = json['page'];
-    // totalPages = json['total_pages'];
-    // totalResults = json['total_results'];
     if (json['results'] != null) {
-      // results = [];
       json['results'].forEach((v) {
-        // results?.add(Results.fromJson(v));
-      });
+        });
     }
   }
 }

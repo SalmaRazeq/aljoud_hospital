@@ -2,7 +2,6 @@ import 'package:aljoud_hospital/core/utils/color_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 typedef Validator = String? Function(String?);
 
 class DoctorPasswordField extends StatefulWidget {
@@ -17,10 +16,8 @@ class DoctorPasswordField extends StatefulWidget {
   @override
   State<DoctorPasswordField> createState() => _DoctorPasswordFieldState();
 }
-
 class _DoctorPasswordFieldState extends State<DoctorPasswordField> {
   bool obscureText = true;
-
   @override
   Widget build(BuildContext context) {
     return TextFormField(
@@ -43,8 +40,8 @@ class _DoctorPasswordFieldState extends State<DoctorPasswordField> {
             minHeight: 50.h
         ),
         suffixIcon: IconButton(
-          icon: Icon(
-            obscureText ? Icons.visibility_off : Icons.visibility, color: ColorsManager.darkGray, size: 16,
+          icon: Icon(obscureText ? Icons.visibility_off : Icons.visibility,
+            color: ColorsManager.darkGray, size: 16,
           ),
           onPressed: () {
             setState(() {

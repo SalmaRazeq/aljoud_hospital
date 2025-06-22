@@ -6,26 +6,20 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../../../../l10n/app_localizations.dart';
 import '../../../../../providers/language_provider.dart';
 import '../../../../../providers/theme_provider.dart';
-import '../../../widgets/build_circleButton.dart';
 import 'language_bottomSheet/language_bottom_sheet.dart';
-
 
 class SettingScreen extends StatefulWidget {
   const SettingScreen({super.key});
-
   @override
   State<SettingScreen> createState() => _SettingScreenState();
 }
-
 class _SettingScreenState extends State<SettingScreen> {
   bool isDarkMode = false;
   String selectedLanguage = 'en';
   bool isLoading = true;
-
 
   @override
   void initState() {
@@ -35,19 +29,15 @@ class _SettingScreenState extends State<SettingScreen> {
   Future<void> loadPreferences() async {
     final prefs = await SharedPreferences.getInstance();
     selectedLanguage = prefs.getString('selectedLanguage') ?? 'en';
-
     var themeProvider = Provider.of<ThemeProvider>(context, listen: false);
     await themeProvider.getTheme();
-
     setState(() {
       isDarkMode = themeProvider.currentTheme == ThemeMode.dark;
       isLoading = false; // انتهى التحميل
     });
-
     var langProvider = Provider.of<LanguageProvider>(context, listen: false);
     langProvider.getLang();
   }
-
 
   void toggleDarkMode(bool value) {
     final themeProvider = Provider.of<ThemeProvider>(context, listen: false);
@@ -58,8 +48,6 @@ class _SettingScreenState extends State<SettingScreen> {
     });
   }
 
-
-  // الانتقال إلى إعدادات اللغة
   void showLanguageBottomSheet(BuildContext context) async {
     final result = await showModalBottomSheet<String>(
       context: context,
@@ -79,7 +67,6 @@ class _SettingScreenState extends State<SettingScreen> {
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
     var themeProvider = Provider.of<ThemeProvider>(context);
-
     return Scaffold(
       body: SafeArea(
         child: Container(
@@ -108,9 +95,7 @@ class _SettingScreenState extends State<SettingScreen> {
                         child: Center(
                           child: Text(
                             loc.settings,
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodySmall
+                            style: Theme.of(context).textTheme.bodySmall
                                 ?.copyWith(fontSize: 24.sp),
                           ),
                         ),
@@ -133,15 +118,13 @@ class _SettingScreenState extends State<SettingScreen> {
                         icon: Icons.dark_mode_outlined,
                         title: loc.darkMode,
                         iconColor: ColorsManager.purple.withOpacity(0.8),
-                        trailing: isLoading
-                            ? SizedBox(
+                        trailing: isLoading ? SizedBox(
                           height: 20.h,
                           width: 20.w,
                                 child: const CircularProgressIndicator(
                                     strokeWidth: 2),
                               )
-                            : Switch(
-                          value: isDarkMode,
+                            : Switch(value: isDarkMode,
                           onChanged: toggleDarkMode,
                           activeColor: ColorsManager.purple,
                         ),
@@ -177,18 +160,14 @@ class _SettingScreenState extends State<SettingScreen> {
                             context: context,
                             builder: (context) => const LanguageBotoomSheet(),
                           );
-
                           if (result != null && result is String) {
                             setState(() {
                               selectedLanguage = result;
                             });
-
-                            // حفظ اللغة المختارة
                             final prefs = await SharedPreferences.getInstance();
                             await prefs.setString('selectedLanguage', selectedLanguage);
                           }
                         },
-
                       ),
                       SizedBox(height: 10.h),
                       _buildListTitle(
@@ -236,8 +215,7 @@ class _SettingScreenState extends State<SettingScreen> {
         ),
         title: Text(
           title,
-          style: GoogleFonts.inter(
-            fontSize: 14.sp,
+          style: GoogleFonts.inter(fontSize: 14.sp,
             fontWeight: FontWeight.w600,
             color: ColorsManager.black,
           ),

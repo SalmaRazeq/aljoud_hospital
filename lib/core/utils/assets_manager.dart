@@ -39,6 +39,4 @@ class AssetsManager{
   static const String faqBg = '${base}background.jpg';
   static const String admin = '${base}admin.jpg';
   static const String emptyProfile = '${base}empty.webp';
-
-
 }

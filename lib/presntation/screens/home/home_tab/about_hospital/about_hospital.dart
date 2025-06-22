@@ -4,7 +4,6 @@ import 'package:aljoud_hospital/presntation/screens/home/home_tab/about_hospital
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import '../../../../../l10n/app_localizations.dart';
 
 class AboutHospitalScreen extends StatelessWidget {
@@ -47,9 +46,7 @@ class AboutHospitalScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(
-                      width: 35.w,
-                    )
+                    SizedBox(width: 35.w,)
                   ],
                 ),
                 SizedBox(height: 6.h),
@@ -70,8 +67,6 @@ class AboutHospitalScreen extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 24.h),
-
-                // تعديل هنا: الرؤية والمهمة جنب بعض
                 Row(
                   children: [
                     VisionMissionWidget(

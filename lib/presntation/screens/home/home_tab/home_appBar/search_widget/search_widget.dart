@@ -2,9 +2,7 @@ import 'package:aljoud_hospital/core/utils/color_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import '../../../../../../l10n/app_localizations.dart';
-
 
 class SearchWidget extends StatelessWidget {
   const SearchWidget({super.key});

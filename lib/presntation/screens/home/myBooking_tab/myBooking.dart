@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-
 import '../../../../core/utils/dialog_utils/dialog_utils.dart';
 import '../../../../data/models/booking_model.dart';
 import '../../../../l10n/app_localizations.dart';
@@ -20,9 +19,7 @@ class MyBookingScreen extends StatefulWidget {
 class _MyBookingScreenState extends State<MyBookingScreen> with SingleTickerProviderStateMixin {
   late TabController _tabController;
   late Stream<List<BookingModel>> _bookingsStream;
-
   late List<String> tabs;
-
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -79,7 +76,6 @@ class _MyBookingScreenState extends State<MyBookingScreen> with SingleTickerProv
   }) {
     var themeProvider = Provider.of<ThemeProvider>(context);
     final loc = AppLocalizations.of(context)!;
-
     return Container(
       margin: REdgeInsets.symmetric(vertical: 10.h),
       decoration: BoxDecoration(
@@ -225,7 +221,6 @@ class _MyBookingScreenState extends State<MyBookingScreen> with SingleTickerProv
       print('Error updating booking status: $e');
     }
   }
-
   List<Widget> buildBookingList(List<BookingModel> bookings, String status) {
     return bookings.map((booking) {
       return buildCard(
@@ -236,7 +231,6 @@ class _MyBookingScreenState extends State<MyBookingScreen> with SingleTickerProv
       );
     }).toList();
   }
-
   Stream<List<BookingModel>> getBookingsStream() {
     try {
       return FirebaseFirestore.instance
@@ -252,12 +246,10 @@ class _MyBookingScreenState extends State<MyBookingScreen> with SingleTickerProv
       return Stream.value([]);
     }
   }
-
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
     var themeProvider = Provider.of<ThemeProvider>(context);
-
     return Scaffold(
       backgroundColor: themeProvider.isLightTheme()
           ? ColorsManager.lightGray.withOpacity(0.9)
@@ -322,7 +314,6 @@ class _MyBookingScreenState extends State<MyBookingScreen> with SingleTickerProv
                         return booking.status?.toLowerCase() == 'canceled' ?? false;
                       }
                     }).toList();
-
                     return ListView(
                       padding: REdgeInsets.symmetric(horizontal: 18.w),
                       children: buildBookingList(filteredBookings, tab),

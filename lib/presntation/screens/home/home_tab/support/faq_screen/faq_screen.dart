@@ -3,7 +3,6 @@ import 'package:aljoud_hospital/core/utils/color_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import '../../../../../../l10n/app_localizations.dart';
 
 class FAQScreen extends StatelessWidget {
@@ -12,7 +11,6 @@ class FAQScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
-
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -42,33 +40,13 @@ class FAQScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    _buildFAQItem(
-                      loc.faq1Q,
-                      loc.faq1A,
-                    ),
-                    _buildFAQItem(
-                      loc.faq2Q,
-                      loc.faq2A,
-                    ),
-                    _buildFAQItem(
-                      loc.faq3Q,
-                      loc.faq3A,
-                    ),
-                    _buildFAQItem(
-                      loc.faq4Q,
-                      loc.faq4A,
-                    ),
-                    _buildFAQItem(
-                      loc.faq5Q,
-                      loc.faq5A,
-                    ),
-                    _buildFAQItem(
-                      loc.faq6Q,
-                      loc.faq6A,
-                    ),
-                    _buildFAQItem(
-                      loc.faq7Q,
-                      loc.faq7A,
+                    _buildFAQItem(loc.faq1Q, loc.faq1A,),
+                    _buildFAQItem(loc.faq2Q, loc.faq2A,),
+                    _buildFAQItem(loc.faq3Q, loc.faq3A,),
+                    _buildFAQItem(loc.faq4Q, loc.faq4A,),
+                    _buildFAQItem(loc.faq5Q, loc.faq5A,),
+                    _buildFAQItem(loc.faq6Q, loc.faq6A,),
+                    _buildFAQItem(loc.faq7Q, loc.faq7A,
                     ),
                   ],
                 ),
@@ -79,7 +57,6 @@ class FAQScreen extends StatelessWidget {
       ),
     );
   }
-
   Widget _buildFAQItem(
     String qustion,
     String answer,
@@ -88,8 +65,7 @@ class FAQScreen extends StatelessWidget {
       SizedBox(height: 12.h),
       Text(
         qustion,
-        style: GoogleFonts.inter(
-            color: ColorsManager.black,
+        style: GoogleFonts.inter(color: ColorsManager.black,
             fontWeight: FontWeight.w600,
             fontSize: 13),
       ),
@@ -97,14 +73,12 @@ class FAQScreen extends StatelessWidget {
       Text(
         answer,
         style: GoogleFonts.inter(
-            color: ColorsManager.darkGray,
-            fontSize: 12.sp,
+            color: ColorsManager.darkGray, fontSize: 12.sp,
             fontWeight: FontWeight.w400),
       ),
       SizedBox(height: 10.h),
       Divider(
-        indent: 40.w,
-        endIndent: 40.w,
+        indent: 40.w, endIndent: 40.w,
         color: ColorsManager.hint,
       )
     ]);
