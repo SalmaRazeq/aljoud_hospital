@@ -21,16 +21,16 @@ class StartScreen extends StatelessWidget {
               Image.asset(AssetsManager.startMan, height: 350.h,),
               Text(
                 '${AppLocalizations.of(context)!.yourDoctor}\n${AppLocalizations.of(context)!.anyTime}',
-                style: Theme.of(context).textTheme.titleLarge?.copyWith(color: Theme.of(context).colorScheme.primaryFixed, fontWeight: FontWeight.bold, fontSize: 30),
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(color: Theme.of(context).colorScheme.primaryFixed, fontWeight: FontWeight.bold, fontSize: 28),
               ),
               Text(
                 AppLocalizations.of(context)!.anyWhere,
-                style: Theme.of(context).textTheme.titleLarge?.copyWith(color: Theme.of(context).colorScheme.onPrimary, fontWeight: FontWeight.bold, fontSize: 30),
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(color: Theme.of(context).colorScheme.onPrimary, fontWeight: FontWeight.bold, fontSize: 28),
               ),
               SizedBox(height: 10.h),
               Text(AppLocalizations.of(context)!.startText,
                 style: GoogleFonts.sansita(fontSize: 18.sp,color: Theme.of(context).colorScheme.secondary.withOpacity(0.6),fontWeight: FontWeight.w600 ),),
-              SizedBox(height: 40.h),
+              SizedBox(height: 20.h),
               Align(
                 alignment: Alignment.bottomCenter,
                 child: ElevatedButton(

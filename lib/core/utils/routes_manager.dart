@@ -30,7 +30,6 @@ import '../../data/models/doctor/doctor_model.dart';
 import '../../presntation/screens/home/home.dart';
 import '../../presntation/screens/notification/notification.dart';
 import '../../presntation/screens/splash/splash.dart';
-import '../../test.dart';
 
 class RoutesManager{
   static const String splash = '/splash';
@@ -65,10 +64,6 @@ class RoutesManager{
 
   static Route? router(RouteSettings settings) {
     switch (settings.name) {
-      case testApiScreen:
-        return MaterialPageRoute(
-          builder: (context) =>  const TestScreen(),
-        );
       case splash:
         return MaterialPageRoute(
           builder: (context) => const SplashScreen(),
